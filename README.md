@@ -339,17 +339,30 @@ CREATE SCHEMA public;
 
 ## Support
 
-- 📧 Email: [your-email]
+- 📧 Email: cedrik.rosemann@tutor-ai.me
 - 📖 Dokumentation: `deploy/DEPLOYMENT_FULL.md`
-- 🐛 Issues: [GitHub Issues]
 
-## Lizenz
+## 📝 License
 
-[Deine Lizenz]
+This project is licensed under CC BY-NC-ND 4.0.
+
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC-
+-ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+**You are free to:**
+- 👀 View and study the code
+- 📚 Use it for learning purposes
+
+**Under the following terms:**
+- 📛 **Attribution** — You must give appropriate credit
+- 💰 **NonCommercial** — You may not use the material for commercial purposes
+- 🚫 **NoDerivatives** — You may not distribute modified versions
+
+For commercial use or custom licensing, please contact me.
 
 ## Credits
 
-- **LLM:** Claude 3.5 Sonnet (AWS Bedrock)
+- **LLM:** Claude 4.5 Sonnet (AWS Bedrock)
 - **Embeddings:** Amazon Titan (AWS Bedrock)
 - **PDF Parsing:** LlamaParse
 - **Framework:** FastAPI, React
