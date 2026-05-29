@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database with pgvector
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: ai-tutor-db
+    environment:
+      POSTGRES_DB: ai_tutor_prod
+      POSTGRES_USER: ai_tutor
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_tutor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend FastAPI
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: ai-tutor-backend
+    environment:
+      DATABASE_URL: postgresql://ai_tutor:${DB_PASSWORD}@postgres:5432/ai_tutor_prod
+      BEDROCK_API_KEY: ${BEDROCK_API_KEY}
+      AWS_REGION: ${AWS_REGION}
+      LLAMA_CLOUD_API_KEY: ${LLAMA_CLOUD_API_KEY}
+      BEDROCK_EMBEDDING_MODEL: ${BEDROCK_EMBEDDING_MODEL}
+      BEDROCK_LLM_MODEL_PRIMARY: ${BEDROCK_LLM_MODEL_PRIMARY}
+      BEDROCK_LLM_MODEL_SECONDARY: ${BEDROCK_LLM_MODEL_SECONDARY}
+      MAX_CONCURRENT_PARSES: ${MAX_CONCURRENT_PARSES}
+      PARSE_BATCH_SIZE: ${PARSE_BATCH_SIZE}
+      RETRY_MAX_ATTEMPTS: ${RETRY_MAX_ATTEMPTS}
+      RETRY_BASE_DELAY: ${RETRY_BASE_DELAY}
+      RETRY_MAX_DELAY: ${RETRY_MAX_DELAY}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE}
+      MAX_CONCURRENT_EMBEDDINGS: ${MAX_CONCURRENT_EMBEDDINGS}
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Frontend (nginx serving React build)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: ai-tutor-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

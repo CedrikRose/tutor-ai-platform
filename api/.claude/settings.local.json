@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(pem|key\\)$|ssh_config\")",
+      "Read(//home/cedrik/Downloads/**)",
+      "Read(//home/cedrik/**)",
+      "Bash(ssh *)",
+      "Bash(scp -i ~/Downloads/AI-Tutor.pem /tmp/ChatWindow_fixed.tsx ubuntu@98.91.21.41:/tmp/ChatWindow_fixed.tsx)",
+      "Bash(scp -i ~/Downloads/AI-Tutor.pem /tmp/CourseSelectorV2_fixed.tsx ubuntu@98.91.21.41:/tmp/CourseSelectorV2_fixed.tsx)",
+      "Bash(scp -i ~/Downloads/AI-Tutor.pem /tmp/ChatWindow_final.tsx ubuntu@98.91.21.41:/tmp/ChatWindow_final.tsx)",
+      "Bash(scp -i ~/Downloads/AI-Tutor.pem /tmp/ExchangeList_final.tsx ubuntu@98.91.21.41:/tmp/ExchangeList_final.tsx)"
+    ]
+  }
+}

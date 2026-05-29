@@ -1,0 +1,36 @@
+# Core LlamaIndex and parsing
+llama-index
+llama-parse
+
+# AWS Bedrock
+boto3>=1.35.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+pgvector>=0.3.0
+
+# Async and utilities
+aiofiles>=24.0.0
+
+# Configuration and environment
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Progress tracking and CLI
+tqdm>=4.66.0
+
+# Tokenization for chunk counting
+tiktoken>=0.7.0
+
+# Authentication (Professor Dashboard)
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.9
+
+# API Framework (Professor Dashboard)
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+websockets>=13.1
+apscheduler>=3.10.4

@@ -1,0 +1,11 @@
+# FastAPI and Web Server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+websockets==13.1
+
+# Scheduling
+apscheduler==3.10.4
+
+# CORS
+python-jose[cryptography]==3.3.0
