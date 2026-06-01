@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { courseApi } from '../services/api';
+import DeleteMaterialModal from './DeleteMaterialModal';
 import type { CourseMaterial } from '../types';
 
 interface MaterialCardProps {
@@ -10,6 +11,7 @@ interface MaterialCardProps {
 export default function MaterialCard({ material }: MaterialCardProps) {
   const queryClient = useQueryClient();
   const [showAllFiles, setShowAllFiles] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const PROCESSING_MARKER = new Date('1970-01-01T00:00:00Z');
   const isProcessed = !!material.processed_at && new Date(material.processed_at) > PROCESSING_MARKER;
@@ -30,6 +32,7 @@ export default function MaterialCard({ material }: MaterialCardProps) {
     mutationFn: () => courseApi.deleteMaterial(material.material_id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['materials', material.course_id] });
+      setShowDeleteModal(false);
     },
   });
 
@@ -44,10 +47,12 @@ export default function MaterialCard({ material }: MaterialCardProps) {
     }
   });
 
-  const handleDelete = () => {
-    if (window.confirm(`Delete "${material.display_name}"?`)) {
-      deleteMutation.mutate();
-    }
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    deleteMutation.mutate();
   };
 
   const handleProcess = () => {
@@ -143,13 +148,22 @@ export default function MaterialCard({ material }: MaterialCardProps) {
           </button>
         )}
         <button
-          onClick={handleDelete}
+          onClick={handleDeleteClick}
           disabled={deleteMutation.isPending}
           className={`${!isProcessed ? 'flex-1' : 'w-full'} bg-red-900/30 hover:bg-red-900/50 text-red-400 py-2 px-3 rounded-md text-sm disabled:opacity-50`}
         >
           {deleteMutation.isPending ? 'Lösche...' : 'Löschen'}
         </button>
       </div>
+
+      {showDeleteModal && (
+        <DeleteMaterialModal
+          materialName={material.display_name}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setShowDeleteModal(false)}
+          isDeleting={deleteMutation.isPending}
+        />
+      )}
     </div>
   );
 }

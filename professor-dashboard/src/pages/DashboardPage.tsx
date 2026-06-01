@@ -3,10 +3,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { courseApi } from '../services/api';
 import CourseCard from '../components/CourseCard';
 import CreateCourseModal from '../components/CreateCourseModal';
+import DeleteCourseModal from '../components/DeleteCourseModal';
 import type { Course } from '../types';
 
 export default function DashboardPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [courseToDelete, setCourseToDelete] = useState<Course | null>(null);
   const queryClient = useQueryClient();
 
   const { data: courses, isLoading } = useQuery({
@@ -18,12 +20,20 @@ export default function DashboardPage() {
     mutationFn: courseApi.deleteCourse,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
+      setCourseToDelete(null);
     },
   });
 
-  const handleDelete = async (courseId: string) => {
-    if (window.confirm('Are you sure you want to delete this course?')) {
-      await deleteMutation.mutateAsync(courseId);
+  const handleDeleteClick = (courseId: string) => {
+    const course = courses?.find((c: Course) => c.course_id === courseId);
+    if (course) {
+      setCourseToDelete(course);
+    }
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (courseToDelete) {
+      await deleteMutation.mutateAsync(courseToDelete.course_id);
     }
   };
 
@@ -73,7 +83,7 @@ export default function DashboardPage() {
             <CourseCard
               key={course.course_id}
               course={course}
-              onDelete={handleDelete}
+              onDelete={handleDeleteClick}
             />
           ))}
         </div>
@@ -81,6 +91,15 @@ export default function DashboardPage() {
 
       {showCreateModal && (
         <CreateCourseModal onClose={() => setShowCreateModal(false)} />
+      )}
+
+      {courseToDelete && (
+        <DeleteCourseModal
+          courseName={courseToDelete.course_name}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setCourseToDelete(null)}
+          isDeleting={deleteMutation.isPending}
+        />
       )}
     </div>
   );
