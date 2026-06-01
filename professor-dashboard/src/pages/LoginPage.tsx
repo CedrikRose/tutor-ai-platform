@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 
 export default function LoginPage() {
@@ -12,7 +12,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       // Error is handled by store
     }
@@ -73,9 +73,9 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 text-center">
-          <a href="/register" className="text-sm text-blue-400 hover:text-blue-300">
+          <Link to="/register" className="text-sm text-blue-400 hover:text-blue-300">
             Need an account? Register here
-          </a>
+          </Link>
         </div>
       </div>
     </div>

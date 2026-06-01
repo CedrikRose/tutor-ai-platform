@@ -57,7 +57,7 @@ export default function CourseDetailPage() {
       <div className="text-center py-12">
         <p className="text-slate-400">Course not found</p>
         <button
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/')}
           className="mt-4 text-blue-400 hover:text-blue-300"
         >
           Back to Dashboard
@@ -78,7 +78,7 @@ export default function CourseDetailPage() {
       {/* Header */}
       <div className="mb-6">
         <button
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/')}
           className="text-slate-400 hover:text-slate-300 mb-4 flex items-center gap-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

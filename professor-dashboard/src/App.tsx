@@ -21,7 +21,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 }
 
 function App() {
@@ -33,12 +33,12 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/dashboard">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route
-            path="/dashboard"
+            path="/"
             element={
               <ProtectedRoute>
                 <Layout>
@@ -57,7 +57,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/dashboard" />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

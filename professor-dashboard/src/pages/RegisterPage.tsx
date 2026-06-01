@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 
 export default function RegisterPage() {
@@ -71,7 +71,7 @@ export default function RegisterPage() {
       // Registration successful! Store tokens and redirect
       if (data.access_token && data.refresh_token) {
         setTokens(data.access_token, data.refresh_token);
-        navigate('/dashboard');
+        navigate('/');
       } else {
         // Shouldn't happen, but just in case
         navigate('/login');
@@ -235,9 +235,9 @@ export default function RegisterPage() {
             </div>
 
             <div className="text-center">
-              <a href="/login" className="text-sm text-blue-400 hover:text-blue-300">
+              <Link to="/login" className="text-sm text-blue-400 hover:text-blue-300">
                 Already have an account? Sign in
-              </a>
+              </Link>
             </div>
           </form>
         )}
