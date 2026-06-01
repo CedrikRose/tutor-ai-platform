@@ -4,6 +4,7 @@ import { courseApi } from '../services/api';
 import CourseCard from '../components/CourseCard';
 import CreateCourseModal from '../components/CreateCourseModal';
 import DeleteCourseModal from '../components/DeleteCourseModal';
+import SchedulerStatus from '../components/SchedulerStatus';
 import type { Course } from '../types';
 
 export default function DashboardPage() {
@@ -61,6 +62,11 @@ export default function DashboardPage() {
           </svg>
           Create Course
         </button>
+      </div>
+
+      {/* Scheduler Status */}
+      <div className="mb-6">
+        <SchedulerStatus />
       </div>
 
       {courses && courses.length === 0 ? (

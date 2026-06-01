@@ -28,13 +28,14 @@ logger = logging.getLogger(__name__)
 circuit_breaker = None
 embedder = None
 llm = None
+scheduler = None
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events."""
     # Startup
-    global circuit_breaker, embedder, llm
+    global circuit_breaker, embedder, llm, scheduler
     logger.info("🚀 Starting AI-Tutor API...")
 
     circuit_breaker = BedrockCircuitBreaker()
@@ -49,12 +50,28 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Could not initialize chat_api_v2 globals: {e}")
 
+    # Start automated analysis scheduler
+    try:
+        from api.scheduler import start_scheduler
+        scheduler = start_scheduler()
+        logger.info("✓ Automated analysis scheduler started (runs daily at 3:00 AM)")
+    except Exception as e:
+        logger.warning(f"Could not start scheduler: {e}")
+
     logger.info("✅ AI-Tutor API started successfully")
 
     yield
 
     # Shutdown
     logger.info("👋 Shutting down AI-Tutor API...")
+
+    # Stop scheduler
+    if scheduler:
+        try:
+            from api.scheduler import stop_scheduler
+            stop_scheduler(scheduler)
+        except Exception as e:
+            logger.warning(f"Error stopping scheduler: {e}")
 
 
 # Create FastAPI app
@@ -1088,6 +1105,14 @@ try:
     logger.info("✓ Manual Analysis Trigger API included")
 except ImportError as e:
     logger.warning(f"Could not import manual_course_analysis: {e}")
+
+# Include scheduler status API
+try:
+    from api.scheduler_api import router as scheduler_router
+    app.include_router(scheduler_router)
+    logger.info("✓ Scheduler Status API included")
+except ImportError as e:
+    logger.warning(f"Could not import scheduler_api: {e}")
 
 # Include chat API v2 (MUST be after lifespan where globals are created!)
 try:
