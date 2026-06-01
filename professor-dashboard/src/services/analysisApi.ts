@@ -17,11 +17,9 @@ import type {
   ReportSettings,
 } from '../types/analysis';
 
-const API_BASE = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
-
 // Create axios instance with auth
 const api = axios.create({
-  baseURL: API_BASE,
+  baseURL: '/api',
 });
 
 // Add auth token to requests
@@ -41,7 +39,7 @@ export const generateSummary = async (
   courseId: string,
   daysBack: number
 ): Promise<CourseSummary> => {
-  const response = await api.post('/api/professor/summaries/generate', {
+  const response = await api.post('/professor/summaries/generate', {
     course_id: courseId,
     days_back: daysBack,
   });
@@ -52,7 +50,7 @@ export const getSummaries = async (
   courseId: string,
   limit: number = 20
 ): Promise<CourseSummary[]> => {
-  const response = await api.get('/api/professor/summaries', {
+  const response = await api.get('/professor/summaries', {
     params: { course_id: courseId, limit },
   });
   return response.data;
@@ -69,14 +67,14 @@ export const getAnalyses = async (params: {
   limit?: number;
   offset?: number;
 }): Promise<AnalysisListItem[]> => {
-  const response = await api.get('/api/professor/analyses', { params });
+  const response = await api.get('/professor/analyses', { params });
   return response.data;
 };
 
 export const getAnalysisDetail = async (
   analysisId: string
 ): Promise<AnalysisDetail> => {
-  const response = await api.get(`/api/professor/analyses/${analysisId}`);
+  const response = await api.get(`/professor/analyses/${analysisId}`);
   return response.data;
 };
 
@@ -91,7 +89,7 @@ export const getStudentKnowledge = async (params: {
   limit?: number;
   offset?: number;
 }): Promise<StudentKnowledgeItem[]> => {
-  const response = await api.get('/api/professor/student-knowledge', {
+  const response = await api.get('/professor/student-knowledge', {
     params,
   });
   return response.data;
@@ -101,7 +99,7 @@ export const getTopicsOverview = async (
   courseId: string,
   daysBack: number = 7
 ): Promise<TopicsOverview> => {
-  const response = await api.get('/api/professor/topics-overview', {
+  const response = await api.get('/professor/topics-overview', {
     params: { course_id: courseId, days_back: daysBack },
   });
   return response.data;
@@ -118,7 +116,7 @@ export const getFeedback = async (params: {
   limit?: number;
   offset?: number;
 }): Promise<FeedbackItem[]> => {
-  const response = await api.get('/api/professor/feedback', { params });
+  const response = await api.get('/professor/feedback', { params });
   return response.data;
 };
 
@@ -129,7 +127,7 @@ export const getFeedback = async (params: {
 export const getChatSession = async (
   sessionId: string
 ): Promise<ChatSessionDetail> => {
-  const response = await api.get(`/api/professor/chat/${sessionId}`);
+  const response = await api.get(`/professor/chat/${sessionId}`);
   return response.data;
 };
 
@@ -140,14 +138,14 @@ export const getChatSession = async (
 export const createEmailAutomation = async (
   config: EmailAutomationConfig
 ): Promise<EmailAutomation> => {
-  const response = await api.post('/api/professor/email-automation', config);
+  const response = await api.post('/professor/email-automation', config);
   return response.data;
 };
 
 export const getEmailAutomations = async (
   courseId?: string
 ): Promise<EmailAutomation[]> => {
-  const response = await api.get('/api/professor/email-automation', {
+  const response = await api.get('/professor/email-automation', {
     params: courseId ? { course_id: courseId } : {},
   });
   return response.data;
@@ -157,7 +155,7 @@ export const toggleEmailAutomation = async (
   automationId: string
 ): Promise<{ automation_id: string; enabled: boolean }> => {
   const response = await api.patch(
-    `/api/professor/email-automation/${automationId}/toggle`
+    `/professor/email-automation/${automationId}/toggle`
   );
   return response.data;
 };
@@ -165,7 +163,7 @@ export const toggleEmailAutomation = async (
 export const deleteEmailAutomation = async (
   automationId: string
 ): Promise<void> => {
-  await api.delete(`/api/professor/email-automation/${automationId}`);
+  await api.delete(`/professor/email-automation/${automationId}`);
 };
 
 // ============================================================================
@@ -177,7 +175,7 @@ export const generateReport = async (
   endDate?: string,
   daysBack?: number
 ): Promise<ReportDetail> => {
-  const response = await api.post('/api/professor/reports/generate', {
+  const response = await api.post('/professor/reports/generate', {
     course_id: courseId,
     end_date: endDate || new Date().toISOString().split('T')[0],
     days_back: daysBack,
@@ -190,7 +188,7 @@ export const getReports = async (
   limit: number = 10,
   offset: number = 0
 ): Promise<Report[]> => {
-  const response = await api.get('/api/professor/reports', {
+  const response = await api.get('/professor/reports', {
     params: { course_id: courseId, limit, offset },
   });
   return response.data;
@@ -199,7 +197,7 @@ export const getReports = async (
 export const getReportDetail = async (
   reportId: string
 ): Promise<ReportDetail> => {
-  const response = await api.get(`/api/professor/reports/${reportId}`);
+  const response = await api.get(`/professor/reports/${reportId}`);
   return response.data;
 };
 
@@ -207,5 +205,5 @@ export const updateReportSettings = async (
   courseId: string,
   settings: Partial<ReportSettings>
 ): Promise<void> => {
-  await api.patch(`/api/professor/courses/${courseId}/report-settings`, settings);
+  await api.patch(`/professor/courses/${courseId}/report-settings`, settings);
 };

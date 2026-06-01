@@ -47,7 +47,7 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register-with-code', {
+      const response = await fetch('/api/auth/register-with-code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

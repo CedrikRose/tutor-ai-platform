@@ -7,9 +7,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Play, Loader2, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import axios from 'axios';
 
-const API_BASE = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
-
-const api = axios.create({ baseURL: API_BASE });
+const api = axios.create({ baseURL: '/api' });
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
@@ -33,12 +31,12 @@ interface TriggerResponse {
 }
 
 async function getAnalysisStatus(): Promise<AnalysisStatus> {
-  const response = await api.get('/api/professor/analysis-status');
+  const response = await api.get('/professor/analysis-status');
   return response.data;
 }
 
 async function triggerAnalysis(): Promise<TriggerResponse> {
-  const response = await api.post('/api/professor/trigger-analysis');
+  const response = await api.post('/professor/trigger-analysis');
   return response.data;
 }
 

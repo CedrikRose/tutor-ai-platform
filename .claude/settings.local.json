@@ -117,7 +117,14 @@
       "Read(//home/cedrik/.ssh/**)",
       "Read(//home/cedrik/**)",
       "Bash(grep -E \"\\\\.py$|^d\")",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git config *)",
+      "Bash(chmod 600 *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
     ]
   },
   "prefersReducedMotion": true
