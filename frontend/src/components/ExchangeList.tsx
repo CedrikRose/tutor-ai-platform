@@ -2,8 +2,11 @@ import { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import './MessageList.css';
 import 'highlight.js/styles/github-dark.css';
+import 'katex/dist/katex.min.css';
 
 interface Exchange {
   exchange_id: string;
@@ -93,8 +96,8 @@ function ExchangeList({
               <div className="message-content">
                 <div className="message-text">
                   <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeHighlight, rehypeKatex]}
                   >
                     {exchange.user_question}
                   </ReactMarkdown>
@@ -117,8 +120,8 @@ function ExchangeList({
               <div className="message-content">
                 <div className="message-text">
                   <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeHighlight, rehypeKatex]}
                   >
                     {exchange.assistant_answer}
                   </ReactMarkdown>

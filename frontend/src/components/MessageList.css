@@ -249,3 +249,34 @@
     display: none; /* Redundant but explicit for clarity */
   }
 }
+
+/* KaTeX Math Rendering */
+.message-text .katex-display {
+  margin: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.message-text .katex {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.message-text .katex-display > .katex {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Mobile-Anpassungen */
+@media (max-width: 768px), (pointer: coarse) {
+  .message-text .katex {
+    font-size: 1em;
+  }
+
+  .message-text .katex-display {
+    margin: 0.75rem 0;
+    font-size: 0.95em;
+  }
+}

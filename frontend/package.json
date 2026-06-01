@@ -12,12 +12,15 @@
   "dependencies": {
     "@types/js-cookie": "^3.0.6",
     "js-cookie": "^3.0.5",
+    "katex": "^0.16.11",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.15.1",
     "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "uuid": "^14.0.0"
   },
   "devDependencies": {
