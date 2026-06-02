@@ -125,7 +125,8 @@
       "Bash(chmod 600 *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")"
+      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
+      "Bash(git pull *)"
     ]
   },
   "prefersReducedMotion": true

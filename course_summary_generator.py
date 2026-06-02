@@ -243,39 +243,43 @@ class CourseSummaryGenerator:
 
         import json
 
-        prompt = f"""Du bist ein pädagogischer Analyst für einen Professor.
+        # Get course summary prompt from manager
+        try:
+            from prompt_manager import prompt_manager
+            summary_prompt_template = prompt_manager.get_prompt("course_summary")
+        except Exception as e:
+            logger.warning(f"Could not load course summary prompt: {e}")
+            # Fallback to hardcoded prompt
+            summary_prompt_template = """Du bist ein Zusammenfasser für Kurs-Analysen. Erstelle eine faktenbasierte Übersicht über einen Zeitraum.
 
-Erstelle eine FAKTENBASIERTE Zusammenfassung der Kursaktivität für den Zeitraum {start_date} bis {end_date}.
+**Input:**
+- Statistiken (Anzahl Studenten, Analysen, Feedback-Items)
+- Detaillierte Analysen aus dem Zeitraum
+- Feedback-Zusammenfassungen
+
+**Output-Struktur:**
+1. **Überblick**: Zeitraum, Anzahl Interaktionen, allgemeine Trends
+2. **Hauptthemen**: Top 3-5 Themen mit den meisten Interaktionen
+3. **Verständnisprobleme**: Konzepte mit erhöhter Difficulty
+4. **Feedback-Highlights**: Wichtige Professor/Chatbot-Feedbacks
+5. **Patterns**: Wiederkehrende Muster über den Zeitraum
+
+**Stil:**
+- Objektiv und faktenbasiert
+- Nutze Zahlen und Häufigkeiten
+- Keine Empfehlungen ("sollte", "könnte")
+- Verweise auf Quell-Analysen wenn möglich
+
+Schreibe auf Deutsch, max 1500 Wörter."""
+
+        prompt = f"""{summary_prompt_template}
+
+**Zeitraum:** {start_date} bis {end_date}
 
 **Verfügbare Daten:**
 {context_text}
 
-**Deine Aufgabe:**
-Erstelle eine objektive Zusammenfassung die folgendes enthält:
-
-1. **Überblick**
-   - Wie viele Studenten haben den KI-Tutor genutzt?
-   - Für welche Themen und Aufgaben?
-
-2. **Häufige Fragen & Schwierigkeiten**
-   - Welche Konzepte bereiteten Schwierigkeiten?
-   - Welche Fehler traten häufig auf?
-   - Wie wurden sie gelöst?
-
-3. **Allgemeines Feedback**
-   - Feedback zu Professor-Erklärungen
-   - Feedback zum Tutor-Verhalten
-   - Feedback zu Materialien
-
-**WICHTIG:**
-- Nur FAKTEN berichten, keine Interpretationen
-- KEINE Empfehlungen oder Ratschläge
-- KEINE Belehrungen an den Professor
-- Nur zusammenfassen was in den Daten steht
-
-**Format:**
-Schreibe klar und prägnant. Verwende Markdown-Formatierung.
-Fokussiere auf die wichtigsten Erkenntnisse.
+Erstelle die Zusammenfassung:
 """
 
         body = json.dumps({

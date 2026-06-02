@@ -169,26 +169,43 @@ class MaterialProcessor:
 
         files_info = '\n'.join(file_info_list)
 
-        prompt = f"""Analyze which files are important for student learning based on the assignment PDF and file contents.
+        # Get batch analysis prompt from manager
+        try:
+            from prompt_manager import prompt_manager
+            batch_prompt_template = prompt_manager.get_prompt("material_file_analysis_batch")
+        except Exception as e:
+            logger.warning(f"Could not load material batch analysis prompt: {e}")
+            # Fallback
+            batch_prompt_template = """You are analyzing course material files to determine which are important for student learning.
 
-{files_info}
+**Task:**
+Analyze the following files and determine if each is important for students:
 
-Rules:
-- Files referenced in the PDF assignment = IMPORTANT
-- Source code files (.java, .scala, .py, .js, .ts, .cpp, .c, .h) = IMPORTANT
-- Test files = IMPORTANT
-- Configuration for project setup (pom.xml, build.gradle, package.json) = IMPORTANT
-- Data files used by the assignment (.csv with actual data) = IMPORTANT
-- Build outputs (target/, build/, dist/, .class files) = NOT IMPORTANT
-- IDE files (.idea/, .vscode/) = NOT IMPORTANT
-- Gradle/Maven wrapper files (gradlew, gradle-wrapper.jar) = NOT IMPORTANT
-- Empty or auto-generated files = NOT IMPORTANT
+{file_list}
 
-Return ONLY valid JSON array with no additional text:
-[
-  {{"filename": "file1.java", "important": true, "reason": "Referenced in assignment"}},
-  {{"filename": "gradlew", "important": false, "reason": "Build wrapper script"}}
-]"""
+**Criteria for "important":**
+✅ **Include:**
+- Lecture slides (PDF)
+- Homework assignments
+- Exercise sheets
+- Solution files
+- Code examples
+- Study guides
+- Relevant documentation
+
+❌ **Exclude:**
+- Build artifacts (.class, .o, .pyc)
+- Dependencies (node_modules, .venv)
+- Temporary files (.tmp, .bak)
+- System files (.DS_Store, Thumbs.db)
+- Large binary files (unless explicitly educational)
+
+**Output Format:**
+JSON array: [{"filename": "...", "important": true/false, "reason": "..."}]
+
+Analyze ALL files and respond ONLY with the JSON array."""
+
+        prompt = batch_prompt_template.replace("{file_list}", files_info)
 
         try:
             response = await llm.complete(prompt)
@@ -245,20 +262,27 @@ Return ONLY valid JSON array with no additional text:
             if pattern in filename:
                 return False, f"Automatically skipped: {pattern}"
 
+        # Get single file analysis prompt from manager
+        try:
+            from prompt_manager import prompt_manager
+            single_prompt_template = prompt_manager.get_prompt("material_file_analysis_single")
+        except Exception as e:
+            logger.warning(f"Could not load material single analysis prompt: {e}")
+            # Fallback
+            single_prompt_template = """You are analyzing a course material file to determine if it is important for student learning.
+
+**File:** {filename}
+**Material Type:** {material_type}
+
+**Criteria for "important":**
+✅ Include: Lecture slides, homework, exercises, solutions, code examples, study materials
+❌ Exclude: Build artifacts, dependencies, temp files, system files
+
+**Respond in JSON:**
+{"important": true/false, "reason": "brief explanation"}"""
+
         # Build prompt for LLM
-        prompt = f"""Analyze if this file is important for student learning in a programming course.
-
-Filename: {filename}
-
-Consider:
-- Source code files (.java, .scala, .py, etc.) = IMPORTANT
-- Documentation, assignments, slides = IMPORTANT
-- Configuration files (pom.xml, build.gradle) = LESS IMPORTANT (but include if needed for project setup)
-- IDE files, build outputs, temp files = NOT IMPORTANT
-
-Return ONLY valid JSON, no other text:
-{{"important": true/false, "reason": "brief explanation"}}
-"""
+        prompt = single_prompt_template.replace("{filename}", filename).replace("{material_type}", material_type or "unknown")
 
         if file_content:
             prompt += f"\n\nFile preview (first 500 chars):\n{file_content[:500]}"

@@ -42,6 +42,17 @@ async def lifespan(app: FastAPI):
     embedder = BedrockEmbedder(circuit_breaker)
     llm = BedrockLLM(settings, circuit_breaker)
 
+    # Initialize prompt manager
+    try:
+        from prompt_manager import prompt_manager
+        from database import SessionLocal
+        db = SessionLocal()
+        prompt_manager.initialize(db)
+        db.close()
+        logger.info(f"✓ Prompt manager initialized ({prompt_manager.cache_size} prompts loaded)")
+    except Exception as e:
+        logger.warning(f"Could not initialize prompt manager: {e}")
+
     # Initialize chat API v2 globals
     try:
         from api.chat_api_v2 import init_chat_v2_globals
@@ -1122,6 +1133,14 @@ try:
     # Note: globals will be initialized in lifespan startup
 except ImportError as e:
     logger.warning(f"Could not import chat_api_v2: {e}")
+
+# Include prompts admin API
+try:
+    from api.prompts_api import router as prompts_router
+    app.include_router(prompts_router)
+    logger.info("✓ Prompts Admin API router included")
+except ImportError as e:
+    logger.warning(f"Could not import prompts_api: {e}")
 
 
 # ============================================================================

@@ -15,7 +15,8 @@ from retry_utils import BedrockCircuitBreaker
 
 logger = logging.getLogger(__name__)
 
-REPORT_SYSTEM_PROMPT = """Du bist ein Analysesystem für Lern-Chatbot-Daten.
+# Fallback prompt (will be loaded from DB via prompt_manager)
+REPORT_SYSTEM_PROMPT_FALLBACK = """Du bist ein Analysesystem für Lern-Chatbot-Daten.
 Deine Aufgabe: Erstelle einen objektiven Bericht für den Professor über die
 Erkenntnisse aus Student-Chats.
 
@@ -33,6 +34,18 @@ Dein Bericht soll dem Professor helfen zu verstehen:
 4. Welche Fragemuster auftraten
 
 Schreibe in professionellem, akademischem Stil. Nutze Markdown-Formatierung für bessere Lesbarkeit."""
+
+
+def _get_report_prompt() -> str:
+    """Get report generation prompt from prompt manager."""
+    try:
+        from prompt_manager import prompt_manager
+        prompt = prompt_manager.get_prompt("report_generation")
+        if prompt:
+            return prompt
+    except Exception as e:
+        logger.warning(f"Could not load report prompt from manager: {e}")
+    return REPORT_SYSTEM_PROMPT_FALLBACK
 
 
 class ReportGenerator:
@@ -259,7 +272,7 @@ Fasse die wichtigsten Punkte zusammen. Dies ist eine Zwischenzusammenfassung, di
         try:
             summary = await self.llm.complete(
                 prompt=prompt,
-                system_prompt=REPORT_SYSTEM_PROMPT,
+                system_prompt=_get_report_prompt(),
                 temperature=0.3,
                 max_tokens=2000 if is_final else 1000
             )
@@ -318,7 +331,7 @@ Erstelle eine kompakte Zusammenfassung, die die wichtigsten Punkte aus allen Tei
         try:
             merged = await self.llm.complete(
                 prompt=prompt,
-                system_prompt=REPORT_SYSTEM_PROMPT,
+                system_prompt=_get_report_prompt(),
                 temperature=0.3,
                 max_tokens=2000 if is_final else 1000
             )

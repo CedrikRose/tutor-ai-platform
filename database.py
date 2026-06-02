@@ -1511,3 +1511,26 @@ class AuditLog(Base):
         Index("idx_audit_log_timestamp", "timestamp"),
         Index("idx_audit_log_action", "action"),
     )
+
+
+class SystemPrompt(Base):
+    """System prompts for LLM interactions."""
+    __tablename__ = "system_prompts"
+
+    prompt_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    prompt_key = Column(String(100), unique=True, nullable=False, index=True)  # e.g., "chatbot_system"
+    prompt_name = Column(String(255), nullable=False)  # Display name
+    prompt_content = Column(Text, nullable=False)
+    description = Column(Text)  # What does this prompt do?
+    category = Column(String(50))  # "chat", "analysis", "report", "material"
+    temperature = Column(DECIMAL(3, 2))  # Recommended temperature
+    max_tokens = Column(Integer)  # Recommended max_tokens
+    updated_at = Column(TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_by = Column(String(100), default="system")  # "admin", "system", or email
+    version = Column(Integer, default=1)  # Track changes
+    created_at = Column(TIMESTAMP, default=datetime.utcnow)
+
+    __table_args__ = (
+        Index("idx_system_prompts_category", "category"),
+        Index("idx_system_prompts_updated", "updated_at"),
+    )

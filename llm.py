@@ -67,8 +67,38 @@ Antworte: "Lass uns gemeinsam darauf hinarbeiten. Was hast du bereits versucht? 
 **Dein Ton:** Freundlich, ermutigend, geduldig, aber fordernd."""
 
 
-# Load system prompt at module initialization
+# Load system prompt at module initialization (fallback only)
 SCAFFOLDING_SYSTEM_PROMPT = load_system_prompt()
+
+
+def get_chatbot_system_prompt() -> str:
+    """
+    Get current chatbot system prompt from prompt manager.
+
+    Falls back to file-based prompt if prompt manager is not available.
+    """
+    try:
+        from prompt_manager import prompt_manager
+        from database import SessionLocal
+
+        prompt = prompt_manager.get_prompt("chatbot_system")
+        if prompt:
+            return prompt
+
+        # Fallback to DB lookup if not in cache
+        db = SessionLocal()
+        try:
+            prompt = prompt_manager.get_prompt("chatbot_system", db)
+            if prompt:
+                return prompt
+        finally:
+            db.close()
+
+    except Exception as e:
+        logger.warning(f"Could not load prompt from manager, using fallback: {e}")
+
+    # Final fallback: use file-based prompt
+    return SCAFFOLDING_SYSTEM_PROMPT
 
 
 class BedrockLLM:
@@ -98,7 +128,7 @@ class BedrockLLM:
     async def stream_chat(
         self,
         messages: List[Dict[str, str]],
-        system_prompt: str = SCAFFOLDING_SYSTEM_PROMPT,
+        system_prompt: Optional[str] = None,
         rag_context: Optional[str] = None,
         temperature: float = 0.7,
         max_tokens: int = 2048
@@ -140,6 +170,10 @@ class BedrockLLM:
                             f"**Frage des Studenten:**\n{original_text}"
                         )
                         break
+
+            # Use prompt from manager if not provided
+            if system_prompt is None:
+                system_prompt = get_chatbot_system_prompt()
 
             # Build request body for Bedrock Converse API
             request_body = {
@@ -273,11 +307,18 @@ Zusammenfassung (max {max_summary_tokens} Tokens):"""
             {"role": "user", "content": summarization_prompt}
         ]
 
+        # Get conversation summary prompt from manager
+        try:
+            from prompt_manager import prompt_manager
+            summary_system_prompt = prompt_manager.get_prompt("conversation_summary")
+        except:
+            summary_system_prompt = "Du bist ein präziser Zusammenfasser. Erstelle kurze, informative Zusammenfassungen."
+
         # Generate summary (non-streaming for simplicity)
         summary = ""
         async for token in self.stream_chat(
             messages=summary_messages,
-            system_prompt="Du bist ein präziser Zusammenfasser. Erstelle kurze, informative Zusammenfassungen.",
+            system_prompt=summary_system_prompt,
             rag_context=None,
             temperature=0.3,  # Lower temperature for more focused summaries
             max_tokens=max_summary_tokens

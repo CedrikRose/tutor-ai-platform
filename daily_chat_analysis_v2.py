@@ -236,41 +236,37 @@ class ChatAnalyzer:
     def _build_analysis_prompt(self, chat_content: str) -> str:
         """Build prompt for LLM to analyze chat."""
 
-        prompt = f"""Analysiere den folgenden Chat-Verlauf zwischen einem Studenten und einem KI-Tutor.
+        # Get analysis system prompt from manager
+        try:
+            from prompt_manager import prompt_manager
+            analysis_prompt_template = prompt_manager.get_prompt("chat_analysis")
+        except Exception as e:
+            logger.warning(f"Could not load chat analysis prompt: {e}")
+            # Fallback to hardcoded prompt
+            analysis_prompt_template = """Du bist ein Analysator für studentische Chat-Gespräche. Deine Aufgabe ist es, Findings zu extrahieren, die für Professoren relevant sind.
 
-Identifiziere:
+**Kategorien:**
+1. **difficulty** - Verständnisprobleme, wiederholte Fehler, Konzept-Lücken
+2. **feedback_professor** - Kommentare über Vorlesungsinhalte, Materialien, Erklärungen
+3. **feedback_chatbot** - Qualität der KI-Antworten, Hilfreichkeit, Frustration
+4. **question_pattern** - Wiederkehrende Fragenmuster, die auf systematische Issues hindeuten
 
-1. **Schwierigkeiten (difficulty)**: Wo hatte der Student Verständnisprobleme mit dem Stoff?
-2. **Feedback zum Professor (feedback_professor)**: Kommentare zur Lehre, zu Materialien, zu Erklärungen des Professors
-3. **Feedback zum Chatbot (feedback_chatbot)**: Kommentare zur Qualität der Bot-Antworten, Hilfsbereitschaft, Klarheit
-4. **Fragemuster (question_pattern)**: Wiederkehrende oder ungewöhnliche Fragen, die auf systematische Unklarheiten hindeuten
+**Für jedes Finding:**
+- **title**: Kurze, prägnante Zusammenfassung (max 100 Zeichen)
+- **description**: Detaillierte Beschreibung mit konkreten Beispielen
+- **reasoning**: Warum ist das relevant? Was bedeutet es?
+- **reference_exchange_numbers**: Liste der Exchange-Nummern als Beleg
+- **related_topic**: Bezug zu Kursthema (z.B. "Vorlesung 3: Rekursion", "Hausaufgabe 2")
 
-Für jedes Finding, gib folgende Informationen in JSON-Format zurück:
-- "category": Eine der Kategorien (difficulty, feedback_professor, feedback_chatbot, question_pattern)
-- "title": Kurze Zusammenfassung (max 100 Zeichen)
-- "description": Detaillierte Beschreibung des Problems/Feedbacks
-- "reasoning": Begründung - warum kommst du zu diesem Schluss?
-- "reference_exchange_numbers": Array von EXCHANGE-Nummern, die dieses Finding belegen (z.B. [3, 5])
-- "related_topic": Betroffenes Thema falls erkennbar (z.B. "Pointer-Arithmetik", "Vorlesung 5")
+**Wichtig:**
+- Extrahiere NUR relevante, actionable Findings
+- Mehrere ähnliche Fragen → EIN Finding mit allen Referenzen
+- Sei spezifisch: "Verständnisprobleme bei Rekursions-Basis-Bedingung" statt "Probleme mit Rekursion"
+- Nutze die gegebenen Exchange-Nummern für Referenzen
 
-**Wichtig**:
-- Nur echte, konkrete Findings melden - keine Vermutungen
-- reference_exchange_numbers müssen die EXCHANGE-Nummern sein (nicht MSG- oder andere IDs)
-- Wenn keine Findings vorhanden sind, gib eine leere Liste zurück
+Antworte im JSON-Format: {"findings": [{"category": "...", "title": "...", ...}]}"""
 
-Gib das Ergebnis als JSON zurück:
-{{
-  "findings": [
-    {{
-      "category": "difficulty",
-      "title": "...",
-      "description": "...",
-      "reasoning": "...",
-      "reference_exchange_numbers": [3, 5],
-      "related_topic": "..."
-    }}
-  ]
-}}
+        prompt = f"""{analysis_prompt_template}
 
 Chat-Verlauf:
 {chat_content}

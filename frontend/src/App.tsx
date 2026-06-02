@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatWindow from './components/ChatWindow';
 import SessionSidebar from './components/SessionSidebar';
 import About from './pages/About';
+import PromptsAdminPage from './pages/PromptsAdminPage';
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
 import { API_URL } from './config';
@@ -150,6 +151,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ChatApp />} />
         <Route path="/about" element={<About />} />
+        <Route path="/prompts" element={<PromptsAdminPage />} />
       </Routes>
     </BrowserRouter>
   );
