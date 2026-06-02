@@ -326,17 +326,43 @@ async def chat_websocket_v2(
                 except ValueError:
                     pass
 
-            # RAG retrieval
+            # Get conversation history for deduplication tracking
+            previous_exchanges = db.query(ChatExchange).filter(
+                ChatExchange.conversation_id == conversation.conversation_id
+            ).order_by(ChatExchange.exchange_number.asc()).all()
+
+            # Track already used chunks and materials (DEDUPLICATION)
+            seen_chunk_ids = set()
+            seen_material_ids = set()
+
+            for ex in previous_exchanges:
+                # Collect all previously used RAG chunk IDs
+                if ex.rag_chunk_ids:
+                    seen_chunk_ids.update(ex.rag_chunk_ids)
+
+                # Collect all previously used material IDs
+                if ex.selected_material_id:
+                    seen_material_ids.add(ex.selected_material_id)
+
+            logger.info(f"Already seen: {len(seen_chunk_ids)} chunks, {len(seen_material_ids)} materials")
+
+            # RAG retrieval with deduplication
             retriever = RAGRetriever(db, embedder)
             chunks = []
 
             if selected_material_id:
-                # Load ALL chunks from specific material
-                logger.info(f"Loading ALL chunks from material {selected_material_id}")
-                material_chunks = await retriever.retrieve_all_from_material(str(selected_material_id))
+                selected_uuid = uuid.UUID(selected_material_id)
+
+                # Check if material already in context
+                if selected_uuid in seen_material_ids:
+                    logger.info(f"⏭️  Material {selected_material_id} already in context, skipping")
+                    material_chunks = []  # Skip material
+                else:
+                    logger.info(f"📥 Loading new material {selected_material_id}")
+                    material_chunks = await retriever.retrieve_all_from_material(str(selected_material_id))
 
                 # Additionally retrieve relevant lecture chunks via semantic search
-                logger.info(f"Additionally retrieving relevant lecture chunks for context")
+                logger.info(f"Retrieving relevant lecture chunks for context")
                 lecture_chunks = await retriever.retrieve(
                     query=user_message,
                     course_id=str(course_id) if course_id else None,
@@ -345,27 +371,39 @@ async def chat_websocket_v2(
                     top_k=5  # Fewer since we already have the full material
                 )
 
-                # Combine: material first (priority), then relevant lectures
-                chunks = material_chunks + lecture_chunks
-                logger.info(f"RAG retrieved {len(material_chunks)} chunks from material + {len(lecture_chunks)} lecture chunks")
+                # Deduplicate lecture chunks
+                new_lecture_chunks = [
+                    c for c in lecture_chunks
+                    if uuid.UUID(c["chunk_id"]) not in seen_chunk_ids
+                ]
+
+                # Combine: material first (priority), then new lecture chunks
+                chunks = material_chunks + new_lecture_chunks
+                logger.info(f"RAG: {len(material_chunks)} material chunks + {len(new_lecture_chunks)}/{len(lecture_chunks)} new lecture chunks")
             else:
-                # Semantic search
+                # Semantic search without selected material
                 top_k = 10
-                chunks = await retriever.retrieve(
+                raw_chunks = await retriever.retrieve(
                     query=user_message,
                     course_id=str(course_id) if course_id else None,
                     max_lecture_sequence=max_lecture_seq,
                     material_types=material_types,
                     top_k=top_k
                 )
-                logger.info(f"RAG retrieved {len(chunks)} chunks")
 
+                # Deduplicate all chunks
+                chunks = [
+                    c for c in raw_chunks
+                    if uuid.UUID(c["chunk_id"]) not in seen_chunk_ids
+                ]
+
+                logger.info(f"RAG: {len(chunks)}/{len(raw_chunks)} new chunks (filtered {len(raw_chunks) - len(chunks)} duplicates)")
+
+            # Format context only if new chunks are present
             rag_context = retriever.format_context_for_llm(chunks) if chunks else None
 
-            # Get conversation history for context
-            previous_exchanges = db.query(ChatExchange).filter(
-                ChatExchange.conversation_id == conversation.conversation_id
-            ).order_by(ChatExchange.exchange_number.asc()).all()
+            if not chunks:
+                logger.info("ℹ️  No new chunks to add - all relevant chunks already in context")
 
             # Build message history
             message_history = []
