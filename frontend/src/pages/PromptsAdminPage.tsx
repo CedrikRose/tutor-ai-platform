@@ -4,6 +4,7 @@
  * Password-protected page to view and edit all system prompts.
  */
 
+import './PromptsAdminPage.css';
 import React, { useState, useEffect } from 'react';
 import {
   authenticate,
@@ -204,31 +205,31 @@ export default function PromptsAdminPage() {
   }, {} as Record<string, Prompt[]>);
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="prompts-admin">
       {/* Password Modal */}
       {showPasswordModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4">
-            <h2 className="text-2xl font-bold text-white mb-6">Admin Zugang</h2>
+        <div className="modal-overlay">
+          <div className="password-modal">
+            <h2 className="">Admin Zugang</h2>
             <form onSubmit={handleAuthenticate}>
               <div className="mb-4">
-                <label className="block text-gray-300 mb-2">Passwort:</label>
+                <label className="">Passwort:</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                  className=""
                   placeholder="Passwort eingeben..."
                   autoFocus
                 />
                 {passwordError && (
-                  <p className="text-red-400 text-sm mt-2">{passwordError}</p>
+                  <p className="password-error">{passwordError}</p>
                 )}
               </div>
               <button
                 type="submit"
                 disabled={isAuthenticating || !password}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary"
               >
                 {isAuthenticating ? 'Authentifiziere...' : 'Einloggen'}
               </button>
@@ -239,19 +240,19 @@ export default function PromptsAdminPage() {
 
       {/* Editor Modal */}
       {editingPrompt && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col">
+        <div className="modal-overlay">
+          <div className="editor-modal">
             {/* Header */}
-            <div className="p-6 border-b border-gray-700">
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-white mb-2">
+            <div className="editor-header">
+              <div className="editor-header-content">
+                <div className="editor-title">
+                  <h2 className="">
                     {editingPrompt.prompt_name}
                   </h2>
-                  <p className="text-gray-400 text-sm mb-2">
+                  <p className="editor-description">
                     {editingPrompt.description}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <div className="editor-meta">
                     <span>Key: {editingPrompt.prompt_key}</span>
                     {editingPrompt.temperature && (
                       <span>Temperature: {editingPrompt.temperature}</span>
@@ -266,7 +267,7 @@ export default function PromptsAdminPage() {
                 </div>
                 <button
                   onClick={() => setEditingPrompt(null)}
-                  className="text-gray-400 hover:text-white text-2xl"
+                  className="btn-close"
                 >
                   ×
                 </button>
@@ -274,31 +275,31 @@ export default function PromptsAdminPage() {
             </div>
 
             {/* Editor */}
-            <div className="flex-1 p-6 overflow-hidden">
+            <div className="editor-body">
               <textarea
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
-                className="w-full h-full bg-gray-900 text-white p-4 rounded border border-gray-700 focus:border-blue-500 focus:outline-none font-mono text-sm resize-none"
+                className="editor-textarea"
                 placeholder="Prompt content..."
               />
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-gray-700 flex justify-between items-center">
-              <div className="text-sm text-gray-500">
+            <div className="editor-footer">
+              <div className="editor-char-count">
                 {editContent.length} Zeichen
               </div>
-              <div className="flex gap-3">
+              <div className="editor-actions">
                 <button
                   onClick={() => setEditingPrompt(null)}
-                  className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-semibold"
+                  className="btn-cancel"
                 >
                   Abbrechen
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={isSaving || editContent === editingPrompt.prompt_content}
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="btn-save"
                 >
                   {isSaving ? (
                     <>
@@ -319,14 +320,8 @@ export default function PromptsAdminPage() {
 
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed top-4 right-4 z-50 animate-fade-in">
-          <div
-            className={`px-6 py-3 rounded-lg shadow-lg ${
-              toast.type === 'success'
-                ? 'bg-green-600 text-white'
-                : 'bg-red-600 text-white'
-            }`}
-          >
+        <div className="toast">
+          <div className={`toast-content ${toast.type === 'success' ? 'toast-success' : 'toast-error'}`}>
             {toast.message}
           </div>
         </div>
@@ -334,25 +329,25 @@ export default function PromptsAdminPage() {
 
       {/* Main Content */}
       {isAuth && (
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="prompts-container">
           {/* Header */}
-          <div className="flex justify-between items-center mb-8">
+          <div className="prompts-header">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">System Prompts</h1>
-              <p className="text-gray-400">
+              <h1 className="">System Prompts</h1>
+              <p className="">
                 Alle System-Prompts verwalten und bearbeiten
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="editor-actions">
               <button
                 onClick={handleReload}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-semibold"
+                className="btn-secondary"
               >
                 ⟳ Neu laden
               </button>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-semibold"
+                className="btn-secondary"
               >
                 Logout
               </button>
@@ -361,63 +356,63 @@ export default function PromptsAdminPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded mb-6">
+            <div className="error-message">
               {error}
             </div>
           )}
 
           {/* Loading State */}
           {loading && (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin text-4xl text-blue-500 mb-4">⟳</div>
-              <p className="text-gray-400">Lade Prompts...</p>
+            <div className="loading-container">
+              <div className="loading-spinner">⟳</div>
+              <p className="">Lade Prompts...</p>
             </div>
           )}
 
           {/* Prompts Grid */}
           {!loading && prompts.length > 0 && (
-            <div className="space-y-8">
+            <div className="">
               {Object.entries(CATEGORIES).map(([categoryKey, categoryInfo]) => {
                 const categoryPrompts = promptsByCategory[categoryKey] || [];
                 if (categoryPrompts.length === 0) return null;
 
                 return (
                   <div key={categoryKey}>
-                    <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                      <span className={`px-3 py-1 rounded text-sm ${categoryInfo.color}`}>
+                    <h2 className="category-header">
+                      <span className={`category-badge ${categoryKey}`}>
                         {categoryInfo.name}
                       </span>
-                      <span className="text-gray-500 text-sm">
+                      <span className="category-count">
                         ({categoryPrompts.length})
                       </span>
                     </h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="prompts-grid">
                       {categoryPrompts.map((prompt) => (
                         <div
                           key={prompt.prompt_key}
-                          className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors"
+                          className="prompt-card"
                         >
-                          <div className="flex justify-between items-start mb-3">
-                            <h3 className="text-lg font-semibold text-white">
+                          <div className="prompt-card-header">
+                            <h3 className="">
                               {prompt.prompt_name}
                             </h3>
                             <button
                               onClick={() => handleEdit(prompt)}
-                              className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded font-semibold"
+                              className="btn-edit"
                             >
                               Bearbeiten
                             </button>
                           </div>
                           {prompt.description && (
-                            <p className="text-gray-400 text-sm mb-4">
+                            <p className="prompt-description">
                               {prompt.description}
                             </p>
                           )}
-                          <div className="bg-gray-900 p-3 rounded text-xs text-gray-300 font-mono mb-3 max-h-32 overflow-y-auto">
+                          <div className="prompt-preview">
                             {prompt.prompt_content.substring(0, 200)}
                             {prompt.prompt_content.length > 200 && '...'}
                           </div>
-                          <div className="flex items-center gap-4 text-xs text-gray-500">
+                          <div className="prompt-meta">
                             <span>Key: {prompt.prompt_key}</span>
                             {prompt.temperature && (
                               <span>Temp: {prompt.temperature}</span>
@@ -435,7 +430,7 @@ export default function PromptsAdminPage() {
 
           {/* Empty State */}
           {!loading && prompts.length === 0 && (
-            <div className="text-center py-12 text-gray-400">
+            <div className="empty-state">
               Keine Prompts gefunden
             </div>
           )}
