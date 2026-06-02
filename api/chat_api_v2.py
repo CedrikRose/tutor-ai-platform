@@ -336,13 +336,13 @@ async def chat_websocket_v2(
             seen_material_ids = set()
 
             for ex in previous_exchanges:
-                # Collect all previously used RAG chunk IDs
+                # Collect all previously used RAG chunk IDs (convert UUID to string)
                 if ex.rag_chunk_ids:
-                    seen_chunk_ids.update(ex.rag_chunk_ids)
+                    seen_chunk_ids.update(str(cid) for cid in ex.rag_chunk_ids)
 
-                # Collect all previously used material IDs
+                # Collect all previously used material IDs (convert UUID to string)
                 if ex.selected_material_id:
-                    seen_material_ids.add(ex.selected_material_id)
+                    seen_material_ids.add(str(ex.selected_material_id))
 
             logger.info(f"Already seen: {len(seen_chunk_ids)} chunks, {len(seen_material_ids)} materials")
 
@@ -351,10 +351,8 @@ async def chat_websocket_v2(
             chunks = []
 
             if selected_material_id:
-                selected_uuid = uuid.UUID(selected_material_id)
-
-                # Check if material already in context
-                if selected_uuid in seen_material_ids:
+                # Check if material already in context (compare as strings)
+                if selected_material_id in seen_material_ids:
                     logger.info(f"⏭️  Material {selected_material_id} already in context, skipping")
                     material_chunks = []  # Skip material
                 else:
@@ -374,7 +372,7 @@ async def chat_websocket_v2(
                 # Deduplicate lecture chunks
                 new_lecture_chunks = [
                     c for c in lecture_chunks
-                    if uuid.UUID(c["chunk_id"]) not in seen_chunk_ids
+                    if c["chunk_id"] not in seen_chunk_ids
                 ]
 
                 # Combine: material first (priority), then new lecture chunks
@@ -394,7 +392,7 @@ async def chat_websocket_v2(
                 # Deduplicate all chunks
                 chunks = [
                     c for c in raw_chunks
-                    if uuid.UUID(c["chunk_id"]) not in seen_chunk_ids
+                    if c["chunk_id"] not in seen_chunk_ids
                 ]
 
                 logger.info(f"RAG: {len(chunks)}/{len(raw_chunks)} new chunks (filtered {len(raw_chunks) - len(chunks)} duplicates)")

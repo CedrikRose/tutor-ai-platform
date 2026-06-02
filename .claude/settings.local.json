@@ -127,7 +127,8 @@
       "Bash(git add *)",
       "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
       "Bash(git pull *)",
-      "Bash(/tmp/fix_tailwind.sh)"
+      "Bash(/tmp/fix_tailwind.sh)",
+      "Bash(git fetch *)"
     ]
   },
   "prefersReducedMotion": true
