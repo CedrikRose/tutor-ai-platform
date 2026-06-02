@@ -414,7 +414,9 @@ async def chat_websocket_v2(
 
             # Stream LLM response
             assistant_response = ""
-            system_prompt = load_system_prompt()
+            # Import the function to get prompt from manager
+            from llm import get_chatbot_system_prompt
+            system_prompt = get_chatbot_system_prompt()
 
             try:
                 async for token in llm.stream_chat(

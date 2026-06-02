@@ -83,13 +83,16 @@ def get_chatbot_system_prompt() -> str:
 
         prompt = prompt_manager.get_prompt("chatbot_system")
         if prompt:
+            logger.info(f"✓ Using chatbot prompt from cache (last 50 chars: ...{prompt[-50:]})")
             return prompt
 
         # Fallback to DB lookup if not in cache
+        logger.warning("Chatbot prompt not in cache, loading from DB")
         db = SessionLocal()
         try:
             prompt = prompt_manager.get_prompt("chatbot_system", db)
             if prompt:
+                logger.info(f"✓ Loaded chatbot prompt from DB (last 50 chars: ...{prompt[-50:]})")
                 return prompt
         finally:
             db.close()
@@ -98,6 +101,7 @@ def get_chatbot_system_prompt() -> str:
         logger.warning(f"Could not load prompt from manager, using fallback: {e}")
 
     # Final fallback: use file-based prompt
+    logger.warning("⚠️ Using fallback chatbot prompt from file")
     return SCAFFOLDING_SYSTEM_PROMPT
 
 
