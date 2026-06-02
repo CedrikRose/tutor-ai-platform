@@ -2,9 +2,16 @@
 
 .prompts-admin {
   min-height: 100vh;
+  height: auto;
   background-color: #111827;
   color: #e5e7eb;
   overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .prompts-container {
@@ -289,9 +296,9 @@
 .editor-modal {
   background-color: #1f2937;
   border-radius: 0.5rem;
-  width: 100%;
-  max-width: 72rem;
-  max-height: 90vh;
+  width: 95vw;
+  max-width: 90rem;
+  height: 90vh;
   display: flex;
   flex-direction: column;
 }
