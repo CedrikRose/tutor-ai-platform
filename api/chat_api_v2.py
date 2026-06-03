@@ -419,6 +419,10 @@ async def chat_websocket_v2(
             system_prompt = get_chatbot_system_prompt()
 
             try:
+                import time
+                token_count = 0
+                start_time = time.time()
+
                 async for token in llm.stream_chat(
                     messages=message_history,
                     system_prompt=system_prompt,
@@ -426,11 +430,19 @@ async def chat_websocket_v2(
                     temperature=0.7,
                     max_tokens=2048
                 ):
+                    token_count += 1
+                    elapsed = time.time() - start_time
+                    token_length = len(token)
+
+                    logger.info(f"🔵 Token #{token_count} | Size: {token_length} chars | Elapsed: {elapsed:.2f}s | Content: {token[:50] if len(token) > 50 else token}...")
+
                     assistant_response += token
                     await websocket.send_json({
                         "type": "token",
                         "content": token
                     })
+
+                    logger.info(f"✅ Token #{token_count} sent to WebSocket")
 
                 # Count tokens
                 response_tokens = await llm.count_tokens(assistant_response)

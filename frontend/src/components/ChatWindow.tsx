@@ -117,11 +117,20 @@ function ChatWindow({ conversationId, onConversationUpdate, onConversationCreate
       const data = JSON.parse(event.data);
 
       if (data.type === 'token') {
+        console.log('🟢 Token received:', {
+          length: data.content.length,
+          content: data.content.substring(0, 50),
+          timestamp: new Date().toISOString(),
+          currentLength: currentStreamingAnswerRef.current.length
+        });
+
         setIsWaitingForResponse(false);
         setIsStreaming(true);
         // Store in ref AND state
         currentStreamingAnswerRef.current += data.content;
         setStreamingAnswer((prev) => prev + data.content);
+
+        console.log('🔄 State updated, new total length:', currentStreamingAnswerRef.current.length);
       } else if (data.type === 'done') {
         console.log('✅ Streaming done event received');
         console.log('Question from ref:', currentStreamingQuestion.current);
