@@ -121,10 +121,19 @@ class BedrockLLM:
         self.model_id = config.bedrock_llm_model_primary
         self.context_window_size = 32000  # Kimi K2.5 context window
 
-        # Initialize Bedrock client
+        # Initialize Bedrock client with extended timeout for streaming
+        from botocore.config import Config as BotocoreConfig
+
+        boto_config = BotocoreConfig(
+            read_timeout=300,  # 5 minutes - allow for longer generation times
+            connect_timeout=10,  # 10 seconds to establish connection
+            retries={'max_attempts': 0}  # Don't retry, we handle retries with exponential backoff
+        )
+
         self.bedrock_client = boto3.client(
             service_name='bedrock-runtime',
-            region_name=config.aws_region
+            region_name=config.aws_region,
+            config=boto_config
         )
 
         logger.info(f"BedrockLLM initialized with model: {self.model_id}")
