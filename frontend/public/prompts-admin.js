@@ -328,14 +328,23 @@ document.getElementById('editorCancelBtn').addEventListener('click', closeEditor
 document.getElementById('editorSaveBtn').addEventListener('click', savePrompt);
 document.getElementById('editorTextarea').addEventListener('input', updateCharCount);
 
-// Initialize
+// Initialize - Always show modal first, then check token
 window.addEventListener('DOMContentLoaded', () => {
+    console.log('Prompts Admin initialized');
+
+    // Always show password modal initially
+    showLoginModal();
+
     const token = getToken();
+    console.log('Token:', token ? 'exists' : 'not found');
+
     if (token) {
+        // Token exists, try to use it
         currentToken = token;
         hideLoginModal();
         loadPrompts();
     } else {
-        showLoginModal();
+        // No token, user must log in
+        console.log('No valid token - login required');
     }
 });
