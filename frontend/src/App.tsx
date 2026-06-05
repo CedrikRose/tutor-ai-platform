@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatWindow from './components/ChatWindow';
 import SessionSidebar from './components/SessionSidebar';
 import About from './pages/About';
-import PromptsAdminPage from './pages/PromptsAdminPage';
 import Cookies from 'js-cookie';
+
+// Lazy load PromptsAdminPage to prevent its CSS from affecting main app
+const PromptsAdminPage = lazy(() => import('./pages/PromptsAdminPage'));
 import { v4 as uuidv4 } from 'uuid';
 import { API_URL } from './config';
 import './App.css';
@@ -151,7 +153,14 @@ function App() {
       <Routes>
         <Route path="/" element={<ChatApp />} />
         <Route path="/about" element={<About />} />
-        <Route path="/prompts" element={<PromptsAdminPage />} />
+        <Route
+          path="/prompts"
+          element={
+            <Suspense fallback={<div style={{padding: '2rem', color: '#fff'}}>Laden...</div>}>
+              <PromptsAdminPage />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
