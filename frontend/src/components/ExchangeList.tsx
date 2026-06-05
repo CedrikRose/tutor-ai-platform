@@ -39,36 +39,43 @@ function ExchangeList({
 }: ExchangeListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const lastAnswerRef = useRef<HTMLDivElement>(null);
+  const messageListRef = useRef<HTMLDivElement>(null);
 
   // Smart scroll when answer is complete
   useEffect(() => {
     if (scrollToEnd && exchanges.length > 0) {
       // Small delay to ensure DOM is fully rendered
       setTimeout(() => {
-        if (lastAnswerRef.current && messagesEndRef.current) {
+        if (lastAnswerRef.current && messagesEndRef.current && messageListRef.current) {
           const answerElement = lastAnswerRef.current;
+          const messageList = messageListRef.current;
           const answerHeight = answerElement.offsetHeight;
-          const viewportHeight = window.innerHeight;
-          
-          console.log('📏 Answer height:', answerHeight, 'Viewport height:', viewportHeight);
-          
-          // If answer is taller than 70% of viewport, scroll to start of answer
+          const containerHeight = messageList.clientHeight;
+
+          console.log('📏 Answer height:', answerHeight, 'Container height:', containerHeight);
+
+          // If answer is taller than 70% of container, scroll to start of answer
           // Otherwise scroll to end
-          if (answerHeight > viewportHeight * 0.7) {
+          if (answerHeight > containerHeight * 0.7) {
             console.log('📜 Long answer - scrolling to start');
-            answerElement.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
+            const offsetTop = answerElement.offsetTop - messageList.offsetTop;
+            messageList.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
             });
           } else {
             console.log('📜 Short answer - scrolling to end');
-            messagesEndRef.current.scrollIntoView({ 
-              behavior: 'smooth' 
+            messageList.scrollTo({
+              top: messageList.scrollHeight,
+              behavior: 'smooth'
             });
           }
-        } else {
+        } else if (messageListRef.current) {
           // Fallback: scroll to end
-          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+          messageListRef.current.scrollTo({
+            top: messageListRef.current.scrollHeight,
+            behavior: 'smooth'
+          });
         }
         onScrollComplete();
       }, 100);
@@ -77,13 +84,16 @@ function ExchangeList({
 
   // Auto-scroll during streaming
   useEffect(() => {
-    if (isStreaming && streamingAnswer) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isStreaming && streamingAnswer && messageListRef.current) {
+      messageListRef.current.scrollTo({
+        top: messageListRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, [streamingAnswer, isStreaming]);
 
   return (
-    <div className="message-list">
+    <div className="message-list" ref={messageListRef}>
       {/* Render exchanges */}
       {exchanges.map((exchange, index) => {
         const isLastExchange = index === exchanges.length - 1;

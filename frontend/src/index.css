@@ -13,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #0a0a0a;
   color: #e5e7eb;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow: hidden; /* Prevent any scrolling on body */
   /* Safe area insets for devices with notch/home indicator */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
