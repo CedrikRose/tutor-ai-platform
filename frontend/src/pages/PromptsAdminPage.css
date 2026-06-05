@@ -438,7 +438,7 @@
   top: 1rem;
   right: 1rem;
   z-index: 50;
-  animation: fadeIn 0.3s ease-out;
+  animation: toastFadeIn 0.3s ease-out;
 }
 
 .toast-content {
@@ -464,7 +464,7 @@
   color: #9ca3af;
 }
 
-@keyframes fadeIn {
+@keyframes toastFadeIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
