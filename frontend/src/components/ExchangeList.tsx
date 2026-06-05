@@ -43,35 +43,38 @@ function ExchangeList({
   // Smart scroll when answer is complete
   useEffect(() => {
     if (scrollToEnd && exchanges.length > 0) {
-      // Small delay to ensure DOM is fully rendered
+      // Increased delay for complex markdown rendering (KaTeX, tables)
       setTimeout(() => {
-        if (lastAnswerRef.current && messagesEndRef.current) {
-          const answerElement = lastAnswerRef.current;
-          const answerHeight = answerElement.offsetHeight;
-          const viewportHeight = window.innerHeight;
-          
-          console.log('📏 Answer height:', answerHeight, 'Viewport height:', viewportHeight);
-          
-          // If answer is taller than 70% of viewport, scroll to start of answer
-          // Otherwise scroll to end
-          if (answerHeight > viewportHeight * 0.7) {
-            console.log('📜 Long answer - scrolling to start');
-            answerElement.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
-            });
+        // Use requestAnimationFrame to ensure layout is complete
+        requestAnimationFrame(() => {
+          if (lastAnswerRef.current && messagesEndRef.current) {
+            const answerElement = lastAnswerRef.current;
+            const answerHeight = answerElement.offsetHeight;
+            const viewportHeight = window.innerHeight;
+
+            console.log('📏 Answer height:', answerHeight, 'Viewport height:', viewportHeight);
+
+            // If answer is taller than 70% of viewport, scroll to start of answer
+            // Otherwise scroll to end
+            if (answerHeight > viewportHeight * 0.7) {
+              console.log('📜 Long answer - scrolling to start');
+              answerElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            } else {
+              console.log('📜 Short answer - scrolling to end');
+              messagesEndRef.current.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
           } else {
-            console.log('📜 Short answer - scrolling to end');
-            messagesEndRef.current.scrollIntoView({ 
-              behavior: 'smooth' 
-            });
+            // Fallback: scroll to end
+            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
           }
-        } else {
-          // Fallback: scroll to end
-          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }
-        onScrollComplete();
-      }, 100);
+          onScrollComplete();
+        });
+      }, 200);
     }
   }, [scrollToEnd, exchanges.length, onScrollComplete]);
 
