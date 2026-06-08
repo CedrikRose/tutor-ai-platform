@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { courseApi } from '../services/api';
 import DeleteMaterialModal from './DeleteMaterialModal';
+import EditMaterialModal from './EditMaterialModal';
 import type { CourseMaterial } from '../types';
 
 interface MaterialCardProps {
@@ -12,6 +13,7 @@ export default function MaterialCard({ material }: MaterialCardProps) {
   const queryClient = useQueryClient();
   const [showAllFiles, setShowAllFiles] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const PROCESSING_MARKER = new Date('1970-01-01T00:00:00Z');
   const isProcessed = !!material.processed_at && new Date(material.processed_at) > PROCESSING_MARKER;
@@ -138,6 +140,14 @@ export default function MaterialCard({ material }: MaterialCardProps) {
 
       {/* Action buttons */}
       <div className="flex gap-2">
+        {isProcessed && (
+          <button
+            onClick={() => setShowEditModal(true)}
+            className="flex-1 bg-blue-900/30 hover:bg-blue-900/50 text-blue-400 py-2 px-3 rounded-md text-sm font-medium"
+          >
+            Bearbeiten
+          </button>
+        )}
         {!isProcessed && (
           <button
             onClick={handleProcess}
@@ -150,7 +160,7 @@ export default function MaterialCard({ material }: MaterialCardProps) {
         <button
           onClick={handleDeleteClick}
           disabled={deleteMutation.isPending}
-          className={`${!isProcessed ? 'flex-1' : 'w-full'} bg-red-900/30 hover:bg-red-900/50 text-red-400 py-2 px-3 rounded-md text-sm disabled:opacity-50`}
+          className={`${!isProcessed ? 'flex-1' : 'flex-1'} bg-red-900/30 hover:bg-red-900/50 text-red-400 py-2 px-3 rounded-md text-sm disabled:opacity-50`}
         >
           {deleteMutation.isPending ? 'Lösche...' : 'Löschen'}
         </button>
@@ -162,6 +172,17 @@ export default function MaterialCard({ material }: MaterialCardProps) {
           onConfirm={handleDeleteConfirm}
           onCancel={() => setShowDeleteModal(false)}
           isDeleting={deleteMutation.isPending}
+        />
+      )}
+
+      {showEditModal && (
+        <EditMaterialModal
+          material={material}
+          onClose={() => setShowEditModal(false)}
+          onSaved={() => {
+            queryClient.invalidateQueries({ queryKey: ['materials', material.course_id] });
+            setShowEditModal(false);
+          }}
         />
       )}
     </div>

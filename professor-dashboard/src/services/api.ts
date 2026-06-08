@@ -9,6 +9,7 @@ import type {
   Homework,
   CreateHomeworkRequest,
   UploadSession,
+  MaterialContentResponse,
 } from '../types';
 
 const api = axios.create({
@@ -124,6 +125,15 @@ export const courseApi = {
 
   processMaterial: async (materialId: string): Promise<void> => {
     await api.post(`/professor/materials/${materialId}/process`);
+  },
+
+  getMaterialContent: async (materialId: string): Promise<MaterialContentResponse> => {
+    const response = await api.get<MaterialContentResponse>(`/professor/materials/${materialId}/content`);
+    return response.data;
+  },
+
+  updateMaterialContent: async (materialId: string, content: string): Promise<void> => {
+    await api.put(`/professor/materials/${materialId}/content`, { content });
   },
 };
 

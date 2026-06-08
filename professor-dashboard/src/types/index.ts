@@ -127,3 +127,11 @@ export interface UploadMaterialRequest {
   material_type: 'lecture_slide' | 'homework' | 'tutorium' | 'other';
   custom_name?: string;
 }
+
+export interface MaterialContentResponse {
+  material_id: string;
+  material_type: 'lecture_slide' | 'homework' | 'tutorium' | 'other';
+  display_name: string;
+  content: string;
+  is_editable: boolean;
+}

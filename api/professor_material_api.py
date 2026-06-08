@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from database import get_db, CourseMaterial, MaterialFile, Course
+from database import get_db, CourseMaterial, MaterialFile, Course, MaterialChunk, MaterialContent, MaterialProcessingLog
 from auth import get_current_user as get_current_professor
 
 logger = logging.getLogger(__name__)
@@ -41,6 +41,18 @@ class CourseMaterialResponse(BaseModel):
     files: List[MaterialFileResponse] = []
     processed_at: Optional[datetime]
     created_at: datetime
+
+
+class MaterialContentResponse(BaseModel):
+    material_id: str
+    material_type: str
+    display_name: str
+    content: str
+    is_editable: bool
+
+
+class UpdateMaterialContentRequest(BaseModel):
+    content: str
 
 
 # ============================================================================
@@ -394,3 +406,313 @@ async def process_material(
         "status": "processing",
         "message": "Verarbeitung gestartet"
     }
+
+
+@router.get("/materials/{material_id}/content", response_model=MaterialContentResponse)
+async def get_material_content(
+    material_id: str,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_professor)
+):
+    """
+    Get material content for editing.
+
+    For lecture_slide: Combines all chunks from MaterialChunk
+    For homework/tutorium/other: Combines all content from MaterialContent
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.professor_id != current_user.user_id:
+        # TODO: Check if user is editor once we have permissions table
+        raise HTTPException(status_code=403, detail="No permission to view this material")
+
+    # Check if processed
+    PROCESSING_MARKER = datetime(1970, 1, 1, 0, 0, 0)
+    if not material.processed_at or material.processed_at <= PROCESSING_MARKER:
+        raise HTTPException(status_code=400, detail="Material not yet processed")
+
+    # Get content based on material type
+    content_parts = []
+
+    if material.material_type == 'lecture_slide':
+        # Get all chunks, ordered by file_name and chunk_index
+        chunks = db.query(MaterialChunk).filter(
+            MaterialChunk.material_id == material_uuid
+        ).order_by(
+            MaterialChunk.file_name,
+            MaterialChunk.chunk_index
+        ).all()
+
+        if not chunks:
+            raise HTTPException(status_code=404, detail="No content found for this material")
+
+        # Group by file_name and combine
+        current_file = None
+        for chunk in chunks:
+            if chunk.file_name != current_file:
+                if current_file is not None:
+                    content_parts.append("")  # Empty line between files
+                content_parts.append(f"--- File: {chunk.file_name} ---")
+                content_parts.append("")
+                current_file = chunk.file_name
+            content_parts.append(chunk.content)
+
+    else:
+        # Get all content entries, ordered by file_name
+        contents = db.query(MaterialContent).filter(
+            MaterialContent.material_id == material_uuid
+        ).order_by(MaterialContent.file_name).all()
+
+        if not contents:
+            raise HTTPException(status_code=404, detail="No content found for this material")
+
+        # Combine with file separators
+        for content_entry in contents:
+            content_parts.append(f"--- File: {content_entry.file_name} ---")
+            content_parts.append("")
+            content_parts.append(content_entry.content)
+            content_parts.append("")
+
+    combined_content = "\n".join(content_parts)
+
+    return MaterialContentResponse(
+        material_id=str(material.material_id),
+        material_type=material.material_type,
+        display_name=material.display_name,
+        content=combined_content,
+        is_editable=True
+    )
+
+
+@router.put("/materials/{material_id}/content")
+async def update_material_content(
+    material_id: str,
+    request: UpdateMaterialContentRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_professor)
+):
+    """
+    Update material content.
+
+    For lecture_slide: Deletes old chunks, re-chunks, re-embeds
+    For homework/tutorium/other: Updates MaterialContent entries
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.professor_id != current_user.user_id:
+        # TODO: Check if user is editor once we have permissions table
+        raise HTTPException(status_code=403, detail="No permission to edit this material")
+
+    logger.info(f"Updating content for material {material.display_name} (type: {material.material_type})")
+
+    if material.material_type == 'lecture_slide':
+        # Process lecture: Delete old chunks, re-chunk, re-embed in background
+        async def process_lecture_update():
+            from material_processor import MaterialProcessor
+            from embeddings import BedrockEmbedder
+            from datetime import datetime, timezone
+
+            task_db = next(get_db())
+            try:
+                processor = MaterialProcessor()
+                embedder = await processor._get_embedder()
+
+                # Log start
+                processor.log_processing(
+                    task_db, str(material_uuid), 'manual_edit', 'started',
+                    f"Manual edit by {current_user.email}"
+                )
+
+                # Delete old chunks
+                logger.info(f"Deleting old chunks for material {material_uuid}")
+                deleted_count = task_db.query(MaterialChunk).filter(
+                    MaterialChunk.material_id == material_uuid
+                ).delete()
+                task_db.commit()
+                logger.info(f"Deleted {deleted_count} old chunks")
+
+                # Chunk new content
+                logger.info("Chunking new content")
+                chunks = processor.chunk_text(
+                    request.content,
+                    chunk_size=2000,
+                    overlap=300,
+                    max_chunks=50
+                )
+
+                if not chunks:
+                    logger.error("No chunks created from new content")
+                    processor.log_processing(
+                        task_db, str(material_uuid), 'chunking', 'failed',
+                        "No chunks created from content"
+                    )
+                    return
+
+                logger.info(f"Created {len(chunks)} new chunks")
+
+                # Generate embeddings and save
+                logger.info("Generating embeddings for new chunks")
+                for i, chunk in enumerate(chunks):
+                    try:
+                        # Generate embedding
+                        embedding = await embedder.embed_text(chunk['content'])
+
+                        # Save chunk
+                        new_chunk = MaterialChunk(
+                            material_id=material_uuid,
+                            file_id=None,  # No specific file for manual edits
+                            content=processor.sanitize_content(chunk['content']),
+                            chunk_index=i,
+                            source_type='manual_edit',
+                            file_name='manual_edit.md',
+                            start_char=chunk.get('start_char', 0),
+                            end_char=chunk.get('end_char', 0),
+                            embedding=embedding
+                        )
+                        task_db.add(new_chunk)
+
+                        # Commit every 10 chunks
+                        if (i + 1) % 10 == 0:
+                            task_db.commit()
+                            logger.info(f"Saved chunks {i - 8} to {i + 1}")
+
+                    except Exception as e:
+                        logger.error(f"Error processing chunk {i}: {e}")
+                        continue
+
+                # Final commit
+                task_db.commit()
+
+                # Update processed_at
+                material_obj = task_db.query(CourseMaterial).filter(
+                    CourseMaterial.material_id == material_uuid
+                ).first()
+                material_obj.processed_at = datetime.now(timezone.utc)
+                task_db.commit()
+
+                # Log success
+                processor.log_processing(
+                    task_db, str(material_uuid), 'manual_edit', 'completed',
+                    f"Successfully re-processed {len(chunks)} chunks"
+                )
+
+                logger.info(f"Successfully updated lecture material {material_uuid}")
+
+            except Exception as e:
+                logger.error(f"Error updating lecture material: {e}")
+                processor = MaterialProcessor()
+                processor.log_processing(
+                    task_db, str(material_uuid), 'manual_edit', 'failed',
+                    f"Error: {str(e)}"
+                )
+                task_db.rollback()
+            finally:
+                task_db.close()
+
+        # Start background processing
+        background_tasks.add_task(process_lecture_update)
+
+        # Set processing marker immediately
+        material.processed_at = datetime(1970, 1, 1, 0, 0, 0)
+        db.commit()
+
+        return {
+            "material_id": str(material.material_id),
+            "status": "processing",
+            "message": "Lecture wird neu verarbeitet (Chunking & Embedding)"
+        }
+
+    else:
+        # Update homework/tutorium/other: Update MaterialContent directly
+        try:
+            # Update all content entries for this material
+            contents = db.query(MaterialContent).filter(
+                MaterialContent.material_id == material_uuid
+            ).all()
+
+            if not contents:
+                # Create new content entry if none exists
+                new_content = MaterialContent(
+                    material_id=material_uuid,
+                    file_id=None,
+                    content=request.content,
+                    source_type='manual_edit',
+                    file_name='manual_edit.md',
+                    file_size=len(request.content),
+                    importance_reason='Manual edit by professor'
+                )
+                db.add(new_content)
+            else:
+                # Update first content entry, delete others (simplification)
+                contents[0].content = request.content
+                contents[0].file_name = 'manual_edit.md'
+                contents[0].file_size = len(request.content)
+                contents[0].source_type = 'manual_edit'
+
+                # Delete other content entries
+                for content in contents[1:]:
+                    db.delete(content)
+
+            # Update processed_at
+            material.processed_at = datetime.now()
+
+            # Log
+            log = MaterialProcessingLog(
+                material_id=material_uuid,
+                stage='manual_edit',
+                status='completed',
+                message=f"Manual edit by {current_user.email}",
+                started_at=datetime.now(),
+                completed_at=datetime.now()
+            )
+            db.add(log)
+
+            db.commit()
+
+            logger.info(f"Successfully updated {material.material_type} material {material_uuid}")
+
+            return {
+                "material_id": str(material.material_id),
+                "status": "completed",
+                "message": "Material erfolgreich aktualisiert"
+            }
+
+        except Exception as e:
+            db.rollback()
+            logger.error(f"Error updating material content: {e}")
+            raise HTTPException(status_code=500, detail=f"Error updating material: {str(e)}")
