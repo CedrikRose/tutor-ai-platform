@@ -23,15 +23,15 @@ function MessageInput({ onSend, disabled }: MessageInputProps) {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     // On Mobile: Enter = line break, only button sends
-    // On Desktop: Shift+Enter = line break, Enter sends
+    // On Desktop: Enter = line break, Ctrl+Enter sends
     const isMobile = window.innerWidth <= 768;
 
-    if (e.key === 'Enter' && !e.shiftKey && !isMobile) {
-      // Only on Desktop: Enter sends
+    if (e.key === 'Enter' && e.ctrlKey && !isMobile) {
+      // Only on Desktop: Ctrl+Enter sends
       e.preventDefault();
       handleSend();
     }
-    // On Mobile: Enter automatically creates line break (no preventDefault)
+    // Enter without Ctrl creates line break (default textarea behavior)
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -63,7 +63,7 @@ function MessageInput({ onSend, disabled }: MessageInputProps) {
             ? 'Warte auf Antwort...'
             : window.innerWidth <= 768
               ? 'Stelle eine Frage...'
-              : 'Stelle eine Frage... (Shift+Enter für neue Zeile)'
+              : 'Stelle eine Frage... (Strg+Enter zum Senden)'
         }
         disabled={disabled}
         rows={1}
