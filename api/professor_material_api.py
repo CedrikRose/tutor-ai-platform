@@ -439,7 +439,7 @@ async def get_material_content(
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
 
-    if course.professor_id != current_user.user_id:
+    if course.owner_user_id != current_user.user_id:
         # TODO: Check if user is editor once we have permissions table
         raise HTTPException(status_code=403, detail="No permission to view this material")
 
@@ -534,7 +534,7 @@ async def update_material_content(
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
 
-    if course.professor_id != current_user.user_id:
+    if course.owner_user_id != current_user.user_id:
         # TODO: Check if user is editor once we have permissions table
         raise HTTPException(status_code=403, detail="No permission to edit this material")
 
