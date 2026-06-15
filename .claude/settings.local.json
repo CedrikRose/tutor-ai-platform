@@ -128,7 +128,23 @@
       "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
       "Bash(git pull *)",
       "Bash(/tmp/fix_tailwind.sh)",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "WebFetch(domain:docs.reducto.ai)",
+      "Bash(grep -E \"\\\\.py$|\\\\.env\")",
+      "Bash(mkdir -p backups/AI-Tutor)",
+      "Bash(tar -czf \"backups/AI-Tutor/local-backup-$\\(date +%Y%m%d-%H%M%S\\).tar.gz\" -C /home/cedrik AI-Tutor)",
+      "Bash(cd *)",
+      "Bash(sudo -u postgres psql -c \"SELECT 1\")",
+      "Bash(sudo *)",
+      "Bash(systemctl is-active *)",
+      "Bash(systemctl list-units *)",
+      "Bash(pg_config --version)",
+      "Bash(PGPASSWORD='DBTutorSecure2026' psql *)",
+      "Bash(kill 246010)",
+      "Bash(grep -E \"\\\\.\\(sh|py\\)$\")",
+      "Bash(grep -E \"\\\\.\\(py|sql\\)$\")",
+      "Bash(git *)",
+      "Bash(grep -E \"\\\\.\\(py|sh|sql\\)$\")"
     ]
   },
   "prefersReducedMotion": true

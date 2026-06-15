@@ -27,8 +27,9 @@ from database import (
 from file_storage import get_storage
 from embeddings import BedrockEmbedder
 from llm import BedrockLLM
-from llama_parse_client import get_llama_parse_client
 from config import settings
+from reducto_client import get_reducto_client
+from lecture_synthesizer import LectureSynthesizer
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,6 @@ class MaterialProcessor:
         self.storage = get_storage()
         self.embedder = None  # Lazy init
         self.llm = None  # Lazy init
-        self.llama_parse = None  # Lazy init
 
     async def _get_embedder(self) -> BedrockEmbedder:
         """Lazy initialize embedder."""
@@ -102,216 +102,278 @@ class MaterialProcessor:
         # Remove NULL bytes
         return content.replace('\x00', '')
 
-    async def analyze_files_batch(
+    def read_file_preview(self, file_path: str, max_chars: int = 500) -> str:
+        """
+        Read first N characters of a file for preview.
+
+        Args:
+            file_path: Path to file
+            max_chars: Maximum characters to read
+
+        Returns:
+            Preview content (first max_chars characters)
+        """
+        try:
+            content = self.read_code_file(file_path)
+            return content[:max_chars]
+        except Exception as e:
+            logger.error(f"Failed to read preview for {file_path}: {e}")
+            return "[Error reading file]"
+
+    @staticmethod
+    def is_text_file(filename: str) -> bool:
+        """
+        Check if file is text-based (not binary).
+
+        Args:
+            filename: File name with extension
+
+        Returns:
+            True if file is text-based
+        """
+        text_extensions = [
+            '.java', '.scala', '.py', '.js', '.ts', '.cpp', '.c', '.h',
+            '.txt', '.md', '.gradle', '.xml', '.json', '.yaml', '.yml',
+            '.sh', '.bat', '.sql', '.html', '.css', '.properties', '.rs',
+            '.go', '.rb', '.php', '.swift', '.kt', '.cs', '.r', '.m'
+        ]
+        return any(filename.lower().endswith(ext) for ext in text_extensions)
+
+
+    async def analyze_files_two_stage(
         self,
         files: List,
-        parsed_pdfs: Dict[str, str] = None
+        parsed_pdfs: Dict[str, str] = None,
+        material_type: str = None,
+        display_name: str = None
     ) -> Dict[str, Tuple[bool, str]]:
         """
-        Analyze multiple files at once for efficiency.
+        Two-stage LLM analysis for file importance.
+
+        Stage 1: Fast categorization (filenames only + PDF context)
+        Stage 2: Detailed analysis (only for "unsure" files with content preview)
 
         Args:
             files: List of MaterialFile objects
             parsed_pdfs: Dict mapping PDF filename to parsed content
+            material_type: Type of material (homework, tutorium, other)
+            display_name: Display name of material
 
         Returns:
-            Dict mapping filename to (is_important, reason)
+            Dict mapping filename to (is_important: bool, reason: str)
         """
         llm = await self._get_llm()
 
-        # Common patterns to skip immediately
-        skip_patterns = [
-            '.gitignore', '.git/', '.DS_Store', '__MACOSX',
-            'node_modules/', '.vscode/', '.idea/',
-            '.class', '.pyc', '.o', '.so', '.dll',
-            'package-lock.json', 'yarn.lock', '.jar'
-        ]
-
-        results = {}
-        files_to_analyze = []
-
-        # First pass: auto-skip obvious files
-        for file in files:
-            skip = False
-            for pattern in skip_patterns:
-                if pattern in file.filename:
-                    results[file.filename] = (False, f"Automatically skipped: {pattern}")
-                    skip = True
-                    break
-            if not skip:
-                files_to_analyze.append(file)
-
-        if not files_to_analyze:
-            return results
-
-        # Build detailed file list with previews
-        file_info_list = []
-
-        # First add PDF assignment content if available
+        # Prepare PDF context
+        pdf_context = ""
         if parsed_pdfs:
+            pdf_parts = []
             for pdf_name, pdf_content in parsed_pdfs.items():
-                file_info_list.append(f"\n### PDF Assignment: {pdf_name}")
-                file_info_list.append(f"Full content:\n{pdf_content}\n")
+                pdf_parts.append(f"### PDF: {pdf_name}\n{pdf_content}")
+            pdf_context = "\n\n".join(pdf_parts)
 
-        # Then add other files with previews
-        for file in files_to_analyze:
-            file_info_list.append(f"\n### File: {file.filename}")
+        # Prepare filenames list
+        filenames = "\n".join([f"- {f.filename}" for f in files])
 
-            # Get preview for text-based files
-            try:
-                if file.filename.lower().endswith(('.java', '.scala', '.py', '.js', '.ts', '.cpp', '.c', '.h', '.txt', '.md', '.gradle', '.xml', '.json', '.csv', '.sh')):
-                    content = self.read_code_file(file.file_path)
-                    lines = content.split('\n')[:10]  # First 10 lines
-                    preview = '\n'.join(lines)
-                    file_info_list.append(f"First 10 lines:\n{preview}")
-            except Exception as e:
-                logger.debug(f"Could not read preview for {file.filename}: {e}")
+        # ===== STAGE 1: Fast Categorization =====
+        logger.info(f"[STAGE 1] Analyzing {len(files)} files (filenames only)")
 
-        files_info = '\n'.join(file_info_list)
-
-        # Get batch analysis prompt from manager
         try:
             from prompt_manager import prompt_manager
-            batch_prompt_template = prompt_manager.get_prompt("material_file_analysis_batch")
-        except Exception as e:
-            logger.warning(f"Could not load material batch analysis prompt: {e}")
-            # Fallback
-            batch_prompt_template = """You are analyzing course material files to determine which are important for student learning.
+            from database import SessionLocal
 
-**Task:**
-Analyze the following files and determine if each is important for students:
+            # Ensure prompt manager has DB access
+            if not hasattr(prompt_manager, 'db') or prompt_manager.db is None:
+                temp_db = SessionLocal()
+                prompt_manager.initialize(temp_db)
+                temp_db.close()
 
-{file_list}
+            stage1_prompt_template = prompt_manager.get_prompt("material_file_analysis_stage1_fast")
 
-**Criteria for "important":**
-✅ **Include:**
-- Lecture slides (PDF)
-- Homework assignments
-- Exercise sheets
-- Solution files
-- Code examples
-- Study guides
-- Relevant documentation
-
-❌ **Exclude:**
-- Build artifacts (.class, .o, .pyc)
-- Dependencies (node_modules, .venv)
-- Temporary files (.tmp, .bak)
-- System files (.DS_Store, Thumbs.db)
-- Large binary files (unless explicitly educational)
-
-**Output Format:**
-JSON array: [{"filename": "...", "important": true/false, "reason": "..."}]
-
-Analyze ALL files and respond ONLY with the JSON array."""
-
-        prompt = batch_prompt_template.replace("{file_list}", files_info)
-
-        try:
-            response = await llm.complete(prompt)
-            import json
-            analysis = json.loads(response)
-
-            for item in analysis:
-                filename = item.get('filename')
-                # Match filename from any file in files_to_analyze
-                for file in files_to_analyze:
-                    if file.filename == filename:
-                        results[file.filename] = (item.get('important', False), item.get('reason', 'No reason provided'))
-                        break
-
-            # Mark any files not in response as unimportant
-            for file in files_to_analyze:
-                if file.filename not in results:
-                    results[file.filename] = (False, "Not analyzed by LLM")
+            if not stage1_prompt_template:
+                logger.error("Stage 1 prompt not found in cache")
+                raise Exception("Stage 1 prompt 'material_file_analysis_stage1_fast' not found")
 
         except Exception as e:
-            logger.error(f"Batch file analysis failed: {e}", exc_info=True)
-            # Fallback: mark all as important to be safe
-            for file in files_to_analyze:
-                results[file.filename] = (True, f"Batch analysis failed, included by default")
+            logger.error(f"Could not load stage 1 prompt: {e}")
+            raise Exception(f"Failed to load stage 1 prompt: {e}")
 
-        return results
-
-    async def analyze_file_importance(
-        self,
-        filename: str,
-        file_content: Optional[str] = None
-    ) -> Tuple[bool, str]:
-        """
-        Use LLM to determine if file is important for learning.
-
-        Args:
-            filename: Name of the file
-            file_content: Optional content preview (first 500 chars)
-
-        Returns:
-            Tuple of (is_important, reason)
-        """
-        llm = await self._get_llm()
-
-        # Common patterns to skip immediately
-        skip_patterns = [
-            '.gitignore', '.git/', '.DS_Store', '__MACOSX',
-            'node_modules/', '.vscode/', '.idea/',
-            '.class', '.pyc', '.o', '.so', '.dll',
-            'package-lock.json', 'yarn.lock'
-        ]
-
-        for pattern in skip_patterns:
-            if pattern in filename:
-                return False, f"Automatically skipped: {pattern}"
-
-        # Get single file analysis prompt from manager
-        try:
-            from prompt_manager import prompt_manager
-            single_prompt_template = prompt_manager.get_prompt("material_file_analysis_single")
-        except Exception as e:
-            logger.warning(f"Could not load material single analysis prompt: {e}")
-            # Fallback
-            single_prompt_template = """You are analyzing a course material file to determine if it is important for student learning.
-
-**File:** {filename}
-**Material Type:** {material_type}
-
-**Criteria for "important":**
-✅ Include: Lecture slides, homework, exercises, solutions, code examples, study materials
-❌ Exclude: Build artifacts, dependencies, temp files, system files
-
-**Respond in JSON:**
-{"important": true/false, "reason": "brief explanation"}"""
-
-        # Build prompt for LLM
-        prompt = single_prompt_template.replace("{filename}", filename).replace("{material_type}", material_type or "unknown")
-
-        if file_content:
-            prompt += f"\n\nFile preview (first 500 chars):\n{file_content[:500]}"
+        # Build Stage 1 prompt
+        stage1_prompt = stage1_prompt_template
+        stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+        stage1_prompt = stage1_prompt.replace("{display_name}", display_name or "unknown")
+        stage1_prompt = stage1_prompt.replace("{pdf_context}", pdf_context if pdf_context else "(Kein PDF vorhanden)")
+        stage1_prompt = stage1_prompt.replace("{filenames}", filenames)
 
         try:
-            response = await llm.complete(
-                prompt,
-                system_prompt="You are a file analyzer. Return ONLY valid JSON.",
-                temperature=0.3,
-                max_tokens=150
+            # Call LLM for Stage 1
+            stage1_response = await llm.complete(
+                prompt=stage1_prompt,
+                system_prompt="Du bist ein Datei-Analyzer. Antworte NUR mit dem strukturierten JSON.",
+                temperature=0.2,
+                max_tokens=2000
             )
 
-            # Try to parse JSON directly
-            try:
-                result = json.loads(response)
-            except json.JSONDecodeError:
-                # Try to extract JSON from response
-                import re
-                json_match = re.search(r'\{[^}]+\}', response)
-                if json_match:
-                    result = json.loads(json_match.group(0))
-                else:
-                    raise ValueError(f"No JSON found in response: {response}")
+            # Parse JSON response (handle markdown code blocks)
+            stage1_response_clean = stage1_response.strip()
 
-            return result.get('important', True), result.get('reason', 'No reason provided')
+            # Remove markdown code blocks if present
+            if stage1_response_clean.startswith('```'):
+                # Extract JSON from ```json ... ``` or ``` ... ```
+                lines = stage1_response_clean.split('\n')
+                # Remove first line (```json or ```)
+                lines = lines[1:]
+                # Remove last line (```)
+                if lines and lines[-1].strip() == '```':
+                    lines = lines[:-1]
+                stage1_response_clean = '\n'.join(lines)
+
+            stage1_result = json.loads(stage1_response_clean)
+
+            definitely_important = stage1_result.get("definitely_important", [])
+            definitely_unimportant = stage1_result.get("definitely_unimportant", [])
+            unsure = stage1_result.get("unsure", [])
+
+            logger.info(f"[STAGE 1] Results: {len(definitely_important)} important, {len(definitely_unimportant)} unimportant, {len(unsure)} unsure")
+
+        except json.JSONDecodeError as e:
+            logger.error(f"[STAGE 1] JSON parse failed: {e}")
+            logger.error(f"Response: {stage1_response[:500]}")
+            raise Exception(f"Stage 1 JSON parsing failed: {e}")
         except Exception as e:
-            logger.warning(f"LLM file analysis failed for {filename}: {e}, defaulting to IMPORTANT")
-            # Default to important if analysis fails
-            return True, "Analysis failed, keeping file"
+            logger.error(f"[STAGE 1] Error: {e}")
+            raise Exception(f"Stage 1 analysis failed: {e}")
+
+        # Early return if no unsure files
+        if not unsure:
+            logger.info("[STAGE 2] Skipped (no unsure files)")
+            results = {}
+            for item in definitely_important:
+                results[item["filename"]] = (True, f"[Stage 1] {item['reason']}")
+            for item in definitely_unimportant:
+                results[item["filename"]] = (False, f"[Stage 1] {item['reason']}")
+            return results
+
+        # ===== STAGE 2: Detailed Analysis =====
+        logger.info(f"[STAGE 2] Analyzing {len(unsure)} unsure files (with previews)")
+
+        try:
+            from prompt_manager import prompt_manager
+
+            stage2_prompt_template = prompt_manager.get_prompt("material_file_analysis_stage2_detailed")
+
+            if not stage2_prompt_template:
+                logger.error("Stage 2 prompt not found in cache")
+                # Include all unsure files by default
+                results = {}
+                for item in definitely_important:
+                    results[item["filename"]] = (True, f"[Stage 1] {item['reason']}")
+                for item in unsure:
+                    results[item["filename"]] = (True, f"[Stage 1 unsure, Stage 2 failed] {item['reason']}")
+                for item in definitely_unimportant:
+                    results[item["filename"]] = (False, f"[Stage 1] {item['reason']}")
+                return results
+
+        except Exception as e:
+            logger.error(f"Could not load stage 2 prompt: {e}")
+            # Include all unsure files by default
+            results = {}
+            for item in definitely_important:
+                results[item["filename"]] = (True, f"[Stage 1] {item['reason']}")
+            for item in unsure:
+                results[item["filename"]] = (True, f"[Stage 1 unsure, Stage 2 failed] {item['reason']}")
+            for item in definitely_unimportant:
+                results[item["filename"]] = (False, f"[Stage 1] {item['reason']}")
+            return results
+
+        # Build list of important files for context
+        important_files_list = "\n".join([f"- {item['filename']}" for item in definitely_important])
+
+        # Load content previews for unsure files
+        unsure_with_preview = []
+        for unsure_item in unsure:
+            filename = unsure_item["filename"]
+            file_obj = next((f for f in files if f.filename == filename), None)
+
+            if file_obj and self.is_text_file(file_obj.filename):
+                preview = self.read_file_preview(file_obj.file_path, max_chars=500)
+                unsure_with_preview.append(f"### {filename}\n```\n{preview}\n```")
+            else:
+                # Binary file or not found
+                unsure_with_preview.append(f"### {filename}\n[Binary file or not readable]")
+
+        unsure_files_text = "\n\n".join(unsure_with_preview)
+
+        # Build Stage 2 prompt
+        stage2_prompt = stage2_prompt_template
+        stage2_prompt = stage2_prompt.replace("{pdf_context}", pdf_context if pdf_context else "(Kein PDF vorhanden)")
+        stage2_prompt = stage2_prompt.replace("{important_files}", important_files_list if important_files_list else "(Keine)")
+        stage2_prompt = stage2_prompt.replace("{unsure_files_with_preview}", unsure_files_text)
+
+        try:
+            # Call LLM for Stage 2
+            stage2_response = await llm.complete(
+                prompt=stage2_prompt,
+                system_prompt="Du bist ein Datei-Analyzer. Antworte NUR mit dem strukturierten JSON.",
+                temperature=0.3,
+                max_tokens=1500
+            )
+
+            # Parse JSON response (handle markdown code blocks)
+            stage2_response_clean = stage2_response.strip()
+
+            # Remove markdown code blocks if present
+            if stage2_response_clean.startswith('```'):
+                # Extract JSON from ```json ... ``` or ``` ... ```
+                lines = stage2_response_clean.split('\n')
+                # Remove first line (```json or ```)
+                lines = lines[1:]
+                # Remove last line (```)
+                if lines and lines[-1].strip() == '```':
+                    lines = lines[:-1]
+                stage2_response_clean = '\n'.join(lines)
+
+            stage2_result = json.loads(stage2_response_clean)
+
+            essential = stage2_result.get("essential", [])
+            not_essential = stage2_result.get("not_essential", [])
+
+            logger.info(f"[STAGE 2] Results: {len(essential)} essential, {len(not_essential)} not essential")
+
+        except json.JSONDecodeError as e:
+            logger.error(f"[STAGE 2] JSON parse failed: {e}")
+            logger.error(f"Response: {stage2_response[:500]}")
+            # Include all unsure files by default (conservative)
+            essential = unsure
+            not_essential = []
+        except Exception as e:
+            logger.error(f"[STAGE 2] Error: {e}")
+            # Include all unsure files by default (conservative)
+            essential = unsure
+            not_essential = []
+
+        # ===== COMBINE RESULTS =====
+        results = {}
+
+        # Definitely important from Stage 1
+        for item in definitely_important:
+            results[item["filename"]] = (True, f"[Stage 1] {item['reason']}")
+
+        # Essential from Stage 2
+        for item in essential:
+            results[item["filename"]] = (True, f"[Stage 2] {item['reason']}")
+
+        # Definitely unimportant from Stage 1
+        for item in definitely_unimportant:
+            results[item["filename"]] = (False, f"[Stage 1] {item['reason']}")
+
+        # Not essential from Stage 2
+        for item in not_essential:
+            results[item["filename"]] = (False, f"[Stage 2] {item['reason']}")
+
+        logger.info(f"[2-STAGE] Final: {sum(1 for v in results.values() if v[0])} important, {sum(1 for v in results.values() if not v[0])} unimportant")
+
+        return results
 
     def chunk_text(self, text: str, chunk_size: int = 1000, overlap: int = 200, max_chunks: int = 100) -> List[Dict]:
         """
@@ -371,41 +433,57 @@ Analyze ALL files and respond ONLY with the JSON array."""
 
         return chunks
 
-    async def parse_pdf(self, file_path: str) -> str:
+    async def parse_pdf_with_reducto(self, file_path: str) -> str:
         """
-        Parse PDF using Llama Parse.
+        Parse PDF using Reducto and combine all chunk content.
 
         Args:
             file_path: Path to PDF file
 
         Returns:
-            Parsed text content
+            Combined content from all Reducto chunks
         """
-        logger.info(f"Parsing PDF with LlamaParse: {file_path}")
+        logger.info(f"Parsing PDF with Reducto: {file_path}")
 
         try:
-            # Lazy init LlamaParse client
-            if self.llama_parse is None:
-                self.llama_parse = get_llama_parse_client()
+            reducto_client = get_reducto_client()
 
-            # Parse with LlamaParse
-            content = await self.llama_parse.parse_pdf(file_path)
+            # Parse with Reducto
+            reducto_response = await reducto_client.parse_pdf(file_path)
+            result_data = reducto_response.get("result", {})
 
-            if not content or len(content.strip()) == 0:
-                logger.warning(f"LlamaParse returned empty content for {file_path}")
+            if isinstance(result_data, dict):
+                reducto_chunks = result_data.get("chunks", [])
+            else:
+                reducto_chunks = []
+
+            if not reducto_chunks:
+                logger.warning(f"Reducto returned no chunks for {file_path}")
                 return f"[Empty PDF or parsing failed: {Path(file_path).name}]"
 
-            logger.info(f"LlamaParse successful: {len(content)} characters")
-            return content
+            # Extract content from all chunks
+            content_parts = []
+            for chunk in reducto_chunks:
+                chunk_content = chunk.get("content", "")
+                if chunk_content.strip():
+                    content_parts.append(chunk_content)
+
+            # Combine with double newline separator
+            combined_content = "\n\n".join(content_parts)
+
+            logger.info(f"Reducto parsed {len(reducto_chunks)} chunks → {len(combined_content)} chars")
+            return combined_content
 
         except Exception as e:
-            logger.error(f"Failed to parse PDF {file_path} with LlamaParse: {e}")
+            logger.error(f"Failed to parse PDF {file_path} with Reducto: {e}")
             # Return error placeholder instead of failing completely
             return f"[PDF Parsing Error for {Path(file_path).name}: {str(e)}]"
 
     def read_code_file(self, file_path: str) -> str:
         """
         Read code file directly.
+        For CSV files, only reads the first 5 lines to save tokens.
+        For large TXT files (>50KB), only reads first 100 lines.
 
         Args:
             file_path: Path to code file
@@ -416,10 +494,248 @@ Analyze ALL files and respond ONLY with the JSON array."""
         try:
             file_content = self.storage.get_file(file_path)
             # Decode as UTF-8
-            return file_content.decode('utf-8', errors='ignore')
+            content = file_content.decode('utf-8', errors='ignore')
+
+            # Special handling for CSV files: only keep first 5 lines
+            if file_path.lower().endswith('.csv'):
+                lines = content.split('\n')
+                if len(lines) > 5:
+                    content = '\n'.join(lines[:5])
+                    content += f"\n... (truncated: {len(lines) - 5} more lines)"
+                    logger.info(f"CSV file truncated: kept 5/{len(lines)} lines from {Path(file_path).name}")
+
+            # Special handling for large TXT files: only keep first 100 lines
+            elif file_path.lower().endswith('.txt') and len(content) > 50000:
+                lines = content.split('\n')
+                if len(lines) > 100:
+                    content = '\n'.join(lines[:100])
+                    content += f"\n... (truncated: {len(lines) - 100} more lines, file size: {len(file_content):,} bytes)"
+                    logger.info(f"Large TXT file truncated: kept 100/{len(lines)} lines from {Path(file_path).name}")
+
+            return content
         except Exception as e:
             logger.error(f"Failed to read code file {file_path}: {e}")
             raise
+
+    async def smart_truncate_with_llm(self, content: str, file_name: str) -> Optional[str]:
+        """
+        Use LLM to intelligently shorten large files (>10KB).
+
+        Args:
+            content: File content to potentially shorten
+            file_name: Name of the file (for logging and prompt context)
+
+        Returns:
+            Shortened content if LLM decided to truncate, None otherwise
+        """
+        from prompt_manager import prompt_manager
+
+        llm = await self._get_llm()
+
+        # Prepare content with truncation info
+        if len(content) > 30000:
+            content_to_send = content[:30000]
+            content_info = f"Original-Datei (erste 30.000 Zeichen, Datei geht danach noch weiter mit {len(content) - 30000} Zeichen):\n{content_to_send}"
+        else:
+            content_info = f"Original-Datei:\n{content}"
+
+        # Get prompt from database
+        prompt_template = prompt_manager.get_prompt("file_intelligent_truncation")
+
+        if not prompt_template:
+            logger.error("Truncation prompt not found in database!")
+            return None
+
+        # Replace placeholders
+        prompt = prompt_template.replace("{file_name}", file_name)
+        prompt = prompt.replace("{content_info}", content_info)
+
+        try:
+            response = await llm.complete(prompt, temperature=0.3, max_tokens=16384)
+
+            # Try to extract JSON from response (handle cases where LLM adds text around JSON)
+            response_stripped = response.strip()
+
+            # Try direct parsing first
+            try:
+                result = json.loads(response_stripped)
+            except json.JSONDecodeError:
+                # Try to find JSON object in response
+                import re
+                json_match = re.search(r'\{.*"shortened_content".*\}', response_stripped, re.DOTALL)
+                if json_match:
+                    result = json.loads(json_match.group(0))
+                else:
+                    raise ValueError("No valid JSON found in response")
+
+            if result.get("shortened_content"):
+                logger.info(f"LLM truncated {file_name}: {result.get('reason', 'no reason')}")
+                return result["shortened_content"]
+            else:
+                logger.info(f"LLM decided not to truncate {file_name}")
+                return None
+
+        except Exception as e:
+            logger.error(f"LLM truncation failed for {file_name}: {e}")
+            return None  # Fallback: keep original
+
+    async def read_code_file_smart(self, file_path: str) -> str:
+        """
+        Read code file with intelligent LLM-based truncation for large files.
+
+        - Files >10KB: Pass through LLM for intelligent shortening
+        - Files >30KB: LLM only sees first 30KB with note that file continues
+        - Files ≤10KB: Return as-is
+
+        Args:
+            file_path: Path to code file
+
+        Returns:
+            File content (potentially shortened)
+        """
+        try:
+            file_content = self.storage.get_file(file_path)
+            content = file_content.decode('utf-8', errors='ignore')
+            file_name = Path(file_path).name
+
+            # Skip workspace files - not relevant
+            if 'workspace.xml' in file_path or '.idea/workspace' in file_path:
+                logger.info(f"Skipping IDE workspace file: {file_name}")
+                return "[IDE workspace file - not relevant for course content]"
+
+            # Files ≤10KB: return as-is
+            if len(content) <= 10000:
+                return content
+
+            # Files >10KB: LLM-based intelligent truncation
+            logger.info(f"File {file_name} is {len(content):,} chars, using LLM truncation")
+            truncated = await self.smart_truncate_with_llm(content, file_name)
+
+            if truncated:
+                return truncated
+            else:
+                # LLM decided not to truncate
+                return content
+
+        except Exception as e:
+            logger.error(f"Failed to read code file smart {file_path}: {e}")
+            raise
+
+    async def process_lecture_with_synthesis(self, material_id: str, files: List, db: Session):
+        """Process lecture slides with Reducto + Kimi K2.5 synthesis."""
+        from prompt_manager import prompt_manager
+
+        # Get material name for context
+        material = db.query(CourseMaterial).filter(CourseMaterial.material_id == material_id).first()
+        material_name = material.display_name if material else "Unknown Lecture"
+
+        reducto_client = get_reducto_client()
+        llm = await self._get_llm()
+        synthesizer = LectureSynthesizer(llm, prompt_manager)
+
+        all_synthesized_chunks = []
+        
+        for file in files:
+            try:
+                self.log_processing(db, str(material_id), 'parsing', 'started',
+                                  f"Parsing with Reducto: {file.filename}", file_id=str(file.file_id))
+                
+                reducto_response = await reducto_client.parse_pdf(file.file_path)
+                result_data = reducto_response.get("result", {})
+                
+                if isinstance(result_data, dict):
+                    reducto_chunks = result_data.get("chunks", [])
+                else:
+                    reducto_chunks = []
+                
+                logger.info(f"[LECTURE] Reducto returned {len(reducto_chunks)} chunks for {file.filename}")
+                
+                if reducto_chunks:
+                    self.log_processing(db, str(material_id), 'synthesis', 'started',
+                                      f"Synthesizing with Kimi K2.5: {len(reducto_chunks)} chunks")
+
+                    # Pass material_name for context
+                    synthesis_result = await synthesizer.process_lecture(reducto_chunks, material_name=material_name)
+                    
+                    self.log_processing(db, str(material_id), 'synthesis', 'completed',
+                                      f"Synthesized {len(synthesis_result['synthesized_chunks'])} chunks",
+                                      details=synthesis_result)
+                    
+                    all_synthesized_chunks.extend(synthesis_result['synthesized_chunks'])
+                else:
+                    logger.error(f"[LECTURE] No chunks returned from Reducto for {file.filename}")
+                    raise Exception("No chunks from Reducto")
+                
+            except Exception as e:
+                logger.error(f"[LECTURE] Reducto + Synthesis failed for {file.filename}: {e}")
+                self.log_processing(db, str(material_id), 'parsing', 'failed',
+                                  f"Reducto processing failed: {str(e)}", file_id=str(file.file_id))
+                # Abort processing - do not continue with this material
+                raise Exception(f"Lecture processing failed for {file.filename}: {e}")
+        
+        if not all_synthesized_chunks:
+            logger.error(f"[LECTURE] No chunks processed")
+            return
+
+        # NEW: Store synthesized chunks DIRECTLY without re-chunking
+        self.log_processing(db, str(material_id), 'storage', 'started',
+                           f"Storing {len(all_synthesized_chunks)} synthesized chunks")
+
+        embedder = await self._get_embedder()
+        stored_count = 0
+
+        for chunk in all_synthesized_chunks:
+            try:
+                # Get the synthesized explanation
+                content = chunk.get("erklaerung", chunk.get("content", ""))
+                sanitized_content = self.sanitize_content(content)
+
+                # Generate embedding
+                embedding = await embedder.embed_text(sanitized_content)
+
+                # Prepare metadata
+                chunk_metadata = {
+                    "pages": chunk.get("pages", [chunk.get("page", 0)]),
+                    "source": "reducto+kimi",
+                    "synthesized_at": datetime.now(timezone.utc).isoformat(),
+                    "batch_index": chunk.get("batch_index", 0),
+                    "original_chunk_id": chunk.get("chunk_id"),
+                    "original_content_preview": chunk.get("original_content", "")[:200],
+                    "attempt_count": chunk.get("attempt_count", 1)
+                }
+
+                # Create MaterialChunk record
+                chunk_record = MaterialChunk(
+                    material_id=material_id,
+                    file_id=None,  # Synthesis spans multiple files potentially
+                    content=sanitized_content,
+                    chunk_index=chunk.get("chunk_id", 0),
+                    source_type='reducto_synthesis',  # New source type
+                    file_name=material_name,  # Store material name for context
+                    start_char=None,  # Not applicable for synthesized chunks
+                    end_char=None,
+                    embedding=embedding,
+                    chunk_metadata=chunk_metadata  # NEW: Store structured metadata
+                )
+                db.add(chunk_record)
+                stored_count += 1
+
+                # Commit in batches of 10 to avoid memory issues
+                if stored_count % 10 == 0:
+                    db.commit()
+                    logger.info(f"[LECTURE] Stored {stored_count}/{len(all_synthesized_chunks)} chunks")
+
+            except Exception as e:
+                logger.error(f"[LECTURE] Failed to store chunk {chunk.get('chunk_id')}: {e}")
+                # Continue with next chunk rather than failing entirely
+
+        # Final commit
+        db.commit()
+
+        logger.info(f"[LECTURE] Stored {stored_count}/{len(all_synthesized_chunks)} synthesized chunks")
+        self.log_processing(db, str(material_id), 'storage', 'completed',
+                           f"Stored {stored_count} chunks with embeddings and metadata")
+
 
     async def process_material(self, material_id: str, db: Session):
         """
@@ -511,15 +827,19 @@ Analyze ALL files and respond ONLY with the JSON array."""
                     for file in pdf_files:
                         try:
                             logger.info(f"Parsing PDF for batch analysis: {file.filename}")
-                            pdf_content = await self.parse_pdf(file.file_path)
+                            pdf_content = await self.parse_pdf_with_reducto(file.file_path)
                             parsed_pdfs[file.filename] = pdf_content
                             logger.info(f"Successfully parsed {file.filename} ({len(pdf_content)} chars)")
                         except Exception as e:
                             logger.error(f"Failed to parse PDF {file.filename}: {e}")
                             parsed_pdfs[file.filename] = f"[Error parsing PDF: {e}]"
 
-                    # Batch analyze all files with rich context (filenames + file previews + PDF content)
-                    analysis_results = await self.analyze_files_batch(files, parsed_pdfs)
+                    # Two-stage analysis: Fast categorization + detailed analysis
+                    analysis_results = await self.analyze_files_two_stage(
+                        files, parsed_pdfs,
+                        material_type=material.material_type,
+                        display_name=material.display_name
+                    )
 
                     for file in files:
                         is_important, reason = analysis_results.get(file.filename, (False, "Not analyzed"))
@@ -544,108 +864,8 @@ Analyze ALL files and respond ONLY with the JSON array."""
 
             # Stage 2 & 3: Process based on material type
             if is_lecture:
-                # LECTURE: Parse PDFs → Chunk → Embed → Store in MaterialChunk
-                all_chunks = []
-                for file in important_files:
-                    try:
-                        self.log_processing(
-                            db, str(material_id), 'parsing', 'started',
-                            f"Parsing lecture PDF: {file.filename}",
-                            file_id=str(file.file_id)
-                        )
-                        content = await self.parse_pdf(file.file_path)
-
-                        # Chunk the content
-                        content_len = len(content)
-                        logger.info(f"Chunking lecture PDF {file.filename} ({content_len} chars)...")
-
-                        if content_len > 100000:
-                            logger.warning(f"Large lecture PDF ({content_len} chars), limiting to 100k")
-                            content = content[:100000]
-
-                        chunks = self.chunk_text(content, chunk_size=2000, overlap=300, max_chunks=50)
-                        logger.info(f"Created {len(chunks)} chunks from {file.filename}")
-
-                        # Add metadata
-                        for chunk in chunks:
-                            chunk['file_id'] = file.file_id
-                            chunk['file_name'] = file.filename
-                            chunk['source_type'] = 'pdf'
-
-                        all_chunks.extend(chunks)
-
-                        self.log_processing(
-                            db, str(material_id), 'parsing', 'completed',
-                            f"Parsed and chunked: {len(chunks)} chunks",
-                            {'chunk_count': len(chunks)},
-                            file_id=str(file.file_id)
-                        )
-
-                    except Exception as e:
-                        logger.error(f"Error processing lecture PDF {file.filename}: {e}")
-                        self.log_processing(
-                            db, str(material_id), 'parsing', 'failed',
-                            f"Failed to parse: {str(e)}",
-                            file_id=str(file.file_id)
-                        )
-
-                logger.info(f"Total chunks to embed: {len(all_chunks)}")
-
-                # Generate embeddings and store chunks
-                if all_chunks:
-                    self.log_processing(
-                        db, str(material_id), 'embedding', 'started',
-                        f"Generating embeddings for {len(all_chunks)} chunks"
-                    )
-
-                    embedder = await self._get_embedder()
-                    stored_count = 0
-                    failed_count = 0
-                    batch_size = 10
-
-                    for batch_start in range(0, len(all_chunks), batch_size):
-                        batch_end = min(batch_start + batch_size, len(all_chunks))
-                        batch_chunks = all_chunks[batch_start:batch_end]
-
-                        logger.info(f"Embedding batch {batch_start//batch_size + 1} (chunks {batch_start}-{batch_end})")
-
-                        for chunk in batch_chunks:
-                            try:
-                                # Sanitize content to remove NULL bytes
-                                sanitized_chunk_content = self.sanitize_content(chunk['content'])
-                                embedding = await embedder.embed_text(sanitized_chunk_content)
-
-                                chunk_record = MaterialChunk(
-                                    material_id=material_id,
-                                    file_id=chunk['file_id'],
-                                    content=sanitized_chunk_content,
-                                    chunk_index=chunk['chunk_index'],
-                                    source_type=chunk['source_type'],
-                                    file_name=chunk['file_name'],
-                                    start_char=chunk['start_char'],
-                                    end_char=chunk['end_char'],
-                                    embedding=embedding
-                                )
-                                db.add(chunk_record)
-                                stored_count += 1
-
-                            except Exception as e:
-                                logger.error(f"Failed to embed chunk {chunk.get('chunk_index', '?')}: {e}")
-                                failed_count += 1
-
-                        try:
-                            db.commit()
-                            logger.info(f"✓ Batch committed: {stored_count} chunks stored")
-                        except Exception as e:
-                            logger.error(f"Failed to commit batch: {e}")
-                            db.rollback()
-
-                    logger.info(f"Embedding complete: {stored_count} successful, {failed_count} failed")
-
-                    self.log_processing(
-                        db, str(material_id), 'embedding', 'completed',
-                        f"Stored {stored_count}/{len(all_chunks)} chunks with embeddings"
-                    )
+                # NEW: Use Reducto + Kimi K2.5 synthesis
+                await self.process_lecture_with_synthesis(material_id, important_files, db)
 
             else:
                 # HOMEWORK/TUTORIUM/OTHER: Parse all → Store full content (NO chunking)
@@ -657,13 +877,13 @@ Analyze ALL files and respond ONLY with the JSON array."""
                         filename_lower = file.filename.lower()
 
                         if filename_lower.endswith('.pdf'):
-                            # Parse PDF to markdown
+                            # Parse PDF with Reducto
                             self.log_processing(
                                 db, str(material_id), 'parsing', 'started',
-                                f"Parsing PDF to markdown: {file.filename}",
+                                f"Parsing PDF with Reducto: {file.filename}",
                                 file_id=str(file.file_id)
                             )
-                            content = await self.parse_pdf(file.file_path)
+                            content = await self.parse_pdf_with_reducto(file.file_path)
                             source_type = 'pdf_markdown'
 
                         else:
@@ -673,7 +893,7 @@ Analyze ALL files and respond ONLY with the JSON array."""
                                 f"Reading file: {file.filename}",
                                 file_id=str(file.file_id)
                             )
-                            content = self.read_code_file(file.file_path)
+                            content = await self.read_code_file_smart(file.file_path)
 
                             # Determine source type
                             if filename_lower.endswith(('.java', '.scala', '.py', '.js', '.ts', '.cpp', '.c', '.h')):

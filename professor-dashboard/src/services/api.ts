@@ -135,6 +135,15 @@ export const courseApi = {
   updateMaterialContent: async (materialId: string, content: string): Promise<void> => {
     await api.put(`/professor/materials/${materialId}/content`, { content });
   },
+
+  getMaterialChunks: async (materialId: string): Promise<{ chunks: any[] }> => {
+    const response = await api.get(`/professor/materials/${materialId}/chunks`);
+    return response.data;
+  },
+
+  updateChunk: async (materialId: string, chunkId: string, content: string): Promise<void> => {
+    await api.put(`/professor/materials/${materialId}/chunks/${chunkId}`, { content });
+  },
 };
 
 // Homework API

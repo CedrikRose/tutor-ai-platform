@@ -1,0 +1,2282 @@
+{
+  "response_type": "parse",
+  "job_id": "e8e90127-d3b6-474b-8f6b-9dd766da8b94",
+  "duration": 4.435127258300781,
+  "pdf_url": "https://prod-storage20241010144745140900000001.s3.amazonaws.com/org/f446745f-1aa7-478c-8eac-d9a170972fa8/fe0d8e13-abb3-46a4-adc7-76a06072d638.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2UOK6OVBOUYL7WYA%2F20260611%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260611T180305Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=087a0226d155fc1694c73712575186908261011be4c54c96d822b793b373a9ec",
+  "studio_link": "https://studio.reducto.ai/job/e8e90127-d3b6-474b-8f6b-9dd766da8b94",
+  "usage": {
+    "num_pages": 5,
+    "credits": 6.0,
+    "credit_breakdown": {
+      "page": 5.0,
+      "complex": 1.0
+    },
+    "page_billing_breakdown": {
+      "1": [
+        "page"
+      ],
+      "2": [
+        "page"
+      ],
+      "3": [
+        "page"
+      ],
+      "4": [
+        "complex",
+        "page"
+      ],
+      "5": [
+        "page"
+      ]
+    },
+    "non_empty_cell_count": null
+  },
+  "result": {
+    "type": "full",
+    "chunks": [
+      {
+        "content": "[[START OF PAGE 1]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26",
+        "embed": "[[START OF PAGE 1]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "[[START OF PAGE 1]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.04275534441805225,
+              "width": 0.08144416456759027,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9311812400817872
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.4282115869017632,
+              "top": 0.04334916864608076,
+              "width": 0.14273719563392107,
+              "height": 0.013064133016627079,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9511925399303436
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9251646816730499
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## Übung 4",
+        "embed": "## Übung 4",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.43073047858942065,
+              "top": 0.09263657957244656,
+              "width": 0.1385390428211587,
+              "height": 0.024346793349168647,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7605562090873719
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## Objektorientierung in Scala\n\nBearbeitung in den Tutorien am 25. und 29. Mai 2026",
+        "embed": "## Objektorientierung in Scala\n\nBearbeitung in den Tutorien am 25. und 29. Mai 2026",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.3434089000839631,
+              "top": 0.1169833729216152,
+              "width": 0.31150293870696893,
+              "height": 0.0172209026128266,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Objektorientierung in Scala",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7074527263641357
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.2804366078925273,
+              "top": 0.13657957244655583,
+              "width": 0.4332493702770781,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Bearbeitung in den Tutorien am 25. und 29. Mai 2026",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9224651843309403
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## Themen:\n\n• Objektorientierung in Scala (Kapselung, Companion Objects, Apply-Methode)\n\n• Scala Vererbung",
+        "embed": "## Themen:\n\n• Objektorientierung in Scala (Kapselung, Companion Objects, Apply-Methode)\n\n• Scala Vererbung",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.1200671704450042,
+              "top": 0.21140142517814728,
+              "width": 0.0906801007556675,
+              "height": 0.010688836104513063,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Themen:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9279458045959472
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.15029387069689337,
+              "top": 0.24465558194774348,
+              "width": 0.653232577665827,
+              "height": 0.013064133016627079,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Objektorientierung in Scala (Kapselung, Companion Objects, Apply-Methode)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8517583072185516
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.15029387069689337,
+              "top": 0.27256532066508316,
+              "width": 0.1494542401343409,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Scala Vererbung",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9588482499122619
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 4.1 Kapselung, Companion Objects, und Apply\n\nIn dieser Aufgabe entwerfen wir ein System für Smart-Home-Geräte (SmartDevice ) und lernen dabei, wie Scala mit Klassenparametern, Kapselung (Gettern und Settern), sekundären Konstruktoren, Default-Parametern sowie statischen Membern umgeht.",
+        "embed": "## 4.1 Kapselung, Companion Objects, und Apply\n\nIn dieser Aufgabe entwerfen wir ein System für Smart-Home-Geräte (SmartDevice ) und lernen dabei, wie Scala mit Klassenparametern, Kapselung (Gettern und Settern), sekundären Konstruktoren, Default-Parametern sowie statischen Membern umgeht.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.12342569269521411,
+              "top": 0.32244655581947745,
+              "width": 0.6028547439126785,
+              "height": 0.020190023752969122,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "4.1 Kapselung, Companion Objects, und Apply",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9684132426977158
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.3681710213776722,
+              "width": 0.762384550797649,
+              "height": 0.050475059382422804,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "In dieser Aufgabe entwerfen wir ein System für Smart-Home-Geräte (SmartDevice ) und lernen dabei, wie Scala mit Klassenparametern, Kapselung (Gettern und Settern), sekundären Konstruktoren, Default-Parametern sowie statischen Membern umgeht.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9887003660202026
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## a) Primärkonstruktoren und Klassenparameter:\n\nImplementieren Sie das Grundgerüst der KlasseSmartDevice . Der Primärkonstruktor soll folgende Parameter entgegennehmen:\n\n• name vom Typ String ohne val oder var. Dieser soll nur zur Initialisierung dienen und nicht direkt von außen lesbar sein.\n\n• deviceType vom TypString als öffentlichesval .\n\n⚫ deviceId vom Typ String als private val.\n\n• brightness vom TypInt mit einem Default-Wert von100 alsprivate var.\n\nclass SmartDevice(name: String, val deviceType: String, private val deviceId\n\n: String, private var brightness: Int = 100\n\n) {\n\n// Weitere Implementierung folgt in den naechsten Aufgabenteilen\n\n}",
+        "embed": "## a) Primärkonstruktoren und Klassenparameter:\n\nImplementieren Sie das Grundgerüst der KlasseSmartDevice . Der Primärkonstruktor soll folgende Parameter entgegennehmen:\n\n• name vom Typ String ohne val oder var. Dieser soll nur zur Initialisierung dienen und nicht direkt von außen lesbar sein.\n\n• deviceType vom TypString als öffentlichesval .\n\n⚫ deviceId vom Typ String als private val.\n\n• brightness vom TypInt mit einem Default-Wert von100 alsprivate var.\n\nclass SmartDevice(name: String, val deviceType: String, private val deviceId\n\n: String, private var brightness: Int = 100\n\n) {\n\n// Weitere Implementierung folgt in den naechsten Aufgabenteilen\n\n}",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.1418975650713686,
+              "top": 0.4477434679334917,
+              "width": 0.418975650713686,
+              "height": 0.013657957244655582,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "a) Primärkonstruktoren und Klassenparameter:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7945945411920547
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.46258907363420426,
+              "width": 0.7128463476070529,
+              "height": 0.0332541567695962,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Implementieren Sie das Grundgerüst der KlasseSmartDevice . Der Primärkonstruktor soll folgende Parameter entgegennehmen:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8964903146028519
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19311502938706968,
+              "top": 0.5077197149643705,
+              "width": 0.6876574307304786,
+              "height": 0.0344418052256532,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• name vom Typ String ohne val oder var. Dieser soll nur zur Initialisierung dienen und nicht direkt von außen lesbar sein.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9802722871303559
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19395465994962216,
+              "top": 0.5492874109263658,
+              "width": 0.4634760705289673,
+              "height": 0.0166270783847981,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• deviceType vom TypString als öffentlichesval .",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9627002358436585
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19311502938706968,
+              "top": 0.5754156769596199,
+              "width": 0.4374475230898405,
+              "height": 0.012470308788598575,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "⚫ deviceId vom Typ String als private val.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7080831930041313
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19395465994962216,
+              "top": 0.5950118764845606,
+              "width": 0.6910159529806885,
+              "height": 0.0172209026128266,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• brightness vom TypInt mit einem Default-Wert von100 alsprivate var.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9662596732378006
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26028547439126787,
+              "top": 0.6247030878859857,
+              "width": 0.6188077246011755,
+              "height": 0.008907363420427554,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "class SmartDevice(name: String, val deviceType: String, private val deviceId",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.6842122375965118
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.6353919239904988,
+              "width": 0.3534844668345928,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": ": String, private var brightness: Int = 100",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7304200679063797
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26028547439126787,
+              "top": 0.6466745843230404,
+              "width": 0.02434928631402183,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": ") {",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.2762384550797649,
+              "top": 0.6579572446555819,
+              "width": 0.5146935348446684,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "// Weitere Implementierung folgt in den naechsten Aufgabenteilen",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7293684661388398
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26028547439126787,
+              "top": 0.6692399049881235,
+              "width": 0.008396305625524769,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## b) Kapselung mit Gettern und Settern:\n\n• Welche Variablen brauchen noch eine Getter- bzw. Settermethode?\n\n• Implementieren Sie diese. Für die Helligkeit (brightness ) soll zudem eine Vali- dierungslogik integriert werden, die Werte auf den Bereich von0 bis100begrenzt.\n\nAlle alsprivate var deklarierten Variablen (_brightness ) benötigen Getter- und Setter- methoden.private val hingegen können nur über eine Gettermethode verfügen (deviceId ). deviceType ist public und benötigt keine Getter- bzw. Settermethoden.\n\nErkenntnis zum Namenskonflikt: Getter haben in Scala standardmäßig denselben Namen wie das Feld (z. B.brightness ), während Setter die Endung_= besitzen (z. B.brightness_= ) [2]. Wenn wir versuchen, die Methodendef brightnessunddef brightness_=direkt\n\n1\n\n[[END OF PAGE 1]]\n\n[[START OF PAGE 2]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\nim Klassenrumpf zu definieren, erhalten wir einen Compiler-Fehler (Namenskonflikt / Doppeldefi- nition), da der Namebrightness bereits durch den Konstruktorparameter aus Aufgabenteil a) belegt ist.\n\nDaher müssen wir den Parameter im Klassenkopf umbenennen (z. B. in_brightness ), um den Namenbrightness im Klassenrumpf für die Getter- und Setter-Methoden freizugeben.\n\n// Geaenderter Klassenkopf aus Teil a) (z.B. brightness -> _brightness):\nclass SmartDevice(\nname: String,\nval _deviceType: String,\nprivate val _deviceId: String,\nprivate var _brightness: Int = 100\n) {\n// Getter fuer deviceId\ndef deviceId: String = _deviceId\n\n// Getter und Setter fuer brightness (inkl. Validierung) (inkl. Validierung)\ndef brightness: Int = _brightness sung\ndef brightness_=(value: Int): Unit = {\nif (value < 0) _brightness = 0\nelse if (value > 100) _brightness = 100 100\nelse _brightness = value\n\n//Anwendung der Klasse\nval lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80) 80)\n\n}\n\n}\n\n\"L-101\",\nlamp.brightness = 9 // Setter\nlamp.brightness // Getter\n\nc) Sekundärkonstruktor:\n\nFügen Sie der KlasseSmartDevice einen Sekundärkonstruktor hinzu, welcher ledig- lich den Namen (name ) des Geräts als Argument erwartet. Dieser soll den Hauptkon- struktor aufrufen und dabei folgende Standardwerte setzen:deviceType = “Generic”, deviceId = “DEV-000” und die Helligkeit auf den Standardwert setzen.\n\ndef this (name: String)\nthis (name, \"Generic\", \"DEV-000\", 100) \"DEV-000\",\n}",
+        "embed": "## b) Kapselung mit Gettern und Settern:\n\n• Welche Variablen brauchen noch eine Getter- bzw. Settermethode?\n\n• Implementieren Sie diese. Für die Helligkeit (brightness ) soll zudem eine Vali- dierungslogik integriert werden, die Werte auf den Bereich von0 bis100begrenzt.\n\nAlle alsprivate var deklarierten Variablen (_brightness ) benötigen Getter- und Setter- methoden.private val hingegen können nur über eine Gettermethode verfügen (deviceId ). deviceType ist public und benötigt keine Getter- bzw. Settermethoden.\n\nErkenntnis zum Namenskonflikt: Getter haben in Scala standardmäßig denselben Namen wie das Feld (z. B.brightness ), während Setter die Endung_= besitzen (z. B.brightness_= ) [2]. Wenn wir versuchen, die Methodendef brightnessunddef brightness_=direkt\n\n1\n\n[[END OF PAGE 1]]\n\n[[START OF PAGE 2]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\nim Klassenrumpf zu definieren, erhalten wir einen Compiler-Fehler (Namenskonflikt / Doppeldefi- nition), da der Namebrightness bereits durch den Konstruktorparameter aus Aufgabenteil a) belegt ist.\n\nDaher müssen wir den Parameter im Klassenkopf umbenennen (z. B. in_brightness ), um den Namenbrightness im Klassenrumpf für die Getter- und Setter-Methoden freizugeben.\n\n// Geaenderter Klassenkopf aus Teil a) (z.B. brightness -> _brightness):\nclass SmartDevice(\nname: String,\nval _deviceType: String,\nprivate val _deviceId: String,\nprivate var _brightness: Int = 100\n) {\n// Getter fuer deviceId\ndef deviceId: String = _deviceId\n\n// Getter und Setter fuer brightness (inkl. Validierung) (inkl. Validierung)\ndef brightness: Int = _brightness sung\ndef brightness_=(value: Int): Unit = {\nif (value < 0) _brightness = 0\nelse if (value > 100) _brightness = 100 100\nelse _brightness = value\n\n//Anwendung der Klasse\nval lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80) 80)\n\n}\n\n}\n\n\"L-101\",\nlamp.brightness = 9 // Setter\nlamp.brightness // Getter\n\nc) Sekundärkonstruktor:\n\nFügen Sie der KlasseSmartDevice einen Sekundärkonstruktor hinzu, welcher ledig- lich den Namen (name ) des Geräts als Argument erwartet. Dieser soll den Hauptkon- struktor aufrufen und dabei folgende Standardwerte setzen:deviceType = “Generic”, deviceId = “DEV-000” und die Helligkeit auf den Standardwert setzen.\n\ndef this (name: String)\nthis (name, \"Generic\", \"DEV-000\", 100) \"DEV-000\",\n}",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.14105793450881612,
+              "top": 0.7137767220902613,
+              "width": 0.33669185558354325,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "b) Kapselung mit Gettern und Settern:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9451404273509979
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19311502938706968,
+              "top": 0.7428741092636579,
+              "width": 0.5541561712846348,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Welche Variablen brauchen noch eine Getter- bzw. Settermethode?",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9582926362752915
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19311502938706968,
+              "top": 0.7636579572446556,
+              "width": 0.6910159529806885,
+              "height": 0.037410926365795724,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Implementieren Sie diese. Für die Helligkeit (brightness ) soll zudem eine Vali- dierungslogik integriert werden, die Werte auf den Bereich von0 bis100begrenzt.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9833317071199417
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.1670864819479429,
+              "top": 0.8087885985748219,
+              "width": 0.7170445004198153,
+              "height": 0.048693586698337295,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Alle alsprivate var deklarierten Variablen (_brightness ) benötigen Getter- und Setter- methoden.private val hingegen können nur über eine Gettermethode verfügen (deviceId ). deviceType ist public und benötigt keine Getter- bzw. Settermethoden.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9850740969181061
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.8657957244655582,
+              "width": 0.7136859781696053,
+              "height": 0.04631828978622328,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Erkenntnis zum Namenskonflikt: Getter haben in Scala standardmäßig denselben Namen wie das Feld (z. B.brightness ), während Setter die Endung_= besitzen (z. B.brightness_= ) [2]. Wenn wir versuchen, die Methodendef brightnessunddef brightness_=direkt",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9863876789808274
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.4945424013434089,
+              "top": 0.9566508313539193,
+              "width": 0.009235936188077247,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "1",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8075594753026962
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "[[END OF PAGE 1]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "[[START OF PAGE 2]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.04275534441805225,
+              "width": 0.08144416456759027,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9281658709049225
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.42737195633921077,
+              "top": 0.04334916864608076,
+              "width": 0.14357682619647355,
+              "height": 0.012470308788598575,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9463220566511155
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9303966939449311
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.09323040380047506,
+              "width": 0.7153652392947103,
+              "height": 0.04513064133016627,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "im Klassenrumpf zu definieren, erhalten wir einen Compiler-Fehler (Namenskonflikt / Doppeldefi- nition), da der Namebrightness bereits durch den Konstruktorparameter aus Aufgabenteil a) belegt ist.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9830222278833389
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.14548693586698339,
+              "width": 0.7128463476070529,
+              "height": 0.03147268408551069,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Daher müssen wir den Parameter im Klassenkopf umbenennen (z. B. in_brightness ), um den Namenbrightness im Klassenrumpf für die Getter- und Setter-Methoden freizugeben.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9781757861375808
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26028547439126787,
+              "top": 0.1834916864608076,
+              "width": 0.6120906801007556,
+              "height": 0.24168646080760095,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "// Geaenderter Klassenkopf aus Teil a) (z.B. brightness -> _brightness):\nclass SmartDevice(\nname: String,\nval _deviceType: String,\nprivate val _deviceId: String,\nprivate var _brightness: Int = 100\n) {\n// Getter fuer deviceId\ndef deviceId: String = _deviceId\n\n// Getter und Setter fuer brightness (inkl. Validierung) (inkl. Validierung)\ndef brightness: Int = _brightness sung\ndef brightness_=(value: Int): Unit = {\nif (value < 0) _brightness = 0\nelse if (value > 100) _brightness = 100 100\nelse _brightness = value\n\n//Anwendung der Klasse\nval lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80) 80)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.716730174422264
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.2779177162048699,
+              "top": 0.3663895486935867,
+              "width": 0.005037783375314861,
+              "height": 0.006532066508313539,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7888443470001221
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26280436607892527,
+              "top": 0.37707838479809974,
+              "width": 0.005877413937867338,
+              "height": 0.006532066508313539,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9563490152359009
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.26028547439126787,
+              "top": 0.4085510688836104,
+              "width": 0.39378673383711166,
+              "height": 0.032066508313539195,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "\"L-101\",\nlamp.brightness = 9 // Setter\nlamp.brightness // Getter",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.947519713640213
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.1418975650713686,
+              "top": 0.4750593824228028,
+              "width": 0.21914357682619648,
+              "height": 0.011282660332541567,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "c) Sekundärkonstruktor:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7655158698558807
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.48812351543942994,
+              "width": 0.7162048698572628,
+              "height": 0.06532066508313539,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Fügen Sie der KlasseSmartDevice einen Sekundärkonstruktor hinzu, welcher ledig- lich den Namen (name ) des Geräts als Argument erwartet. Dieser soll den Hauptkon- struktor aufrufen und dabei folgende Standardwerte setzen:deviceType = “Generic”, deviceId = “DEV-000” und die Helligkeit auf den Standardwert setzen.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9572154641151428
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.2611251049538203,
+              "top": 0.5605700712589073,
+              "width": 0.31150293870696893,
+              "height": 0.030285035629453682,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "def this (name: String)\nthis (name, \"Generic\", \"DEV-000\", 100) \"DEV-000\",\n}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8298022717237472
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## d) Companion Object und Factory Methode (Apply):\n\nDa es in Scala das Schlüsselwortstatic aus Java nicht gibt, werden statische Funktiona- litäten in ein Companion Object ausgelagert.\n\n• Erstellen Sie das Companion ObjectSmartDevice .\n\n• Implementieren Sie darin einen privaten globalen ZählerdeviceCount vom Typ Int (initialisiert mit0 ) sowie einen öffentlichen GettertotalDevices .\n\n• Implementieren Sie eine Factory-Methodeapply , die dieselben Parameter wie der Hauptkonstruktor der Klasse akzeptiert. Diese Methode soll ein neuesSmartDevice instanziieren, den globalen ZählerdeviceCountum1 erhöhen und das neue Ob- jekt zurückgeben.\n\nobject SmartDevice { private var deviceCount: Int = 0 def totalDevices: Int = deviceCount def apply(name: String, deviceType: String, deviceId: String, brightness: Int = 100): SmartDevice = { deviceCount += 1\n\n2\n\n[[END OF PAGE 2]]\n\n[[START OF PAGE 3]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\n// Uebergibt den Parameter an den geaenderten Konstruktor (_brightness) new SmartDevice(name, deviceType, deviceId, brightness)",
+        "embed": "## d) Companion Object und Factory Methode (Apply):\n\nDa es in Scala das Schlüsselwortstatic aus Java nicht gibt, werden statische Funktiona- litäten in ein Companion Object ausgelagert.\n\n• Erstellen Sie das Companion ObjectSmartDevice .\n\n• Implementieren Sie darin einen privaten globalen ZählerdeviceCount vom Typ Int (initialisiert mit0 ) sowie einen öffentlichen GettertotalDevices .\n\n• Implementieren Sie eine Factory-Methodeapply , die dieselben Parameter wie der Hauptkonstruktor der Klasse akzeptiert. Diese Methode soll ein neuesSmartDevice instanziieren, den globalen ZählerdeviceCountum1 erhöhen und das neue Ob- jekt zurückgeben.\n\nobject SmartDevice { private var deviceCount: Int = 0 def totalDevices: Int = deviceCount def apply(name: String, deviceType: String, deviceId: String, brightness: Int = 100): SmartDevice = { deviceCount += 1\n\n2\n\n[[END OF PAGE 2]]\n\n[[START OF PAGE 3]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\n// Uebergibt den Parameter an den geaenderten Konstruktor (_brightness) new SmartDevice(name, deviceType, deviceId, brightness)",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.14105793450881612,
+              "top": 0.6264845605700713,
+              "width": 0.45843828715365237,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "d) Companion Object und Factory Methode (Apply):",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9083842277526856
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.6419239904988123,
+              "width": 0.7162048698572628,
+              "height": 0.0332541567695962,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Da es in Scala das Schlüsselwortstatic aus Java nicht gibt, werden statische Funktiona- litäten in ein Companion Object ausgelagert.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9600953876972198
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.19395465994962216,
+              "top": 0.6882422802850356,
+              "width": 0.4508816120906801,
+              "height": 0.0172209026128266,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "• Erstellen Sie das Companion ObjectSmartDevice .",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19311502938706968,
+              "top": 0.7114014251781473,
+              "width": 0.6884970612930311,
+              "height": 0.035629453681710214,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "• Implementieren Sie darin einen privaten globalen ZählerdeviceCount vom Typ Int (initialisiert mit0 ) sowie einen öffentlichen GettertotalDevices .",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.978616526722908
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.19227539882451722,
+              "top": 0.7517814726840855,
+              "width": 0.6968933669185559,
+              "height": 0.0671021377672209,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "• Implementieren Sie eine Factory-Methodeapply , die dieselben Parameter wie der Hauptkonstruktor der Klasse akzeptiert. Diese Methode soll ein neuesSmartDevice instanziieren, den globalen ZählerdeviceCountum1 erhöhen und das neue Ob- jekt zurückgeben.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9804653435945511
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.8319477434679335,
+              "width": 0.6330814441645676,
+              "height": 0.08847980997624703,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "object SmartDevice { private var deviceCount: Int = 0 def totalDevices: Int = deviceCount def apply(name: String, deviceType: String, deviceId: String, brightness: Int = 100): SmartDevice = { deviceCount += 1",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8612496644258499
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.49370277078085645,
+              "top": 0.9566508313539193,
+              "width": 0.0109151973131822,
+              "height": 0.00831353919239905,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "2",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8533443301916122
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "[[END OF PAGE 2]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "[[START OF PAGE 3]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.04275534441805225,
+              "width": 0.08144416456759027,
+              "height": 0.014251781472684086,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9183479636907578
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.42737195633921077,
+              "top": 0.04334916864608076,
+              "width": 0.14357682619647355,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.941872027516365
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9208308100700379
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.29303106633081444,
+              "top": 0.09501187648456057,
+              "width": 0.5701091519731318,
+              "height": 0.020783847980997625,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "// Uebergibt den Parameter an den geaenderten Konstruktor (_brightness) new SmartDevice(name, deviceType, deviceId, brightness)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9517601758241654
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## e) Verständnisfragen:\n\nGegeben ist der folgende Codeausschnitt in einem Testprogramm. Entscheiden Sie, ob die Zeilen korrekt sind, ob Fehler auftreten oder welcher Wert auf der Konsole ausgegeben wird:\n\ni) val lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80)\n\nii) lamp.brightness = 150\n\niii) val generic = new SmartDevice(\"Testgeraet\")\n\niv) println(SmartDevice.totalDevices)\n\ni) korrekt: Ruft implizit dieapply-Methode im Companion Object auf (Objekterzeu- gung ohnenew ). Der globale Zähler wird auf1 erhöht.\n\nii) korrekt: Ruft den benutzerdefinierten Setterbrightness_= auf. Der Wert wird intern im Setter auf100begrenzt.\n\niii) korrekt: Nutzt den Sekundärkonstruktor. Da dieser direkt mitnew aufgerufen wird, wird dieapply-Methode des Companion Objects umgangen. Der globale Zähler\n\nbleibt bei1 .\n\niv) korrekt: Gibt den Wert 1 auf der Konsole aus.",
+        "embed": "## e) Verständnisfragen:\n\nGegeben ist der folgende Codeausschnitt in einem Testprogramm. Entscheiden Sie, ob die Zeilen korrekt sind, ob Fehler auftreten oder welcher Wert auf der Konsole ausgegeben wird:\n\ni) val lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80)\n\nii) lamp.brightness = 150\n\niii) val generic = new SmartDevice(\"Testgeraet\")\n\niv) println(SmartDevice.totalDevices)\n\ni) korrekt: Ruft implizit dieapply-Methode im Companion Object auf (Objekterzeu- gung ohnenew ). Der globale Zähler wird auf1 erhöht.\n\nii) korrekt: Ruft den benutzerdefinierten Setterbrightness_= auf. Der Wert wird intern im Setter auf100begrenzt.\n\niii) korrekt: Nutzt den Sekundärkonstruktor. Da dieser direkt mitnew aufgerufen wird, wird dieapply-Methode des Companion Objects umgangen. Der globale Zähler\n\nbleibt bei1 .\n\niv) korrekt: Gibt den Wert 1 auf der Konsole aus.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.1418975650713686,
+              "top": 0.17280285035629453,
+              "width": 0.1889168765743073,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "e) Verständnisfragen:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8609087407588959
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.1670864819479429,
+              "top": 0.19002375296912113,
+              "width": 0.7136859781696053,
+              "height": 0.04809976247030879,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Gegeben ist der folgende Codeausschnitt in einem Testprogramm. Entscheiden Sie, ob die Zeilen korrekt sind, ob Fehler auftreten oder welcher Wert auf der Konsole ausgegeben wird:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9094701170921325
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18723761544920234,
+              "top": 0.2517814726840855,
+              "width": 0.6624685138539043,
+              "height": 0.015439429928741092,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "i) val lamp = SmartDevice(\"Lampe\", \"Light\", \"L-101\", 80)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9514260172843934
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18219983207388749,
+              "top": 0.27434679334916867,
+              "width": 0.28211586901763225,
+              "height": 0.015439429928741092,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "ii) lamp.brightness = 150",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9504576742649078
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17632241813602015,
+              "top": 0.2975059382422803,
+              "width": 0.5524769101595298,
+              "height": 0.014845605700712588,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "iii) val generic = new SmartDevice(\"Testgeraet\")",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9528144508600235
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17800167926112512,
+              "top": 0.32244655581947745,
+              "width": 0.4265323257766583,
+              "height": 0.011876484560570071,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "iv) println(SmartDevice.totalDevices)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9290371268987656
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18723761544920234,
+              "top": 0.35629453681710216,
+              "width": 0.6968933669185559,
+              "height": 0.03681710213776722,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "i) korrekt: Ruft implizit dieapply-Methode im Companion Object auf (Objekterzeu- gung ohnenew ). Der globale Zähler wird auf1 erhöht.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9782593548297882
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.181360201511335,
+              "top": 0.39667458432304037,
+              "width": 0.6994122586062133,
+              "height": 0.035629453681710214,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "ii) korrekt: Ruft den benutzerdefinierten Setterbrightness_= auf. Der Wert wird intern im Setter auf100begrenzt.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9747167319059372
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17632241813602015,
+              "top": 0.43705463182897863,
+              "width": 0.7069689336691856,
+              "height": 0.0344418052256532,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "iii) korrekt: Nutzt den Sekundärkonstruktor. Da dieser direkt mitnew aufgerufen wird, wird dieapply-Methode des Companion Objects umgangen. Der globale Zähler",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9832551509141922
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.21074727120067172,
+              "top": 0.47149643705463185,
+              "width": 0.0982367758186398,
+              "height": 0.0172209026128266,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "bleibt bei1 .",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17800167926112512,
+              "top": 0.4970308788598575,
+              "width": 0.40890008396305627,
+              "height": 0.011282660332541567,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "iv) korrekt: Gibt den Wert 1 auf der Konsole aus.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9217495650053025
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 4.2 Vererbung in Scala\n\na) Implementieren Sie das in Abbildung 1 dargestellte Klassendiagramm in Scala. Für die Felder und Methoden der jeweiligen Klassen gilt:\n\n\ti) Family Member\n\nM.\n\n\t• name vom TypString\n\n- birthDate vom Typ String im Format \"DD-MM-YYYY\"\n\n\t- placeOfBirth vom Typ String\n\nabstract class FamilyMember {\nval name: String\nval birthDate: String\nval placeOfBirth: String\n\n}\n\nii) Parents\n\n\t• children vom TypArray[FamilyMember] repräsentiert die Kinder des entsprechenden Objekts\n\n\t• printChildren() gibt den Namen der Kinder des entsprechenden Objekts aus\n\n3\n\n[[END OF PAGE 3]]\n\n[[START OF PAGE 4]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\n| Class              | Attributes                     | Methods              | Extends            |\n| :----------------- | :----------------------------- | :------------------- | :----------------- |\n| abstract FamilyMember | name: String<br>birthDate: String<br>placeOfBirth: String |                      |                    |\n| abstract Parents   | children: Array[FamilyMember]  | printChildren: Unit<br>isParent: Boolean | abstract FamilyMember |\n| Mother             |                                |                      | abstract Parents   |\n| Father             |                                |                      | abstract Parents   |\n| Sister             |                                |                      | abstract FamilyMember |\n\n- isParent gibt true zurück\n\nabstract class Parents extends FamilyMember {\nvar children: Array[FamilyMember] = Array[FamilyMember]()\ndef printChildren(): Unit = this.children.foreach((c) => println(c.\nname))\ndef isParent: Boolean = true\n}\n\niii) Mother, FatherundSister haben keine dedizierten Felder oder Methoden class Mother(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Father(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Sister(val name: String, val birthDate: String, val placeOfBirth: String) extends FamilyMember {\n\nb) Entscheiden Sie, ob die folgenden Anweisungen und Ausdrücke korrekt sind oder zu Fehlern führen:\n\n\ti) val f1: Mother = new Mother(\"Hildegard\", \"23-7-1952\",\n\"Berlin\")\nkorrekt\n\n\tii) var f2: FamilyMember = new Mother(\"Gisela\", \"4-9-1978\",\n\"Heidelberg\")\nkorrekt\n\n\tiii) val f3: Mother = new FamilyMember(\"Susanne\", \"9-10-1978\",\n\"Leverkusen\")\n\n4\n\n[[END OF PAGE 4]]\n\n[[START OF PAGE 5]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\nFehler: die KlasseFamilyMember ist abstrakt und kann nicht instanziiert werden + FamilyMember ist keine Mother\n\n\tiv) val f4: Sister = new Sister(\"Moni\", \"19-12-1993\",\n\"Frankfurt am Main\")\nkorrekt\n\n\tv) f1.isParent\nwird zu true ausgewertet\n\n\tvi) f4.isParent\nFehler: isParent ist keine Methode von Sister\n\n\tvii) f1.children = fl.children :+ f2\nkorrekt, fügt \"Gisela” als Kind von “Hildegard” hinzu\n\nviii) f2.children = f2.children :+ f4 Fehler: \"Gisela❞ ist vom Typ Family Member, welche nicht das Attribut children besitzt. besitzt.\n\nMusterlösu\n\n5\n\n[[END OF PAGE 5]]",
+        "embed": "## 4.2 Vererbung in Scala\n\na) Implementieren Sie das in Abbildung 1 dargestellte Klassendiagramm in Scala. Für die Felder und Methoden der jeweiligen Klassen gilt:\n\n\ti) Family Member\n\nM.\n\n\t• name vom TypString\n\n- birthDate vom Typ String im Format \"DD-MM-YYYY\"\n\n\t- placeOfBirth vom Typ String\n\nabstract class FamilyMember {\nval name: String\nval birthDate: String\nval placeOfBirth: String\n\n}\n\nii) Parents\n\n\t• children vom TypArray[FamilyMember] repräsentiert die Kinder des entsprechenden Objekts\n\n\t• printChildren() gibt den Namen der Kinder des entsprechenden Objekts aus\n\n3\n\n[[END OF PAGE 3]]\n\n[[START OF PAGE 4]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\n| Class              | Attributes                     | Methods              | Extends            |\n| :----------------- | :----------------------------- | :------------------- | :----------------- |\n| abstract FamilyMember | name: String<br>birthDate: String<br>placeOfBirth: String |                      |                    |\n| abstract Parents   | children: Array[FamilyMember]  | printChildren: Unit<br>isParent: Boolean | abstract FamilyMember |\n| Mother             |                                |                      | abstract Parents   |\n| Father             |                                |                      | abstract Parents   |\n| Sister             |                                |                      | abstract FamilyMember |\n\n- isParent gibt true zurück\n\nabstract class Parents extends FamilyMember {\nvar children: Array[FamilyMember] = Array[FamilyMember]()\ndef printChildren(): Unit = this.children.foreach((c) => println(c.\nname))\ndef isParent: Boolean = true\n}\n\niii) Mother, FatherundSister haben keine dedizierten Felder oder Methoden class Mother(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Father(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Sister(val name: String, val birthDate: String, val placeOfBirth: String) extends FamilyMember {\n\nb) Entscheiden Sie, ob die folgenden Anweisungen und Ausdrücke korrekt sind oder zu Fehlern führen:\n\n\ti) val f1: Mother = new Mother(\"Hildegard\", \"23-7-1952\",\n\"Berlin\")\nkorrekt\n\n\tii) var f2: FamilyMember = new Mother(\"Gisela\", \"4-9-1978\",\n\"Heidelberg\")\nkorrekt\n\n\tiii) val f3: Mother = new FamilyMember(\"Susanne\", \"9-10-1978\",\n\"Leverkusen\")\n\n4\n\n[[END OF PAGE 4]]\n\n[[START OF PAGE 5]]\n\nÜbung 4\n\nProgrammieren II\n\nSoSe 26\n\nFehler: die KlasseFamilyMember ist abstrakt und kann nicht instanziiert werden + FamilyMember ist keine Mother\n\n\tiv) val f4: Sister = new Sister(\"Moni\", \"19-12-1993\",\n\"Frankfurt am Main\")\nkorrekt\n\n\tv) f1.isParent\nwird zu true ausgewertet\n\n\tvi) f4.isParent\nFehler: isParent ist keine Methode von Sister\n\n\tvii) f1.children = fl.children :+ f2\nkorrekt, fügt \"Gisela” als Kind von “Hildegard” hinzu\n\nviii) f2.children = f2.children :+ f4 Fehler: \"Gisela❞ ist vom Typ Family Member, welche nicht das Attribut children besitzt. besitzt.\n\nMusterlösu\n\n5\n\n[[END OF PAGE 5]]",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.12342569269521411,
+              "top": 0.5676959619952494,
+              "width": 0.30058774139378674,
+              "height": 0.020190023752969122,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "4.2 Vererbung in Scala",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9601072043180465
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.14105793450881612,
+              "top": 0.6152019002375297,
+              "width": 0.7405541561712846,
+              "height": 0.03147268408551069,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "a) Implementieren Sie das in Abbildung 1 dargestellte Klassendiagramm in Scala. Für die Felder und Methoden der jeweiligen Klassen gilt:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.972284522652626
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18807724601175482,
+              "top": 0.66270783847981,
+              "width": 0.16792611251049538,
+              "height": 0.011876484560570071,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "\ti) Family Member",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9015036314725876
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.12930310663308145,
+              "top": 0.7048693586698337,
+              "width": 0.13266162888329136,
+              "height": 0.09144893111638955,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "M.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.6205068826675415
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.6823040380047506,
+              "width": 0.21998320738874896,
+              "height": 0.0172209026128266,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "\t• name vom TypString",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9532973825931549
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.22921914357682618,
+              "top": 0.7054631828978623,
+              "width": 0.5289672544080605,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "- birthDate vom Typ String im Format \"DD-MM-YYYY\"",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9215277582406998
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.7262470308788599,
+              "width": 0.3157010915197313,
+              "height": 0.011876484560570071,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "\t- placeOfBirth vom Typ String",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9312131792306899
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.3198992443324937,
+              "top": 0.747624703087886,
+              "width": 0.2325776658270361,
+              "height": 0.04334916864608076,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "abstract class FamilyMember {\nval name: String\nval birthDate: String\nval placeOfBirth: String",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.897724163532257
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.32157850545759864,
+              "top": 0.7951306413301663,
+              "width": 0.005877413937867338,
+              "height": 0.006532066508313539,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8554861545562744
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18219983207388749,
+              "top": 0.8319477434679335,
+              "width": 0.11251049538203191,
+              "height": 0.010688836104513063,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "ii) Parents",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7642424136400223
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.8509501187648456,
+              "width": 0.6507136859781696,
+              "height": 0.033847980997624705,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "\t• children vom TypArray[FamilyMember] repräsentiert die Kinder des entsprechenden Objekts",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9762225955724716
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.8895486935866983,
+              "width": 0.6507136859781696,
+              "height": 0.032066508313539195,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "\t• printChildren() gibt den Namen der Kinder des entsprechenden Objekts aus",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9770092338323593
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.49370277078085645,
+              "top": 0.9566508313539193,
+              "width": 0.011754827875734676,
+              "height": 0.00831353919239905,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "3",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8185876101255417
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "[[END OF PAGE 3]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "[[START OF PAGE 4]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.04275534441805225,
+              "width": 0.08144416456759027,
+              "height": 0.014251781472684086,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9208279818296432
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.42737195633921077,
+              "top": 0.04275534441805225,
+              "width": 0.14357682619647355,
+              "height": 0.013064133016627079,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.931575670838356
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9145191460847855
+            },
+            "extra": null
+          },
+          {
+            "type": "Figure",
+            "bbox": {
+              "left": 0.19421505867984493,
+              "top": 0.08636262581070925,
+              "width": 0.612947106861848,
+              "height": 0.292154724411047,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "| Class              | Attributes                     | Methods              | Extends            |\n| :----------------- | :----------------------------- | :------------------- | :----------------- |\n| abstract FamilyMember | name: String<br>birthDate: String<br>placeOfBirth: String |                      |                    |\n| abstract Parents   | children: Array[FamilyMember]  | printChildren: Unit<br>isParent: Boolean | abstract FamilyMember |\n| Mother             |                                |                      | abstract Parents   |\n| Father             |                                |                      | abstract Parents   |\n| Sister             |                                |                      | abstract FamilyMember |",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8620926469564438
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.23005877413937867,
+              "top": 0.40736342042755347,
+              "width": 0.26364399664147775,
+              "height": 0.011876484560570071,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "- isParent gibt true zurück",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8472670763731003
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.27287993282955497,
+              "top": 0.42933491686460806,
+              "width": 0.6011754827875735,
+              "height": 0.06532066508313539,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "abstract class Parents extends FamilyMember {\nvar children: Array[FamilyMember] = Array[FamilyMember]()\ndef printChildren(): Unit = this.children.foreach((c) => println(c.\nname))\ndef isParent: Boolean = true\n}",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9552664965391159
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.17800167926112512,
+              "top": 0.5195961995249406,
+              "width": 0.6926952141057935,
+              "height": 0.15558194774346792,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "iii) Mother, FatherundSister haben keine dedizierten Felder oder Methoden class Mother(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Father(val name: String, val birthDate: String, val placeOfBirth: String) extends Parents { } class Sister(val name: String, val birthDate: String, val placeOfBirth: String) extends FamilyMember {",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7322032153606415
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.14021830394626364,
+              "top": 0.7315914489311164,
+              "width": 0.7405541561712846,
+              "height": 0.03147268408551069,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "b) Entscheiden Sie, ob die folgenden Anweisungen und Ausdrücke korrekt sind oder zu Fehlern führen:",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9643642485141755
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18723761544920234,
+              "top": 0.7761282660332541,
+              "width": 0.6624685138539043,
+              "height": 0.04928741092636579,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "\ti) val f1: Mother = new Mother(\"Hildegard\", \"23-7-1952\",\n\"Berlin\")\nkorrekt",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9668006032705307
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18219983207388749,
+              "top": 0.8331353919239906,
+              "width": 0.691855583543241,
+              "height": 0.04928741092636579,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "\tii) var f2: FamilyMember = new Mother(\"Gisela\", \"4-9-1978\",\n\"Heidelberg\")\nkorrekt",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9648362934589386
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17632241813602015,
+              "top": 0.8895486935866983,
+              "width": 0.7212426532325776,
+              "height": 0.03147268408551069,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "\tiii) val f3: Mother = new FamilyMember(\"Susanne\", \"9-10-1978\",\n\"Leverkusen\")",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9647880584001541
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.49286314021830396,
+              "top": 0.9572446555819477,
+              "width": 0.011754827875734676,
+              "height": 0.007719714964370546,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8414493352174759
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 4,
+              "original_page": 4
+            },
+            "content": "[[END OF PAGE 4]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "[[START OF PAGE 5]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.04275534441805225,
+              "width": 0.08144416456759027,
+              "height": 0.014251781472684086,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "Übung 4",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9381217807531357
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.42737195633921077,
+              "top": 0.04334916864608076,
+              "width": 0.14357682619647355,
+              "height": 0.013064133016627079,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9546598821878434
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9298015624284744
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.20822837951301426,
+              "top": 0.09026128266033254,
+              "width": 0.672544080604534,
+              "height": 0.0332541567695962,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "Fehler: die KlasseFamilyMember ist abstrakt und kann nicht instanziiert werden + FamilyMember ist keine Mother",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9610994905233383
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17884130982367757,
+              "top": 0.13182897862232779,
+              "width": 0.6230058774139379,
+              "height": 0.048693586698337295,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "\tiv) val f4: Sister = new Sister(\"Moni\", \"19-12-1993\",\n\"Frankfurt am Main\")\nkorrekt",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9811156064271926
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.18387909319899245,
+              "top": 0.1876484560570071,
+              "width": 0.22418136020151133,
+              "height": 0.0332541567695962,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "\tv) f1.isParent\nwird zu true ausgewertet",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9788270562887191
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17884130982367757,
+              "top": 0.23159144893111638,
+              "width": 0.4508816120906801,
+              "height": 0.027315914489311165,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "\tvi) f4.isParent\nFehler: isParent ist keine Methode von Sister",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9562439709901809
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.17296389588581024,
+              "top": 0.27256532066508316,
+              "width": 0.4727120067170445,
+              "height": 0.027909738717339667,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "\tvii) f1.children = fl.children :+ f2\nkorrekt, fügt \"Gisela” als Kind von “Hildegard” hinzu",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "low",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8856933534145355
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.16792611251049538,
+              "top": 0.31235154394299286,
+              "width": 0.7178841309823678,
+              "height": 0.04334916864608076,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "viii) f2.children = f2.children :+ f4 Fehler: \"Gisela❞ ist vom Typ Family Member, welche nicht das Attribut children besitzt. besitzt.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9475188463926315
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.19563392107472713,
+              "top": 0.33847980997624705,
+              "width": 0.4920235096557515,
+              "height": 0.38836104513064135,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "Musterlösu",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9674828380346299
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.4945424013434089,
+              "top": 0.9566508313539193,
+              "width": 0.0109151973131822,
+              "height": 0.008907363420427554,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "5",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8017073422670364
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 5,
+              "original_page": 5
+            },
+            "content": "[[END OF PAGE 5]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          }
+        ]
+      }
+    ],
+    "ocr": null,
+    "custom": null
+  },
+  "parse_mode": null
+}

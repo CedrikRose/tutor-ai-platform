@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { courseApi } from '../services/api';
 import DeleteMaterialModal from './DeleteMaterialModal';
 import EditMaterialModal from './EditMaterialModal';
+import EditChunksModal from './EditChunksModal';
 import type { CourseMaterial } from '../types';
 
 interface MaterialCardProps {
@@ -140,7 +141,15 @@ export default function MaterialCard({ material }: MaterialCardProps) {
 
       {/* Action buttons */}
       <div className="flex gap-2">
-        {isProcessed && (
+        {isProcessed && material.material_type === 'lecture_slide' && (
+          <button
+            onClick={() => setShowEditModal(true)}
+            className="flex-1 bg-blue-900/30 hover:bg-blue-900/50 text-blue-400 py-2 px-3 rounded-md text-sm font-medium"
+          >
+            📝 Chunks bearbeiten
+          </button>
+        )}
+        {isProcessed && material.material_type !== 'lecture_slide' && (
           <button
             onClick={() => setShowEditModal(true)}
             className="flex-1 bg-blue-900/30 hover:bg-blue-900/50 text-blue-400 py-2 px-3 rounded-md text-sm font-medium"
@@ -175,7 +184,18 @@ export default function MaterialCard({ material }: MaterialCardProps) {
         />
       )}
 
-      {showEditModal && (
+      {showEditModal && material.material_type === 'lecture_slide' && (
+        <EditChunksModal
+          material={material}
+          onClose={() => setShowEditModal(false)}
+          onSaved={() => {
+            queryClient.invalidateQueries({ queryKey: ['materials', material.course_id] });
+            setShowEditModal(false);
+          }}
+        />
+      )}
+
+      {showEditModal && material.material_type !== 'lecture_slide' && (
         <EditMaterialModal
           material={material}
           onClose={() => setShowEditModal(false)}

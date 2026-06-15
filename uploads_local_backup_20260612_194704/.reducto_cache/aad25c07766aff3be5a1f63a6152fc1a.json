@@ -1,0 +1,1214 @@
+{
+  "response_type": "parse",
+  "job_id": "c024360b-051c-4ac2-a43c-091498a66007",
+  "duration": 1.4746077060699463,
+  "pdf_url": "https://prod-storage20241010144745140900000001.s3.amazonaws.com/org/f446745f-1aa7-478c-8eac-d9a170972fa8/20aec760-8c65-45c2-ad3d-e540b51353d5.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2UOK6OVBOUYL7WYA%2F20260612%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260612T172334Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=9116638d7f4f38692badaa615a5c52bf480f93a4c30bb736b829a45795b4fa91",
+  "studio_link": "https://studio.reducto.ai/job/c024360b-051c-4ac2-a43c-091498a66007",
+  "usage": {
+    "num_pages": 3,
+    "credits": 3.0,
+    "credit_breakdown": {
+      "page": 3.0
+    },
+    "page_billing_breakdown": {
+      "1": [
+        "page"
+      ],
+      "2": [
+        "page"
+      ],
+      "3": [
+        "page"
+      ]
+    },
+    "non_empty_cell_count": null
+  },
+  "result": {
+    "type": "full",
+    "chunks": [
+      {
+        "content": "[[START OF PAGE 1]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26",
+        "embed": "[[START OF PAGE 1]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "[[START OF PAGE 1]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11922753988245172,
+              "top": 0.043942992874109264,
+              "width": 0.1418975650713686,
+              "height": 0.012470308788598575,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Hausaufgabe 3",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9306467622518539
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.42737195633921077,
+              "top": 0.04275534441805225,
+              "width": 0.14357682619647355,
+              "height": 0.013657957244655582,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.932799118757248
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9107423990964889
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## Hausaufgabe 3\nCase Classes und Match Ausdrücke",
+        "embed": "## Hausaufgabe 3\nCase Classes und Match Ausdrücke",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.29303106633081444,
+              "top": 0.08788598574821853,
+              "width": 0.41309823677581864,
+              "height": 0.04156769596199525,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Hausaufgabe 3\nCase Classes und Match Ausdrücke",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8911385476589203
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1 Fußballspiel (20 Punkte)\n\nIhnen sind im Packageimpl die KlassenFootballMatch ,Events ,MatchUtilsgege- ben, welche Sie im Ordnersrc/main/scala finden. Außerdem ist Ihnen zum Ausprobieren die KlasseMain gegeben in welcher diemain-Methode ist um ein Fußballspiel zu simulieren.\n\nMachen Sie sich mit den Dateien und den darin enthaltenen Klassen und Methoden vertraut. Momentan ist die Fußballspielsimulation noch nicht funktionsfähig.\n\nSie sollen im folgenden Änderungen und Erweiterungen am Code vornehmen um die gewünschte Funktionalität zu realisieren. Verwenden Sie die TestklasseFootballSpec um zu überprüfen ob Ihre Lösungen in die richtge Richtung gehen.\n\nHinweis: eventuell kann dieFootballSpec-Klasse nicht sofort ausgeführt werden. Sollte dies bei Ihnen der Fall sein, können Sie das Problem wie folgt beheben (vorausgesetzt, Sie haben das Scala-Plugin für IntelliJ installiert!):\n\n- Navigieren Sie in IntelliJ zu Einstellungen unter\nFile Settings\n\n• Öffnen Sie die Gradle-Einstellungen unter Build, Execution, Deployment -> Build Tools -> Gradle\n\n• Setzen Sie im AbschnittBuild and Run die EinstellungRun tests using:auf IntelliJ IDEA\n\nWir verwenden Java 21, sollten Sie in Ihrer IDE ein anderes SDK eingestellt haben, so müssen Sie unter\n\nFile -> Project Structure und anschließend unter\n\nProject Settings -> Project das SDK auf Java 21 (z.B. jbr 21) stellen. Auch das Language level sollte dann entweder auf 21 oderSDK default eingestellt werden. Den Rest übernimmt Gradle für Sie.\n\n1\n\n[[END OF PAGE 1]]\n\n[[START OF PAGE 2]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26\n\n3.1.1\n\nKlasseTeam (2 Punkte)\n\nInMatchUtils.scala existiert neben den Untertypen desPlayer auch die KlasseTeam . Diese soll so modifiziert werden, so dass gilt, dass wennDefender ein Untertyp vonPlayer ist, dass dann auch einTeam[Defender] ein Untertyp vonTeam[Player]ist.",
+        "embed": "## 3.1 Fußballspiel (20 Punkte)\n\nIhnen sind im Packageimpl die KlassenFootballMatch ,Events ,MatchUtilsgege- ben, welche Sie im Ordnersrc/main/scala finden. Außerdem ist Ihnen zum Ausprobieren die KlasseMain gegeben in welcher diemain-Methode ist um ein Fußballspiel zu simulieren.\n\nMachen Sie sich mit den Dateien und den darin enthaltenen Klassen und Methoden vertraut. Momentan ist die Fußballspielsimulation noch nicht funktionsfähig.\n\nSie sollen im folgenden Änderungen und Erweiterungen am Code vornehmen um die gewünschte Funktionalität zu realisieren. Verwenden Sie die TestklasseFootballSpec um zu überprüfen ob Ihre Lösungen in die richtge Richtung gehen.\n\nHinweis: eventuell kann dieFootballSpec-Klasse nicht sofort ausgeführt werden. Sollte dies bei Ihnen der Fall sein, können Sie das Problem wie folgt beheben (vorausgesetzt, Sie haben das Scala-Plugin für IntelliJ installiert!):\n\n- Navigieren Sie in IntelliJ zu Einstellungen unter\nFile Settings\n\n• Öffnen Sie die Gradle-Einstellungen unter Build, Execution, Deployment -> Build Tools -> Gradle\n\n• Setzen Sie im AbschnittBuild and Run die EinstellungRun tests using:auf IntelliJ IDEA\n\nWir verwenden Java 21, sollten Sie in Ihrer IDE ein anderes SDK eingestellt haben, so müssen Sie unter\n\nFile -> Project Structure und anschließend unter\n\nProject Settings -> Project das SDK auf Java 21 (z.B. jbr 21) stellen. Auch das Language level sollte dann entweder auf 21 oderSDK default eingestellt werden. Den Rest übernimmt Gradle für Sie.\n\n1\n\n[[END OF PAGE 1]]\n\n[[START OF PAGE 2]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26\n\n3.1.1\n\nKlasseTeam (2 Punkte)\n\nInMatchUtils.scala existiert neben den Untertypen desPlayer auch die KlasseTeam . Diese soll so modifiziert werden, so dass gilt, dass wennDefender ein Untertyp vonPlayer ist, dass dann auch einTeam[Defender] ein Untertyp vonTeam[Player]ist.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.12342569269521411,
+              "top": 0.1834916864608076,
+              "width": 0.36859781696053734,
+              "height": 0.020190023752969122,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "3.1 Fußballspiel (20 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9581272810697555
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.22743467933491687,
+              "width": 0.7657430730478589,
+              "height": 0.05463182897862233,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Ihnen sind im Packageimpl die KlassenFootballMatch ,Events ,MatchUtilsgege- ben, welche Sie im Ordnersrc/main/scala finden. Außerdem ist Ihnen zum Ausprobieren die KlasseMain gegeben in welcher diemain-Methode ist um ein Fußballspiel zu simulieren.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9861515015363693
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.29334916864608074,
+              "width": 0.7657430730478589,
+              "height": 0.03147268408551069,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Machen Sie sich mit den Dateien und den darin enthaltenen Klassen und Methoden vertraut. Momentan ist die Fußballspielsimulation noch nicht funktionsfähig.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.982803949713707
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.33788598574821854,
+              "width": 0.762384550797649,
+              "height": 0.04809976247030879,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Sie sollen im folgenden Änderungen und Erweiterungen am Code vornehmen um die gewünschte Funktionalität zu realisieren. Verwenden Sie die TestklasseFootballSpec um zu überprüfen ob Ihre Lösungen in die richtge Richtung gehen.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9890143007040024
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.3972684085510689,
+              "width": 0.762384550797649,
+              "height": 0.050475059382422804,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Hinweis: eventuell kann dieFootballSpec-Klasse nicht sofort ausgeführt werden. Sollte dies bei Ihnen der Fall sein, können Sie das Problem wie folgt beheben (vorausgesetzt, Sie haben das Scala-Plugin für IntelliJ installiert!):",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9904554635286331
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.15029387069689337,
+              "top": 0.47743467933491684,
+              "width": 0.40470193115029385,
+              "height": 0.029097387173396674,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "- Navigieren Sie in IntelliJ zu Einstellungen unter\nFile Settings",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9568500131368637
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.15029387069689337,
+              "top": 0.5225653206650831,
+              "width": 0.6565910999160369,
+              "height": 0.030285035629453682,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Öffnen Sie die Gradle-Einstellungen unter Build, Execution, Deployment -> Build Tools -> Gradle",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9641210973262787
+            },
+            "extra": null
+          },
+          {
+            "type": "List Item",
+            "bbox": {
+              "left": 0.15029387069689337,
+              "top": 0.5671021377672208,
+              "width": 0.7321578505457599,
+              "height": 0.032066508313539195,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "• Setzen Sie im AbschnittBuild and Run die EinstellungRun tests using:auf IntelliJ IDEA",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9785608530044556
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11754827875734676,
+              "top": 0.6276722090261283,
+              "width": 0.7632241813602015,
+              "height": 0.032066508313539195,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Wir verwenden Java 21, sollten Sie in Ihrer IDE ein anderes SDK eingestellt haben, so müssen Sie unter",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9027646690607071
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.6716152019002375,
+              "width": 0.49286314021830396,
+              "height": 0.016033254156769598,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "File -> Project Structure und anschließend unter",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.936395275592804
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.6989311163895487,
+              "width": 0.762384550797649,
+              "height": 0.0498812351543943,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "Project Settings -> Project das SDK auf Java 21 (z.B. jbr 21) stellen. Auch das Language level sollte dann entweder auf 21 oderSDK default eingestellt werden. Den Rest übernimmt Gradle für Sie.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9865315318107605
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.4945424013434089,
+              "top": 0.9566508313539193,
+              "width": 0.009235936188077247,
+              "height": 0.009501187648456057,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "1",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.7756020456552506
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 1,
+              "original_page": 1
+            },
+            "content": "[[END OF PAGE 1]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "[[START OF PAGE 2]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11922753988245172,
+              "top": 0.04334916864608076,
+              "width": 0.14105793450881612,
+              "height": 0.012470308788598575,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Hausaufgabe 3",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9362061560153961
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.4282115869017632,
+              "top": 0.04334916864608076,
+              "width": 0.1418975650713686,
+              "height": 0.013064133016627079,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9417752981185913
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.91470747590065
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.08966745843230403,
+              "width": 0.04869857262804366,
+              "height": 0.0172209026128266,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "3.1.1",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.19059613769941225,
+              "top": 0.08669833729216152,
+              "width": 0.24517212426532325,
+              "height": 0.021377672209026127,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "KlasseTeam (2 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 1.0
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.12470308788598575,
+              "width": 0.7657430730478589,
+              "height": 0.054038004750593824,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "InMatchUtils.scala existiert neben den Untertypen desPlayer auch die KlasseTeam . Diese soll so modifiziert werden, so dass gilt, dass wennDefender ein Untertyp vonPlayer ist, dass dann auch einTeam[Defender] ein Untertyp vonTeam[Player]ist.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.986186757683754
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2 Klasse FootballMatch\n\nImplementieren Sie in der Klasse FootballMatch die Methode handleEvent als Pat- tern Match auf das ankommende Event. In den folgenen Unteraufgaben finden Sie genauere Anweisungen zur Behandlung der unterschiedlichen Ereignisse.",
+        "embed": "## 3.1.2 Klasse FootballMatch\n\nImplementieren Sie in der Klasse FootballMatch die Methode handleEvent als Pat- tern Match auf das ankommende Event. In den folgenen Unteraufgaben finden Sie genauere Anweisungen zur Behandlung der unterschiedlichen Ereignisse.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.21496437054631828,
+              "width": 0.3333333333333333,
+              "height": 0.012470308788598575,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "3.1.2 Klasse FootballMatch",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9275900423526764
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11754827875734676,
+              "top": 0.2517814726840855,
+              "width": 0.7665827036104114,
+              "height": 0.048693586698337295,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Implementieren Sie in der Klasse FootballMatch die Methode handleEvent als Pat- tern Match auf das ankommende Event. In den folgenen Unteraufgaben finden Sie genauere Anweisungen zur Behandlung der unterschiedlichen Ereignisse.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.986805522441864
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.1 Spielzustände (4 Punkte)\n\nSie finden in der KlasseFootballMatch die FelderisRunning ,isOverundtotalTime , diese sollen auf Basis der Ereignisse manipuliert werden. In der Halbzeitpause wird nicht ge- spielt. Ein Fußballspiel geht selten wirklich 90 Minuten. Berechnen Sie im FeldtotalTime die tatsächliche Spielzeit mit Verlängerungen. Der Wert muss erst am Ende des Spiels stimmen, aber beachten Sie, dass die erste Halbzeit durchaus länger als 45 Minuten dauern kann, während die zweite Halbzeit immer ab Minute 45 beginnt. Sobald das Spiel beendet ist, soll das Feld isOver auf true gesetzt werden.\n\nFür diese Unteraufgabe müssen Sie die Events First Half, SecondHalf, HalfTime und Game Over aus der Datei Events.scala verwenden.,",
+        "embed": "## 3.1.2.1 Spielzustände (4 Punkte)\n\nSie finden in der KlasseFootballMatch die FelderisRunning ,isOverundtotalTime , diese sollen auf Basis der Ereignisse manipuliert werden. In der Halbzeitpause wird nicht ge- spielt. Ein Fußballspiel geht selten wirklich 90 Minuten. Berechnen Sie im FeldtotalTime die tatsächliche Spielzeit mit Verlängerungen. Der Wert muss erst am Ende des Spiels stimmen, aber beachten Sie, dass die erste Halbzeit durchaus länger als 45 Minuten dauern kann, während die zweite Halbzeit immer ab Minute 45 beginnt. Sobald das Spiel beendet ist, soll das Feld isOver auf true gesetzt werden.\n\nFür diese Unteraufgabe müssen Sie die Events First Half, SecondHalf, HalfTime und Game Over aus der Datei Events.scala verwenden.,",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11922753988245172,
+              "top": 0.3355106888361045,
+              "width": 0.28883291351805207,
+              "height": 0.013064133016627079,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "3.1.2.1 Spielzustände (4 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9363983482122422
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.3681710213776722,
+              "width": 0.7691015952980689,
+              "height": 0.12114014251781473,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Sie finden in der KlasseFootballMatch die FelderisRunning ,isOverundtotalTime , diese sollen auf Basis der Ereignisse manipuliert werden. In der Halbzeitpause wird nicht ge- spielt. Ein Fußballspiel geht selten wirklich 90 Minuten. Berechnen Sie im FeldtotalTime die tatsächliche Spielzeit mit Verlängerungen. Der Wert muss erst am Ende des Spiels stimmen, aber beachten Sie, dass die erste Halbzeit durchaus länger als 45 Minuten dauern kann, während die zweite Halbzeit immer ab Minute 45 beginnt. Sobald das Spiel beendet ist, soll das Feld isOver auf true gesetzt werden.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9921469062566757
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.502375296912114,
+              "width": 0.762384550797649,
+              "height": 0.027909738717339667,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Für diese Unteraufgabe müssen Sie die Events First Half, SecondHalf, HalfTime und Game Over aus der Datei Events.scala verwenden.,",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9658498436212539
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.2 Tore (4 Punkte)\n\nBerechnen Sie den Spielstand in den Variablenscore1undscore2. In den EreignissenGoal undOwnGoal steht leider nur der Spielername und nicht das Team. Finden Sie also zunächst heraus, zu welchem Team ein Spieler gehört. Implementieren Sie eine Fallunterscheidung, ob der Spieler mit dem gegebenen name inplayersTeam1oderplayersTeam2ist.\n\nHinweis: schauen Sie sich die API zu der Klasse List in scala an.",
+        "embed": "## 3.1.2.2 Tore (4 Punkte)\n\nBerechnen Sie den Spielstand in den Variablenscore1undscore2. In den EreignissenGoal undOwnGoal steht leider nur der Spielername und nicht das Team. Finden Sie also zunächst heraus, zu welchem Team ein Spieler gehört. Implementieren Sie eine Fallunterscheidung, ob der Spieler mit dem gegebenen name inplayersTeam1oderplayersTeam2ist.\n\nHinweis: schauen Sie sich die API zu der Klasse List in scala an.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.5665083135391924,
+              "width": 0.20906801007556675,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "3.1.2.2 Tore (4 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9371440231800079
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.6015439429928741,
+              "width": 0.762384550797649,
+              "height": 0.07007125890736342,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Berechnen Sie den Spielstand in den Variablenscore1undscore2. In den EreignissenGoal undOwnGoal steht leider nur der Spielername und nicht das Team. Finden Sie also zunächst heraus, zu welchem Team ein Spieler gehört. Implementieren Sie eine Fallunterscheidung, ob der Spieler mit dem gegebenen name inplayersTeam1oderplayersTeam2ist.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9878831595182419
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11922753988245172,
+              "top": 0.6834916864608076,
+              "width": 0.5415617128463476,
+              "height": 0.010688836104513063,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Hinweis: schauen Sie sich die API zu der Klasse List in scala an.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9259176790714263
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.3 Karten (4 Punkte)\n\nImplementieren Sie die Logik für das Verarbeiten von gelben und roten Karten, indem Sie entsprechende Spieler vom Spiel ausschließen, falls nötig.\n\nFalls ein Spieler eine rote Karte erhält via des EventsRedCard , dann muss dieser sofort aus dem Team entfernt werden. Erhält ein Spieler eine gelbe Karte via des EventsYellowCard , dann darf dieser Spieler noch weiter spielen. Sollte dieser Spieler eine zweite gelbe Karte erhalten, so muss dieser des Spiels verwiesen werden und aus dem Team entfernt werden.\n\nHinweis: in der KlassePlayer existiert die VariableyellowCards , verwenden Sie diese um die gelben Karten eines Spielers zu protokollieren.\n\n2\n\n[[END OF PAGE 2]]\n\n[[START OF PAGE 3]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26",
+        "embed": "## 3.1.2.3 Karten (4 Punkte)\n\nImplementieren Sie die Logik für das Verarbeiten von gelben und roten Karten, indem Sie entsprechende Spieler vom Spiel ausschließen, falls nötig.\n\nFalls ein Spieler eine rote Karte erhält via des EventsRedCard , dann muss dieser sofort aus dem Team entfernt werden. Erhält ein Spieler eine gelbe Karte via des EventsYellowCard , dann darf dieser Spieler noch weiter spielen. Sollte dieser Spieler eine zweite gelbe Karte erhalten, so muss dieser des Spiels verwiesen werden und aus dem Team entfernt werden.\n\nHinweis: in der KlassePlayer existiert die VariableyellowCards , verwenden Sie diese um die gelben Karten eines Spielers zu protokollieren.\n\n2\n\n[[END OF PAGE 2]]\n\n[[START OF PAGE 3]]\n\nHausaufgabe 3\n\nProgrammieren II\n\nSoSe 26",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.7304038004750594,
+              "width": 0.23173803526448364,
+              "height": 0.014251781472684086,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "3.1.2.3 Karten (4 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9366992145776749
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.7672209026128266,
+              "width": 0.762384550797649,
+              "height": 0.03147268408551069,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Implementieren Sie die Logik für das Verarbeiten von gelben und roten Karten, indem Sie entsprechende Spieler vom Spiel ausschließen, falls nötig.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9793029367923737
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.8099762470308789,
+              "width": 0.762384550797649,
+              "height": 0.0671021377672209,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Falls ein Spieler eine rote Karte erhält via des EventsRedCard , dann muss dieser sofort aus dem Team entfernt werden. Erhält ein Spieler eine gelbe Karte via des EventsYellowCard , dann darf dieser Spieler noch weiter spielen. Sollte dieser Spieler eine zweite gelbe Karte erhalten, so muss dieser des Spiels verwiesen werden und aus dem Team entfernt werden.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.98848817050457
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.8883610451306413,
+              "width": 0.762384550797649,
+              "height": 0.0332541567695962,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "Hinweis: in der KlassePlayer existiert die VariableyellowCards , verwenden Sie diese um die gelben Karten eines Spielers zu protokollieren.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9828618317842484
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.49370277078085645,
+              "top": 0.9572446555819477,
+              "width": 0.010075566750629723,
+              "height": 0.00831353919239905,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "2",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.820255982875824
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 2,
+              "original_page": 2
+            },
+            "content": "[[END OF PAGE 2]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "[[START OF PAGE 3]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.11922753988245172,
+              "top": 0.04334916864608076,
+              "width": 0.14105793450881612,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Hausaufgabe 3",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9372319161891938
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.4282115869017632,
+              "top": 0.043942992874109264,
+              "width": 0.1418975650713686,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Programmieren II",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9420692801475525
+            },
+            "extra": null
+          },
+          {
+            "type": "Header",
+            "bbox": {
+              "left": 0.8035264483627204,
+              "top": 0.04275534441805225,
+              "width": 0.07724601175482787,
+              "height": 0.014251781472684086,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "SoSe 26",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9165805071592331
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.4 Auswechslung (2 Punkte)\n\nDas EreignisSubstitution beschreibt einen Wechsel zwischen zwei Spielern. Implementie- ren Sie die Logik, um die entsprechenden Spieler in der Liste zu ersetzen und die Auswechslungen zu protokollieren.\n\nHinweis: Beachten Sie, dass Listen immutable sind und daher keine neuen Elemente in die Liste hinzugefügt werden können, sondern eine Kopie von der Liste erstellt wird.",
+        "embed": "## 3.1.2.4 Auswechslung (2 Punkte)\n\nDas EreignisSubstitution beschreibt einen Wechsel zwischen zwei Spielern. Implementie- ren Sie die Logik, um die entsprechenden Spieler in der Liste zu ersetzen und die Auswechslungen zu protokollieren.\n\nHinweis: Beachten Sie, dass Listen immutable sind und daher keine neuen Elemente in die Liste hinzugefügt werden können, sondern eine Kopie von der Liste erstellt wird.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.09382422802850356,
+              "width": 0.29219143576826195,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "3.1.2.4 Auswechslung (2 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9461648255586623
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.12648456057007126,
+              "width": 0.7657430730478589,
+              "height": 0.0510688836104513,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Das EreignisSubstitution beschreibt einen Wechsel zwischen zwei Spielern. Implementie- ren Sie die Logik, um die entsprechenden Spieler in der Liste zu ersetzen und die Auswechslungen zu protokollieren.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9857789874076843
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.19061757719714964,
+              "width": 0.762384550797649,
+              "height": 0.03147268408551069,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Hinweis: Beachten Sie, dass Listen immutable sind und daher keine neuen Elemente in die Liste hinzugefügt werden können, sondern eine Kopie von der Liste erstellt wird.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9797750979661941
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.5 Unapply (2 Punkte)\n\nImplementieren Sie die unapply-Methode für die Klasse Football Match im Companion- Objekt.\n\nDieunapply-Methode soll den Endstand zurückgeben, wenn das Spiel beendet ist. Beachten Sie, dass jedeunapply-Methode eine Instanz vom TypOption[T] zurückgibt. Wenn das Spiel beendet ist, soll unapply einen Typ (String, Int, String, Int) zurückgeben, wobei das 4-Tupel folgendermaßen definiert ist:(Teamname1, Tore1, Teamname2, Tore2).\n\nVerwenden Sie Some und None.",
+        "embed": "## 3.1.2.5 Unapply (2 Punkte)\n\nImplementieren Sie die unapply-Methode für die Klasse Football Match im Companion- Objekt.\n\nDieunapply-Methode soll den Endstand zurückgeben, wenn das Spiel beendet ist. Beachten Sie, dass jedeunapply-Methode eine Instanz vom TypOption[T] zurückgibt. Wenn das Spiel beendet ist, soll unapply einen Typ (String, Int, String, Int) zurückgeben, wobei das 4-Tupel folgendermaßen definiert ist:(Teamname1, Tore1, Teamname2, Tore2).\n\nVerwenden Sie Some und None.",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.25534441805225655,
+              "width": 0.24433249370277077,
+              "height": 0.014251781472684086,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "3.1.2.5 Unapply (2 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9506705284118653
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.29334916864608074,
+              "width": 0.7649034424853065,
+              "height": 0.029691211401425176,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Implementieren Sie die unapply-Methode für die Klasse Football Match im Companion- Objekt.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9645431339740753
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.3343230403800475,
+              "width": 0.762384550797649,
+              "height": 0.07007125890736342,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Dieunapply-Methode soll den Endstand zurückgeben, wenn das Spiel beendet ist. Beachten Sie, dass jedeunapply-Methode eine Instanz vom TypOption[T] zurückgibt. Wenn das Spiel beendet ist, soll unapply einen Typ (String, Int, String, Int) zurückgeben, wobei das 4-Tupel folgendermaßen definiert ist:(Teamname1, Tore1, Teamname2, Tore2).",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.987973740696907
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11754827875734676,
+              "top": 0.4156769596199525,
+              "width": 0.2611251049538203,
+              "height": 0.014251781472684086,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Verwenden Sie Some und None.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9367261022329331
+            },
+            "extra": null
+          }
+        ]
+      },
+      {
+        "content": "## 3.1.2.6 DidGermany Win (2 Punkte)\n\nWas uns natürlich am meisten interessiert, ist ob Deutschland das Spiel gewonnen hat. Imple- mentieren Sie im Companion-Objekt die MethodedidGermanyWin , die aus einemResult mittels Pattern Matching prüft, ob“Deutschland” das Spiel gewonnen hat. Beachten Sie, dass dies auch funktionieren soll, wenn die Position der Teams im Result-Tupel vertauscht ist!\n\nNutzen Sie auch hier Pattern Matching.\n\n3\n\n[[END OF PAGE 3]]",
+        "embed": "## 3.1.2.6 DidGermany Win (2 Punkte)\n\nWas uns natürlich am meisten interessiert, ist ob Deutschland das Spiel gewonnen hat. Imple- mentieren Sie im Companion-Objekt die MethodedidGermanyWin , die aus einemResult mittels Pattern Matching prüft, ob“Deutschland” das Spiel gewonnen hat. Beachten Sie, dass dies auch funktionieren soll, wenn die Position der Teams im Result-Tupel vertauscht ist!\n\nNutzen Sie auch hier Pattern Matching.\n\n3\n\n[[END OF PAGE 3]]",
+        "enriched": null,
+        "enrichment_success": false,
+        "blocks": [
+          {
+            "type": "Section Header",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.4643705463182898,
+              "width": 0.3198992443324937,
+              "height": 0.012470308788598575,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "3.1.2.6 DidGermany Win (2 Punkte)",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9430415868759154
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11754827875734676,
+              "top": 0.5005938242280285,
+              "width": 0.7665827036104114,
+              "height": 0.06591448931116389,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Was uns natürlich am meisten interessiert, ist ob Deutschland das Spiel gewonnen hat. Imple- mentieren Sie im Companion-Objekt die MethodedidGermanyWin , die aus einemResult mittels Pattern Matching prüft, ob“Deutschland” das Spiel gewonnen hat. Beachten Sie, dass dies auch funktionieren soll, wenn die Position der Teams im Result-Tupel vertauscht ist!",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.988196125626564
+            },
+            "extra": null
+          },
+          {
+            "type": "Text",
+            "bbox": {
+              "left": 0.11838790931989925,
+              "top": 0.5795724465558195,
+              "width": 0.3165407220822838,
+              "height": 0.013657957244655582,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "Nutzen Sie auch hier Pattern Matching.",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.9537019759416581
+            },
+            "extra": null
+          },
+          {
+            "type": "Footer",
+            "bbox": {
+              "left": 0.49538203190596136,
+              "top": 0.9590261282660333,
+              "width": 0.008396305625524769,
+              "height": 0.00831353919239905,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "3",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": 0.8117236614227294
+            },
+            "extra": null
+          },
+          {
+            "type": "Page Number",
+            "bbox": {
+              "left": 0.0,
+              "top": 0.0,
+              "width": 0.0,
+              "height": 0.0,
+              "page": 3,
+              "original_page": 3
+            },
+            "content": "[[END OF PAGE 3]]",
+            "image_url": null,
+            "chart_data": null,
+            "confidence": "high",
+            "granular_confidence": {
+              "extract_confidence": null,
+              "parse_confidence": null
+            },
+            "extra": null
+          }
+        ]
+      }
+    ],
+    "ocr": null,
+    "custom": null
+  },
+  "parse_mode": null
+}

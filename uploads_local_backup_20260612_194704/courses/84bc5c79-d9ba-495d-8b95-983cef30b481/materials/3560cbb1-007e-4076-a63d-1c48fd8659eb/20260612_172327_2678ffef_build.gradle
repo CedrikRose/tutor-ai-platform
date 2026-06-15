@@ -1,0 +1,36 @@
+plugins {
+    id 'scala'
+}
+
+group = 'snet.prog2'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+scala {
+    scalaVersion = "3.3.5"
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation('org.scala-lang:scala3-library_3:3.3.5')
+    testImplementation('org.scalatest:scalatest_3:3.2.17')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "PASSED" , "FAILED" , "SKIPPED"
+    }
+    systemProperty 'scala.test.framework', 'org.scalatest.tools.Framework'
+}
+
+tasks.register('runEval', JavaExec) {
+    group = "Evaluation"
+    description = "Run the evaluation."
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set("eval.Main")
+}

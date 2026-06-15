@@ -1,0 +1,1128 @@
+2026-06-12 19:17:25,053 - file_storage - INFO - Initialized local storage: uploads
+2026-06-12 19:17:25,097 - __main__ - INFO - Found 44 non-lecture materials to reprocess
+
+================================================================================
+⚠️  About to re-process 44 non-lecture materials
+   This will:
+   - Delete old MaterialContent entries
+   - Re-run 2-stage filtering
+   - Potentially store FEWER files than before
+================================================================================
+
+Continue? (yes/no): 2026-06-12 19:17:25,098 - __main__ - INFO - 
+[1/44] Processing: Tutorium 2 (tutorium)
+2026-06-12 19:17:25,102 - __main__ - INFO -   Deleted 93 old content entries
+2026-06-12 19:17:25,107 - material_processor - INFO - Processing material: Tutorium 2 (694be1b1-2a7a-4f3b-aad0-eb48825c632c) - Type: tutorium
+2026-06-12 19:17:25,111 - material_processor - INFO - [694be1b1-2a7a-4f3b-aad0-eb48825c632c] processing: started - Starting processing of Tutorium 2 (Type: tutorium)
+2026-06-12 19:17:25,114 - material_processor - INFO - Found 131 files to process (lecture=False)
+2026-06-12 19:17:25,114 - material_processor - INFO - Non-lecture material: Batch analyzing 131 files with LLM
+2026-06-12 19:17:25,114 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:25,114 - material_processor - INFO - Parsing PDF for batch analysis: Tutorium_02_SS26-lsg.pdf
+2026-06-12 19:17:25,114 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/694be1b1-2a7a-4f3b-aad0-eb48825c632c/20260527_200611_28be4c87.pdf
+2026-06-12 19:17:25,114 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/694be1b1-2a7a-4f3b-aad0-eb48825c632c/20260527_200611_28be4c87.pdf
+2026-06-12 19:17:25,114 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/694be1b1-2a7a-4f3b-aad0-eb48825c632c/20260527_200611_28be4c87.pdf'
+2026-06-12 19:17:25,115 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/694be1b1-2a7a-4f3b-aad0-eb48825c632c/20260527_200611_28be4c87.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/694be1b1-2a7a-4f3b-aad0-eb48825c632c/20260527_200611_28be4c87.pdf'
+2026-06-12 19:17:25,115 - material_processor - INFO - Successfully parsed Tutorium_02_SS26-lsg.pdf (244 chars)
+2026-06-12 19:17:27,154 - botocore.tokens - INFO - Found token in environment variables.
+2026-06-12 19:17:27,156 - llm - INFO - BedrockLLM initialized with model: moonshotai.kimi-k2.5
+2026-06-12 19:17:27,156 - material_processor - INFO - [STAGE 1] Analyzing 131 files (filenames only)
+2026-06-12 19:17:27,156 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,156 - material_processor - ERROR - Failed to process material 694be1b1-2a7a-4f3b-aad0-eb48825c632c: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,159 - material_processor - INFO - [694be1b1-2a7a-4f3b-aad0-eb48825c632c] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,159 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,161 - __main__ - INFO - 
+[2/44] Processing: Hausaufgabe 1 (homework)
+2026-06-12 19:17:27,163 - __main__ - INFO -   Deleted 9 old content entries
+2026-06-12 19:17:27,166 - material_processor - INFO - Processing material: Hausaufgabe 1 (907cd81c-7177-44c2-82a1-aec7a68eccae) - Type: homework
+2026-06-12 19:17:27,169 - material_processor - INFO - [907cd81c-7177-44c2-82a1-aec7a68eccae] processing: started - Starting processing of Hausaufgabe 1 (Type: homework)
+2026-06-12 19:17:27,170 - material_processor - INFO - Found 15 files to process (lecture=False)
+2026-06-12 19:17:27,170 - material_processor - INFO - Non-lecture material: Batch analyzing 15 files with LLM
+2026-06-12 19:17:27,170 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,170 - material_processor - INFO - Parsing PDF for batch analysis: ha01.pdf
+2026-06-12 19:17:27,170 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/907cd81c-7177-44c2-82a1-aec7a68eccae/20260527_192537_5720c7e1.pdf
+2026-06-12 19:17:27,170 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/907cd81c-7177-44c2-82a1-aec7a68eccae/20260527_192537_5720c7e1.pdf
+2026-06-12 19:17:27,170 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/907cd81c-7177-44c2-82a1-aec7a68eccae/20260527_192537_5720c7e1.pdf'
+2026-06-12 19:17:27,170 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/907cd81c-7177-44c2-82a1-aec7a68eccae/20260527_192537_5720c7e1.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/907cd81c-7177-44c2-82a1-aec7a68eccae/20260527_192537_5720c7e1.pdf'
+2026-06-12 19:17:27,170 - material_processor - INFO - Successfully parsed ha01.pdf (244 chars)
+2026-06-12 19:17:27,170 - material_processor - INFO - [STAGE 1] Analyzing 15 files (filenames only)
+2026-06-12 19:17:27,170 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,170 - material_processor - ERROR - Failed to process material 907cd81c-7177-44c2-82a1-aec7a68eccae: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,172 - material_processor - INFO - [907cd81c-7177-44c2-82a1-aec7a68eccae] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,172 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,173 - __main__ - INFO - 
+[3/44] Processing: Tutorium 1 (tutorium)
+2026-06-12 19:17:27,175 - __main__ - INFO -   Deleted 7 old content entries
+2026-06-12 19:17:27,178 - material_processor - INFO - Processing material: Tutorium 1 (725d7126-29d2-46f7-a718-17cd5000ce52) - Type: tutorium
+2026-06-12 19:17:27,180 - material_processor - INFO - [725d7126-29d2-46f7-a718-17cd5000ce52] processing: started - Starting processing of Tutorium 1 (Type: tutorium)
+2026-06-12 19:17:27,181 - material_processor - INFO - Found 29 files to process (lecture=False)
+2026-06-12 19:17:27,181 - material_processor - INFO - Non-lecture material: Batch analyzing 29 files with LLM
+2026-06-12 19:17:27,181 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,181 - material_processor - INFO - Parsing PDF for batch analysis: Tutorium_01_SS26-lsg.pdf
+2026-06-12 19:17:27,181 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/725d7126-29d2-46f7-a718-17cd5000ce52/20260527_193019_783cee4c.pdf
+2026-06-12 19:17:27,182 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/725d7126-29d2-46f7-a718-17cd5000ce52/20260527_193019_783cee4c.pdf
+2026-06-12 19:17:27,182 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/725d7126-29d2-46f7-a718-17cd5000ce52/20260527_193019_783cee4c.pdf'
+2026-06-12 19:17:27,182 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/725d7126-29d2-46f7-a718-17cd5000ce52/20260527_193019_783cee4c.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/725d7126-29d2-46f7-a718-17cd5000ce52/20260527_193019_783cee4c.pdf'
+2026-06-12 19:17:27,182 - material_processor - INFO - Successfully parsed Tutorium_01_SS26-lsg.pdf (244 chars)
+2026-06-12 19:17:27,182 - material_processor - INFO - [STAGE 1] Analyzing 29 files (filenames only)
+2026-06-12 19:17:27,182 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,182 - material_processor - ERROR - Failed to process material 725d7126-29d2-46f7-a718-17cd5000ce52: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,184 - material_processor - INFO - [725d7126-29d2-46f7-a718-17cd5000ce52] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,184 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,185 - __main__ - INFO - 
+[4/44] Processing: Hausaufgabe 2 (homework)
+2026-06-12 19:17:27,187 - __main__ - INFO -   Deleted 16 old content entries
+2026-06-12 19:17:27,190 - material_processor - INFO - Processing material: Hausaufgabe 2 (63a45aa2-e67c-4773-859b-ed18703199e4) - Type: homework
+2026-06-12 19:17:27,192 - material_processor - INFO - [63a45aa2-e67c-4773-859b-ed18703199e4] processing: started - Starting processing of Hausaufgabe 2 (Type: homework)
+2026-06-12 19:17:27,193 - material_processor - INFO - Found 21 files to process (lecture=False)
+2026-06-12 19:17:27,193 - material_processor - INFO - Non-lecture material: Batch analyzing 21 files with LLM
+2026-06-12 19:17:27,193 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,193 - material_processor - INFO - Parsing PDF for batch analysis: ha02.pdf
+2026-06-12 19:17:27,193 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/63a45aa2-e67c-4773-859b-ed18703199e4/20260527_193623_fa09e0ec.pdf
+2026-06-12 19:17:27,193 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/63a45aa2-e67c-4773-859b-ed18703199e4/20260527_193623_fa09e0ec.pdf
+2026-06-12 19:17:27,193 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/63a45aa2-e67c-4773-859b-ed18703199e4/20260527_193623_fa09e0ec.pdf'
+2026-06-12 19:17:27,194 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/63a45aa2-e67c-4773-859b-ed18703199e4/20260527_193623_fa09e0ec.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/63a45aa2-e67c-4773-859b-ed18703199e4/20260527_193623_fa09e0ec.pdf'
+2026-06-12 19:17:27,194 - material_processor - INFO - Successfully parsed ha02.pdf (244 chars)
+2026-06-12 19:17:27,194 - material_processor - INFO - [STAGE 1] Analyzing 21 files (filenames only)
+2026-06-12 19:17:27,194 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,194 - material_processor - ERROR - Failed to process material 63a45aa2-e67c-4773-859b-ed18703199e4: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,196 - material_processor - INFO - [63a45aa2-e67c-4773-859b-ed18703199e4] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,196 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,197 - __main__ - INFO - 
+[5/44] Processing: Tutorium 3 (tutorium)
+2026-06-12 19:17:27,199 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,201 - material_processor - INFO - Processing material: Tutorium 3 (cb81a167-b961-4b0b-835b-765292650641) - Type: tutorium
+2026-06-12 19:17:27,204 - material_processor - INFO - [cb81a167-b961-4b0b-835b-765292650641] processing: started - Starting processing of Tutorium 3 (Type: tutorium)
+2026-06-12 19:17:27,204 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,204 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,206 - material_processor - INFO - [cb81a167-b961-4b0b-835b-765292650641] file_analysis: completed - PDF file (auto-included): Tutorium_03_SS26-lsg.pdf
+2026-06-12 19:17:27,206 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,209 - material_processor - INFO - [cb81a167-b961-4b0b-835b-765292650641] parsing: started - Parsing PDF with Reducto: Tutorium_03_SS26-lsg.pdf
+2026-06-12 19:17:27,210 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/cb81a167-b961-4b0b-835b-765292650641/20260527_201729_3a550351.pdf
+2026-06-12 19:17:27,210 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/cb81a167-b961-4b0b-835b-765292650641/20260527_201729_3a550351.pdf
+2026-06-12 19:17:27,210 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/cb81a167-b961-4b0b-835b-765292650641/20260527_201729_3a550351.pdf'
+2026-06-12 19:17:27,210 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/cb81a167-b961-4b0b-835b-765292650641/20260527_201729_3a550351.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/cb81a167-b961-4b0b-835b-765292650641/20260527_201729_3a550351.pdf'
+2026-06-12 19:17:27,213 - material_processor - INFO - [cb81a167-b961-4b0b-835b-765292650641] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,213 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,215 - material_processor - INFO - [cb81a167-b961-4b0b-835b-765292650641] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,218 - material_processor - INFO - Successfully processed material: Tutorium 3
+2026-06-12 19:17:27,225 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,225 - __main__ - INFO - 
+[6/44] Processing: Hausaufgabe 3 (homework)
+2026-06-12 19:17:27,227 - __main__ - INFO -   Deleted 8 old content entries
+2026-06-12 19:17:27,230 - material_processor - INFO - Processing material: Hausaufgabe 3 (b52d7d66-6357-4581-a123-9f1d97713694) - Type: homework
+2026-06-12 19:17:27,232 - material_processor - INFO - [b52d7d66-6357-4581-a123-9f1d97713694] processing: started - Starting processing of Hausaufgabe 3 (Type: homework)
+2026-06-12 19:17:27,233 - material_processor - INFO - Found 12 files to process (lecture=False)
+2026-06-12 19:17:27,233 - material_processor - INFO - Non-lecture material: Batch analyzing 12 files with LLM
+2026-06-12 19:17:27,233 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,233 - material_processor - INFO - Parsing PDF for batch analysis: ha03.pdf
+2026-06-12 19:17:27,233 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/b52d7d66-6357-4581-a123-9f1d97713694/20260601_113238_3555cbea.pdf
+2026-06-12 19:17:27,233 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/b52d7d66-6357-4581-a123-9f1d97713694/20260601_113238_3555cbea.pdf
+2026-06-12 19:17:27,233 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/b52d7d66-6357-4581-a123-9f1d97713694/20260601_113238_3555cbea.pdf'
+2026-06-12 19:17:27,233 - material_processor - ERROR - Failed to parse PDF uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/b52d7d66-6357-4581-a123-9f1d97713694/20260601_113238_3555cbea.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/84bc5c79-d9ba-495d-8b95-983cef30b481/materials/b52d7d66-6357-4581-a123-9f1d97713694/20260601_113238_3555cbea.pdf'
+2026-06-12 19:17:27,234 - material_processor - INFO - Successfully parsed ha03.pdf (244 chars)
+2026-06-12 19:17:27,234 - material_processor - INFO - [STAGE 1] Analyzing 12 files (filenames only)
+2026-06-12 19:17:27,234 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,234 - material_processor - ERROR - Failed to process material b52d7d66-6357-4581-a123-9f1d97713694: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,236 - material_processor - INFO - [b52d7d66-6357-4581-a123-9f1d97713694] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,236 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,237 - __main__ - INFO - 
+[7/44] Processing: Tutorium 3 (tutorium)
+2026-06-12 19:17:27,239 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,241 - material_processor - INFO - Processing material: Tutorium 3 (7ce9e547-48de-4f05-8d35-6e76975981a0) - Type: tutorium
+2026-06-12 19:17:27,243 - material_processor - INFO - [7ce9e547-48de-4f05-8d35-6e76975981a0] processing: started - Starting processing of Tutorium 3 (Type: tutorium)
+2026-06-12 19:17:27,244 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,244 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,246 - material_processor - INFO - [7ce9e547-48de-4f05-8d35-6e76975981a0] file_analysis: completed - PDF file (auto-included): Tutorium #3_Annuitaetenrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,246 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,249 - material_processor - INFO - [7ce9e547-48de-4f05-8d35-6e76975981a0] parsing: started - Parsing PDF with Reducto: Tutorium #3_Annuitaetenrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,249 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/7ce9e547-48de-4f05-8d35-6e76975981a0/20260601_133404_ad046672.pdf
+2026-06-12 19:17:27,249 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/7ce9e547-48de-4f05-8d35-6e76975981a0/20260601_133404_ad046672.pdf
+2026-06-12 19:17:27,250 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/7ce9e547-48de-4f05-8d35-6e76975981a0/20260601_133404_ad046672.pdf'
+2026-06-12 19:17:27,250 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/7ce9e547-48de-4f05-8d35-6e76975981a0/20260601_133404_ad046672.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/7ce9e547-48de-4f05-8d35-6e76975981a0/20260601_133404_ad046672.pdf'
+2026-06-12 19:17:27,252 - material_processor - INFO - [7ce9e547-48de-4f05-8d35-6e76975981a0] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,252 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,254 - material_processor - INFO - [7ce9e547-48de-4f05-8d35-6e76975981a0] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,257 - material_processor - INFO - Successfully processed material: Tutorium 3
+2026-06-12 19:17:27,257 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,258 - __main__ - INFO - 
+[8/44] Processing: Tutorium 1 (tutorium)
+2026-06-12 19:17:27,260 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,263 - material_processor - INFO - Processing material: Tutorium 1 (30934abf-a84f-4018-8200-29edad4c3a47) - Type: tutorium
+2026-06-12 19:17:27,265 - material_processor - INFO - [30934abf-a84f-4018-8200-29edad4c3a47] processing: started - Starting processing of Tutorium 1 (Type: tutorium)
+2026-06-12 19:17:27,266 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,266 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,267 - material_processor - INFO - [30934abf-a84f-4018-8200-29edad4c3a47] file_analysis: completed - PDF file (auto-included): Tutorium #1_Zinsrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,267 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,270 - material_processor - INFO - [30934abf-a84f-4018-8200-29edad4c3a47] parsing: started - Parsing PDF with Reducto: Tutorium #1_Zinsrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,271 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/30934abf-a84f-4018-8200-29edad4c3a47/20260601_133327_8f25437a.pdf
+2026-06-12 19:17:27,271 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/30934abf-a84f-4018-8200-29edad4c3a47/20260601_133327_8f25437a.pdf
+2026-06-12 19:17:27,271 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/30934abf-a84f-4018-8200-29edad4c3a47/20260601_133327_8f25437a.pdf'
+2026-06-12 19:17:27,271 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/30934abf-a84f-4018-8200-29edad4c3a47/20260601_133327_8f25437a.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/30934abf-a84f-4018-8200-29edad4c3a47/20260601_133327_8f25437a.pdf'
+2026-06-12 19:17:27,273 - material_processor - INFO - [30934abf-a84f-4018-8200-29edad4c3a47] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,273 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,275 - material_processor - INFO - [30934abf-a84f-4018-8200-29edad4c3a47] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,278 - material_processor - INFO - Successfully processed material: Tutorium 1
+2026-06-12 19:17:27,278 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,279 - __main__ - INFO - 
+[9/44] Processing: Tutorium 2 (tutorium)
+2026-06-12 19:17:27,281 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,284 - material_processor - INFO - Processing material: Tutorium 2 (1a585c30-6bfb-4749-aace-4c4b262e680c) - Type: tutorium
+2026-06-12 19:17:27,286 - material_processor - INFO - [1a585c30-6bfb-4749-aace-4c4b262e680c] processing: started - Starting processing of Tutorium 2 (Type: tutorium)
+2026-06-12 19:17:27,287 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,287 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,289 - material_processor - INFO - [1a585c30-6bfb-4749-aace-4c4b262e680c] file_analysis: completed - PDF file (auto-included): Tutorium #2_statische  dynamische Investitionsrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,289 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,291 - material_processor - INFO - [1a585c30-6bfb-4749-aace-4c4b262e680c] parsing: started - Parsing PDF with Reducto: Tutorium #2_statische  dynamische Investitionsrechnung_Aufgaben.pdf
+2026-06-12 19:17:27,292 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/1a585c30-6bfb-4749-aace-4c4b262e680c/20260601_133348_f611525e.pdf
+2026-06-12 19:17:27,292 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/1a585c30-6bfb-4749-aace-4c4b262e680c/20260601_133348_f611525e.pdf
+2026-06-12 19:17:27,292 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/1a585c30-6bfb-4749-aace-4c4b262e680c/20260601_133348_f611525e.pdf'
+2026-06-12 19:17:27,292 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/1a585c30-6bfb-4749-aace-4c4b262e680c/20260601_133348_f611525e.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/1a585c30-6bfb-4749-aace-4c4b262e680c/20260601_133348_f611525e.pdf'
+2026-06-12 19:17:27,294 - material_processor - INFO - [1a585c30-6bfb-4749-aace-4c4b262e680c] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,294 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,296 - material_processor - INFO - [1a585c30-6bfb-4749-aace-4c4b262e680c] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,299 - material_processor - INFO - Successfully processed material: Tutorium 2
+2026-06-12 19:17:27,299 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,300 - __main__ - INFO - 
+[10/44] Processing: Tutorium 6 (tutorium)
+2026-06-12 19:17:27,302 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,305 - material_processor - INFO - Processing material: Tutorium 6 (2cf322ae-9656-49d2-b0d9-f4f21f9f9da4) - Type: tutorium
+2026-06-12 19:17:27,307 - material_processor - INFO - [2cf322ae-9656-49d2-b0d9-f4f21f9f9da4] processing: started - Starting processing of Tutorium 6 (Type: tutorium)
+2026-06-12 19:17:27,308 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,308 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,310 - material_processor - INFO - [2cf322ae-9656-49d2-b0d9-f4f21f9f9da4] file_analysis: completed - PDF file (auto-included): Tutorium #6_Steuern und Wiederholung Interner Zins_Aufgaben.pdf
+2026-06-12 19:17:27,310 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,312 - material_processor - INFO - [2cf322ae-9656-49d2-b0d9-f4f21f9f9da4] parsing: started - Parsing PDF with Reducto: Tutorium #6_Steuern und Wiederholung Interner Zins_Aufgaben.pdf
+2026-06-12 19:17:27,313 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2cf322ae-9656-49d2-b0d9-f4f21f9f9da4/20260601_133430_5ae41a96.pdf
+2026-06-12 19:17:27,313 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2cf322ae-9656-49d2-b0d9-f4f21f9f9da4/20260601_133430_5ae41a96.pdf
+2026-06-12 19:17:27,313 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2cf322ae-9656-49d2-b0d9-f4f21f9f9da4/20260601_133430_5ae41a96.pdf'
+2026-06-12 19:17:27,313 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2cf322ae-9656-49d2-b0d9-f4f21f9f9da4/20260601_133430_5ae41a96.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2cf322ae-9656-49d2-b0d9-f4f21f9f9da4/20260601_133430_5ae41a96.pdf'
+2026-06-12 19:17:27,315 - material_processor - INFO - [2cf322ae-9656-49d2-b0d9-f4f21f9f9da4] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,315 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,318 - material_processor - INFO - [2cf322ae-9656-49d2-b0d9-f4f21f9f9da4] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,320 - material_processor - INFO - Successfully processed material: Tutorium 6
+2026-06-12 19:17:27,321 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,321 - __main__ - INFO - 
+[11/44] Processing: Tutorium 4 (tutorium)
+2026-06-12 19:17:27,323 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,326 - material_processor - INFO - Processing material: Tutorium 4 (35023848-0644-4f70-966e-e9a0b76bf8bf) - Type: tutorium
+2026-06-12 19:17:27,328 - material_processor - INFO - [35023848-0644-4f70-966e-e9a0b76bf8bf] processing: started - Starting processing of Tutorium 4 (Type: tutorium)
+2026-06-12 19:17:27,329 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,329 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,330 - material_processor - INFO - [35023848-0644-4f70-966e-e9a0b76bf8bf] file_analysis: completed - PDF file (auto-included): Tutorium #4_Interner Zins_Aufgaben.pdf
+2026-06-12 19:17:27,331 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,333 - material_processor - INFO - [35023848-0644-4f70-966e-e9a0b76bf8bf] parsing: started - Parsing PDF with Reducto: Tutorium #4_Interner Zins_Aufgaben.pdf
+2026-06-12 19:17:27,334 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/35023848-0644-4f70-966e-e9a0b76bf8bf/20260601_133414_b6c5f9bd.pdf
+2026-06-12 19:17:27,334 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/35023848-0644-4f70-966e-e9a0b76bf8bf/20260601_133414_b6c5f9bd.pdf
+2026-06-12 19:17:27,334 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/35023848-0644-4f70-966e-e9a0b76bf8bf/20260601_133414_b6c5f9bd.pdf'
+2026-06-12 19:17:27,334 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/35023848-0644-4f70-966e-e9a0b76bf8bf/20260601_133414_b6c5f9bd.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/35023848-0644-4f70-966e-e9a0b76bf8bf/20260601_133414_b6c5f9bd.pdf'
+2026-06-12 19:17:27,336 - material_processor - INFO - [35023848-0644-4f70-966e-e9a0b76bf8bf] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,336 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,339 - material_processor - INFO - [35023848-0644-4f70-966e-e9a0b76bf8bf] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,341 - material_processor - INFO - Successfully processed material: Tutorium 4
+2026-06-12 19:17:27,342 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,342 - __main__ - INFO - 
+[12/44] Processing: Tutorium 5 (tutorium)
+2026-06-12 19:17:27,344 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,347 - material_processor - INFO - Processing material: Tutorium 5 (f482399b-f8f1-489e-b9da-b1ea8fd77d94) - Type: tutorium
+2026-06-12 19:17:27,349 - material_processor - INFO - [f482399b-f8f1-489e-b9da-b1ea8fd77d94] processing: started - Starting processing of Tutorium 5 (Type: tutorium)
+2026-06-12 19:17:27,350 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,350 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,351 - material_processor - INFO - [f482399b-f8f1-489e-b9da-b1ea8fd77d94] file_analysis: completed - PDF file (auto-included): Tutorium #5_Kapitalwertrate (KWR)_Aufgaben.pdf
+2026-06-12 19:17:27,351 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,354 - material_processor - INFO - [f482399b-f8f1-489e-b9da-b1ea8fd77d94] parsing: started - Parsing PDF with Reducto: Tutorium #5_Kapitalwertrate (KWR)_Aufgaben.pdf
+2026-06-12 19:17:27,355 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f482399b-f8f1-489e-b9da-b1ea8fd77d94/20260601_133423_79117e75.pdf
+2026-06-12 19:17:27,355 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f482399b-f8f1-489e-b9da-b1ea8fd77d94/20260601_133423_79117e75.pdf
+2026-06-12 19:17:27,355 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f482399b-f8f1-489e-b9da-b1ea8fd77d94/20260601_133423_79117e75.pdf'
+2026-06-12 19:17:27,355 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f482399b-f8f1-489e-b9da-b1ea8fd77d94/20260601_133423_79117e75.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f482399b-f8f1-489e-b9da-b1ea8fd77d94/20260601_133423_79117e75.pdf'
+2026-06-12 19:17:27,357 - material_processor - INFO - [f482399b-f8f1-489e-b9da-b1ea8fd77d94] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,357 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,359 - material_processor - INFO - [f482399b-f8f1-489e-b9da-b1ea8fd77d94] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,362 - material_processor - INFO - Successfully processed material: Tutorium 5
+2026-06-12 19:17:27,362 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,363 - __main__ - INFO - 
+[13/44] Processing: Tutorium 10 (tutorium)
+2026-06-12 19:17:27,365 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,367 - material_processor - INFO - Processing material: Tutorium 10 (2106fcb0-2958-44e3-974f-2a516337981f) - Type: tutorium
+2026-06-12 19:17:27,369 - material_processor - INFO - [2106fcb0-2958-44e3-974f-2a516337981f] processing: started - Starting processing of Tutorium 10 (Type: tutorium)
+2026-06-12 19:17:27,370 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,370 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,372 - material_processor - INFO - [2106fcb0-2958-44e3-974f-2a516337981f] file_analysis: completed - PDF file (auto-included): Tutorium #10_Finanzierungsformen_Aufgaben.pdf
+2026-06-12 19:17:27,372 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,374 - material_processor - INFO - [2106fcb0-2958-44e3-974f-2a516337981f] parsing: started - Parsing PDF with Reducto: Tutorium #10_Finanzierungsformen_Aufgaben.pdf
+2026-06-12 19:17:27,375 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2106fcb0-2958-44e3-974f-2a516337981f/20260601_133516_36476968.pdf
+2026-06-12 19:17:27,375 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2106fcb0-2958-44e3-974f-2a516337981f/20260601_133516_36476968.pdf
+2026-06-12 19:17:27,375 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2106fcb0-2958-44e3-974f-2a516337981f/20260601_133516_36476968.pdf'
+2026-06-12 19:17:27,375 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2106fcb0-2958-44e3-974f-2a516337981f/20260601_133516_36476968.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/2106fcb0-2958-44e3-974f-2a516337981f/20260601_133516_36476968.pdf'
+2026-06-12 19:17:27,377 - material_processor - INFO - [2106fcb0-2958-44e3-974f-2a516337981f] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,377 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,380 - material_processor - INFO - [2106fcb0-2958-44e3-974f-2a516337981f] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,382 - material_processor - INFO - Successfully processed material: Tutorium 10
+2026-06-12 19:17:27,383 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,383 - __main__ - INFO - 
+[14/44] Processing: Tutorium 11 (tutorium)
+2026-06-12 19:17:27,385 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,388 - material_processor - INFO - Processing material: Tutorium 11 (0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2) - Type: tutorium
+2026-06-12 19:17:27,390 - material_processor - INFO - [0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2] processing: started - Starting processing of Tutorium 11 (Type: tutorium)
+2026-06-12 19:17:27,391 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,391 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,393 - material_processor - INFO - [0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2] file_analysis: completed - PDF file (auto-included): Tutorium #11_Hybride Finanzierung, Innenfinanzierung_Aufgaben.pdf
+2026-06-12 19:17:27,393 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,395 - material_processor - INFO - [0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2] parsing: started - Parsing PDF with Reducto: Tutorium #11_Hybride Finanzierung, Innenfinanzierung_Aufgaben.pdf
+2026-06-12 19:17:27,396 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2/20260601_133526_354bcb2a.pdf
+2026-06-12 19:17:27,396 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2/20260601_133526_354bcb2a.pdf
+2026-06-12 19:17:27,396 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2/20260601_133526_354bcb2a.pdf'
+2026-06-12 19:17:27,396 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2/20260601_133526_354bcb2a.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2/20260601_133526_354bcb2a.pdf'
+2026-06-12 19:17:27,398 - material_processor - INFO - [0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,398 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,400 - material_processor - INFO - [0fe3e0bf-9417-4cdf-b017-dfb6d225a6d2] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,403 - material_processor - INFO - Successfully processed material: Tutorium 11
+2026-06-12 19:17:27,403 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,404 - __main__ - INFO - 
+[15/44] Processing: Tutorium 12 (tutorium)
+2026-06-12 19:17:27,406 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,409 - material_processor - INFO - Processing material: Tutorium 12 (a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822) - Type: tutorium
+2026-06-12 19:17:27,411 - material_processor - INFO - [a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822] processing: started - Starting processing of Tutorium 12 (Type: tutorium)
+2026-06-12 19:17:27,412 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,412 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,413 - material_processor - INFO - [a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822] file_analysis: completed - PDF file (auto-included): Tutorium #12_Kapitalstruktur_Aufgaben.pdf
+2026-06-12 19:17:27,413 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,416 - material_processor - INFO - [a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822] parsing: started - Parsing PDF with Reducto: Tutorium #12_Kapitalstruktur_Aufgaben.pdf
+2026-06-12 19:17:27,417 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822/20260601_133535_d6e03bfb.pdf
+2026-06-12 19:17:27,417 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822/20260601_133535_d6e03bfb.pdf
+2026-06-12 19:17:27,417 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822/20260601_133535_d6e03bfb.pdf'
+2026-06-12 19:17:27,417 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822/20260601_133535_d6e03bfb.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822/20260601_133535_d6e03bfb.pdf'
+2026-06-12 19:17:27,419 - material_processor - INFO - [a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,419 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,421 - material_processor - INFO - [a0d3b2e6-1f6c-4dc5-95bf-47fe8e8fb822] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,424 - material_processor - INFO - Successfully processed material: Tutorium 12
+2026-06-12 19:17:27,424 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,425 - __main__ - INFO - 
+[16/44] Processing: Tutorium 9 (tutorium)
+2026-06-12 19:17:27,427 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,429 - material_processor - INFO - Processing material: Tutorium 9 (c478d535-038e-4c31-ad17-d893c60357e0) - Type: tutorium
+2026-06-12 19:17:27,431 - material_processor - INFO - [c478d535-038e-4c31-ad17-d893c60357e0] processing: started - Starting processing of Tutorium 9 (Type: tutorium)
+2026-06-12 19:17:27,432 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,432 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,434 - material_processor - INFO - [c478d535-038e-4c31-ad17-d893c60357e0] file_analysis: completed - PDF file (auto-included): Tutorium #9_Nutzungsdauerentscheidungen, Dean-Modell_Aufgaben.pdf
+2026-06-12 19:17:27,434 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,436 - material_processor - INFO - [c478d535-038e-4c31-ad17-d893c60357e0] parsing: started - Parsing PDF with Reducto: Tutorium #9_Nutzungsdauerentscheidungen, Dean-Modell_Aufgaben.pdf
+2026-06-12 19:17:27,437 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/c478d535-038e-4c31-ad17-d893c60357e0/20260601_133508_15450025.pdf
+2026-06-12 19:17:27,437 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/c478d535-038e-4c31-ad17-d893c60357e0/20260601_133508_15450025.pdf
+2026-06-12 19:17:27,437 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/c478d535-038e-4c31-ad17-d893c60357e0/20260601_133508_15450025.pdf'
+2026-06-12 19:17:27,437 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/c478d535-038e-4c31-ad17-d893c60357e0/20260601_133508_15450025.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/c478d535-038e-4c31-ad17-d893c60357e0/20260601_133508_15450025.pdf'
+2026-06-12 19:17:27,439 - material_processor - INFO - [c478d535-038e-4c31-ad17-d893c60357e0] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,439 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,442 - material_processor - INFO - [c478d535-038e-4c31-ad17-d893c60357e0] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,444 - material_processor - INFO - Successfully processed material: Tutorium 9
+2026-06-12 19:17:27,445 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,445 - __main__ - INFO - 
+[17/44] Processing: Tutorium 7 (tutorium)
+2026-06-12 19:17:27,447 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,450 - material_processor - INFO - Processing material: Tutorium 7 (f5bb8d49-4b02-4885-9467-55b3203618e4) - Type: tutorium
+2026-06-12 19:17:27,452 - material_processor - INFO - [f5bb8d49-4b02-4885-9467-55b3203618e4] processing: started - Starting processing of Tutorium 7 (Type: tutorium)
+2026-06-12 19:17:27,453 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,453 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,455 - material_processor - INFO - [f5bb8d49-4b02-4885-9467-55b3203618e4] file_analysis: completed - PDF file (auto-included): Tutorium #7_Zinskurven_Aufgaben.pdf
+2026-06-12 19:17:27,455 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,457 - material_processor - INFO - [f5bb8d49-4b02-4885-9467-55b3203618e4] parsing: started - Parsing PDF with Reducto: Tutorium #7_Zinskurven_Aufgaben.pdf
+2026-06-12 19:17:27,458 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f5bb8d49-4b02-4885-9467-55b3203618e4/20260601_133452_76fe9bd0.pdf
+2026-06-12 19:17:27,458 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f5bb8d49-4b02-4885-9467-55b3203618e4/20260601_133452_76fe9bd0.pdf
+2026-06-12 19:17:27,458 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f5bb8d49-4b02-4885-9467-55b3203618e4/20260601_133452_76fe9bd0.pdf'
+2026-06-12 19:17:27,458 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f5bb8d49-4b02-4885-9467-55b3203618e4/20260601_133452_76fe9bd0.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/f5bb8d49-4b02-4885-9467-55b3203618e4/20260601_133452_76fe9bd0.pdf'
+2026-06-12 19:17:27,460 - material_processor - INFO - [f5bb8d49-4b02-4885-9467-55b3203618e4] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,460 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,462 - material_processor - INFO - [f5bb8d49-4b02-4885-9467-55b3203618e4] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,465 - material_processor - INFO - Successfully processed material: Tutorium 7
+2026-06-12 19:17:27,466 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,466 - __main__ - INFO - 
+[18/44] Processing: Tutorium 8 (tutorium)
+2026-06-12 19:17:27,468 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,471 - material_processor - INFO - Processing material: Tutorium 8 (e9e77522-369f-4ca8-87e3-5c075cce31d4) - Type: tutorium
+2026-06-12 19:17:27,473 - material_processor - INFO - [e9e77522-369f-4ca8-87e3-5c075cce31d4] processing: started - Starting processing of Tutorium 8 (Type: tutorium)
+2026-06-12 19:17:27,474 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,474 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,476 - material_processor - INFO - [e9e77522-369f-4ca8-87e3-5c075cce31d4] file_analysis: completed - PDF file (auto-included): Tutorium #8_Fisher, Hirshleifer_Aufgaben.pdf
+2026-06-12 19:17:27,476 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,478 - material_processor - INFO - [e9e77522-369f-4ca8-87e3-5c075cce31d4] parsing: started - Parsing PDF with Reducto: Tutorium #8_Fisher, Hirshleifer_Aufgaben.pdf
+2026-06-12 19:17:27,479 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/e9e77522-369f-4ca8-87e3-5c075cce31d4/20260601_133500_c4b9016b.pdf
+2026-06-12 19:17:27,479 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/e9e77522-369f-4ca8-87e3-5c075cce31d4/20260601_133500_c4b9016b.pdf
+2026-06-12 19:17:27,479 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/e9e77522-369f-4ca8-87e3-5c075cce31d4/20260601_133500_c4b9016b.pdf'
+2026-06-12 19:17:27,479 - material_processor - ERROR - Failed to parse PDF uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/e9e77522-369f-4ca8-87e3-5c075cce31d4/20260601_133500_c4b9016b.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/a2ac358f-b007-44fb-8a0a-11c2c86a0dcd/materials/e9e77522-369f-4ca8-87e3-5c075cce31d4/20260601_133500_c4b9016b.pdf'
+2026-06-12 19:17:27,481 - material_processor - INFO - [e9e77522-369f-4ca8-87e3-5c075cce31d4] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,481 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,483 - material_processor - INFO - [e9e77522-369f-4ca8-87e3-5c075cce31d4] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,486 - material_processor - INFO - Successfully processed material: Tutorium 8
+2026-06-12 19:17:27,487 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,487 - __main__ - INFO - 
+[19/44] Processing: Tutorium 2 (tutorium)
+2026-06-12 19:17:27,489 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,492 - material_processor - INFO - Processing material: Tutorium 2 (b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99) - Type: tutorium
+2026-06-12 19:17:27,494 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] processing: started - Starting processing of Tutorium 2 (Type: tutorium)
+2026-06-12 19:17:27,495 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,495 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,497 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] file_analysis: completed - PDF file (auto-included): blatt16.pdf
+2026-06-12 19:17:27,499 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] file_analysis: completed - PDF file (auto-included): T16 Tschebyscheffsche Ungleichung und ZGS Lösung.pdf
+2026-06-12 19:17:27,499 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,501 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] parsing: started - Parsing PDF with Reducto: blatt16.pdf
+2026-06-12 19:17:27,502 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_1581bdcc.pdf
+2026-06-12 19:17:27,502 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_1581bdcc.pdf
+2026-06-12 19:17:27,502 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_1581bdcc.pdf'
+2026-06-12 19:17:27,502 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_1581bdcc.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_1581bdcc.pdf'
+2026-06-12 19:17:27,505 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,507 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] parsing: started - Parsing PDF with Reducto: T16 Tschebyscheffsche Ungleichung und ZGS Lösung.pdf
+2026-06-12 19:17:27,507 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_5e580ad6.pdf
+2026-06-12 19:17:27,508 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_5e580ad6.pdf
+2026-06-12 19:17:27,508 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_5e580ad6.pdf'
+2026-06-12 19:17:27,508 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_5e580ad6.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99/20260601_143800_5e580ad6.pdf'
+2026-06-12 19:17:27,510 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,510 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,512 - material_processor - INFO - [b2ec655d-6fd2-4dc6-a6ea-0e98c9c6ef99] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,515 - material_processor - INFO - Successfully processed material: Tutorium 2
+2026-06-12 19:17:27,516 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,516 - __main__ - INFO - 
+[20/44] Processing: Tutorium 1 (tutorium)
+2026-06-12 19:17:27,518 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,521 - material_processor - INFO - Processing material: Tutorium 1 (b024517a-570c-4c97-b2f5-e8a97d40fabd) - Type: tutorium
+2026-06-12 19:17:27,522 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] processing: started - Starting processing of Tutorium 1 (Type: tutorium)
+2026-06-12 19:17:27,523 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,523 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,525 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] file_analysis: completed - PDF file (auto-included): blatt15.pdf
+2026-06-12 19:17:27,528 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] file_analysis: completed - PDF file (auto-included): T15 Einführung Schätztheorie Lösung.pdf
+2026-06-12 19:17:27,528 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,530 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] parsing: started - Parsing PDF with Reducto: blatt15.pdf
+2026-06-12 19:17:27,531 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_eab24e45.pdf
+2026-06-12 19:17:27,531 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_eab24e45.pdf
+2026-06-12 19:17:27,531 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_eab24e45.pdf'
+2026-06-12 19:17:27,531 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_eab24e45.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_eab24e45.pdf'
+2026-06-12 19:17:27,533 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,535 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] parsing: started - Parsing PDF with Reducto: T15 Einführung Schätztheorie Lösung.pdf
+2026-06-12 19:17:27,536 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_91c8a25c.pdf
+2026-06-12 19:17:27,536 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_91c8a25c.pdf
+2026-06-12 19:17:27,536 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_91c8a25c.pdf'
+2026-06-12 19:17:27,536 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_91c8a25c.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b024517a-570c-4c97-b2f5-e8a97d40fabd/20260601_143745_91c8a25c.pdf'
+2026-06-12 19:17:27,538 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,538 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,540 - material_processor - INFO - [b024517a-570c-4c97-b2f5-e8a97d40fabd] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,543 - material_processor - INFO - Successfully processed material: Tutorium 1
+2026-06-12 19:17:27,544 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,544 - __main__ - INFO - 
+[21/44] Processing: Tutorium 7 (tutorium)
+2026-06-12 19:17:27,546 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,549 - material_processor - INFO - Processing material: Tutorium 7 (7e884433-5427-4279-b4e1-7ae7185cd0ca) - Type: tutorium
+2026-06-12 19:17:27,551 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] processing: started - Starting processing of Tutorium 7 (Type: tutorium)
+2026-06-12 19:17:27,552 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,552 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,553 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] file_analysis: completed - PDF file (auto-included): blatt21.pdf
+2026-06-12 19:17:27,556 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] file_analysis: completed - PDF file (auto-included): T21 Zweiseitiger Einstichtprobentest auf µ Lösung.pdf
+2026-06-12 19:17:27,556 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,558 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] parsing: started - Parsing PDF with Reducto: blatt21.pdf
+2026-06-12 19:17:27,559 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_0061e16d.pdf
+2026-06-12 19:17:27,559 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_0061e16d.pdf
+2026-06-12 19:17:27,559 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_0061e16d.pdf'
+2026-06-12 19:17:27,559 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_0061e16d.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_0061e16d.pdf'
+2026-06-12 19:17:27,561 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,564 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] parsing: started - Parsing PDF with Reducto: T21 Zweiseitiger Einstichtprobentest auf µ Lösung.pdf
+2026-06-12 19:17:27,564 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_fcb59e06.pdf
+2026-06-12 19:17:27,564 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_fcb59e06.pdf
+2026-06-12 19:17:27,564 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_fcb59e06.pdf'
+2026-06-12 19:17:27,564 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_fcb59e06.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/7e884433-5427-4279-b4e1-7ae7185cd0ca/20260601_143906_fcb59e06.pdf'
+2026-06-12 19:17:27,567 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,567 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,569 - material_processor - INFO - [7e884433-5427-4279-b4e1-7ae7185cd0ca] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,572 - material_processor - INFO - Successfully processed material: Tutorium 7
+2026-06-12 19:17:27,572 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,573 - __main__ - INFO - 
+[22/44] Processing: Tutorium 9 (tutorium)
+2026-06-12 19:17:27,574 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,578 - material_processor - INFO - Processing material: Tutorium 9 (17cb4e0b-b58c-4919-924f-9edfa0de5c20) - Type: tutorium
+2026-06-12 19:17:27,579 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] processing: started - Starting processing of Tutorium 9 (Type: tutorium)
+2026-06-12 19:17:27,580 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,580 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,582 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] file_analysis: completed - PDF file (auto-included): blatt23.pdf
+2026-06-12 19:17:27,584 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] file_analysis: completed - PDF file (auto-included): T23 Binomialtest Lösung.pdf
+2026-06-12 19:17:27,584 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,587 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] parsing: started - Parsing PDF with Reducto: blatt23.pdf
+2026-06-12 19:17:27,588 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_980c9d09.pdf
+2026-06-12 19:17:27,588 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_980c9d09.pdf
+2026-06-12 19:17:27,588 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_980c9d09.pdf'
+2026-06-12 19:17:27,588 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_980c9d09.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_980c9d09.pdf'
+2026-06-12 19:17:27,590 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,592 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] parsing: started - Parsing PDF with Reducto: T23 Binomialtest Lösung.pdf
+2026-06-12 19:17:27,593 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_1502094b.pdf
+2026-06-12 19:17:27,593 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_1502094b.pdf
+2026-06-12 19:17:27,593 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_1502094b.pdf'
+2026-06-12 19:17:27,593 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_1502094b.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/17cb4e0b-b58c-4919-924f-9edfa0de5c20/20260601_143941_1502094b.pdf'
+2026-06-12 19:17:27,595 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,595 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,597 - material_processor - INFO - [17cb4e0b-b58c-4919-924f-9edfa0de5c20] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,600 - material_processor - INFO - Successfully processed material: Tutorium 9
+2026-06-12 19:17:27,601 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,601 - __main__ - INFO - 
+[23/44] Processing: Tutorium 4 (tutorium)
+2026-06-12 19:17:27,603 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,606 - material_processor - INFO - Processing material: Tutorium 4 (476bd4dd-1afb-4459-b794-53166d396a2a) - Type: tutorium
+2026-06-12 19:17:27,608 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] processing: started - Starting processing of Tutorium 4 (Type: tutorium)
+2026-06-12 19:17:27,609 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,609 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,611 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] file_analysis: completed - PDF file (auto-included): blatt18.pdf
+2026-06-12 19:17:27,613 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] file_analysis: completed - PDF file (auto-included): T18 Schätzprinzipien Teil 1 Lösung.pdf
+2026-06-12 19:17:27,613 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,615 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] parsing: started - Parsing PDF with Reducto: blatt18.pdf
+2026-06-12 19:17:27,616 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_340b4089.pdf
+2026-06-12 19:17:27,616 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_340b4089.pdf
+2026-06-12 19:17:27,616 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_340b4089.pdf'
+2026-06-12 19:17:27,616 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_340b4089.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_340b4089.pdf'
+2026-06-12 19:17:27,619 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,621 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] parsing: started - Parsing PDF with Reducto: T18 Schätzprinzipien Teil 1 Lösung.pdf
+2026-06-12 19:17:27,621 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_95cf55aa.pdf
+2026-06-12 19:17:27,621 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_95cf55aa.pdf
+2026-06-12 19:17:27,622 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_95cf55aa.pdf'
+2026-06-12 19:17:27,622 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_95cf55aa.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/476bd4dd-1afb-4459-b794-53166d396a2a/20260601_143833_95cf55aa.pdf'
+2026-06-12 19:17:27,624 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,624 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,626 - material_processor - INFO - [476bd4dd-1afb-4459-b794-53166d396a2a] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,631 - material_processor - INFO - Successfully processed material: Tutorium 4
+2026-06-12 19:17:27,631 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,631 - __main__ - INFO - 
+[24/44] Processing: Tutorium 3 (tutorium)
+2026-06-12 19:17:27,633 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,636 - material_processor - INFO - Processing material: Tutorium 3 (a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8) - Type: tutorium
+2026-06-12 19:17:27,638 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] processing: started - Starting processing of Tutorium 3 (Type: tutorium)
+2026-06-12 19:17:27,639 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,639 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,641 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] file_analysis: completed - PDF file (auto-included): blatt17.pdf
+2026-06-12 19:17:27,643 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] file_analysis: completed - PDF file (auto-included): T17 Gütekriterien von Schätzfunktionen Lösung.pdf
+2026-06-12 19:17:27,643 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,645 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] parsing: started - Parsing PDF with Reducto: blatt17.pdf
+2026-06-12 19:17:27,646 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_548ffeca.pdf
+2026-06-12 19:17:27,646 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_548ffeca.pdf
+2026-06-12 19:17:27,646 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_548ffeca.pdf'
+2026-06-12 19:17:27,646 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_548ffeca.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_548ffeca.pdf'
+2026-06-12 19:17:27,648 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,651 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] parsing: started - Parsing PDF with Reducto: T17 Gütekriterien von Schätzfunktionen Lösung.pdf
+2026-06-12 19:17:27,651 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_3e414aa1.pdf
+2026-06-12 19:17:27,652 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_3e414aa1.pdf
+2026-06-12 19:17:27,652 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_3e414aa1.pdf'
+2026-06-12 19:17:27,652 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_3e414aa1.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8/20260601_143811_3e414aa1.pdf'
+2026-06-12 19:17:27,654 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,654 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,656 - material_processor - INFO - [a8093d6b-a9e0-4f6a-a7b7-4a227aac2ca8] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,659 - material_processor - INFO - Successfully processed material: Tutorium 3
+2026-06-12 19:17:27,659 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,660 - __main__ - INFO - 
+[25/44] Processing: Tutorium 6 (tutorium)
+2026-06-12 19:17:27,662 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,664 - material_processor - INFO - Processing material: Tutorium 6 (3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b) - Type: tutorium
+2026-06-12 19:17:27,666 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] processing: started - Starting processing of Tutorium 6 (Type: tutorium)
+2026-06-12 19:17:27,667 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,667 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,669 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] file_analysis: completed - PDF file (auto-included): blatt20.pdf
+2026-06-12 19:17:27,672 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] file_analysis: completed - PDF file (auto-included): T20 Konfidenzintervalle Teil 2 Lösung.pdf
+2026-06-12 19:17:27,672 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,674 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] parsing: started - Parsing PDF with Reducto: blatt20.pdf
+2026-06-12 19:17:27,675 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_a5bdaafe.pdf
+2026-06-12 19:17:27,675 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_a5bdaafe.pdf
+2026-06-12 19:17:27,675 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_a5bdaafe.pdf'
+2026-06-12 19:17:27,675 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_a5bdaafe.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_a5bdaafe.pdf'
+2026-06-12 19:17:27,677 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,679 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] parsing: started - Parsing PDF with Reducto: T20 Konfidenzintervalle Teil 2 Lösung.pdf
+2026-06-12 19:17:27,680 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_bc72974d.pdf
+2026-06-12 19:17:27,680 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_bc72974d.pdf
+2026-06-12 19:17:27,680 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_bc72974d.pdf'
+2026-06-12 19:17:27,680 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_bc72974d.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b/20260601_143854_bc72974d.pdf'
+2026-06-12 19:17:27,683 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,683 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,684 - material_processor - INFO - [3bc1d937-f8bb-4744-ac8d-05f4c3f6ed6b] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,688 - material_processor - INFO - Successfully processed material: Tutorium 6
+2026-06-12 19:17:27,688 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,689 - __main__ - INFO - 
+[26/44] Processing: Tutorium 5 (tutorium)
+2026-06-12 19:17:27,690 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,693 - material_processor - INFO - Processing material: Tutorium 5 (b47e8ebb-cf21-4472-bf20-e68b64082fa9) - Type: tutorium
+2026-06-12 19:17:27,695 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] processing: started - Starting processing of Tutorium 5 (Type: tutorium)
+2026-06-12 19:17:27,696 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,696 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,698 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] file_analysis: completed - PDF file (auto-included): blatt19.pdf
+2026-06-12 19:17:27,700 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] file_analysis: completed - PDF file (auto-included): T19 Schätzprinzipien Teil 2 Lösung.pdf
+2026-06-12 19:17:27,700 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,703 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] parsing: started - Parsing PDF with Reducto: blatt19.pdf
+2026-06-12 19:17:27,704 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_9144f3af.pdf
+2026-06-12 19:17:27,704 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_9144f3af.pdf
+2026-06-12 19:17:27,704 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_9144f3af.pdf'
+2026-06-12 19:17:27,704 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_9144f3af.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_9144f3af.pdf'
+2026-06-12 19:17:27,706 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,708 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] parsing: started - Parsing PDF with Reducto: T19 Schätzprinzipien Teil 2 Lösung.pdf
+2026-06-12 19:17:27,709 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_01c2c21d.pdf
+2026-06-12 19:17:27,709 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_01c2c21d.pdf
+2026-06-12 19:17:27,709 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_01c2c21d.pdf'
+2026-06-12 19:17:27,709 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_01c2c21d.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/b47e8ebb-cf21-4472-bf20-e68b64082fa9/20260601_143843_01c2c21d.pdf'
+2026-06-12 19:17:27,711 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,711 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,713 - material_processor - INFO - [b47e8ebb-cf21-4472-bf20-e68b64082fa9] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,716 - material_processor - INFO - Successfully processed material: Tutorium 5
+2026-06-12 19:17:27,717 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,717 - __main__ - INFO - 
+[27/44] Processing: Tutorium 11 (tutorium)
+2026-06-12 19:17:27,720 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,722 - material_processor - INFO - Processing material: Tutorium 11 (e69272fa-2db8-4e6d-a266-57ab60e47b4c) - Type: tutorium
+2026-06-12 19:17:27,724 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] processing: started - Starting processing of Tutorium 11 (Type: tutorium)
+2026-06-12 19:17:27,725 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,725 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,727 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] file_analysis: completed - PDF file (auto-included): blatt25.pdf
+2026-06-12 19:17:27,729 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] file_analysis: completed - PDF file (auto-included): T25 Chi-Quadrat-Tests Lösung.pdf
+2026-06-12 19:17:27,729 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,732 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] parsing: started - Parsing PDF with Reducto: blatt25.pdf
+2026-06-12 19:17:27,732 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_b5f2e232.pdf
+2026-06-12 19:17:27,732 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_b5f2e232.pdf
+2026-06-12 19:17:27,732 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_b5f2e232.pdf'
+2026-06-12 19:17:27,732 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_b5f2e232.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_b5f2e232.pdf'
+2026-06-12 19:17:27,735 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,737 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] parsing: started - Parsing PDF with Reducto: T25 Chi-Quadrat-Tests Lösung.pdf
+2026-06-12 19:17:27,738 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_11c3d09d.pdf
+2026-06-12 19:17:27,738 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_11c3d09d.pdf
+2026-06-12 19:17:27,738 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_11c3d09d.pdf'
+2026-06-12 19:17:27,738 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_11c3d09d.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/e69272fa-2db8-4e6d-a266-57ab60e47b4c/20260601_144003_11c3d09d.pdf'
+2026-06-12 19:17:27,740 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,740 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,742 - material_processor - INFO - [e69272fa-2db8-4e6d-a266-57ab60e47b4c] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,745 - material_processor - INFO - Successfully processed material: Tutorium 11
+2026-06-12 19:17:27,746 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,747 - __main__ - INFO - 
+[28/44] Processing: Tutorium 8 (tutorium)
+2026-06-12 19:17:27,748 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,751 - material_processor - INFO - Processing material: Tutorium 8 (c37a69a5-ee74-4559-8a96-d1506f72cf2a) - Type: tutorium
+2026-06-12 19:17:27,753 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] processing: started - Starting processing of Tutorium 8 (Type: tutorium)
+2026-06-12 19:17:27,754 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,754 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,756 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] file_analysis: completed - PDF file (auto-included): blatt22.pdf
+2026-06-12 19:17:27,758 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] file_analysis: completed - PDF file (auto-included): T22 Einseitiger Einstichtprobentest auf µ Lösung.pdf
+2026-06-12 19:17:27,758 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,761 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] parsing: started - Parsing PDF with Reducto: blatt22.pdf
+2026-06-12 19:17:27,761 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_571d45fc.pdf
+2026-06-12 19:17:27,761 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_571d45fc.pdf
+2026-06-12 19:17:27,761 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_571d45fc.pdf'
+2026-06-12 19:17:27,761 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_571d45fc.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_571d45fc.pdf'
+2026-06-12 19:17:27,763 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,766 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] parsing: started - Parsing PDF with Reducto: T22 Einseitiger Einstichtprobentest auf µ Lösung.pdf
+2026-06-12 19:17:27,767 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_a3c71d04.pdf
+2026-06-12 19:17:27,767 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_a3c71d04.pdf
+2026-06-12 19:17:27,767 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_a3c71d04.pdf'
+2026-06-12 19:17:27,767 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_a3c71d04.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/c37a69a5-ee74-4559-8a96-d1506f72cf2a/20260601_143918_a3c71d04.pdf'
+2026-06-12 19:17:27,769 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,769 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,771 - material_processor - INFO - [c37a69a5-ee74-4559-8a96-d1506f72cf2a] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,774 - material_processor - INFO - Successfully processed material: Tutorium 8
+2026-06-12 19:17:27,775 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,775 - __main__ - INFO - 
+[29/44] Processing: Tutorium 10 (tutorium)
+2026-06-12 19:17:27,777 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,780 - material_processor - INFO - Processing material: Tutorium 10 (593bc9f8-32bd-43cf-9b98-e92009cb06b6) - Type: tutorium
+2026-06-12 19:17:27,782 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] processing: started - Starting processing of Tutorium 10 (Type: tutorium)
+2026-06-12 19:17:27,783 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,783 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,785 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] file_analysis: completed - PDF file (auto-included): blatt24.pdf
+2026-06-12 19:17:27,787 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] file_analysis: completed - PDF file (auto-included): T24 Zweistichproben- und Differenzentest Lösung.pdf
+2026-06-12 19:17:27,787 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,790 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] parsing: started - Parsing PDF with Reducto: blatt24.pdf
+2026-06-12 19:17:27,790 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_309339ed.pdf
+2026-06-12 19:17:27,790 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_309339ed.pdf
+2026-06-12 19:17:27,790 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_309339ed.pdf'
+2026-06-12 19:17:27,790 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_309339ed.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_309339ed.pdf'
+2026-06-12 19:17:27,793 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,795 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] parsing: started - Parsing PDF with Reducto: T24 Zweistichproben- und Differenzentest Lösung.pdf
+2026-06-12 19:17:27,795 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_8bba14b9.pdf
+2026-06-12 19:17:27,796 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_8bba14b9.pdf
+2026-06-12 19:17:27,796 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_8bba14b9.pdf'
+2026-06-12 19:17:27,796 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_8bba14b9.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/593bc9f8-32bd-43cf-9b98-e92009cb06b6/20260601_143952_8bba14b9.pdf'
+2026-06-12 19:17:27,798 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,798 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,800 - material_processor - INFO - [593bc9f8-32bd-43cf-9b98-e92009cb06b6] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,803 - material_processor - INFO - Successfully processed material: Tutorium 10
+2026-06-12 19:17:27,804 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,804 - __main__ - INFO - 
+[30/44] Processing: Tutorium 12 (tutorium)
+2026-06-12 19:17:27,806 - __main__ - INFO -   Deleted 2 old content entries
+2026-06-12 19:17:27,809 - material_processor - INFO - Processing material: Tutorium 12 (ba74202a-75fc-45b0-a92b-e99926cd4448) - Type: tutorium
+2026-06-12 19:17:27,811 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] processing: started - Starting processing of Tutorium 12 (Type: tutorium)
+2026-06-12 19:17:27,811 - material_processor - INFO - Found 2 files to process (lecture=False)
+2026-06-12 19:17:27,812 - material_processor - INFO - Non-lecture material: Only 2 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,814 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] file_analysis: completed - PDF file (auto-included): blatt26.pdf
+2026-06-12 19:17:27,816 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] file_analysis: completed - PDF file (auto-included): T26 Vorzeichen- und Vorzeichenrangtest Lösung.pdf
+2026-06-12 19:17:27,816 - material_processor - INFO - Filtered to 2 important files
+2026-06-12 19:17:27,819 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] parsing: started - Parsing PDF with Reducto: blatt26.pdf
+2026-06-12 19:17:27,819 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_87ec5cbf.pdf
+2026-06-12 19:17:27,819 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_87ec5cbf.pdf
+2026-06-12 19:17:27,819 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_87ec5cbf.pdf'
+2026-06-12 19:17:27,819 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_87ec5cbf.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_87ec5cbf.pdf'
+2026-06-12 19:17:27,821 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,824 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] parsing: started - Parsing PDF with Reducto: T26 Vorzeichen- und Vorzeichenrangtest Lösung.pdf
+2026-06-12 19:17:27,824 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_27b595a4.pdf
+2026-06-12 19:17:27,825 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_27b595a4.pdf
+2026-06-12 19:17:27,825 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_27b595a4.pdf'
+2026-06-12 19:17:27,825 - material_processor - ERROR - Failed to parse PDF uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_27b595a4.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/0a34dfa6-ba46-4fbf-8bba-fe64abed6df8/materials/ba74202a-75fc-45b0-a92b-e99926cd4448/20260601_144015_27b595a4.pdf'
+2026-06-12 19:17:27,827 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,827 - material_processor - INFO - Stored 2 full content records
+2026-06-12 19:17:27,829 - material_processor - INFO - [ba74202a-75fc-45b0-a92b-e99926cd4448] storage: completed - Stored 2 full content records (no chunking)
+2026-06-12 19:17:27,832 - material_processor - INFO - Successfully processed material: Tutorium 12
+2026-06-12 19:17:27,832 - __main__ - INFO -   ✅ Success: 2 new content entries (was: 2)
+2026-06-12 19:17:27,833 - __main__ - INFO - 
+[31/44] Processing: Hausaufgabe 6 (homework)
+2026-06-12 19:17:27,836 - __main__ - INFO -   Deleted 32 old content entries
+2026-06-12 19:17:27,840 - material_processor - INFO - Processing material: Hausaufgabe 6 (6104f89c-435b-4e62-b8f5-7e9a92f8f26c) - Type: homework
+2026-06-12 19:17:27,841 - material_processor - INFO - [6104f89c-435b-4e62-b8f5-7e9a92f8f26c] processing: started - Starting processing of Hausaufgabe 6 (Type: homework)
+2026-06-12 19:17:27,842 - material_processor - INFO - Found 32 files to process (lecture=False)
+2026-06-12 19:17:27,842 - material_processor - INFO - Non-lecture material: Batch analyzing 32 files with LLM
+2026-06-12 19:17:27,842 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,842 - material_processor - INFO - Parsing PDF for batch analysis: ue06_bvg.pdf
+2026-06-12 19:17:27,842 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/6104f89c-435b-4e62-b8f5-7e9a92f8f26c/20260603_142328_a66b1685.pdf
+2026-06-12 19:17:27,843 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/6104f89c-435b-4e62-b8f5-7e9a92f8f26c/20260603_142328_a66b1685.pdf
+2026-06-12 19:17:27,843 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/6104f89c-435b-4e62-b8f5-7e9a92f8f26c/20260603_142328_a66b1685.pdf'
+2026-06-12 19:17:27,843 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/6104f89c-435b-4e62-b8f5-7e9a92f8f26c/20260603_142328_a66b1685.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/6104f89c-435b-4e62-b8f5-7e9a92f8f26c/20260603_142328_a66b1685.pdf'
+2026-06-12 19:17:27,843 - material_processor - INFO - Successfully parsed ue06_bvg.pdf (244 chars)
+2026-06-12 19:17:27,843 - material_processor - INFO - [STAGE 1] Analyzing 32 files (filenames only)
+2026-06-12 19:17:27,843 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,843 - material_processor - ERROR - Failed to process material 6104f89c-435b-4e62-b8f5-7e9a92f8f26c: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,845 - material_processor - INFO - [6104f89c-435b-4e62-b8f5-7e9a92f8f26c] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,845 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,846 - __main__ - INFO - 
+[32/44] Processing: Hausaufgabe 1 (homework)
+2026-06-12 19:17:27,848 - __main__ - INFO -   Deleted 8 old content entries
+2026-06-12 19:17:27,851 - material_processor - INFO - Processing material: Hausaufgabe 1 (f462814f-1f69-4700-ac44-fc76f03d178f) - Type: homework
+2026-06-12 19:17:27,853 - material_processor - INFO - [f462814f-1f69-4700-ac44-fc76f03d178f] processing: started - Starting processing of Hausaufgabe 1 (Type: homework)
+2026-06-12 19:17:27,854 - material_processor - INFO - Found 8 files to process (lecture=False)
+2026-06-12 19:17:27,854 - material_processor - INFO - Non-lecture material: Batch analyzing 8 files with LLM
+2026-06-12 19:17:27,854 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,854 - material_processor - INFO - Parsing PDF for batch analysis: ue01_intro.pdf
+2026-06-12 19:17:27,854 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f462814f-1f69-4700-ac44-fc76f03d178f/20260603_142202_590bf1c6.pdf
+2026-06-12 19:17:27,854 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f462814f-1f69-4700-ac44-fc76f03d178f/20260603_142202_590bf1c6.pdf
+2026-06-12 19:17:27,854 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f462814f-1f69-4700-ac44-fc76f03d178f/20260603_142202_590bf1c6.pdf'
+2026-06-12 19:17:27,854 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f462814f-1f69-4700-ac44-fc76f03d178f/20260603_142202_590bf1c6.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f462814f-1f69-4700-ac44-fc76f03d178f/20260603_142202_590bf1c6.pdf'
+2026-06-12 19:17:27,854 - material_processor - INFO - Successfully parsed ue01_intro.pdf (244 chars)
+2026-06-12 19:17:27,854 - material_processor - INFO - [STAGE 1] Analyzing 8 files (filenames only)
+2026-06-12 19:17:27,855 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,855 - material_processor - ERROR - Failed to process material f462814f-1f69-4700-ac44-fc76f03d178f: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,857 - material_processor - INFO - [f462814f-1f69-4700-ac44-fc76f03d178f] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,857 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,858 - __main__ - INFO - 
+[33/44] Processing: Hausaufgabe 2 (homework)
+2026-06-12 19:17:27,860 - __main__ - INFO -   Deleted 8 old content entries
+2026-06-12 19:17:27,863 - material_processor - INFO - Processing material: Hausaufgabe 2 (cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f) - Type: homework
+2026-06-12 19:17:27,865 - material_processor - INFO - [cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f] processing: started - Starting processing of Hausaufgabe 2 (Type: homework)
+2026-06-12 19:17:27,866 - material_processor - INFO - Found 8 files to process (lecture=False)
+2026-06-12 19:17:27,866 - material_processor - INFO - Non-lecture material: Batch analyzing 8 files with LLM
+2026-06-12 19:17:27,866 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,866 - material_processor - INFO - Parsing PDF for batch analysis: ue02_imperative.pdf
+2026-06-12 19:17:27,866 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f/20260603_142224_f3802edc.pdf
+2026-06-12 19:17:27,866 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f/20260603_142224_f3802edc.pdf
+2026-06-12 19:17:27,866 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f/20260603_142224_f3802edc.pdf'
+2026-06-12 19:17:27,866 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f/20260603_142224_f3802edc.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f/20260603_142224_f3802edc.pdf'
+2026-06-12 19:17:27,866 - material_processor - INFO - Successfully parsed ue02_imperative.pdf (244 chars)
+2026-06-12 19:17:27,866 - material_processor - INFO - [STAGE 1] Analyzing 8 files (filenames only)
+2026-06-12 19:17:27,866 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,866 - material_processor - ERROR - Failed to process material cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,868 - material_processor - INFO - [cd485dbc-280a-4da9-b0f9-0e23f7e4cc4f] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,868 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,869 - __main__ - INFO - 
+[34/44] Processing: Hausaufgabe 9 (homework)
+2026-06-12 19:17:27,871 - __main__ - INFO -   Deleted 13 old content entries
+2026-06-12 19:17:27,875 - material_processor - INFO - Processing material: Hausaufgabe 9 (08173fb9-af2b-45e9-b123-4f674116d4f5) - Type: homework
+2026-06-12 19:17:27,876 - material_processor - INFO - [08173fb9-af2b-45e9-b123-4f674116d4f5] processing: started - Starting processing of Hausaufgabe 9 (Type: homework)
+2026-06-12 19:17:27,877 - material_processor - INFO - Found 13 files to process (lecture=False)
+2026-06-12 19:17:27,877 - material_processor - INFO - Non-lecture material: Batch analyzing 13 files with LLM
+2026-06-12 19:17:27,877 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,878 - material_processor - INFO - Parsing PDF for batch analysis: ue09_sockets.pdf
+2026-06-12 19:17:27,878 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/08173fb9-af2b-45e9-b123-4f674116d4f5/20260603_142358_e0b91130.pdf
+2026-06-12 19:17:27,878 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/08173fb9-af2b-45e9-b123-4f674116d4f5/20260603_142358_e0b91130.pdf
+2026-06-12 19:17:27,878 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/08173fb9-af2b-45e9-b123-4f674116d4f5/20260603_142358_e0b91130.pdf'
+2026-06-12 19:17:27,878 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/08173fb9-af2b-45e9-b123-4f674116d4f5/20260603_142358_e0b91130.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/08173fb9-af2b-45e9-b123-4f674116d4f5/20260603_142358_e0b91130.pdf'
+2026-06-12 19:17:27,878 - material_processor - INFO - Successfully parsed ue09_sockets.pdf (244 chars)
+2026-06-12 19:17:27,878 - material_processor - INFO - [STAGE 1] Analyzing 13 files (filenames only)
+2026-06-12 19:17:27,878 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,878 - material_processor - ERROR - Failed to process material 08173fb9-af2b-45e9-b123-4f674116d4f5: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,880 - material_processor - INFO - [08173fb9-af2b-45e9-b123-4f674116d4f5] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,880 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,882 - __main__ - INFO - 
+[35/44] Processing: Hausaufgabe 5 (homework)
+2026-06-12 19:17:27,883 - __main__ - INFO -   Deleted 24 old content entries
+2026-06-12 19:17:27,886 - material_processor - INFO - Processing material: Hausaufgabe 5 (c647ea06-c13f-4415-889a-9ccfcce4014f) - Type: homework
+2026-06-12 19:17:27,888 - material_processor - INFO - [c647ea06-c13f-4415-889a-9ccfcce4014f] processing: started - Starting processing of Hausaufgabe 5 (Type: homework)
+2026-06-12 19:17:27,889 - material_processor - INFO - Found 24 files to process (lecture=False)
+2026-06-12 19:17:27,889 - material_processor - INFO - Non-lecture material: Batch analyzing 24 files with LLM
+2026-06-12 19:17:27,889 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,889 - material_processor - INFO - Parsing PDF for batch analysis: ue05_public_transport.pdf
+2026-06-12 19:17:27,889 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c647ea06-c13f-4415-889a-9ccfcce4014f/20260603_142307_8ef871c9.pdf
+2026-06-12 19:17:27,889 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c647ea06-c13f-4415-889a-9ccfcce4014f/20260603_142307_8ef871c9.pdf
+2026-06-12 19:17:27,889 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c647ea06-c13f-4415-889a-9ccfcce4014f/20260603_142307_8ef871c9.pdf'
+2026-06-12 19:17:27,890 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c647ea06-c13f-4415-889a-9ccfcce4014f/20260603_142307_8ef871c9.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c647ea06-c13f-4415-889a-9ccfcce4014f/20260603_142307_8ef871c9.pdf'
+2026-06-12 19:17:27,890 - material_processor - INFO - Successfully parsed ue05_public_transport.pdf (244 chars)
+2026-06-12 19:17:27,890 - material_processor - INFO - [STAGE 1] Analyzing 24 files (filenames only)
+2026-06-12 19:17:27,890 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,890 - material_processor - ERROR - Failed to process material c647ea06-c13f-4415-889a-9ccfcce4014f: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,892 - material_processor - INFO - [c647ea06-c13f-4415-889a-9ccfcce4014f] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,892 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,893 - __main__ - INFO - 
+[36/44] Processing: Hausaufgabe 4 (homework)
+2026-06-12 19:17:27,895 - __main__ - INFO -   Deleted 40 old content entries
+2026-06-12 19:17:27,898 - material_processor - INFO - Processing material: Hausaufgabe 4 (8912dd93-9429-47a9-ad59-bce6f4cc8b5d) - Type: homework
+2026-06-12 19:17:27,900 - material_processor - INFO - [8912dd93-9429-47a9-ad59-bce6f4cc8b5d] processing: started - Starting processing of Hausaufgabe 4 (Type: homework)
+2026-06-12 19:17:27,901 - material_processor - INFO - Found 40 files to process (lecture=False)
+2026-06-12 19:17:27,901 - material_processor - INFO - Non-lecture material: Batch analyzing 40 files with LLM
+2026-06-12 19:17:27,901 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,901 - material_processor - INFO - Parsing PDF for batch analysis: ue04_escape_room.pdf
+2026-06-12 19:17:27,901 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8912dd93-9429-47a9-ad59-bce6f4cc8b5d/20260603_142251_44ad1a51.pdf
+2026-06-12 19:17:27,901 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8912dd93-9429-47a9-ad59-bce6f4cc8b5d/20260603_142251_44ad1a51.pdf
+2026-06-12 19:17:27,901 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8912dd93-9429-47a9-ad59-bce6f4cc8b5d/20260603_142251_44ad1a51.pdf'
+2026-06-12 19:17:27,901 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8912dd93-9429-47a9-ad59-bce6f4cc8b5d/20260603_142251_44ad1a51.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8912dd93-9429-47a9-ad59-bce6f4cc8b5d/20260603_142251_44ad1a51.pdf'
+2026-06-12 19:17:27,901 - material_processor - INFO - Successfully parsed ue04_escape_room.pdf (244 chars)
+2026-06-12 19:17:27,901 - material_processor - INFO - [STAGE 1] Analyzing 40 files (filenames only)
+2026-06-12 19:17:27,901 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,901 - material_processor - ERROR - Failed to process material 8912dd93-9429-47a9-ad59-bce6f4cc8b5d: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,904 - material_processor - INFO - [8912dd93-9429-47a9-ad59-bce6f4cc8b5d] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,904 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,905 - __main__ - INFO - 
+[37/44] Processing: Hausaufgabe 7 (homework)
+2026-06-12 19:17:27,906 - __main__ - INFO -   Deleted 15 old content entries
+2026-06-12 19:17:27,910 - material_processor - INFO - Processing material: Hausaufgabe 7 (339c7c73-209d-4deb-bb82-0b99667db8d9) - Type: homework
+2026-06-12 19:17:27,911 - material_processor - INFO - [339c7c73-209d-4deb-bb82-0b99667db8d9] processing: started - Starting processing of Hausaufgabe 7 (Type: homework)
+2026-06-12 19:17:27,912 - material_processor - INFO - Found 15 files to process (lecture=False)
+2026-06-12 19:17:27,912 - material_processor - INFO - Non-lecture material: Batch analyzing 15 files with LLM
+2026-06-12 19:17:27,912 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,912 - material_processor - INFO - Parsing PDF for batch analysis: ue07_algos.pdf
+2026-06-12 19:17:27,912 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/339c7c73-209d-4deb-bb82-0b99667db8d9/20260603_142337_80e215a2.pdf
+2026-06-12 19:17:27,913 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/339c7c73-209d-4deb-bb82-0b99667db8d9/20260603_142337_80e215a2.pdf
+2026-06-12 19:17:27,913 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/339c7c73-209d-4deb-bb82-0b99667db8d9/20260603_142337_80e215a2.pdf'
+2026-06-12 19:17:27,913 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/339c7c73-209d-4deb-bb82-0b99667db8d9/20260603_142337_80e215a2.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/339c7c73-209d-4deb-bb82-0b99667db8d9/20260603_142337_80e215a2.pdf'
+2026-06-12 19:17:27,913 - material_processor - INFO - Successfully parsed ue07_algos.pdf (244 chars)
+2026-06-12 19:17:27,913 - material_processor - INFO - [STAGE 1] Analyzing 15 files (filenames only)
+2026-06-12 19:17:27,913 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,913 - material_processor - ERROR - Failed to process material 339c7c73-209d-4deb-bb82-0b99667db8d9: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,915 - material_processor - INFO - [339c7c73-209d-4deb-bb82-0b99667db8d9] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,915 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,916 - __main__ - INFO - 
+[38/44] Processing: Hausaufgabe 8 (homework)
+2026-06-12 19:17:27,918 - __main__ - INFO -   Deleted 17 old content entries
+2026-06-12 19:17:27,921 - material_processor - INFO - Processing material: Hausaufgabe 8 (8272dee5-f290-4a81-8535-ac7dad9d3e7d) - Type: homework
+2026-06-12 19:17:27,923 - material_processor - INFO - [8272dee5-f290-4a81-8535-ac7dad9d3e7d] processing: started - Starting processing of Hausaufgabe 8 (Type: homework)
+2026-06-12 19:17:27,924 - material_processor - INFO - Found 18 files to process (lecture=False)
+2026-06-12 19:17:27,924 - material_processor - INFO - Non-lecture material: Batch analyzing 18 files with LLM
+2026-06-12 19:17:27,924 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,924 - material_processor - INFO - Parsing PDF for batch analysis: ue08_threads.pdf
+2026-06-12 19:17:27,924 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8272dee5-f290-4a81-8535-ac7dad9d3e7d/20260603_142348_ba88a339.pdf
+2026-06-12 19:17:27,924 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8272dee5-f290-4a81-8535-ac7dad9d3e7d/20260603_142348_ba88a339.pdf
+2026-06-12 19:17:27,924 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8272dee5-f290-4a81-8535-ac7dad9d3e7d/20260603_142348_ba88a339.pdf'
+2026-06-12 19:17:27,924 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8272dee5-f290-4a81-8535-ac7dad9d3e7d/20260603_142348_ba88a339.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/8272dee5-f290-4a81-8535-ac7dad9d3e7d/20260603_142348_ba88a339.pdf'
+2026-06-12 19:17:27,924 - material_processor - INFO - Successfully parsed ue08_threads.pdf (244 chars)
+2026-06-12 19:17:27,924 - material_processor - INFO - [STAGE 1] Analyzing 18 files (filenames only)
+2026-06-12 19:17:27,924 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,924 - material_processor - ERROR - Failed to process material 8272dee5-f290-4a81-8535-ac7dad9d3e7d: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,927 - material_processor - INFO - [8272dee5-f290-4a81-8535-ac7dad9d3e7d] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,927 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,928 - __main__ - INFO - 
+[39/44] Processing: Hausaufgabe 3 (homework)
+2026-06-12 19:17:27,930 - __main__ - INFO -   Deleted 19 old content entries
+2026-06-12 19:17:27,934 - material_processor - INFO - Processing material: Hausaufgabe 3 (f06c4bd9-4bb0-48a8-8eef-d45757145ca1) - Type: homework
+2026-06-12 19:17:27,935 - material_processor - INFO - [f06c4bd9-4bb0-48a8-8eef-d45757145ca1] processing: started - Starting processing of Hausaufgabe 3 (Type: homework)
+2026-06-12 19:17:27,936 - material_processor - INFO - Found 19 files to process (lecture=False)
+2026-06-12 19:17:27,936 - material_processor - INFO - Non-lecture material: Batch analyzing 19 files with LLM
+2026-06-12 19:17:27,936 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,936 - material_processor - INFO - Parsing PDF for batch analysis: ue03_midi_player.pdf
+2026-06-12 19:17:27,936 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f06c4bd9-4bb0-48a8-8eef-d45757145ca1/20260603_142238_cd1f178f.pdf
+2026-06-12 19:17:27,937 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f06c4bd9-4bb0-48a8-8eef-d45757145ca1/20260603_142238_cd1f178f.pdf
+2026-06-12 19:17:27,937 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f06c4bd9-4bb0-48a8-8eef-d45757145ca1/20260603_142238_cd1f178f.pdf'
+2026-06-12 19:17:27,937 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f06c4bd9-4bb0-48a8-8eef-d45757145ca1/20260603_142238_cd1f178f.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/f06c4bd9-4bb0-48a8-8eef-d45757145ca1/20260603_142238_cd1f178f.pdf'
+2026-06-12 19:17:27,937 - material_processor - INFO - Successfully parsed ue03_midi_player.pdf (244 chars)
+2026-06-12 19:17:27,937 - material_processor - INFO - [STAGE 1] Analyzing 19 files (filenames only)
+2026-06-12 19:17:27,937 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,937 - material_processor - ERROR - Failed to process material f06c4bd9-4bb0-48a8-8eef-d45757145ca1: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,939 - material_processor - INFO - [f06c4bd9-4bb0-48a8-8eef-d45757145ca1] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,939 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,941 - __main__ - INFO - 
+[40/44] Processing: Tutorium 1 (tutorium)
+2026-06-12 19:17:27,942 - __main__ - INFO -   Deleted 1 old content entries
+2026-06-12 19:17:27,945 - material_processor - INFO - Processing material: Tutorium 1 (66924e2a-b1d1-4d98-a0e3-153b1f42e9fd) - Type: tutorium
+2026-06-12 19:17:27,947 - material_processor - INFO - [66924e2a-b1d1-4d98-a0e3-153b1f42e9fd] processing: started - Starting processing of Tutorium 1 (Type: tutorium)
+2026-06-12 19:17:27,948 - material_processor - INFO - Found 1 files to process (lecture=False)
+2026-06-12 19:17:27,948 - material_processor - INFO - Non-lecture material: Only 1 PDF(s), skipping LLM analysis
+2026-06-12 19:17:27,950 - material_processor - INFO - [66924e2a-b1d1-4d98-a0e3-153b1f42e9fd] file_analysis: completed - PDF file (auto-included): 01-foundations.pdf
+2026-06-12 19:17:27,950 - material_processor - INFO - Filtered to 1 important files
+2026-06-12 19:17:27,953 - material_processor - INFO - [66924e2a-b1d1-4d98-a0e3-153b1f42e9fd] parsing: started - Parsing PDF with Reducto: 01-foundations.pdf
+2026-06-12 19:17:27,953 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/66924e2a-b1d1-4d98-a0e3-153b1f42e9fd/20260603_142612_2dbab0eb.pdf
+2026-06-12 19:17:27,953 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/66924e2a-b1d1-4d98-a0e3-153b1f42e9fd/20260603_142612_2dbab0eb.pdf
+2026-06-12 19:17:27,953 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/66924e2a-b1d1-4d98-a0e3-153b1f42e9fd/20260603_142612_2dbab0eb.pdf'
+2026-06-12 19:17:27,953 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/66924e2a-b1d1-4d98-a0e3-153b1f42e9fd/20260603_142612_2dbab0eb.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/66924e2a-b1d1-4d98-a0e3-153b1f42e9fd/20260603_142612_2dbab0eb.pdf'
+2026-06-12 19:17:27,956 - material_processor - INFO - [66924e2a-b1d1-4d98-a0e3-153b1f42e9fd] parsing: completed - Stored full content (244 chars)
+2026-06-12 19:17:27,956 - material_processor - INFO - Stored 1 full content records
+2026-06-12 19:17:27,958 - material_processor - INFO - [66924e2a-b1d1-4d98-a0e3-153b1f42e9fd] storage: completed - Stored 1 full content records (no chunking)
+2026-06-12 19:17:27,961 - material_processor - INFO - Successfully processed material: Tutorium 1
+2026-06-12 19:17:27,961 - __main__ - INFO -   ✅ Success: 1 new content entries (was: 1)
+2026-06-12 19:17:27,962 - __main__ - INFO - 
+[41/44] Processing: Tutorium 2 (tutorium)
+2026-06-12 19:17:27,964 - __main__ - INFO -   Deleted 19 old content entries
+2026-06-12 19:17:27,967 - material_processor - INFO - Processing material: Tutorium 2 (64e663ef-eddf-43c8-8741-227c9f3e86ef) - Type: tutorium
+2026-06-12 19:17:27,968 - material_processor - INFO - [64e663ef-eddf-43c8-8741-227c9f3e86ef] processing: started - Starting processing of Tutorium 2 (Type: tutorium)
+2026-06-12 19:17:27,970 - material_processor - INFO - Found 19 files to process (lecture=False)
+2026-06-12 19:17:27,970 - material_processor - INFO - Non-lecture material: Batch analyzing 19 files with LLM
+2026-06-12 19:17:27,970 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,970 - material_processor - INFO - Parsing PDF for batch analysis: 02-imperatives-programmieren.pdf
+2026-06-12 19:17:27,970 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/64e663ef-eddf-43c8-8741-227c9f3e86ef/20260603_142625_7180d73d.pdf
+2026-06-12 19:17:27,970 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/64e663ef-eddf-43c8-8741-227c9f3e86ef/20260603_142625_7180d73d.pdf
+2026-06-12 19:17:27,970 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/64e663ef-eddf-43c8-8741-227c9f3e86ef/20260603_142625_7180d73d.pdf'
+2026-06-12 19:17:27,970 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/64e663ef-eddf-43c8-8741-227c9f3e86ef/20260603_142625_7180d73d.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/64e663ef-eddf-43c8-8741-227c9f3e86ef/20260603_142625_7180d73d.pdf'
+2026-06-12 19:17:27,970 - material_processor - INFO - Successfully parsed 02-imperatives-programmieren.pdf (244 chars)
+2026-06-12 19:17:27,970 - material_processor - INFO - [STAGE 1] Analyzing 19 files (filenames only)
+2026-06-12 19:17:27,970 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,970 - material_processor - ERROR - Failed to process material 64e663ef-eddf-43c8-8741-227c9f3e86ef: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,973 - material_processor - INFO - [64e663ef-eddf-43c8-8741-227c9f3e86ef] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,973 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,974 - __main__ - INFO - 
+[42/44] Processing: Tutorium 4 (tutorium)
+2026-06-12 19:17:27,976 - __main__ - INFO -   Deleted 49 old content entries
+2026-06-12 19:17:27,979 - material_processor - INFO - Processing material: Tutorium 4 (2609e781-ce60-4e2e-bda4-08bcb4cf7224) - Type: tutorium
+2026-06-12 19:17:27,981 - material_processor - INFO - [2609e781-ce60-4e2e-bda4-08bcb4cf7224] processing: started - Starting processing of Tutorium 4 (Type: tutorium)
+2026-06-12 19:17:27,985 - material_processor - INFO - Found 359 files to process (lecture=False)
+2026-06-12 19:17:27,985 - material_processor - INFO - Non-lecture material: Batch analyzing 359 files with LLM
+2026-06-12 19:17:27,985 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:27,985 - material_processor - INFO - Parsing PDF for batch analysis: 04-algoDat.pdf
+2026-06-12 19:17:27,985 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/2609e781-ce60-4e2e-bda4-08bcb4cf7224/20260603_142647_c06cf390.pdf
+2026-06-12 19:17:27,985 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/2609e781-ce60-4e2e-bda4-08bcb4cf7224/20260603_142647_c06cf390.pdf
+2026-06-12 19:17:27,985 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/2609e781-ce60-4e2e-bda4-08bcb4cf7224/20260603_142647_c06cf390.pdf'
+2026-06-12 19:17:27,985 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/2609e781-ce60-4e2e-bda4-08bcb4cf7224/20260603_142647_c06cf390.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/2609e781-ce60-4e2e-bda4-08bcb4cf7224/20260603_142647_c06cf390.pdf'
+2026-06-12 19:17:27,985 - material_processor - INFO - Successfully parsed 04-algoDat.pdf (244 chars)
+2026-06-12 19:17:27,985 - material_processor - INFO - [STAGE 1] Analyzing 359 files (filenames only)
+2026-06-12 19:17:27,985 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:27,985 - material_processor - ERROR - Failed to process material 2609e781-ce60-4e2e-bda4-08bcb4cf7224: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,989 - material_processor - INFO - [2609e781-ce60-4e2e-bda4-08bcb4cf7224] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,989 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:27,990 - __main__ - INFO - 
+[43/44] Processing: Tutorium 3 (tutorium)
+2026-06-12 19:17:27,993 - __main__ - INFO -   Deleted 22 old content entries
+2026-06-12 19:17:27,997 - material_processor - INFO - Processing material: Tutorium 3 (78e5d956-d751-4967-814a-14152099ffdd) - Type: tutorium
+2026-06-12 19:17:27,999 - material_processor - INFO - [78e5d956-d751-4967-814a-14152099ffdd] processing: started - Starting processing of Tutorium 3 (Type: tutorium)
+2026-06-12 19:17:28,000 - material_processor - INFO - Found 22 files to process (lecture=False)
+2026-06-12 19:17:28,000 - material_processor - INFO - Non-lecture material: Batch analyzing 22 files with LLM
+2026-06-12 19:17:28,000 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:28,000 - material_processor - INFO - Parsing PDF for batch analysis: 03-objektorientierung.pdf
+2026-06-12 19:17:28,000 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_b0c4a818.pdf
+2026-06-12 19:17:28,000 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_b0c4a818.pdf
+2026-06-12 19:17:28,000 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_b0c4a818.pdf'
+2026-06-12 19:17:28,001 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_b0c4a818.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_b0c4a818.pdf'
+2026-06-12 19:17:28,001 - material_processor - INFO - Successfully parsed 03-objektorientierung.pdf (244 chars)
+2026-06-12 19:17:28,001 - material_processor - INFO - Parsing PDF for batch analysis: tut03_ml/11.pdf
+2026-06-12 19:17:28,001 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_764e7823_11.pdf
+2026-06-12 19:17:28,001 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_764e7823_11.pdf
+2026-06-12 19:17:28,001 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_764e7823_11.pdf'
+2026-06-12 19:17:28,001 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_764e7823_11.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/78e5d956-d751-4967-814a-14152099ffdd/20260603_142637_764e7823_11.pdf'
+2026-06-12 19:17:28,001 - material_processor - INFO - Successfully parsed tut03_ml/11.pdf (250 chars)
+2026-06-12 19:17:28,001 - material_processor - INFO - [STAGE 1] Analyzing 22 files (filenames only)
+2026-06-12 19:17:28,001 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:28,001 - material_processor - ERROR - Failed to process material 78e5d956-d751-4967-814a-14152099ffdd: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,003 - material_processor - INFO - [78e5d956-d751-4967-814a-14152099ffdd] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,003 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,005 - __main__ - INFO - 
+[44/44] Processing: Tutorium 5 (tutorium)
+2026-06-12 19:17:28,006 - __main__ - INFO -   Deleted 18 old content entries
+2026-06-12 19:17:28,010 - material_processor - INFO - Processing material: Tutorium 5 (c45eacec-73f8-49ba-9bce-f507f7eb86d6) - Type: tutorium
+2026-06-12 19:17:28,011 - material_processor - INFO - [c45eacec-73f8-49ba-9bce-f507f7eb86d6] processing: started - Starting processing of Tutorium 5 (Type: tutorium)
+2026-06-12 19:17:28,012 - material_processor - INFO - Found 18 files to process (lecture=False)
+2026-06-12 19:17:28,012 - material_processor - INFO - Non-lecture material: Batch analyzing 18 files with LLM
+2026-06-12 19:17:28,012 - material_processor - INFO - Parsing PDFs first to extract assignment content...
+2026-06-12 19:17:28,012 - material_processor - INFO - Parsing PDF for batch analysis: 05-advanced.pdf
+2026-06-12 19:17:28,012 - material_processor - INFO - Parsing PDF with Reducto: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c45eacec-73f8-49ba-9bce-f507f7eb86d6/20260603_142658_767bdfa2.pdf
+2026-06-12 19:17:28,013 - reducto_client - INFO - [REDUCTO] Uploading file: uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c45eacec-73f8-49ba-9bce-f507f7eb86d6/20260603_142658_767bdfa2.pdf
+2026-06-12 19:17:28,013 - reducto_client - ERROR - [REDUCTO] Upload error: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c45eacec-73f8-49ba-9bce-f507f7eb86d6/20260603_142658_767bdfa2.pdf'
+2026-06-12 19:17:28,013 - material_processor - ERROR - Failed to parse PDF uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c45eacec-73f8-49ba-9bce-f507f7eb86d6/20260603_142658_767bdfa2.pdf with Reducto: Failed to upload file: [Errno 2] No such file or directory: 'uploads/courses/b05b7edf-3931-43a9-82e8-21905ecfdbcc/materials/c45eacec-73f8-49ba-9bce-f507f7eb86d6/20260603_142658_767bdfa2.pdf'
+2026-06-12 19:17:28,013 - material_processor - INFO - Successfully parsed 05-advanced.pdf (244 chars)
+2026-06-12 19:17:28,013 - material_processor - INFO - [STAGE 1] Analyzing 18 files (filenames only)
+2026-06-12 19:17:28,013 - prompt_manager - ERROR - Prompt 'material_file_analysis_stage1_fast' not found in cache and no DB session provided
+2026-06-12 19:17:28,013 - material_processor - ERROR - Failed to process material c45eacec-73f8-49ba-9bce-f507f7eb86d6: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,015 - material_processor - INFO - [c45eacec-73f8-49ba-9bce-f507f7eb86d6] processing: failed - Processing failed: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,015 - __main__ - ERROR -   ❌ Failed: 'NoneType' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "/home/cedrik/AI-Tutor/reprocess_all_non_lectures.py", line 87, in reprocess_all_non_lectures
+    await processor.process_material(material_id, db)
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 874, in process_material
+    analysis_results = await self.analyze_files_two_stage(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cedrik/AI-Tutor/material_processor.py", line 401, in analyze_files_two_stage
+    stage1_prompt = stage1_prompt.replace("{material_type}", material_type or "unknown")
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+2026-06-12 19:17:28,016 - __main__ - INFO - Re-processing complete
+
+================================================================================
+Re-processing Complete!
+  ✅ Success: 26
+  ❌ Failed: 18
+  Total: 44
+================================================================================
+

@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     # LlamaParse
     llama_cloud_api_key: str = Field(..., description="LlamaParse API key")
 
+    # Reducto (for lecture slide parsing)
+    reducto_api_key: str = Field(..., description="Reducto API key")
+
     # Database
     database_url: str = Field(
         default="postgresql://ai_tutor:dev_password@localhost:5432/ai_tutor_dev",

@@ -1369,10 +1369,11 @@ class MaterialChunk(Base):
     chunk_index = Column(Integer, nullable=False)
 
     # Metadata
-    source_type = Column(String(50))  # 'pdf', 'code', 'text'
+    source_type = Column(String(50))  # 'pdf', 'code', 'text', 'reducto_synthesis'
     file_name = Column(Text)
     start_char = Column(Integer)
     end_char = Column(Integer)
+    chunk_metadata = Column(JSONB)  # Structured metadata (pages, source, synthesis info)
 
     # Embedding
     embedding = Column(Vector(1024))  # Amazon Titan v2 uses 1024 dimensions

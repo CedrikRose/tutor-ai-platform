@@ -56,9 +56,13 @@ def hash_password(password: str) -> str:
     # Bcrypt has a 72-byte limit, truncate if necessary
     password_bytes = password.encode('utf-8')
     if len(password_bytes) > 72:
-        password = password_bytes[:72].decode('utf-8', errors='ignore')
+        password_bytes = password_bytes[:72]
+        password = password_bytes.decode('utf-8', errors='ignore')
 
-    return pwd_context.hash(password)
+    # Use bcrypt directly to avoid passlib version detection issues
+    import bcrypt as bcrypt_lib
+    salt = bcrypt_lib.gensalt(rounds=12)
+    return bcrypt_lib.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -72,7 +76,19 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     Returns:
         True if password matches
     """
-    return pwd_context.verify(plain_password, hashed_password)
+    # Truncate password if too long (bcrypt limit)
+    password_bytes = plain_password.encode('utf-8')
+    if len(password_bytes) > 72:
+        password_bytes = password_bytes[:72]
+        plain_password = password_bytes.decode('utf-8', errors='ignore')
+
+    # Use bcrypt directly to avoid passlib version detection issues
+    import bcrypt as bcrypt_lib
+    try:
+        return bcrypt_lib.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+    except Exception as e:
+        logger.error(f"Password verification error: {e}")
+        return False
 
 
 # ============================================================

@@ -716,3 +716,179 @@ async def update_material_content(
             db.rollback()
             logger.error(f"Error updating material content: {e}")
             raise HTTPException(status_code=500, detail=f"Error updating material: {str(e)}")
+
+
+# ============================================================================
+# Chunk Management Endpoints (for lecture_slides with synthesis)
+# ============================================================================
+
+class ChunkResponse(BaseModel):
+    chunk_id: str
+    chunk_index: int
+    content: str
+    source_type: Optional[str]
+    pages: Optional[List[int]] = []
+    metadata: Optional[dict] = {}
+
+
+class ChunksListResponse(BaseModel):
+    material_id: str
+    material_type: str
+    display_name: str
+    chunks: List[ChunkResponse]
+
+
+class UpdateChunkRequest(BaseModel):
+    content: str
+
+
+@router.get("/materials/{material_id}/chunks", response_model=ChunksListResponse)
+async def get_material_chunks(
+    material_id: str,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_professor)
+):
+    """
+    Get all chunks for a lecture_slide material.
+    Returns chunks sorted by chunk_index.
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="No permission to view this material")
+
+    # Get chunks
+    chunks = db.query(MaterialChunk).filter(
+        MaterialChunk.material_id == material_uuid
+    ).order_by(MaterialChunk.chunk_index).all()
+
+    chunk_responses = []
+    for chunk in chunks:
+        # Extract pages from metadata if available
+        pages = []
+        if chunk.chunk_metadata and isinstance(chunk.chunk_metadata, dict):
+            pages = chunk.chunk_metadata.get('pages', [])
+
+        chunk_responses.append(ChunkResponse(
+            chunk_id=str(chunk.chunk_id),
+            chunk_index=chunk.chunk_index,
+            content=chunk.content,
+            source_type=chunk.source_type,
+            pages=pages,
+            metadata=chunk.chunk_metadata or {}
+        ))
+
+    return ChunksListResponse(
+        material_id=str(material.material_id),
+        material_type=material.material_type,
+        display_name=material.display_name,
+        chunks=chunk_responses
+    )
+
+
+@router.put("/materials/{material_id}/chunks/{chunk_id}")
+async def update_chunk(
+    material_id: str,
+    chunk_id: str,
+    request: UpdateChunkRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_professor)
+):
+    """
+    Update a single chunk's content.
+    Regenerates the embedding for this chunk in the background.
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+        chunk_uuid = uuid.UUID(chunk_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid UUID format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="No permission to edit this material")
+
+    # Get chunk
+    chunk = db.query(MaterialChunk).filter(
+        MaterialChunk.chunk_id == chunk_uuid,
+        MaterialChunk.material_id == material_uuid
+    ).first()
+
+    if not chunk:
+        raise HTTPException(status_code=404, detail="Chunk not found")
+
+    # Update content
+    from material_processor import MaterialProcessor
+    processor = MaterialProcessor()
+    sanitized_content = processor.sanitize_content(request.content)
+
+    chunk.content = sanitized_content
+    db.commit()
+
+    logger.info(f"Updated chunk {chunk_id} for material {material.display_name}")
+
+    # Regenerate embedding in background
+    async def regenerate_embedding():
+        from embeddings import BedrockEmbedder
+
+        task_db = next(get_db())
+        try:
+            embedder = BedrockEmbedder()
+
+            # Get updated chunk
+            updated_chunk = task_db.query(MaterialChunk).filter(
+                MaterialChunk.chunk_id == chunk_uuid
+            ).first()
+
+            if updated_chunk:
+                # Generate new embedding
+                embedding = await embedder.embed_text(updated_chunk.content)
+                updated_chunk.embedding = embedding
+                task_db.commit()
+
+                logger.info(f"Regenerated embedding for chunk {chunk_id}")
+
+        except Exception as e:
+            logger.error(f"Error regenerating embedding: {e}")
+            task_db.rollback()
+        finally:
+            task_db.close()
+
+    background_tasks.add_task(regenerate_embedding)
+
+    return {
+        "status": "success",
+        "message": "Chunk updated successfully",
+        "chunk_id": str(chunk_uuid)
+    }
