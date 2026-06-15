@@ -1082,7 +1082,12 @@ async def upload_raw_files(
     from datetime import timezone
     PROCESSING_MARKER = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
-    if material.processed_at and material.processed_at <= PROCESSING_MARKER:
+    # Convert timezone-naive datetime to timezone-aware (for old DB records)
+    processed_at = material.processed_at
+    if processed_at and processed_at.tzinfo is None:
+        processed_at = processed_at.replace(tzinfo=timezone.utc)
+
+    if processed_at and processed_at <= PROCESSING_MARKER:
         raise HTTPException(status_code=409, detail="Material is currently being processed")
 
     # Save files
