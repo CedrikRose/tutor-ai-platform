@@ -892,3 +892,448 @@ async def update_chunk(
         "message": "Chunk updated successfully",
         "chunk_id": str(chunk_uuid)
     }
+
+
+# ============================================================================
+# Raw Material File Management Endpoints
+# ============================================================================
+
+class RawMaterialFileResponse(BaseModel):
+    file_id: str
+    filename: str
+    file_size: Optional[int]
+    is_important: bool
+    importance_reason: str
+    created_at: datetime
+
+
+class RawFilesListResponse(BaseModel):
+    material_id: str
+    files: List[RawMaterialFileResponse]
+
+
+class UpdateFileImportanceRequest(BaseModel):
+    file_importances: dict  # file_id -> bool
+
+
+def get_file_importance_status(db: Session, material: CourseMaterial, file: MaterialFile) -> tuple[bool, str]:
+    """
+    Determine if a file is important based on MaterialContent/MaterialChunk entries.
+
+    Args:
+        db: Database session
+        material: CourseMaterial instance
+        file: MaterialFile instance
+
+    Returns:
+        Tuple of (is_important: bool, reason: str)
+    """
+    # Check if file is referenced in processed content
+    if material.material_type == 'lecture_slide':
+        # Check MaterialChunk
+        chunk_exists = db.query(MaterialChunk).filter(
+            MaterialChunk.file_id == file.file_id
+        ).first()
+
+        if chunk_exists:
+            return True, "File is processed in lecture chunks"
+    else:
+        # Check MaterialContent
+        content_exists = db.query(MaterialContent).filter(
+            MaterialContent.file_id == file.file_id
+        ).first()
+
+        if content_exists:
+            reason = content_exists.importance_reason or "File is included in material"
+            return True, reason
+
+    # File not in processed content - check processing log for reason
+    log_entry = db.query(MaterialProcessingLog).filter(
+        MaterialProcessingLog.material_id == material.material_id,
+        MaterialProcessingLog.file_id == file.file_id,
+        MaterialProcessingLog.stage == 'file_analysis'
+    ).order_by(MaterialProcessingLog.started_at.desc()).first()
+
+    if log_entry and log_entry.details:
+        details = log_entry.details
+        if isinstance(details, dict):
+            is_important = details.get('important', False)
+            reason = details.get('reason', 'No reason provided')
+            return is_important, reason
+
+    # Default: assume unimportant with no specific reason
+    return False, "Not analyzed or filtered out"
+
+
+@router.get("/materials/{material_id}/raw-files", response_model=RawFilesListResponse)
+async def get_raw_files(
+    material_id: str,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_professor)
+):
+    """
+    Get all raw files for a material with importance status.
+
+    Returns all MaterialFile entries with their importance status
+    based on whether they appear in MaterialContent/MaterialChunk.
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        # Check if user is editor
+        from database import CoursePermission
+        permission = db.query(CoursePermission).filter(
+            CoursePermission.course_id == course.course_id,
+            CoursePermission.user_id == current_user.user_id
+        ).first()
+
+        if not permission or permission.permission_level not in ["owner", "editor"]:
+            raise HTTPException(status_code=403, detail="No permission to view this material")
+
+    # Get all files for this material
+    files = db.query(MaterialFile).filter(
+        MaterialFile.material_id == material_uuid
+    ).order_by(MaterialFile.created_at).all()
+
+    # Build response with importance status
+    file_responses = []
+    for file in files:
+        is_important, reason = get_file_importance_status(db, material, file)
+
+        file_responses.append(RawMaterialFileResponse(
+            file_id=str(file.file_id),
+            filename=file.filename,
+            file_size=file.file_size,
+            is_important=is_important,
+            importance_reason=reason,
+            created_at=file.created_at
+        ))
+
+    return RawFilesListResponse(
+        material_id=str(material.material_id),
+        files=file_responses
+    )
+
+
+@router.post("/materials/{material_id}/raw-files/upload")
+async def upload_raw_files(
+    material_id: str,
+    files: List[UploadFile] = File(...),
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_professor)
+):
+    """
+    Upload additional raw files to existing material.
+
+    New files are automatically marked as important (no LLM analysis).
+    Material must be re-processed after upload to include new files.
+    """
+    from file_storage import get_storage
+    from io import BytesIO
+
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        from database import CoursePermission
+        permission = db.query(CoursePermission).filter(
+            CoursePermission.course_id == course.course_id,
+            CoursePermission.user_id == current_user.user_id
+        ).first()
+
+        if not permission or permission.permission_level not in ["owner", "editor"]:
+            raise HTTPException(status_code=403, detail="No permission to edit this material")
+
+    # Check if material is currently being processed
+    from datetime import timezone
+    PROCESSING_MARKER = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+    if material.processed_at and material.processed_at <= PROCESSING_MARKER:
+        raise HTTPException(status_code=409, detail="Material is currently being processed")
+
+    # Save files
+    storage = get_storage()
+    saved_files = []
+
+    for file in files:
+        file_content = await file.read()
+
+        # Check if ZIP - extract if so
+        if file.filename.lower().endswith('.zip'):
+            logger.info(f"Detected ZIP file: {file.filename}, extracting...")
+
+            file_bytes = BytesIO(file_content)
+            temp_zip_path = storage.save_file(
+                file_content=file_bytes,
+                original_filename=file.filename,
+                course_id=f"{course.course_id}/materials/{material.material_id}"
+            )
+
+            try:
+                extracted_files = storage.extract_zip(
+                    temp_zip_path,
+                    f"{course.course_id}/materials/{material.material_id}"
+                )
+
+                for original_name, stored_path in extracted_files:
+                    material_file = MaterialFile(
+                        material_id=material.material_id,
+                        filename=original_name,
+                        file_path=stored_path,
+                        file_size=None,
+                        file_type='extracted_from_zip'
+                    )
+                    db.add(material_file)
+                    saved_files.append(material_file)
+
+                storage.delete_file(temp_zip_path)
+                logger.info(f"Extracted {len(extracted_files)} files from {file.filename}")
+
+            except Exception as e:
+                logger.error(f"Failed to extract ZIP {file.filename}: {e}", exc_info=True)
+                # Save ZIP as-is if extraction fails
+                material_file = MaterialFile(
+                    material_id=material.material_id,
+                    filename=file.filename,
+                    file_path=temp_zip_path,
+                    file_size=len(file_content),
+                    file_type='application/zip'
+                )
+                db.add(material_file)
+                saved_files.append(material_file)
+        else:
+            # Regular file
+            file_bytes = BytesIO(file_content)
+            file_path = storage.save_file(
+                file_content=file_bytes,
+                original_filename=file.filename,
+                course_id=f"{course.course_id}/materials/{material.material_id}"
+            )
+
+            material_file = MaterialFile(
+                material_id=material.material_id,
+                filename=file.filename,
+                file_path=file_path,
+                file_size=len(file_content)
+            )
+            db.add(material_file)
+            saved_files.append(material_file)
+
+    # Update file count
+    material.file_count = db.query(MaterialFile).filter(
+        MaterialFile.material_id == material.material_id
+    ).count()
+
+    db.commit()
+
+    logger.info(f"Added {len(saved_files)} files to material {material.display_name} by {current_user.email}")
+
+    return {
+        "material_id": str(material.material_id),
+        "files_added": len(saved_files),
+        "files": [{"filename": f.filename, "file_id": str(f.file_id)} for f in saved_files],
+        "message": f"{len(saved_files)} file(s) added successfully"
+    }
+
+
+@router.delete("/materials/{material_id}/raw-files/{file_id}")
+async def delete_raw_file(
+    material_id: str,
+    file_id: str,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_professor)
+):
+    """
+    Delete a raw file from material (physical deletion from storage).
+
+    Deletes:
+    - Physical file from S3/local storage
+    - MaterialFile record
+    - Associated MaterialContent/MaterialChunk entries
+    """
+    from file_storage import get_storage
+
+    try:
+        material_uuid = uuid.UUID(material_id)
+        file_uuid = uuid.UUID(file_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid UUID format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        from database import CoursePermission
+        permission = db.query(CoursePermission).filter(
+            CoursePermission.course_id == course.course_id,
+            CoursePermission.user_id == current_user.user_id
+        ).first()
+
+        if not permission or permission.permission_level not in ["owner", "editor"]:
+            raise HTTPException(status_code=403, detail="No permission to edit this material")
+
+    # Get file
+    file = db.query(MaterialFile).filter(
+        MaterialFile.file_id == file_uuid,
+        MaterialFile.material_id == material_uuid
+    ).first()
+
+    if not file:
+        raise HTTPException(status_code=404, detail="File not found")
+
+    # Delete physical file from storage
+    storage = get_storage()
+    try:
+        storage.delete_file(file.file_path)
+        logger.info(f"Deleted physical file: {file.file_path}")
+    except Exception as e:
+        logger.error(f"Failed to delete physical file {file.file_path}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete file from storage")
+
+    # Delete associated content entries (CASCADE will handle chunks/contents)
+    db.query(MaterialContent).filter(MaterialContent.file_id == file_uuid).delete()
+    db.query(MaterialChunk).filter(MaterialChunk.file_id == file_uuid).delete()
+
+    # Delete file record
+    db.delete(file)
+
+    # Update file count
+    material.file_count = db.query(MaterialFile).filter(
+        MaterialFile.material_id == material.material_id
+    ).count()
+
+    db.commit()
+
+    logger.info(f"Deleted file {file.filename} from material {material.display_name} by {current_user.email}")
+
+    return {"status": "success", "message": "File deleted successfully"}
+
+
+@router.put("/materials/{material_id}/raw-files/importance")
+async def update_file_importance(
+    material_id: str,
+    request: UpdateFileImportanceRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_professor)
+):
+    """
+    Update file importance and trigger reprocessing.
+
+    Only processes files marked as important (skips LLM filter).
+    If no files are marked as important, creates placeholder content.
+    """
+    try:
+        material_uuid = uuid.UUID(material_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid material_id format")
+
+    # Get material
+    material = db.query(CourseMaterial).filter(
+        CourseMaterial.material_id == material_uuid,
+        CourseMaterial.deleted_at.is_(None)
+    ).first()
+
+    if not material:
+        raise HTTPException(status_code=404, detail="Material not found")
+
+    # Check permissions
+    course = db.query(Course).filter(Course.course_id == material.course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    if course.owner_user_id != current_user.user_id:
+        from database import CoursePermission
+        permission = db.query(CoursePermission).filter(
+            CoursePermission.course_id == course.course_id,
+            CoursePermission.user_id == current_user.user_id
+        ).first()
+
+        if not permission or permission.permission_level not in ["owner", "editor"]:
+            raise HTTPException(status_code=403, detail="No permission to edit this material")
+
+    # Get important file IDs
+    important_file_ids = [
+        file_id for file_id, is_important in request.file_importances.items()
+        if is_important
+    ]
+
+    logger.info(f"Reprocessing material {material.display_name} with {len(important_file_ids)} important files")
+
+    # Mark as processing
+    from datetime import timezone
+    material.processed_at = datetime(1970, 1, 1, tzinfo=timezone.utc)
+    db.commit()
+
+    # Queue background reprocessing
+    from material_processor import MaterialProcessor
+    from database import SessionLocal
+
+    async def reprocess_material_task():
+        task_db = SessionLocal()
+        try:
+            processor = MaterialProcessor()
+            await processor.process_material(
+                str(material.material_id),
+                task_db,
+                skip_llm_filter=True,
+                important_file_ids=important_file_ids if important_file_ids else None
+            )
+            logger.info(f"Material {material.material_id} successfully reprocessed")
+        except Exception as e:
+            logger.error(f"Failed to reprocess material {material.material_id}: {e}", exc_info=True)
+        finally:
+            task_db.close()
+
+    background_tasks.add_task(reprocess_material_task)
+
+    return {
+        "status": "processing",
+        "material_id": str(material.material_id),
+        "important_files_count": len(important_file_ids),
+        "message": "Material wird neu verarbeitet"
+    }

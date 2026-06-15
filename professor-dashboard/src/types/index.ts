@@ -135,3 +135,21 @@ export interface MaterialContentResponse {
   content: string;
   is_editable: boolean;
 }
+
+export interface RawMaterialFile {
+  file_id: string;
+  filename: string;
+  file_size: number | null;
+  is_important: boolean;
+  importance_reason: string;
+  created_at: string;
+}
+
+export interface RawFilesResponse {
+  material_id: string;
+  files: RawMaterialFile[];
+}
+
+export interface UpdateFileImportanceRequest {
+  file_importances: Record<string, boolean>; // file_id -> is_important
+}

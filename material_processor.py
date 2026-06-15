@@ -737,7 +737,13 @@ class MaterialProcessor:
                            f"Stored {stored_count} chunks with embeddings and metadata")
 
 
-    async def process_material(self, material_id: str, db: Session):
+    async def process_material(
+        self,
+        material_id: str,
+        db: Session,
+        skip_llm_filter: bool = False,
+        important_file_ids: List[str] = None
+    ):
         """
         Process a single material through all stages.
 
@@ -748,6 +754,8 @@ class MaterialProcessor:
         Args:
             material_id: Material UUID
             db: Database session
+            skip_llm_filter: If True, skip LLM-based file analysis (manual selection)
+            important_file_ids: List of file IDs to process (if None, process all when skip_llm_filter=True)
         """
         from database import CourseMaterial, MaterialFile, MaterialChunk, MaterialContent
 
@@ -777,8 +785,40 @@ class MaterialProcessor:
 
             logger.info(f"Found {len(files)} files to process (lecture={is_lecture})")
 
-            # Stage 1: Filter files based on material type
-            if is_lecture:
+            # Stage 1: Filter files based on material type and skip_llm_filter flag
+            if skip_llm_filter:
+                # Manual file selection mode - process only specified files
+                if important_file_ids:
+                    important_file_id_set = set(str(fid) for fid in important_file_ids)
+                    important_files = [
+                        (f, "Manually selected by professor")
+                        for f in files
+                        if str(f.file_id) in important_file_id_set
+                    ]
+                    logger.info(f"Manual selection: Processing {len(important_files)} of {len(files)} files")
+                else:
+                    # No files specified and skip_llm_filter=True → empty material
+                    important_files = []
+                    logger.info(f"No important files specified - creating placeholder content")
+
+                # Log all files
+                for file in files:
+                    if str(file.file_id) in (important_file_ids or []):
+                        self.log_processing(
+                            db, str(material_id), 'file_analysis', 'completed',
+                            f"Manually selected: {file.filename}",
+                            {'important': True, 'reason': 'Manually selected by professor'},
+                            file_id=str(file.file_id)
+                        )
+                    else:
+                        self.log_processing(
+                            db, str(material_id), 'file_analysis', 'skipped',
+                            f"Not selected: {file.filename}",
+                            {'important': False, 'reason': 'Not marked as important by professor'},
+                            file_id=str(file.file_id)
+                        )
+
+            elif is_lecture:
                 # For lectures: Only PDFs are relevant (will be chunked and embedded)
                 pdf_files = [f for f in files if f.filename.lower().endswith('.pdf')]
                 important_files = pdf_files
@@ -861,6 +901,50 @@ class MaterialProcessor:
                             )
 
             logger.info(f"Filtered to {len(important_files)} important files")
+
+            # Handle empty materials (no important files)
+            if len(important_files) == 0:
+                logger.warning(f"No important files for material {material_id} - creating placeholder")
+
+                if is_lecture:
+                    # Create placeholder chunk for lecture
+                    placeholder_chunk = MaterialChunk(
+                        material_id=material_id,
+                        file_id=None,
+                        content="Material ist aktuell nicht verfügbar.",
+                        chunk_index=0,
+                        source_type='placeholder',
+                        file_name='placeholder.txt',
+                        start_char=0,
+                        end_char=0,
+                        embedding=None  # No embedding for placeholder
+                    )
+                    db.add(placeholder_chunk)
+                else:
+                    # Create placeholder content for homework/tutorium/other
+                    placeholder_content = MaterialContent(
+                        material_id=material_id,
+                        file_id=None,
+                        content="Material ist aktuell nicht verfügbar.",
+                        source_type='placeholder',
+                        file_name='placeholder.txt',
+                        file_size=len("Material ist aktuell nicht verfügbar."),
+                        importance_reason='No important files selected'
+                    )
+                    db.add(placeholder_content)
+
+                db.commit()
+                self.log_processing(
+                    db, str(material_id), 'placeholder', 'completed',
+                    "Created placeholder content (no important files)"
+                )
+
+                # Mark material as processed
+                material.processed_at = datetime.now(timezone.utc)
+                db.commit()
+
+                logger.info(f"Material {material_id} processed with placeholder content")
+                return
 
             # Stage 2 & 3: Process based on material type
             if is_lecture:

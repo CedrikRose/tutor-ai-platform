@@ -144,6 +144,32 @@ export const courseApi = {
   updateChunk: async (materialId: string, chunkId: string, content: string): Promise<void> => {
     await api.put(`/professor/materials/${materialId}/chunks/${chunkId}`, { content });
   },
+
+  getRawFiles: async (materialId: string): Promise<any> => {
+    const response = await api.get(`/professor/materials/${materialId}/raw-files`);
+    return response.data;
+  },
+
+  uploadRawFiles: async (materialId: string, files: File[]): Promise<void> => {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file));
+    await api.post(`/professor/materials/${materialId}/raw-files/upload`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+  },
+
+  deleteRawFile: async (materialId: string, fileId: string): Promise<void> => {
+    await api.delete(`/professor/materials/${materialId}/raw-files/${fileId}`);
+  },
+
+  updateFileImportance: async (
+    materialId: string,
+    fileImportances: Record<string, boolean>
+  ): Promise<void> => {
+    await api.put(`/professor/materials/${materialId}/raw-files/importance`, {
+      file_importances: fileImportances
+    });
+  },
 };
 
 // Homework API

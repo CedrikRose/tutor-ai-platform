@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { courseApi } from '../services/api';
+import EditRawMaterialsModal from './EditRawMaterialsModal';
 import type { CourseMaterial } from '../types';
 
 interface MaterialChunk {
@@ -30,6 +31,7 @@ export default function EditChunksModal({ material, onClose }: EditChunksModalPr
   const [error, setError] = useState<string | null>(null);
   const [editingChunk, setEditingChunk] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showRawMaterialsModal, setShowRawMaterialsModal] = useState(false);
 
   useEffect(() => {
     fetchChunks();
@@ -114,12 +116,20 @@ export default function EditChunksModal({ material, onClose }: EditChunksModalPr
                 {chunks.length} Chunks | Synthesized mit Reducto + Kimi K2.5
               </p>
             </div>
-            <button
-              onClick={onClose}
-              className="text-slate-400 hover:text-slate-200 text-3xl leading-none"
-            >
-              ×
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowRawMaterialsModal(true)}
+                className="text-slate-400 hover:text-slate-200 text-sm px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded"
+              >
+                📁 Rohmaterialien
+              </button>
+              <button
+                onClick={onClose}
+                className="text-slate-400 hover:text-slate-200 text-3xl leading-none"
+              >
+                ×
+              </button>
+            </div>
           </div>
 
           {/* Search */}
@@ -292,6 +302,18 @@ export default function EditChunksModal({ material, onClose }: EditChunksModalPr
           </button>
         </div>
       </div>
+
+      {/* Raw Materials Modal */}
+      {showRawMaterialsModal && (
+        <EditRawMaterialsModal
+          material={material}
+          onClose={() => setShowRawMaterialsModal(false)}
+          onSaved={() => {
+            setShowRawMaterialsModal(false);
+            fetchChunks(); // Reload chunks after raw materials change
+          }}
+        />
+      )}
     </div>
   );
 }
