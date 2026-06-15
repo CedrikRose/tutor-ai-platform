@@ -370,8 +370,13 @@ async def process_material(
     from datetime import datetime, timezone
     PROCESSING_MARKER = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
-    if material.processed_at:
-        if material.processed_at > PROCESSING_MARKER:
+    # Convert timezone-naive datetime to timezone-aware (for old DB records)
+    processed_at = material.processed_at
+    if processed_at and processed_at.tzinfo is None:
+        processed_at = processed_at.replace(tzinfo=timezone.utc)
+
+    if processed_at:
+        if processed_at > PROCESSING_MARKER:
             return {"message": "Material bereits verarbeitet", "status": "already_processed"}
         else:
             # Already being processed
@@ -446,7 +451,13 @@ async def get_material_content(
     # Check if processed
     from datetime import timezone
     PROCESSING_MARKER = datetime(1970, 1, 1, tzinfo=timezone.utc)
-    if not material.processed_at or material.processed_at <= PROCESSING_MARKER:
+
+    # Convert timezone-naive datetime to timezone-aware (for old DB records)
+    processed_at = material.processed_at
+    if processed_at and processed_at.tzinfo is None:
+        processed_at = processed_at.replace(tzinfo=timezone.utc)
+
+    if not processed_at or processed_at <= PROCESSING_MARKER:
         raise HTTPException(status_code=400, detail="Material not yet processed")
 
     # Get content based on material type
