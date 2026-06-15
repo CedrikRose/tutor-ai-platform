@@ -22,6 +22,7 @@ export default function EditRawMaterialsModal({
   const [error, setError] = useState<string | null>(null);
   const [fileToDelete, setFileToDelete] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasUploadedFiles, setHasUploadedFiles] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,6 +88,7 @@ export default function EditRawMaterialsModal({
     try {
       await courseApi.uploadRawFiles(material.material_id, filesToUpload);
       await fetchFiles(); // Reload
+      setHasUploadedFiles(true); // Mark that files were uploaded
     } catch (err: any) {
       console.error('Error uploading files:', err);
       setError(err.response?.data?.detail || 'Fehler beim Hochladen');
@@ -145,7 +147,9 @@ export default function EditRawMaterialsModal({
   };
 
   const hasChanges = () => {
-    return files.some(file => fileImportances[file.file_id] !== file.is_important);
+    // Check if checkboxes were changed OR files were uploaded
+    const checkboxChanged = files.some(file => fileImportances[file.file_id] !== file.is_important);
+    return checkboxChanged || hasUploadedFiles;
   };
 
   const formatFileSize = (bytes: number | null): string => {
