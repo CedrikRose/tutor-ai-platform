@@ -444,7 +444,8 @@ async def get_material_content(
         raise HTTPException(status_code=403, detail="No permission to view this material")
 
     # Check if processed
-    PROCESSING_MARKER = datetime(1970, 1, 1, 0, 0, 0)
+    from datetime import timezone
+    PROCESSING_MARKER = datetime(1970, 1, 1, tzinfo=timezone.utc)
     if not material.processed_at or material.processed_at <= PROCESSING_MARKER:
         raise HTTPException(status_code=400, detail="Material not yet processed")
 
@@ -648,7 +649,7 @@ async def update_material_content(
         background_tasks.add_task(process_lecture_update)
 
         # Set processing marker immediately
-        material.processed_at = datetime(1970, 1, 1, 0, 0, 0)
+        material.processed_at = datetime(1970, 1, 1, tzinfo=timezone.utc)
         db.commit()
 
         return {
