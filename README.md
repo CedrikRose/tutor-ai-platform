@@ -17,7 +17,7 @@ AI-assisted tutoring system for programming courses using RAG (Retrieval-Augment
 ### Backend
 - **FastAPI** server (Python 3.12)
 - **PostgreSQL 16** with pgvector for embeddings
-- **AWS Bedrock** (Claude 4.5 Sonnet, Titan Embeddings)
+- **AWS Bedrock** (Claude 4.6 Sonnet, Titan Embeddings)
 - **LlamaParse** for PDF processing
 
 ### Frontend
@@ -359,8 +359,8 @@ For commercial use or custom licensing, please contact me.
 
 ## Credits
 
-- **LLM:** Claude 4.5 Sonnet (AWS Bedrock)
+- **LLM:** Claude 4.6 Sonnet (AWS Bedrock)
 - **Embeddings:** Amazon Titan (AWS Bedrock)
-- **PDF Parsing:** LlamaParse
+- **PDF Parsing:** Reducto
 - **Framework:** FastAPI, React
 - **Database:** PostgreSQL + pgvector
