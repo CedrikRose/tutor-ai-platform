@@ -1,0 +1,900 @@
+================================================================================
+CHAT-VERLAUF: Paul
+Anzahl Exchanges: 11
+================================================================================
+
+
+================================================================================
+EXCHANGE 1
+================================================================================
+
+>>> STUDENT (Paul):
+ich bin paul ich habe grundlagen Erfahrung in Python aber noch keine in Scala oder java. ich möchte dass du mir hilfst stück für stück die Aufgaben durchzugehen
+
+>>> ASSISTENT:
+Hallo Paul! Schön, dass du dich an die Aufgaben wagst – auch ohne Scala/Java-Erfahrung. Das ist absolut machbar, ich begleite dich Schritt für Schritt.
+
+Lass uns mit **Teil 1.1 (Java: Funktionale Interfaces)** beginnen, da das konzeptionell ein guter Einstieg ist, bevor wir zu Scalas Datenverarbeitung kommen.
+
+---
+
+## Aufgabe 1.1: Funktionale Interfaces in Java – Das Konzept
+
+Bevor wir zum Code kommen, kurz die Idee: **Funktionale Interfaces** sind Java-Interfaces mit **genau einer abstrakten Methode**. Sie erlauben es, Lambda-Ausdrücke (also anonyme Funktionen) als Parameter zu übergeben.
+
+Java stellt im `java.util.function`-Paket vorgefertigte funktionale Interfaces bereit. Die vier wichtigsten für diese Aufgabe sind:
+
+| Interface | Signatur | Bedeutung |
+|-----------|----------|-----------|
+| `UnaryOperator<T>` | `T apply(T t)` | Eingabe → Ausgabe (gleicher Typ) |
+| `IntBinaryOperator` | `int applyAsInt(int a, int b)` | Zwei `int` → ein `int` |
+| `BiFunction<T, U, R>` | `R apply(T t, U u)` | Zwei Eingaben → beliebiger Rückgabetyp |
+| `Predicate<T>` | `boolean test(T t)` | Eingabe → `true`/`false` |
+
+---
+
+## Deine erste konkrete Aufgabe: Methode `applyMathToOneInt`
+
+Schau dir diese Methode in der Datei `FunctionalInterfaces.java` an:
+
+```java
+public static int applyMathToOneInt(int i, Object o) {
+    return -1;
+}
+```
+
+Und ihr Aufruf in `main()` (auskommentiert):
+```java
+int modifiedNumber = applyMathToOneInt(10, i -> i + 3);
+```
+
+**Was passiert hier?**
+- Der Lambda `i -> i + 3` nimmt **einen** `int`, addiert 3, gibt `int` zurück
+- Das ist ein klassischer Fall für `UnaryOperator<Integer>` – oder primitiver: `IntUnaryOperator`
+
+**Deine Aufgabe:** Welches funktionale Interface passt hier? Schreib mir einfach deinen ersten Gedanken – egal ob richtig oder falsch! – und wir bauen darauf auf.
+
+---
+
+Tipp: Überleg kurz: Wie viele Parameter nimmt der Lambda? Was gibt er zurück? Welches Interface in der Tabelle oben passt dazu?
+
+Was denkst du?
+
+
+================================================================================
+EXCHANGE 2
+================================================================================
+
+>>> STUDENT (Paul):
+was sind lamda ausfrücke
+
+>>> ASSISTENT:
+Sehr gute Frage, Paul! Lambda-Ausdrücke sind ein fundamentales Konzept – lass mich das direkt und ausführlich erklären.
+
+---
+
+## Lambda-Ausdrücke: Das Konzept
+
+Ein **Lambda-Ausdruck** ist eine **anonyme Funktion** – also eine Funktion ohne Namen, die du direkt an der Stelle definierst, wo du sie brauchst. Statt eine separate Methode zu schreiben, kannst du das Verhalten "inline" angeben.
+
+### Der Aufbau (Java-Syntax)
+
+```java
+(Parameter) -> { Rumpf }
+```
+
+| Teil | Bedeutung |
+|------|-----------|
+| `Parameter` | Eingabewerte (kann 0, 1 oder mehrere sein) |
+| `->` | Pfeil, trennt Parameter vom Rumpf |
+| `Rumpf` | Der Code, der ausgeführt wird |
+
+---
+
+## Konkrete Beispiele
+
+### Beispiel 1: Ein Parameter, einfacher Ausdruck
+```java
+// Lambda: nimm einen int, gib int + 3 zurück
+i -> i + 3
+
+// Entspricht dieser anonymen Funktion:
+int irgendeineFunktion(int i) {
+    return i + 3;
+}
+```
+
+### Beispiel 2: Zwei Parameter, mit Typangabe
+```java
+// Lambda: zwei ints, berechne (a % 3) + (b * 5)
+(int a, int b) -> (a % 3) + (b * 5)
+```
+
+### Beispiel 3: Mehrzeiliger Rumpf
+```java
+(a, b) -> {
+    String ergebnis = "First: " + a + ", Second: " + b;
+    return ergebnis;
+}
+```
+
+---
+
+## Warum heißt das so? (Kurzer historischer Kontext)
+
+Der Name kommt aus dem **Lambda-Kalkül**, einem mathematischen Formalismus von Alonzo Church (1930er). Dort schrieb man Funktionen als `λx.x+3` – das griechische Lambda `λ` stand für "anonyme Funktion". In Java wurde daraus der Pfeil `->`.
+
+---
+
+## Der entscheidende Punkt für deine Aufgabe
+
+Lambda-Ausdrücke können **als Parameter übergeben werden**, aber nur wenn der Parameter-Typ ein **funktionales Interface** ist – also ein Interface mit genau einer abstrakten Methode.
+
+Der Lambda "passt sich automatisch an" das Interface an. Wenn du also `i -> i + 3` übergibst, sagt Java: *"Ah, das ist eine Funktion mit einem `int`-Parameter und `int`-Rückgabe – das passt zu `UnaryOperator<Integer>`!"*
+
+---
+
+## Zurück zu deiner Aufgabe 1.1
+
+Schau nochmal auf den Aufruf:
+```java
+applyMathToOneInt(10, i -> i + 3);
+```
+
+| Element | Bedeutung |
+|---------|-----------|
+| `10` | Der Wert, der verarbeitet wird |
+| `i -> i + 3` | Die Operation: "nimm `i`, addiere 3" |
+
+**Frage an dich:** Welches funktionale Interface passt hier? Überleg kurz:
+- Wie viele Parameter nimmt der Lambda? **Einen** (`i`)
+- Was gibt er zurück? **Einen `int`** (`i + 3`)
+- Eingabe- und Ausgabetyp sind **gleich** (beide `int`)
+
+Schreib mir deine Vermutung – oder auch nur einen halben Gedanken! – dann gehen wir weiter.
+
+
+================================================================================
+EXCHANGE 3
+================================================================================
+
+>>> STUDENT (Paul):
+das klingt nach einem unary operator
+
+>>> ASSISTENT:
+Ja, genau richtig, Paul! 🎉
+
+Du hast es erfasst: **`UnaryOperator<T>`** ist das passende funktionale Interface für `applyMathToOneInt`.
+
+---
+
+## Warum `UnaryOperator<T>`?
+
+| Eigenschaft | Passt zu deinem Lambda? |
+|-------------|------------------------|
+| **Ein Parameter** | ✅ `i -> ...` hat einen Parameter |
+| **Gleicher Ein-/Ausgabetyp** | ✅ `int` → `int` (bzw. `Integer` → `Integer`) |
+| **Rückgabe wird weiterverwendet** | ✅ Das Ergebnis soll zurückgegeben werden |
+
+`UnaryOperator<T>` erweitert `Function<T, T>` – spezialisiert also auf den Fall, wo Eingabe und Ausgabe identisch sind.
+
+> **Kleine Feinheit:** Da wir mit primitiven `int` arbeiten, wäre eigentlich `IntUnaryOperator` noch effizienter (kein Boxing/Unboxing). Aber `UnaryOperator<Integer>` funktioniert auch und ist oft in Übungen akzeptiert. Die Musterlösung zeigt `UnaryOperator<Integer>`.
+
+---
+
+## Deine Aufgabe: Vervollständige die Methode
+
+Hier ist der aktuelle Stand:
+
+```java
+public static int applyMathToOneInt(int i, Object o) {
+    return -1;
+}
+```
+
+**Schritt 1:** Ersetze `Object` durch das richtige Interface.
+
+**Schritt 2:** Implementiere den Methodenrumpf so, dass das übergebene Interface auf `i` angewendet wird.
+
+Tipp: Das Interface hat eine Methode `apply()`, mit der du den Operator aufrufst.
+
+Versuch es! Schreib mir deinen Code – oder auch nur eine Vermutung, wie die Zeilen aussehen könnten.
+
+
+================================================================================
+EXCHANGE 4
+================================================================================
+
+>>> STUDENT (Paul):
+wofür steht das T in UnaryOperator<T>
+
+>>> ASSISTENT:
+Ausgezeichnete Frage, Paul! Das ist ein fundamentales Konzept in Java, das du unbedingt verstehen solltest.
+
+---
+
+## Generics: Das `<T>` in `UnaryOperator<T>`
+
+Das `T` steht für **Typ-Parameter** (Type Parameter) – ein Platzhalter für einen beliebigen Datentyp. Das Konzept nennt sich **Generics** (generische Typen).
+
+### Die Idee
+
+Statt für jeden Datentyp eine eigene Klasse zu schreiben, definierst du **eine** Klasse/Methode, die mit **beliebigen** Typen funktioniert.
+
+| Schreibweise | Bedeutung |
+|------------|-----------|
+| `UnaryOperator<Integer>` | Ein Operator, der `Integer` nimmt und `Integer` zurückgibt |
+| `UnaryOperator<String>` | Ein Operator, der `String` nimmt und `String` zurückgibt |
+| `UnaryOperator<Double>` | Ein Operator, der `Double` nimmt und `Double` zurückgibt |
+
+---
+
+## Konkretes Beispiel
+
+```java
+// Definition des Interfaces (vereinfacht):
+public interface UnaryOperator<T> {
+    T apply(T t);  // Nimmt T, gibt T zurück
+}
+
+// Verwendung mit verschiedenen Typen:
+UnaryOperator<Integer> addThree = i -> i + 3;     // Integer → Integer
+UnaryOperator<String> toUpper = s -> s.toUpperCase(); // String → String
+
+Integer result1 = addThree.apply(10);   // ergibt 13
+String result2 = toUpper.apply("hello"); // ergibt "HELLO"
+```
+
+---
+
+## Warum nicht einfach `Object`?
+
+Vergleiche:
+
+| Mit `Object` (schlecht) | Mit `T` (gut) |
+|------------------------|---------------|
+| `Object apply(Object o)` | `T apply(T t)` |
+| Keine Typprüfung zur Compile-Zeit | Compiler prüft Typen |
+| Laufzeitfehler möglich | Sicherheit zur Compile-Zeit |
+| Casting nötig: `(Integer) result` | Kein Casting nötig |
+
+Mit Generics sagst du dem Compiler: *"Hier kommt ein bestimmter Typ rein, und derselbe Typ kommt raus."*
+
+---
+
+## Zurück zu deiner Aufgabe
+
+In der Musterlösung steht:
+```java
+public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    return o.apply(i);
+}
+```
+
+Hier wird `T` konkret zu `Integer`. Der Lambda `i -> i + 3` passt dazu, weil:
+- Eingabe: `Integer` (autoboxed von `int`)
+- Rückgabe: `Integer` (autoboxed von `int`)
+
+> **Hinweis:** Wegen der Autoboxing könnte man auch `IntUnaryOperator` verwenden (primitiv, effizienter), aber `UnaryOperator<Integer>` ist völlig korrekt.
+
+---
+
+## Dein nächster Schritt
+
+Versuch die Methode jetzt zu implementieren! Du hast:
+- Parameter `i` (der `int`-Wert)
+- Parameter `o` (der `UnaryOperator<Integer>`)
+
+Was muss in den Rumpf, damit der Operator auf `i` angewendet wird?
+
+Schreib mir deinen Versuch – auch wenn's nur eine Vermutung ist!
+
+
+================================================================================
+EXCHANGE 5
+================================================================================
+
+>>> STUDENT (Paul):
+public static int applyMathToOneInt(int i, UnaryOperator Int o) {
+    return i-1;
+}
+
+>>> ASSISTENT:
+Gute Richtung, Paul! Du hast das richtige Interface erkannt, aber die Syntax und der Rumpf brauchen noch eine kleine Korrektur.
+
+---
+
+## Die Korrektur
+
+Dein Code:
+```java
+public static int applyMathToOneInt(int i, UnaryOperator Int o) {
+    return i-1;
+}
+```
+
+**Zwei Probleme:**
+
+| Problem | Erklärung |
+|---------|-----------|
+| `UnaryOperator Int` → `UnaryOperator<Integer>` | Generics brauchen `<T>`-Syntax, Leerzeichen funktioniert nicht |
+| `return i-1` → `return o.apply(i)` | Du musst den übergebenen Operator **anwenden**, nicht einfach `i-1` zurückgeben |
+
+---
+
+## Die korrekte Lösung
+
+```java
+public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    return o.apply(i);
+}
+```
+
+**Was passiert hier?**
+
+| Teil | Bedeutung |
+|------|-----------|
+| `UnaryOperator<Integer>` | Ein Operator, der `Integer` nimmt und `Integer` zurückgibt |
+| `o.apply(i)` | Der Operator `o` wird auf `i` angewendet |
+| `return ...` | Das Ergebnis wird zurückgegeben |
+
+**Beispiel-Aufruf:**
+```java
+applyMathToOneInt(10, i -> i + 3);
+// → o.apply(10) → 10 + 3 → 13
+```
+
+---
+
+## Warum `return i-1` falsch wäre
+
+Das würde **immer** `i-1` zurückgeben, egal welcher Lambda übergeben wird. Der Sinn der Aufgabe ist aber, den **übergebenen Operator** auszuführen.
+
+---
+
+## Nächste Aufgabe: 3.1.2
+
+Schau dir die zweite Methode an:
+
+```java
+public static int applyMathToTwoInts(int a, int b, Object o) {
+    return -1;
+}
+```
+
+Und ihr Aufruf:
+```java
+applyMathToTwoInts(10, 23, (int a, int b) -> (a % 3) + (b * 5));
+```
+
+**Überlegung:**
+- Wie viele Parameter hat der Lambda? **Zwei** (`a` und `b`)
+- Was gibt er zurück? **Ein `int`**
+- Welches Interface aus unserer Tabelle passt dazu?
+
+Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 6
+================================================================================
+
+>>> STUDENT (Paul):
+was macht public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    return o.apply(i);
+} den jetzt mit i , wo wird das i +3 ausgeführt
+
+>>> ASSISTENT:
+Sehr gute Frage, Paul! Das ist ein entscheidender Punkt, um zu verstehen, wie Lambda-Ausdrücke und funktionale Interfaces zusammenspielen. Lass mich das Schritt für Schritt aufdröseln.
+
+---
+
+## Der Ablauf im Detail
+
+### 1. Der Lambda wird **definiert** (aber noch nicht ausgeführt!)
+
+```java
+applyMathToOneInt(10, i -> i + 3);
+//                    ↑___________↑
+//                    Das ist der Lambda-Ausdruck!
+```
+
+Hier passiert **noch nichts** mit der Rechnung. Der Lambda `i -> i + 3` ist nur eine **Beschreibung** einer Funktion: *"Wenn du mir einen Wert gibst, addiere ich 3 dazu."*
+
+---
+
+### 2. Der Lambda wird an die Methode übergeben
+
+```java
+public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    // Hier kommt an: i = 10, o = der Lambda "i -> i + 3"
+    return o.apply(i);  // ← HIER wird der Lambda erst ausgeführt!
+}
+```
+
+| Variable | Wert |
+|----------|------|
+| `i` | `10` (das erste Argument) |
+| `o` | Der Lambda `i -> i + 3` als `UnaryOperator<Integer>` |
+
+---
+
+### 3. Der Lambda wird **angewendet** mit `o.apply(i)`
+
+```java
+o.apply(i)
+//  ↑    ↑
+//  |    └── Das ist die 10!
+//  └────── Das ist der Lambda "i -> i + 3"
+```
+
+**Was passiert intern:**
+
+| Schritt | Beschreibung |
+|---------|-------------|
+| `o.apply(10)` | "Hey Lambda, hier ist dein Wert: **10**" |
+| Lambda fängt an | Der Parameter `i` im Lambda wird zu **10** |
+| `i + 3` wird berechnet | `10 + 3 = 13` |
+| Ergebnis | `13` wird zurückgegeben |
+
+---
+
+## Visualisierung
+
+```
+Aufruf:  applyMathToOneInt(10,  i -> i + 3)
+                ↓           ↓       ↓
+Parameter:      i = 10      o = "Funktion, die 3 addiert"
+
+Im Rumpf:  return o.apply(i);
+                    ↓    ↓
+              "Funktion(10)"  →  10 + 3  →  13
+```
+
+---
+
+## Das ist der Kern der Sache
+
+| Konzept | Erklärung |
+|---------|-----------|
+| **Lambda-Definition** | `i -> i + 3` beschreibt nur *was* zu tun ist |
+| **Lambda-Ausführung** | Erst bei `apply()` wird *tatsächlich gerechnet* |
+| **Parameter-Einsetzung** | Das `i` im Lambda ist **nicht** dasselbe `i` wie in der Methode! |
+
+> **Wichtig:** Das `i` in `applyMathToOneInt(int i, ...)` und das `i` im Lambda `i -> i + 3` sind **zwei verschiedene Dinge**! Sie haben nur zufällig denselben Namen. Der Lambda-Parameter könnte genauso gut `x -> x + 3` oder `zahl -> zahl + 3` heißen.
+
+---
+
+## Alternative Sichtweise
+
+Stell dir den Lambda als kleine Maschine vor:
+
+```
+┌─────────────────┐
+│  Lambda-Maschine │
+│  "Addiere 3"     │
+│                 │
+│  Eingabe: [ i ] │
+│  → i + 3        │
+│  Ausgabe: ?     │
+└─────────────────┘
+        ↑
+   o.apply(10)  →  Eingabe wird zu 10  →  Ausgabe ist 13
+```
+
+---
+
+## Zurück zu deiner Aufgabe 1.1.2
+
+Du warst bei der Methode mit zwei Int-Parametern:
+
+```java
+applyMathToTwoInts(10, 23, (int a, int b) -> (a % 3) + (b * 5));
+```
+
+**Frage an dich:** Welches Interface passt hier? Überleg:
+- Wie viele Parameter? **Zwei** (`a` und `b`)
+- Eingabetypen? **Beide `int`**
+- Rückgabetyp? **`int`**
+
+Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 7
+================================================================================
+
+>>> STUDENT (Paul):
+der Lamda typ ist IntBinaryOperator
+die Funktion ist 
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator o) {
+    return o.apply(a,b);
+}
+
+>>> ASSISTENT:
+Fast, Paul! Du hast das richtige Interface erkannt, aber die Methode heißt bei `IntBinaryOperator` **anders**. Lass mich das kurz erklären.
+
+---
+
+## IntBinaryOperator: Die korrekte Methode
+
+Bei `IntBinaryOperator` lautet die abstrakte Methode nicht `apply()`, sondern:
+
+```java
+int applyAsInt(int left, int right)
+```
+
+Das ist eine Namenskonvention für primitive Spezialisierungen in Java – sie fügen oft `AsInt`, `AsLong`, `AsDouble` hinzu, um den Rückgabetyp klar zu machen.
+
+---
+
+## Deine korrekte Lösung
+
+```java
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator o) {
+    return o.applyAsInt(a, b);  // ← nicht apply(), sondern applyAsInt()!
+}
+```
+
+---
+
+## Warum `applyAsInt` und nicht `apply`?
+
+| Interface | Methode | Grund |
+|-----------|---------|-------|
+| `UnaryOperator<Integer>` | `apply(T t)` | Generisch, Wrapper-Typ |
+| `IntBinaryOperator` | `applyAsInt(int a, int b)` | Primitiv, vermeidet Boxing |
+
+`IntBinaryOperator` arbeitet direkt mit `int`, nicht mit `Integer`. Daher die spezielle Namensgebung.
+
+---
+
+## Kontrolle mit dem Aufruf
+
+```java
+applyMathToTwoInts(10, 23, (int a, int b) -> (a % 3) + (b * 5));
+//                        ↓
+//              a=10, b=23
+//              (10 % 3) + (23 * 5) = 1 + 115 = 116
+```
+
+Passt das zu deinem Verständnis? Wenn ja, gehen wir zur **Aufgabe 1.1.3** – dort wird es interessant, weil der Rückgabetyp **nicht** `int` ist!
+
+
+================================================================================
+EXCHANGE 8
+================================================================================
+
+>>> STUDENT (Paul):
+public static int applyMathToTwoInts(int a, int b, Object o) {
+    Int applyAsInt(int a, int b);
+}
+
+ist das richtig
+
+>>> ASSISTENT:
+Fast, Paul! Du hast die richtige Methode (`applyAsInt`) erkannt, aber die Syntax ist noch nicht ganz korrekt. Lass mich dir den Unterschied zeigen.
+
+---
+
+## Dein Versuch
+
+```java
+public static int applyMathToTwoInts(int a, int b, Object o) {
+    Int applyAsInt(int a, int b);  // ← Das ist Methoden-DEKLARATION, nicht Aufruf!
+}
+```
+
+Das sieht aus wie eine Interface-Methodendefinition, aber du willst ja die **bereits existierende** Methode des übergebenen Operators **aufrufen**.
+
+---
+
+## Die korrekte Lösung
+
+```java
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator o) {
+    return o.applyAsInt(a, b);  // ← Aufruf der Methode auf Objekt o!
+}
+```
+
+| Teil | Bedeutung |
+|------|-----------|
+| `IntBinaryOperator o` | Der Parameter ist vom Typ Interface (nicht `Object`) |
+| `o.applyAsInt(a, b)` | Wir rufen die Methode **auf dem Objekt o** auf |
+| `return ...` | Das Ergebnis wird zurückgegeben |
+
+---
+
+## Der entscheidende Unterschied
+
+| Was du geschrieben hast | Was du brauchst |
+|------------------------|-----------------|
+| Methoden**deklaration** (ohne Rumpf) | Methoden**aufruf** (mit Objekt und Parametern) |
+| `Int applyAsInt(int a, int b);` | `o.applyAsInt(a, b)` |
+
+Der Aufruf funktioniert so:
+- `o` → das übergebene funktionale Interface (der Lambda)
+- `.applyAsInt(...)` → seine Methode aufrufen
+- `(a, b)` → die beiden Parameter übergeben
+
+---
+
+## Zusammenfassung der bisherigen Lösungen
+
+| Aufgabe | Interface | Methode |
+|---------|-----------|---------|
+| 3.1.1 | `UnaryOperator<Integer>` | `o.apply(i)` |
+| 3.1.2 | `IntBinaryOperator` | `o.applyAsInt(a, b)` |
+
+---
+
+## Nächste Aufgabe: 3.1.3
+
+Schau dir die Methode an:
+
+```java
+public static String concatenateInts(int a, int b, Object o) {
+    return "";
+}
+```
+
+Und ihr Aufruf:
+```java
+concatenateInts(10, 23, (a, b) -> "First: " + a + ", Second: " + b);
+```
+
+**Analyse:**
+- Zwei Parameter: `a` und `b` (beide `int`)
+- Rückgabe: `String` (nicht `int`!)
+
+Welches Interface passt hier? Tipp: Es ist **kein** `Int...`-Operator, weil der Rückgabetyp anders ist als die Eingabetypen.
+
+Was denkst du?
+
+
+================================================================================
+EXCHANGE 9
+================================================================================
+
+>>> STUDENT (Paul):
+BiFunction<T, U, R,> aber ich weiß nicht wofür u und r steht
+
+>>> ASSISTENT:
+Sehr gute Frage, Paul! Du hast das richtige Interface erkannt. Lass mich die generischen Typparameter `T`, `U` und `R` erklären.
+
+---
+
+## `BiFunction<T, U, R>` – Die Typparameter
+
+| Parameter | Bedeutung |
+|-----------|-----------|
+| `T` | **Erster** Eingabetyp (Type 1) |
+| `U` | **Zweiter** Eingabetyp (Type 2 – **U** wie "second") |
+| `R` | **R**ückgabetyp (Return type) |
+
+Das Interface hat die Signatur:
+```java
+R apply(T t, U u)
+```
+
+---
+
+## Warum nicht `IntIntOperator`?
+
+Es gibt kein `IntIntOperator`, weil:
+- `IntBinaryOperator` → zwei `int` **rein**, ein `int` **raus**
+- Bei deiner Aufgabe → zwei `int` **rein**, aber `String` **raus**!
+
+Die Eingabetypen (`int`, `int`) und der Rückgabetyp (`String`) sind **verschieden**. Daher brauchen wir das generische `BiFunction`.
+
+---
+
+## Konkret für deine Aufgabe
+
+| Stelle im Code | Bedeutung |
+|--------------|-----------|
+| `BiFunction<Integer, Integer, String>` | Zwei `Integer` rein, `String` raus |
+| `(a, b) -> "First: " + a + ", Second: " + b` | Der Lambda nimmt `a` und `b`, gibt `String` zurück |
+
+---
+
+## Die vollständige Lösung
+
+```java
+public static String concatenateInts(int a, int b, BiFunction<Integer, Integer, String> f) {
+    return f.apply(a, b);
+}
+```
+
+---
+
+## Vergleich aller bisherigen Interfaces
+
+| Aufgabe | Interface | Signatur | Verwendung |
+|---------|-----------|----------|------------|
+| 3.1.1 | `UnaryOperator<T>` | `T apply(T t)` | Ein Parameter, gleicher Typ raus |
+| 3.1.2 | `IntBinaryOperator` | `int applyAsInt(int a, int b)` | Zwei `int`, `int` raus |
+| 3.1.3 | `BiFunction<T, U, R>` | `R apply(T t, U u)` | Zwei Parameter, **beliebiger** Rückgabetyp |
+
+---
+
+## Letzte Aufgabe: 3.1.4
+
+Schau dir die Methode an:
+
+```java
+public static List<Integer> filterIntegers(List<Integer> nums, Object o) {
+    return null;
+}
+```
+
+Und ihr Aufruf:
+```java
+List<Integer> greaterThanFive = filterIntegers(nums, i -> i > 5);
+```
+
+**Analyse:**
+- Eingabe: ein `Integer` (`i`)
+- Rückgabe: `boolean` (`i > 5` ist wahr oder falsch)
+- Verwendung: **Filtern** einer Liste
+
+Welches Interface passt hier? Tipp: Es hat `boolean` als Rückgabetyp und heißt im Deutschen "Prädikat" oder "Aussage".
+
+Was denkst du?
+
+
+================================================================================
+EXCHANGE 10
+================================================================================
+
+>>> STUDENT (Paul):
+der typ ist predicate<T>
+
+>>> ASSISTENT:
+Sehr gut, Paul! **Genau richtig!** 🎉
+
+---
+
+## `Predicate<T>` – Deine Lösung
+
+| Eigenschaft | Passt zu deiner Aufgabe? |
+|-------------|------------------------|
+| Ein Parameter | ✅ `i -> ...` hat einen Parameter |
+| Rückgabe `boolean` | ✅ `i > 5` ist ein boolean-Vergleich |
+| Test auf Bedingung | ✅ "Ist das Element größer als 5?" |
+
+Das Interface `Predicate<T>` hat die Signatur:
+```java
+boolean test(T t)
+```
+
+---
+
+## Die vollständige Lösung
+
+```java
+public static List<Integer> filterIntegers(List<Integer> nums, Predicate<Integer> p) {
+    List<Integer> output = new ArrayList<>();
+    for (Integer i : nums) {
+        if (p.test(i)) {  // ← Predicate mit .test() aufrufen!
+            output.add(i);
+        }
+    }
+    return output;
+}
+```
+
+**Wichtig:** Bei `Predicate` heißt die Methode `test()`, nicht `apply()`!
+
+---
+
+## Alle vier Interfaces im Vergleich
+
+| Aufgabe | Interface | Methode | Lambda-Beispiel |
+|---------|-----------|---------|-----------------|
+| 3.1.1 | `UnaryOperator<Integer>` | `apply(i)` | `i -> i + 3` |
+| 3.1.2 | `IntBinaryOperator` | `applyAsInt(a, b)` | `(a, b) -> (a % 3) + (b * 5)` |
+| 3.1.3 | `BiFunction<Integer, Integer, String>` | `apply(a, b)` | `(a, b) -> "First: " + a + ", Second: " + b` |
+| 3.1.4 | `Predicate<Integer>` | `test(i)` | `i -> i > 5` |
+
+---
+
+## 🎉 Teil 1.1 geschafft!
+
+Du hast alle vier funktionalen Interfaces korrekt identifiziert! Das Java-Teil ist damit komplett.
+
+---
+
+## Weiter zu Teil 1.2: Scala
+
+Jetzt kommen wir zu **Scala** – der zweiten Sprache in dieser Hausaufgabe. Du hast ja Python-Erfahrung, das hilft! Scala hat einige Gemeinsamkeiten mit Python (z.B. Listen-Comprehensions), aber auch wichtige Unterschiede.
+
+### Erste Aufgabe: `readRegistrationsFromFile`
+
+**Ziel:** Eine CSV-Datei einlesen und in eine Liste von Tupeln umwandeln.
+
+**CSV-Format (`registrations.csv`):**
+```
+Willi,373583,2
+Anselma,476749,2
+Noll,345909,2
+...
+```
+
+**Ziel-Tupel:** `List[(String, Int, Int)]` also z.B. `("Willi", 373583, 2)`
+
+**Gegebener Code-Rumpf:**
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    //TODO: implement
+    List()
+}
+```
+
+**Hinweis aus der Aufgabe:** Nutze die **for-Notation** (Scala's Version von Listen-Comprehensions).
+
+Hast du schon mal mit Dateien in Python gearbeitet? Wie würdest du da vorgehen – zeilenweise lesen, splitten, in Tupel umwandeln?
+
+Schreib mir deinen ersten Gedanken, dann zeige ich dir die Scala-Syntax dazu!
+
+
+================================================================================
+EXCHANGE 11
+================================================================================
+
+>>> STUDENT (Paul):
+ich habe für den ersten Teil der Hausaufgabe ca eine Stunde gebraucht
+
+>>> ASSISTENT:
+Paul, das ist eine super Zeit für den ersten Teil! 🎉 Eine Stunde für das Java-Teil mit funktionalen Interfaces zeigt, dass du das Konzept gut durchdrungen hast. Das ist normal für den Einstieg – besonders wenn du neu in Lambda-Ausdrücken bist.
+
+---
+
+## Jetzt: Scala-Teil (Aufgabe 3.2)
+
+Du hast ja Python-Erfahrung. Stell dir Scalas **for-Notation** wie eine **Listen-Comprehension in Python** vor – nur mit etwas anderer Syntax.
+
+### Vergleich Python vs. Scala
+
+| Python | Scala |
+|--------|-------|
+| `[x*2 for x in liste]` | `for (x <- liste) yield x*2` |
+| `[x for x in liste if x > 5]` | `for (x <- liste if x > 5) yield x` |
+
+---
+
+## Aufgabe 3.2.1: `readRegistrationsFromFile`
+
+**Gegeben:**
+- CSV-Datei mit Zeilen wie: `Willi,373583,2`
+- Ziel: `List[(String, Int, Int)]` also z.B. `("Willi", 373583, 2)`
+
+**Dein Startpunkt:**
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()  // Iterator über alle Zeilen
+
+    //TODO: implement
+    List()
+}
+```
+
+**Was du brauchst (Schritt für Schritt):**
+
+| Schritt | Was passiert |
+|---------|--------------|
+| 1. Über Zeilen iterieren | `line <- lines` |
+| 2. Zeile splitten | `line.split(",")` |
+| 3. Werte extrahieren | `name = parts(0)`, `id = parts(1).toInt`, `attempt = parts(2).toInt` |
+| 4. Tupel bilden | `(name, id, attempt)` |
+| 5. In Liste sammeln | `.toList` am Ende |
+
+---
+
+## Versuch es!
+
+Wie würdest du in Python eine CSV-Datei zeilenweise einlesen und in Tupel umwandeln? Schreib mir deinen Python-Ansatz – dann zeige ich dir die Scala-Übersetzung!
+
+Oder wagst du direkt einen Scala-Versuch?

@@ -1,0 +1,111 @@
+================================================================================
+FRAGE: Was ist die Komplexitätstheorie in Java?
+Conversation-ID: acd143fb-7165-4ea1-868e-d8cca4e23329
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 02-Skript Imperative Programming.pdf (Index: 23)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 2] Quelle: 02-Skript Imperative Programming.pdf (Index: 24)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 3] Quelle: 02-Skript Imperative Programming.pdf (Index: 25)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 4] Quelle: 02-Skript Imperative Programming.pdf (Index: 26)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 5] Quelle: 02-Skript Imperative Programming.pdf (Index: 27)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 6] Quelle: 02-Skript Imperative Programming.pdf (Index: 36)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 7] Quelle: 02-Skript Imperative Programming.pdf (Index: 37)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 8] Quelle: 02-Skript Imperative Programming.pdf (Index: 38)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 9] Quelle: 02-Skript Imperative Programming.pdf (Index: 39)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 10] Quelle: 02-Skript Imperative Programming.pdf (Index: 40)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+────────────────────────────────────────
+
+STUDENT: Was ist die Komplexitätstheorie in Java?
+
+ASSISTENT: ## Komplexitätstheorie in Java
+
+Die **Komplexitätstheorie** ist kein spezifisches Java-Konzept, sondern ein **fundamentales Thema der Informatik** im Allgemeinen.
+
+---
+
+### Was ist Komplexitätstheorie?
+
+Die Komplexitätstheorie beschäftigt sich mit der **Effizienz von Algorithmen**, insbesondere:
+
+- ⏱️ **Zeitkomplexität** – Wie viele Schritte braucht ein Algorithmus?
+- 💾 **Speicherkomplexität** – Wie viel Speicher wird benötigt?
+
+---
+
+### Die Big-O-Notation
+
+Das wichtigste Werkzeug ist die **Big-O-Notation**, z.B.:
+
+| Notation | Bezeichnung | Beispiel |
+|----------|-------------|---------|
+| O(1) | Konstant | Array-Zugriff |
+| O(log n) | Logarithmisch | Binäre Suche |
+| O(n) | Linear | Einfache Schleife |
+| O(n²) | Quadratisch | Verschachtelte Schleifen |
+
+---
+
+### Hinweis zu den Kursmaterialien
+
+> ⚠️ Die bereitgestellten Kursmaterialien aus **Vorlesung 2 (Imperative Programming)** behandeln dieses Thema **nicht direkt**. Dort geht es um grundlegende Java-Konzepte wie `IOTools` und die `Math`-Klasse.
+
+Die Komplexitätstheorie wird typischerweise in einem **Algorithmen- und Datenstrukturen**-Kurs behandelt.
+
+Hast du eine spezifischere Frage dazu? 😊
+

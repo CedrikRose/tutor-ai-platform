@@ -1,0 +1,521 @@
+================================================================================
+FRAGE: Wie funktioniert Selection Sort in Java?
+Conversation-ID: a961b21e-d68d-4666-980b-4b7a7a37e6e3
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 01-Foundations.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part I: Foundations
+  #### David Bermbach
+  
+  ----
+  
+  ### Table of Contents
+  1. Introduction to Programming
+  2. Basic Concepts
+  3. Control Structures
+  4. Functions
+  5. Data Structures
+  6. Object-Oriented Programming
+  7. Conclusion
+  
+  ----
+  
+  ### 1. Introduction to Programming
+  Programming is the process of creating a set of instructions that tell a computer how to perform a task. It involves writing code in a programming language.
+  
+  ### 2. Basic Concepts
+  - **Variables**: Used to store data values.
+  - **Data Types**: Different types of data (e.g., integers, floats, strings).
+  - **Operators**: Symbols that perform operations on variables and values.
+  
+  #### Example:
+  ```python
+  # This is a comment
+  x = 5           # Integer
+  y = 3.14        # Float
+  name = "Alice"  # String
+  ```
+  
+  ### 3. Control Structures
+  Control structures dictate the flow of control in a program. The most common types are:
+  - **Conditional Statements**: `if`, `else`, `elif`
+  - **Loops**: `for`, `while`
+  
+  #### Example:
+  ```python
+  # Conditional statement
+  if x > 0:
+  print("x is positive")
+  else:
+  print("x is non-positive")
+  
+  # Loop
+  for i in range(5):
+  print(i)
+  ```
+  
+  ### 4. Functions
+  Functions are reusable pieces of code that perform a specific task. They can take inputs and return outputs.
+  
+  #### Example:
+  ```python
+  def add(a, b):
+  return a + b
+  
+  result = add(5, 3)
+  print(result)  # Output: 8
+  ```
+  
+  ### 5. Data Structures
+  Data structures are ways to organize and store data. Common data structures include:
+  - **Lists**
+  - **Tuples**
+  - **Dictionaries**
+  - **Sets**
+  
+  #### Example:
+  ```python
+  # List
+  fruits = ["apple", "banana", "cherry"]
+  
+  # Dictionary
+  person = {"name": "Alice", "age": 25}
+  ```
+  
+  ### 6.
+
+  [Chunk 2] Quelle: 04-Algorithms and Data Structures.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part IV: Algorithms and Data Structures
+  #### David Bermbach
+  
+  ----
+  
+  This document covers the fundamental concepts of algorithms and data structures, which are essential for efficient programming. Below are key topics that will be discussed in this part of the course.
+  
+  ### 1. Introduction to Algorithms
+  - Definition of an algorithm
+  - Characteristics of algorithms
+  - Examples of algorithms in programming
+  
+  ### 2. Data Structures
+  - Definition and importance of data structures
+  - Common data structures:
+  - Arrays
+  - Linked Lists
+  - Stacks
+  - Queues
+  - Trees
+  - Graphs
+  
+  ### 3. Algorithm Complexity
+  - Time complexity
+  - Space complexity
+  - Big O notation
+  
+  ### 4. Searching Algorithms
+  - Linear search
+  - Binary search
+  - Comparison of searching algorithms
+  
+  ### 5. Sorting Algorithms
+  - Bubble sort
+  - Selection sort
+  - Merge sort
+  - Quick sort
+  - Comparison of sorting algorithms
+  
+  ### 6. Recursion
+  - Definition of recursion
+  - Base case and recursive case
+  - Examples of recursive algorithms
+  
+  ### 7.
+
+  [Chunk 3] Quelle: 04-Algorithms and Data Structures.pdf (Index: 1)
+  ------------------------------------------------------------
+  ar search
+  - Binary search
+  - Comparison of searching algorithms
+  
+  ### 5. Sorting Algorithms
+  - Bubble sort
+  - Selection sort
+  - Merge sort
+  - Quick sort
+  - Comparison of sorting algorithms
+  
+  ### 6. Recursion
+  - Definition of recursion
+  - Base case and recursive case
+  - Examples of recursive algorithms
+  
+  ### 7. Conclusion
+  - Summary of key points
+  - Importance of choosing the right algorithm and data structure
+  
+  ----
+  
+  ### Code Examples
+  
+  ```python
+  # Example of a simple linear search algorithm
+  def linear_search(arr, target):
+  for index, value in enumerate(arr):
+  if value == target:
+  return index
+  return -1
+  ```
+  
+  ### Mathematical Formulas
+  
+  - Time Complexity: \( T(n) = O(n) \) for linear search
+  - Space Complexity: \( S(n) = O(1) \) for iterative algorithms
+  
+  ### Tables
+  
+  | Data Structure | Access Time | Insertion Time | Deletion Time |
+  |----------------|-------------|----------------|---------------|
+  | Array          | O(1)        | O(n)           | O(n)          |
+  | Linked List    | O(n)        | O(1)           | O(1)          |
+  | Stack          | O(n)        | O(1)           | O(1)          |
+  | Queue          | O(n)        | O(1)           | O(1)          |
+  
+  ### Diagrams
+  
+  *Figure 1: Example of a binary tree structure*
+  
+  ```
+  A
+  / \
+  B   C
+  / \
+  D   E
+  ```
+  
+  This concludes the overview of algorithms and data structures.
+
+  [Chunk 4] Quelle: 04-Algorithms and Data Structures.pdf (Index: 2)
+  ------------------------------------------------------------
+  |
+  | Stack          | O(n)        | O(1)           | O(1)          |
+  | Queue          | O(n)        | O(1)           | O(1)          |
+  
+  ### Diagrams
+  
+  *Figure 1: Example of a binary tree structure*
+  
+  ```
+  A
+  / \
+  B   C
+  / \
+  D   E
+  ```
+  
+  This concludes the overview of algorithms and data structures. Understanding these concepts is crucial for developing efficient and effective software solutions.
+  
+  
+  
+  # Roadmap
+  
+  ## Foundations
+  
+  ## Imperative Programming
+  
+  ## Object-Oriented Programming
+  
+  ## Algorithms and Data Structures
+  
+  ## Advanced Concepts in Java
+  
+  ## Outlook
+  
+  ----
+  
+  **Page 2  Prog1**
+  
+  
+  
+  # Agenda for this Block
+  
+  ## Algorithms
+  - **Searching**
+  - **Complexity Theory**
+  - **Sorting**
+  
+  ## Data Structures
+  - **Abstract Data Types**
+  - **Array-backed Implementations**
+  - **Linked Implementations**
+  
+  ## Collections and Generics
+  - **Collections**
+  - **Generics**
+  - **Other Useful Classes**
+  
+  
+  
+  # IV-A: Algorithms
+  
+  ## Search Algorithms
+  
+  ### Introduction
+  Search algorithms are fundamental to computer science and are used to retrieve information stored within data structures. They can be broadly categorized into two types: **linear search** and **binary search**.
+  
+  ### Linear Search
+  Linear search is the simplest search algorithm. It checks each element in a list until the desired element is found or the list ends.
+  
+  #### Algorithm
+  ```python
+  def linear_search(arr, target):
+  for index, value in enumerate(arr):
+  if value == target:
+  return index
+  return -1
+  ```
+  
+  #### Complexity
+  - **Time Complexity**: O(n)
+  - **Space Complexity**: O(1)
+  
+  ### Binary Search
+  Binary search is a more efficient algorithm that works on sorted arrays.
+
+  [Chunk 5] Quelle: 04-Algorithms and Data Structures.pdf (Index: 3)
+  ------------------------------------------------------------
+  lgorithm
+  ```python
+  def linear_search(arr, target):
+  for index, value in enumerate(arr):
+  if value == target:
+  return index
+  return -1
+  ```
+  
+  #### Complexity
+  - **Time Complexity**: O(n)
+  - **Space Complexity**: O(1)
+  
+  ### Binary Search
+  Binary search is a more efficient algorithm that works on sorted arrays. It divides the search interval in half repeatedly until the target value is found.
+  
+  #### Algorithm
+  ```python
+  def binary_search(arr, target):
+  left, right = 0, len(arr) - 1
+  while left &#x3C;= right:
+  mid = left + (right - left) // 2
+  if arr[mid] == target:
+  return mid
+  elif arr[mid] &#x3C; target:
+  left = mid + 1
+  else:
+  right = mid - 1
+  return -1
+  ```
+  
+  #### Complexity
+  - **Time Complexity**: O(log n)
+  - **Space Complexity**: O(1)
+  
+  ### Comparison of Search Algorithms
+  
+  | Algorithm      | Time Complexity | Space Complexity |
+  |----------------|-----------------|------------------|
+  | Linear Search  | O(n)            | O(1)             |
+  | Binary Search  | O(log n)        | O(1)             |
+  
+  ### Conclusion
+  Choosing the right search algorithm depends on the data structure and the specific requirements of the application. For unsorted data, linear search is appropriate, while binary search is optimal for sorted data.
+  
+  
+  
+  # Motivation
+  
+  So far, we have accessed all data via their index position in an array.
+
+  [Chunk 6] Quelle: 04-Algorithms and Data Structures.pdf (Index: 21)
+  ------------------------------------------------------------
+  oosing the right search algorithm depends on the data structure and the specific requirements of the application. For unsorted data, linear search is appropriate, while binary search is optimal for sorted data.
+  
+  
+  
+  # Motivation
+  
+  So far, we have accessed all data via their index position in an array.
+
+  [Chunk 7] Quelle: 02-Skript Imperative Programming.pdf (Index: 22)
+  ------------------------------------------------------------
+  at the assignment operation in brackets yields the assigned value to first assign a value and then compare said value to `-1`.
+  
+  Second, variables should always have useful names that describe what is stored in the corresponding variable. For example, `numberOfExams` is much more intuitive than `a`. If we now want to calculate the number of exams we need to print, we end up with code such as this (assuming the corresponding variables all exist and have reasonable values):
+  
+  ```java
+  // Example code for calculating number of exams
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  To increase readability, Java offers compound operators for the operators `+`, `-`, `*`, `/`, and `%`. For example, `+=` is short for `a = a + b`, likewise `-=` is short for `a = a - b`, etc. Using this, the code example above can be rewritten to:
+  
+  ```java
+  // Using compound operators
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  ## Class Functionality in Java
+  
+  Almost all functionality provided by the Java Class Library is provided in the form of methods, which we can call. We have already seen how calling class methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 8] Quelle: 04-Algorithms and Data Structures.pdf (Index: 22)
+  ------------------------------------------------------------
+  oosing the right search algorithm depends on the data structure and the specific requirements of the application. For unsorted data, linear search is appropriate, while binary search is optimal for sorted data.
+  
+  
+  
+  # Motivation
+  
+  So far, we have accessed all data via their index position in an array.
+
+  [Chunk 9] Quelle: 04-Algorithms and Data Structures.pdf (Index: 24)
+  ------------------------------------------------------------
+  oosing the right search algorithm depends on the data structure and the specific requirements of the application. For unsorted data, linear search is appropriate, while binary search is optimal for sorted data.
+  
+  
+  
+  # Motivation
+  
+  So far, we have accessed all data via their index position in an array.
+
+  [Chunk 10] Quelle: 04-Algorithms and Data Structures.pdf (Index: 26)
+  ------------------------------------------------------------
+  oosing the right search algorithm depends on the data structure and the specific requirements of the application. For unsorted data, linear search is appropriate, while binary search is optimal for sorted data.
+  
+  
+  
+  # Motivation
+  
+  So far, we have accessed all data via their index position in an array.
+
+────────────────────────────────────────
+
+STUDENT: Wie funktioniert Selection Sort in Java?
+
+ASSISTENT: # Selection Sort in Java
+
+## Grundprinzip
+
+Selection Sort funktioniert nach folgendem Prinzip:
+
+1. **Finde das kleinste Element** im unsortierten Teil des Arrays
+2. **Tausche es** mit dem ersten Element des unsortierten Teils
+3. **Verschiebe die Grenze** zwischen sortiertem und unsortiertem Teil um eine Position nach rechts
+4. **Wiederhole**, bis das gesamte Array sortiert ist
+
+---
+
+## Visualisierung
+
+```
+[64, 25, 12, 22, 11]   → finde Minimum (11), tausche mit Index 0
+[11, 25, 12, 22, 64]   → finde Minimum (12), tausche mit Index 1
+[11, 12, 25, 22, 64]   → finde Minimum (22), tausche mit Index 2
+[11, 12, 22, 25, 64]   → finde Minimum (25), tausche mit Index 3
+[11, 12, 22, 25, 64]   → fertig ✓
+ ↑____________↑
+ sortiert   | unsortiert
+```
+
+---
+
+## Java-Implementierung
+
+```java
+public class SelectionSort {
+
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+
+        // Äußere Schleife: Grenze des sortierten Bereichs
+        for (int i = 0; i < n - 1; i++) {
+
+            // Schritt 1: Index des Minimums im unsortierten Teil finden
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // Schritt 2: Minimum mit erstem unsortierten Element tauschen
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 25, 12, 22, 11};
+        selectionSort(arr);
+
+        // Ausgabe: 11 12 22 25 64
+        for (int val : arr) {
+            System.out.print(val + " ");
+        }
+    }
+}
+```
+
+---
+
+## Komplexität
+
+| Eigenschaft | Wert |
+|---|---|
+| **Zeit (Best Case)** | O(n²) |
+| **Zeit (Worst Case)** | O(n²) |
+| **Speicher** | O(1) |
+
+> ⚠️ **Wichtig:** Selection Sort hat **immer O(n²)**, da der innere Suchdurchlauf unabhängig vom Eingabezustand immer vollständig ausgeführt wird.
+
+---
+
+## Vergleich mit anderen Sortieralgorithmen
+
+Laut den Kursmaterialien gibt es effizientere Alternativen:
+
+| Algorithmus | Durchschnitt | Geeignet für |
+|---|---|---|
+| Selection Sort | O(n²) | Kleine Arrays |
+| Merge Sort | O(n log n) | Große Arrays |
+| Quick Sort | O(n log n) | Allgemein |
+
+**Fazit:** Selection Sort ist einfach zu verstehen, aber für große Datensätze weniger geeignet als Merge Sort oder Quick Sort.
+

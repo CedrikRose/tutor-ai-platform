@@ -1,0 +1,779 @@
+================================================================================
+FRAGE: Was ist OOP in Java?
+Conversation-ID: 93305bde-eb34-4987-a245-724bc2e30be3
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 03-OOP.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part III: Object-Oriented Programming
+  #### David Bermbach
+  
+  ----
+  
+  ### Overview of Object-Oriented Programming
+  
+  Object-Oriented Programming (OOP) is a programming paradigm that uses "objects" to represent data and methods to manipulate that data. The key concepts of OOP include:
+  
+  - **Classes and Objects**
+  - **Encapsulation**
+  - **Inheritance**
+  - **Polymorphism**
+  
+  ### 1. Classes and Objects
+  
+  A class is a blueprint for creating objects. An object is an instance of a class.
+  
+  ```python
+  class Dog:
+  def __init__(self, name):
+  self.name = name
+  
+  def bark(self):
+  return f"{self.name} says woof!"
+  
+  # Creating an object of the Dog class
+  my_dog = Dog("Buddy")
+  print(my_dog.bark())  # Output: Buddy says woof!
+  ```
+  
+  ### 2. Encapsulation
+  
+  Encapsulation is the bundling of data and methods that operate on that data within one unit, typically a class. It restricts direct access to some of the object's components.
+  
+  ```python
+  class BankAccount:
+  def __init__(self, balance=0):
+  self.__balance = balance  # Private attribute
+  
+  def deposit(self, amount):
+  self.__balance += amount
+  
+  def get_balance(self):
+  return self.__balance
+  
+  account = BankAccount()
+  account.deposit(100)
+  print(account.get_balance())  # Output: 100
+  ```
+  
+  ### 3. Inheritance
+  
+  Inheritance allows a class to inherit attributes and methods from another class.
+  
+  ```python
+  class Animal:
+  def speak(self):
+  return "Animal speaks"
+  
+  class Cat(Animal):
+  def speak(self):
+  return "Cat meows"
+  
+  my_cat = Cat()
+  print(my_cat.speak())  # Output: Cat meows
+  ```
+  
+  ### 4. Polymorphism
+  
+  Polymorphism allows methods to do different things based on the object it is acting upon.
+  
+  ```python
+  def animal_sound(animal):
+  print(animal.speak())
+  
+  animal_sound(my_cat)  # Output: Cat meows
+  animal_sound(Dog("Rex"))  # Output: Rex says woof!
+  ```
+  
+  ### Summary
+  
+  Object-Oriented Programming is a powerful paradigm that helps in organizing code and making it more reusable and maintainable.
+
+  [Chunk 2] Quelle: 05-Advanced Concepts.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part V: Advanced Concepts
+  #### David Bermbach
+  
+  ----
+  
+  ### Table of Contents
+  1. Introduction to Advanced Concepts
+  2. Object-Oriented Programming
+  3. Functional Programming
+  4. Error Handling
+  5. Concurrency and Parallelism
+  6. Conclusion
+  
+  ----
+  
+  ### 1. Introduction to Advanced Concepts
+  In this section, we will explore advanced programming concepts that enhance your coding skills and improve the efficiency of your programs.
+  
+  ### 2. Object-Oriented Programming
+  Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code.
+  
+  #### Key Concepts:
+  - **Classes and Objects**
+  - **Inheritance**
+  - **Polymorphism**
+  - **Encapsulation**
+  
+  ```python
+  class Animal:
+  def speak(self):
+  raise NotImplementedError("Subclasses must implement this method")
+  
+  class Dog(Animal):
+  def speak(self):
+  return "Woof!"
+  
+  class Cat(Animal):
+  def speak(self):
+  return "Meow!"
+  ```
+  
+  ### 3. Functional Programming
+  Functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions.
+  
+  #### Key Concepts:
+  - **First-Class Functions**
+  - **Higher-Order Functions**
+  - **Pure Functions**
+  - **Immutability**
+  
+  ```python
+  def add(x, y):
+  return x + y
+  
+  def apply_function(func, x, y):
+  return func(x, y)
+  
+  result = apply_function(add, 5, 3)  # result is 8
+  ```
+  
+  ### 4. Error Handling
+  Error handling is crucial for building robust applications. In Python, we use exceptions to handle errors.
+  
+  #### Example:
+  ```python
+  try:
+  result = 10 / 0
+  except ZeroDivisionError:
+  print("You can't divide by zero!")
+  ```
+  
+  ### 5. Concurrency and Parallelism
+  Concurrency is the ability to run multiple tasks simultaneously, while parallelism is the simultaneous execution of multiple tasks.
+  
+  #### Example using threading:
+  ```python
+  import threading
+  
+  def print_numbers():
+  for i in range(5):
+  print(i)
+  
+  thread = threading.Thread(target=print_numbers)
+  thread.start()
+  thread.join()
+  ```
+  
+  ### 6.
+
+  [Chunk 3] Quelle: 02-Skript Imperative Programming.pdf (Index: 0)
+  ------------------------------------------------------------
+  # Part IIa: Imperative Programming
+  
+  **David Bermbach**
+  
+  *Last update: October 13, 2025*
+  
+  This is the script for the first part of the imperative programming block in the course *Programmieren I*. Use this for reading up on the concepts covered in the lecture which will – for the first part of this block – be using IntelliJ only. For further reading, you can also check the official Java Tutorials.
+  
+  ## 1 Hello, World!
+  
+  All programming courses start with one simple program to greet the world: Let’s have Java print “Hello, World!” to the console.
+  
+  ```java
+  public class HelloWorld {
+  public static void main(String[] args) {
+  System.out.println("Hello, World!");
+  }
+  }
+  ```
+  
+  ### Console output:
+  
+  As you remember, we already talked about the console in Part I. If we launch this program from the console directly by calling `java HelloWorld` and then `java HelloWorld`, it will print the text directly in the line following our command prompt. If we launch this program in IntelliJ, there is a console widget in the lower part of the editor – we will use it for both input (a bit later) and output.
+  
+  Let’s have a closer look at our first program above:
+  
+  - **Line 1**: In Java, executable code is always written inside so-called classes. These will play an important role once we start talking about object-oriented programming. For now, just remember that every `.java` file can contain multiple classes (declared through the keyword `class`), but only one of them can be declared a `public class`. Also, the name of that public class needs to be identical to the file name, i.e., `HelloWorld` needs to be stored in a file with the name `HelloWorld.java`.
+  
+  **Please note**: Java is case-sensitive for everything.
+  
+  1. Your life as a beginner will be significantly easier if you respect the “one file, one class” rule for now.
+  
+  
+  
+  # Java Programming Basics
+  
+  ## Class Definition
+  
+  In Java, every program is defined within a class.
+
+  [Chunk 4] Quelle: 01-Foundations.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part I: Foundations
+  #### David Bermbach
+  
+  ----
+  
+  ### Table of Contents
+  1. Introduction to Programming
+  2. Basic Concepts
+  3. Control Structures
+  4. Functions
+  5. Data Structures
+  6. Object-Oriented Programming
+  7. Conclusion
+  
+  ----
+  
+  ### 1. Introduction to Programming
+  Programming is the process of creating a set of instructions that tell a computer how to perform a task. It involves writing code in a programming language.
+  
+  ### 2. Basic Concepts
+  - **Variables**: Used to store data values.
+  - **Data Types**: Different types of data (e.g., integers, floats, strings).
+  - **Operators**: Symbols that perform operations on variables and values.
+  
+  #### Example:
+  ```python
+  # This is a comment
+  x = 5           # Integer
+  y = 3.14        # Float
+  name = "Alice"  # String
+  ```
+  
+  ### 3. Control Structures
+  Control structures dictate the flow of control in a program. The most common types are:
+  - **Conditional Statements**: `if`, `else`, `elif`
+  - **Loops**: `for`, `while`
+  
+  #### Example:
+  ```python
+  # Conditional statement
+  if x > 0:
+  print("x is positive")
+  else:
+  print("x is non-positive")
+  
+  # Loop
+  for i in range(5):
+  print(i)
+  ```
+  
+  ### 4. Functions
+  Functions are reusable pieces of code that perform a specific task. They can take inputs and return outputs.
+  
+  #### Example:
+  ```python
+  def add(a, b):
+  return a + b
+  
+  result = add(5, 3)
+  print(result)  # Output: 8
+  ```
+  
+  ### 5. Data Structures
+  Data structures are ways to organize and store data. Common data structures include:
+  - **Lists**
+  - **Tuples**
+  - **Dictionaries**
+  - **Sets**
+  
+  #### Example:
+  ```python
+  # List
+  fruits = ["apple", "banana", "cherry"]
+  
+  # Dictionary
+  person = {"name": "Alice", "age": 25}
+  ```
+  
+  ### 6.
+
+  [Chunk 5] Quelle: 03-OOP.pdf (Index: 1)
+  ------------------------------------------------------------
+  .
+  
+  ```python
+  def animal_sound(animal):
+  print(animal.speak())
+  
+  animal_sound(my_cat)  # Output: Cat meows
+  animal_sound(Dog("Rex"))  # Output: Rex says woof!
+  ```
+  
+  ### Summary
+  
+  Object-Oriented Programming is a powerful paradigm that helps in organizing code and making it more reusable and maintainable. Understanding the core concepts of classes, encapsulation, inheritance, and polymorphism is essential for effective programming in OOP.
+  
+  ----
+  
+  ### Exercises
+  
+  1. Create a class `Car` with attributes for `make`, `model`, and `year`. Include a method to display the car's information.
+  2. Implement inheritance by creating a subclass `ElectricCar` that adds an attribute for `battery_size` and a method to display the battery size.
+  3. Write a function that takes a list of objects (of type `Car` or `ElectricCar`) and prints their information.
+  
+  ### References
+  
+  - Python Official Documentation
+  - Object-Oriented Programming Concepts
+  
+  
+  
+  # Considering a PhD: Pros and Insights
+  
+  ## Reasons to Consider a PhD
+  
+  1. **Exploration and Innovation**
+  Pursuing a PhD allows you to delve deeply into your area of interest. You have the opportunity to work with cutting-edge technology and even contribute to advancements that go beyond the current state of the art.
+  
+  2. **Personal Freedom**
+  Contrary to popular belief, a PhD program often provides significant flexibility in how you manage your time. The stereotype of long, grueling hours is not universally true; many PhD students find a balance that works for them.
+  
+  3. **Career Opportunities**
+  While many PhD graduates do not pursue academic careers, the skills and experiences gained during a PhD are highly valued in various industries. These include:
+  - In-depth knowledge of a specific field
+  - Development of GitHub projects
+  - Experience in public speaking
+  - A prestigious title
+  - Enhanced writing skills
+  - Improved structured thinking and self-organization abilities
+  
+  4.
+
+  [Chunk 6] Quelle: 01-Foundations.pdf (Index: 1)
+  ------------------------------------------------------------
+  ### 5. Data Structures
+  Data structures are ways to organize and store data. Common data structures include:
+  - **Lists**
+  - **Tuples**
+  - **Dictionaries**
+  - **Sets**
+  
+  #### Example:
+  ```python
+  # List
+  fruits = ["apple", "banana", "cherry"]
+  
+  # Dictionary
+  person = {"name": "Alice", "age": 25}
+  ```
+  
+  ### 6. Object-Oriented Programming
+  Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code.
+  
+  #### Example:
+  ```python
+  class Dog:
+  def __init__(self, name):
+  self.name = name
+  
+  def bark(self):
+  return "Woof!"
+  
+  my_dog = Dog("Buddy")
+  print(my_dog.bark())  # Output: Woof!
+  ```
+  
+  ### 7. Conclusion
+  Programming is a fundamental skill in today's digital world. Understanding the basics of programming will enable you to solve problems and create applications.
+  
+  ----
+  
+  ### Exercises
+  1. Write a function that takes a list of numbers and returns the sum.
+  2. Create a class `Car` with attributes for make, model, and year, and a method to display the car's information.
+  
+  ----
+  
+  ### References
+  - Python Documentation
+  - Learn Python
+  
+  
+  
+  # Computer Hardware in a Nutshell
+  
+  **Please note:** The presentation of concepts in this block is extremely simplified and does not attempt to capture the nuances of computer hardware.
+  
+  ----
+  
+  ## Page 2: Programming I
+  
+  ### Overview of Computer Hardware
+  
+  1. **Central Processing Unit (CPU)**
+  - The brain of the computer where most calculations take place.
+  - Comprised of:
+  - Arithmetic Logic Unit (ALU)
+  - Control Unit (CU)
+  - Registers
+  
+  2. **Memory**
+  - **RAM (Random Access Memory)**
+  - Temporary storage that is fast and volatile.
+  - **ROM (Read-Only Memory)**
+  - Permanent storage that is non-volatile.
+  
+  3. **Storage**
+  - **Hard Disk Drives (HDD)**
+  - **Solid State Drives (SSD)**
+  - Used for long-term data storage.
+  
+  4. **Motherboard**
+  - The main circuit board that connects all components of the computer.
+  
+  5. **Power Supply Unit (PSU)**
+  - Converts electrical power to the correct voltage for the computer.
+  
+  6.
+
+  [Chunk 7] Quelle: 02-Skript Imperative Programming.pdf (Index: 1)
+  ------------------------------------------------------------
+  h the name `HelloWorld.java`.
+  
+  **Please note**: Java is case-sensitive for everything.
+  
+  1. Your life as a beginner will be significantly easier if you respect the “one file, one class” rule for now.
+  
+  
+  
+  # Java Programming Basics
+  
+  ## Class Definition
+  
+  In Java, every program is defined within a class. The class name should start with an uppercase letter and follow the naming conventions. The curly braces `{}` open a block (which is closed later) to define which code lines belong to the class.
+  
+  ```java
+  public class HelloWorld {
+  // Class content goes here
+  }
+  ```
+  
+  ## Main Method
+  
+  The main method is the entry point of any Java program. When the Java Virtual Machine (JVM) starts executing the program, it begins with the main method.
+  
+  ```java
+  public static void main(String[] args) {
+  // Main method content goes here
+  }
+  ```
+  
+  ### Indentation and Readability
+  
+  - The main method starts one tab character to the right, and code lines within the main method start yet another tab character to the right.
+  - In Java, indentation is used strictly for readability. Additional whitespace characters (such as tabs or spaces) are ignored by the compiler.
+  - Use the auto-format command in IntelliJ to maintain proper formatting.
+  
+  ## Comments
+  
+  Comments are essential for explaining code. Java provides three types of comments:
+  
+  1. **End-of-line comment**: Starts with `//` and continues until the end of the line.
+  ```java
+  int x = 5; // This is an end-of-line comment
+  ```
+  
+  2. **Multi-line comment**: Starts with `/*` and ends with `*/`.
+  ```java
+  /* This is a
+  multi-line comment */
+  ```
+  
+  3. **Javadoc comment**: Starts with `/**` and ends with `*/`.
+
+  [Chunk 8] Quelle: 02-Skript Imperative Programming.pdf (Index: 13)
+  ------------------------------------------------------------
+  ration. For example, if your class is stored in `src/foo/bar`, then your class needs to be in the package `foo.bar`. For this, the first line in your program (aside from comments) needs to be:
+  
+  ```java
+  package foo.bar;
+  ```
+  
+  IntelliJ will usually auto-create this for you when you create a new class. A common way of organizing packages is by starting with the URL of the organization in reverse order and then appending “content-related” sub-packages. Example: `de.tuberlin.3s.systemname.modulename`, etc.
+  
+  ### Getting Back to Importing
+  By default, only a few core JDK classes (e.g., `java.lang.String` or `java.util.List`) as well as the classes in the same package are known to your program. To access any other class, we need to add an import statement for it between the package declaration of our current class and its class block. The syntax for this is:
+  
+  ```java
+  import packageName.ClassName;
+  ```
+  
+  This tells the compiler to also check for the specified class in the specified package and to include it when compiling the code. Example:
+  
+  ```java
+  import de.tuberlin.3s.IOTools;
+  ```
+  
+  This gives you access to the `IOTools`. As with the package declaration, IntelliJ will help you with imports, e.g., when clicking on any of the auto-complete options or choosing one of the suggested bug fixes on the side panel.
+  
+  ----
+  
+  ## 4 Typecasts
+  
+  Sometimes, we need to transform types. In the cardboard box analogy, for example, you might want to put your shoes from a shoebox into the box that came with your fridge. Obviously, this is not a big problem because we are putting something small into a very large box. Still, from a Java perspective, we are changing the type from (well, this somewhat breaks the analogy...) shoes to fridge.
+
+  [Chunk 9] Quelle: 02-Skript Imperative Programming.pdf (Index: 15)
+  ------------------------------------------------------------
+  variableName
+  ```
+  
+  ### Example
+  
+  ```java
+  long largeNumber = 1234567890123L;
+  int smallerNumber = (int) largeNumber; // Explicit typecast
+  System.out.println(smallerNumber); // Output may lose information
+  ```
+  
+  ## 5 Operators
+  
+  Expressions often combine an operator with one or more (usually two) operands. Note that operands can be variables, literals, or other expressions.
+  
+  ### 5.1 Operators for Numbers
+  
+  The most intuitive examples are the ones you already know from math: `+`, `-`, `*`, and `/`. There is also `%`, which is the modulo operator for integer number types. Let’s look at an example:
+  
+  ```java
+  int a = 10;
+  int b = 3;
+  int sum = a + b; // 13
+  int difference = a - b; // 7
+  int product = a * b; // 30
+  int quotient = a / b; // 3
+  int remainder = a % b; // 1
+  ```
+  
+  ### Console Output
+  
+  ```
+  Sum: 13
+  Difference: 7
+  Product: 30
+  Quotient: 3
+  Remainder: 1
+  ```
+  
+  This example illustrates the basic arithmetic operations available in Java.
+  
+  
+  
+  # Java Basics: Variables and Data Types
+  
+  ## Declaring Variables
+  
+  In Java, we can declare (and optionally initialize) multiple variables of the same type in one line. For example:
+  
+  ```java
+  int a = 5, b = 10, c = 15;
+  ```
+  
+  ## Integer vs. Floating Point Division
+  
+  Java differentiates between integer division and floating point division.
+  
+  - Integer division:
+  ```java
+  int result = 5 / 2; // result will be 2
+  ```
+  
+  - Floating point division:
+  ```java
+  double result = 5.0 / 2.0; // result will be 2.5
+  ```
+  
+  ### Why does `5 / 2.0` print `2.5`?
+  
+  When combining an integer and a floating point number, the Java Virtual Machine (JVM) checks the types of the operands. If one operand can be implicitly typecast to a floating point type, the entire expression will be evaluated as a floating point operation.
+  
+  ### Concatenation with the `+` Operator
+  
+  The `+` operator can also be used to concatenate strings.
+
+  [Chunk 10] Quelle: 02-Skript Imperative Programming.pdf (Index: 22)
+  ------------------------------------------------------------
+  at the assignment operation in brackets yields the assigned value to first assign a value and then compare said value to `-1`.
+  
+  Second, variables should always have useful names that describe what is stored in the corresponding variable. For example, `numberOfExams` is much more intuitive than `a`. If we now want to calculate the number of exams we need to print, we end up with code such as this (assuming the corresponding variables all exist and have reasonable values):
+  
+  ```java
+  // Example code for calculating number of exams
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  To increase readability, Java offers compound operators for the operators `+`, `-`, `*`, `/`, and `%`. For example, `+=` is short for `a = a + b`, likewise `-=` is short for `a = a - b`, etc. Using this, the code example above can be rewritten to:
+  
+  ```java
+  // Using compound operators
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  ## Class Functionality in Java
+  
+  Almost all functionality provided by the Java Class Library is provided in the form of methods, which we can call. We have already seen how calling class methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+────────────────────────────────────────
+
+STUDENT: Was ist OOP in Java?
+
+ASSISTENT: # Objektorientierte Programmierung (OOP) in Java
+
+OOP ist ein Programmierparadigma, das Code in **Objekte** organisiert – also in Einheiten, die sowohl Daten (Attribute) als auch Verhalten (Methoden) zusammenfassen. Java ist von Grund auf objektorientiert aufgebaut. Die vier Kernkonzepte sind:
+
+---
+
+## 1. Klassen und Objekte
+
+Eine **Klasse** ist der Bauplan, ein **Objekt** ist die konkrete Instanz davon.
+
+```java
+public class Dog {
+    String name; // Attribut
+
+    public Dog(String name) { // Konstruktor
+        this.name = name;
+    }
+
+    public String bark() { // Methode
+        return name + " says woof!";
+    }
+}
+
+// Objekt erstellen:
+Dog myDog = new Dog("Buddy");
+System.out.println(myDog.bark()); // Ausgabe: Buddy says woof!
+```
+
+Der **Konstruktor** (`Dog(...)`) wird beim Erstellen eines Objekts mit `new` automatisch aufgerufen und initialisiert die Attribute.
+
+---
+
+## 2. Encapsulation (Kapselung)
+
+Interne Daten werden **versteckt** und nur über kontrollierte Methoden zugänglich gemacht. In Java geschieht das über Zugriffsmodifikatoren:
+
+- `private` → nur innerhalb der Klasse sichtbar
+- `public` → von überall sichtbar
+
+```java
+public class BankAccount {
+    private double balance; // von außen nicht direkt änderbar
+
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+BankAccount acc = new BankAccount();
+acc.deposit(100);
+System.out.println(acc.getBalance()); // 100.0
+// acc.balance = 9999; ← FEHLER! balance ist private
+```
+
+---
+
+## 3. Inheritance (Vererbung)
+
+Eine **Unterklasse** erbt Attribute und Methoden der **Oberklasse** und kann sie erweitern oder überschreiben. In Java mit dem Schlüsselwort `extends`:
+
+```java
+public class Animal {
+    public String speak() {
+        return "...";
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public String speak() { // Methode überschreiben
+        return "Meow!";
+    }
+}
+
+Cat myCat = new Cat();
+System.out.println(myCat.speak()); // Meow!
+```
+
+`@Override` ist eine Annotation, die dem Compiler sagt: "Ich überschreibe absichtlich eine Methode der Oberklasse." Das hilft, Tippfehler zu vermeiden.
+
+---
+
+## 4. Polymorphism (Polymorphismus)
+
+Objekte verschiedener Klassen können **über denselben Typ angesprochen** werden, verhalten sich aber unterschiedlich – je nach ihrer eigentlichen Klasse:
+
+```java
+Animal[] animals = { new Cat(), new Dog("Rex") };
+
+for (Animal a : animals) {
+    System.out.println(a.speak());
+    // Cat → "Meow!", Dog → "Rex says woof!"
+}
+```
+
+Obwohl das Array vom Typ `Animal` ist, wird zur Laufzeit die richtige `speak()`-Methode der jeweiligen Unterklasse aufgerufen. Das nennt man **dynamisches Dispatch**.
+
+---
+
+## Zusammenfassung auf einen Blick
+
+| Konzept | Kernidee | Java-Schlüsselwort |
+|---|---|---|
+| Klasse/Objekt | Bauplan & Instanz | `class`, `new` |
+| Kapselung | Datenverstecken | `private`, `public` |
+| Vererbung | Eigenschaften weitergeben | `extends`, `@Override` |
+| Polymorphismus | Gleiche Schnittstelle, verschiedenes Verhalten | (dynamisches Dispatch) |
+
+---
+
+Hast du schon eine Vorstellung, welches dieser vier Konzepte du als nächstes vertiefen möchtest – oder gibt es vielleicht eine konkrete Aufgabe, bei der du OOP anwenden sollst? Schreib gerne auch einfach einen ersten Gedanken oder Ansatz, den du schon hast! 🚀
+

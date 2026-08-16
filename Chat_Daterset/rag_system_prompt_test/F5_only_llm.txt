@@ -1,0 +1,138 @@
+================================================================================
+FRAGE: Was sind Klassen- vs. Instanzvariablen & -methoden in Java?
+Conversation-ID: 97a36465-a205-480a-aec0-aac8922837de
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Was sind Klassen- vs. Instanzvariablen & -methoden in Java?
+
+ASSISTENT: # Klassen- vs. Instanzvariablen & -methoden in Java
+
+## Grundkonzept
+
+```
+Klasse (Bauplan)
+├── Klassenvariablen/-methoden  → gehören zur KLASSE selbst (static)
+└── Instanzvariablen/-methoden → gehören zum OBJEKT (Instanz)
+```
+
+---
+
+## Instanzvariablen & -methoden
+
+Jedes Objekt hat **seine eigene Kopie** der Variablen.
+
+```java
+public class Auto {
+    // Instanzvariablen – jedes Auto hat eigene Werte
+    String marke;
+    int    geschwindigkeit;
+
+    // Instanzmethode – arbeitet mit den Daten DIESES Objekts
+    public void beschleunigen(int wert) {
+        this.geschwindigkeit += wert;   // "this" = dieses Objekt
+    }
+
+    public void info() {
+        System.out.println(marke + " fährt " + geschwindigkeit + " km/h");
+    }
+}
+```
+
+```java
+Auto a1 = new Auto();
+a1.marke = "BMW";
+a1.beschleunigen(50);
+
+Auto a2 = new Auto();
+a2.marke = "Audi";
+a2.beschleunigen(80);
+
+a1.info();  // BMW fährt 50 km/h
+a2.info();  // Audi fährt 80 km/h  ← eigene, unabhängige Werte!
+```
+
+---
+
+## Klassenvariablen & -methoden (`static`)
+
+**Ein einziger Wert** für alle Objekte gemeinsam – gehört der Klasse.
+
+```java
+public class Auto {
+    // Klassenvariable – wird von ALLEN Autos geteilt
+    static int anzahlAutos = 0;
+
+    String marke;
+
+    public Auto(String marke) {
+        this.marke = marke;
+        anzahlAutos++;          // zählt jede neue Instanz
+    }
+
+    // Klassenmethode – kein Zugriff auf Instanzvariablen!
+    public static int getAnzahl() {
+        return anzahlAutos;
+        // return marke;  ❌ Fehler! marke gehört Instanz, nicht Klasse
+    }
+}
+```
+
+```java
+Auto a1 = new Auto("BMW");
+Auto a2 = new Auto("Audi");
+Auto a3 = new Auto("VW");
+
+System.out.println(Auto.getAnzahl());  // 3  ← Aufruf über Klassenname!
+System.out.println(Auto.anzahlAutos);  // 3
+```
+
+---
+
+## Vergleich auf einen Blick
+
+| Merkmal | Instanz | Klasse (`static`) |
+|---|---|---|
+| **Schlüsselwort** | *(keins)* | `static` |
+| **Gehört zu** | Objekt | Klasse |
+| **Speicher** | pro Objekt | einmal gesamt |
+| **Zugriff über** | `objekt.methode()` | `Klasse.methode()` |
+| **`this` nutzbar?** | ✅ Ja | ❌ Nein |
+| **Zugriff auf Instanzmember?** | ✅ Ja | ❌ Nein |
+
+---
+
+## Typische Anwendungsfälle
+
+```java
+public class MathHelper {
+    // ✅ static: braucht kein Objekt, nur Eingabewerte
+    public static double kreis(double r) {
+        return Math.PI * r * r;
+    }
+}
+
+// Aufruf ohne Objekt:
+double flaeche = MathHelper.kreis(5.0);
+```
+
+```java
+// Bekannte static-Elemente aus Java:
+Math.sqrt(16)          // static Methode
+System.out.println()   // out ist static Variable in System
+Integer.parseInt("42") // static Methode
+```
+
+---
+
+## Häufige Faustregel
+
+> **`static`** → wenn die Methode/Variable **kein Objekt braucht**  
+> (Hilfsfunktionen, Konstanten, Zähler, Factories)
+
+> **Instanz** → wenn jedes Objekt **eigene Daten** haben soll
+

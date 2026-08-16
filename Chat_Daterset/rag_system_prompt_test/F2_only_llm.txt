@@ -1,0 +1,78 @@
+================================================================================
+FRAGE: Was sind Variablen in Java?
+Conversation-ID: 4b4a17a5-eec6-4fa4-af24-1d2414f56881
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Was sind Variablen in Java?
+
+ASSISTENT: # Variablen in Java
+
+## Definition
+Eine Variable ist ein **benannter Speicherbereich**, der einen Wert speichert, der sich während der Programmausführung ändern kann.
+
+---
+
+## Deklaration und Initialisierung
+
+```java
+// Nur Deklaration
+int alter;
+
+// Deklaration + Initialisierung
+int alter = 25;
+String name = "Max";
+```
+
+---
+
+## Datentypen
+
+### Primitive Datentypen
+| Typ | Größe | Beispiel |
+|--------|-------|---------|
+| `int` | 32 Bit | `int x = 10;` |
+| `double` | 64 Bit | `double pi = 3.14;` |
+| `boolean` | 1 Bit | `boolean aktiv = true;` |
+| `char` | 16 Bit | `char buchstabe = 'A';` |
+| `long` | 64 Bit | `long zahl = 100L;` |
+
+### Referenztypen
+```java
+String text = "Hallo";
+int[] zahlen = {1, 2, 3};
+```
+
+---
+
+## Arten von Variablen
+
+```java
+public class Beispiel {
+
+    static int klassenVariable = 0;  // Klassenvariable
+    int instanzVariable = 5;         // Instanzvariable
+
+    void methode() {
+        int lokaleVariable = 10;     // Lokale Variable
+    }
+}
+```
+
+| Art | Gültigkeitsbereich |
+|-----|-------------------|
+| **Klassenvariable** | Gesamte Klasse (mit `static`) |
+| **Instanzvariable** | Gesamtes Objekt |
+| **Lokale Variable** | Nur innerhalb der Methode |
+
+---
+
+## Wichtige Regeln
+- Variablen müssen **vor der Nutzung deklariert** werden
+- Namen sind **case-sensitive** (`alter ≠ Alter`)
+- Konvention: **camelCase** (`meinName`, `alterDesNutzers`)
+

@@ -1,0 +1,103 @@
+================================================================================
+FRAGE: Wie ist ein Java Programm grundsätzlich aufgebaut?
+Conversation-ID: 9e4f03af-09fc-43e8-951d-10a1b351fe0c
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Wie ist ein Java Programm grundsätzlich aufgebaut?
+
+ASSISTENT: # Grundlegender Aufbau eines Java-Programms
+
+## Minimales Java-Programm
+
+```java
+public class MeinProgramm {
+    public static void main(String[] args) {
+        System.out.println("Hallo Welt!");
+    }
+}
+```
+
+---
+
+## Die wichtigsten Bestandteile
+
+### 1. **Klasse**
+```java
+public class MeinProgramm {
+    // Alles befindet sich innerhalb einer Klasse
+}
+```
+- Jeder Code muss in einer **Klasse** stehen
+- Der **Dateiname** muss mit dem Klassennamen übereinstimmen (`MeinProgramm.java`)
+
+### 2. **Main-Methode** (Einstiegspunkt)
+```java
+public static void main(String[] args) {
+    // Hier startet das Programm
+}
+```
+| Teil | Bedeutung |
+|------|-----------|
+| `public` | Von überall aufrufbar |
+| `static` | Gehört zur Klasse, nicht zu einem Objekt |
+| `void` | Kein Rückgabewert |
+| `String[] args` | Kommandozeilenargumente |
+
+### 3. **Anweisungen**
+```java
+System.out.println("Text");  // Ausgabe in der Konsole
+int zahl = 42;               // Variable deklarieren
+```
+
+---
+
+## Erweiterter Aufbau
+
+```java
+// 1. Package-Deklaration (optional)
+package meinpaket;
+
+// 2. Import-Anweisungen (optional)
+import java.util.Scanner;
+
+// 3. Klasse
+public class MeinProgramm {
+
+    // 4. Attribute (Variablen der Klasse)
+    static int zahl = 10;
+
+    // 5. Main-Methode
+    public static void main(String[] args) {
+        System.out.println("Hallo!");
+        meineMethode();
+    }
+
+    // 6. Weitere Methoden
+    public static void meineMethode() {
+        System.out.println("Ich bin eine Methode!");
+    }
+}
+```
+
+---
+
+## Zusammenfassung
+
+```
+MeinProgramm.java
+│
+├── package (optional)
+├── imports (optional)
+└── class
+    ├── Attribute
+    ├── main()-Methode  ← Startpunkt
+    └── weitere Methoden
+```
+
+> 💡 **Wichtig:** Java ist **objektorientiert** – alles ist in Klassen organisiert. Der Compiler übersetzt `.java`-Dateien in `.class`-Dateien (Bytecode), die von der **JVM** ausgeführt werden.
+

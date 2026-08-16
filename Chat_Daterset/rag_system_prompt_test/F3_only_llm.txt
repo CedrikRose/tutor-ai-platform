@@ -1,0 +1,86 @@
+================================================================================
+FRAGE: Was sind Typecasts in Java?
+Conversation-ID: 7f94c40b-6be5-4a25-9fcb-dc7d8826d661
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Was sind Typecasts in Java?
+
+ASSISTENT: # Typecasts in Java
+
+Ein **Typecast** (Typumwandlung) bezeichnet die explizite oder implizite Konvertierung eines Wertes von einem Datentyp in einen anderen.
+
+---
+
+## Arten von Typecasts
+
+### 1. Impliziter Cast (Widening / automatisch)
+Java konvertiert **automatisch**, wenn kein Datenverlust möglich ist:
+
+```java
+int i = 42;
+long l = i;       // int → long (automatisch)
+double d = i;     // int → double (automatisch)
+```
+
+**Reihenfolge:** `byte → short → int → long → float → double`
+
+---
+
+### 2. Expliziter Cast (Narrowing / manuell)
+Bei möglichem Datenverlust muss man **manuell** casten:
+
+```java
+double d = 9.99;
+int i = (int) d;  // → 9 (Nachkommastellen gehen verloren!)
+
+long l = 1000L;
+byte b = (byte) l; // Möglicher Überlauf!
+```
+
+---
+
+## Typecast bei Objekten
+
+### Upcasting (implizit)
+```java
+Animal animal = new Dog(); // Dog → Animal (automatisch)
+```
+
+### Downcasting (explizit)
+```java
+Animal animal = new Dog();
+Dog dog = (Dog) animal; // Muss explizit gecastet werden
+```
+
+### Sicherheit mit `instanceof`
+```java
+if (animal instanceof Dog dog) { // Java 16+ Pattern Matching
+    dog.bellen();
+}
+```
+
+---
+
+## Häufige Fehler
+
+| Fehler | Beschreibung |
+|--------|-------------|
+| `ClassCastException` | Ungültiger Objekt-Cast zur Laufzeit |
+| Datenverlust | Beim Narrowing (z.B. `double → int`) |
+| Overflow | Wenn Wert nicht in Zieltyp passt |
+
+---
+
+## Zusammenfassung
+
+| | Widening | Narrowing |
+|--|---------|-----------|
+| **Automatisch?** | ✅ Ja | ❌ Nein |
+| **Datenverlust?** | ❌ Nein | ✅ Möglich |
+| **Syntax** | `int i = myByte;` | `int i = (int) myDouble;` |
+

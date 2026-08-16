@@ -1,0 +1,723 @@
+================================================================================
+FRAGE: Was sind Algorithmen in Java?
+Conversation-ID: c1d7de18-e094-49c9-b318-f890c83daf1e
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 04-Algorithms and Data Structures.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part IV: Algorithms and Data Structures
+  #### David Bermbach
+  
+  ----
+  
+  This document covers the fundamental concepts of algorithms and data structures, which are essential for efficient programming. Below are key topics that will be discussed in this part of the course.
+  
+  ### 1. Introduction to Algorithms
+  - Definition of an algorithm
+  - Characteristics of algorithms
+  - Examples of algorithms in programming
+  
+  ### 2. Data Structures
+  - Definition and importance of data structures
+  - Common data structures:
+  - Arrays
+  - Linked Lists
+  - Stacks
+  - Queues
+  - Trees
+  - Graphs
+  
+  ### 3. Algorithm Complexity
+  - Time complexity
+  - Space complexity
+  - Big O notation
+  
+  ### 4. Searching Algorithms
+  - Linear search
+  - Binary search
+  - Comparison of searching algorithms
+  
+  ### 5. Sorting Algorithms
+  - Bubble sort
+  - Selection sort
+  - Merge sort
+  - Quick sort
+  - Comparison of sorting algorithms
+  
+  ### 6. Recursion
+  - Definition of recursion
+  - Base case and recursive case
+  - Examples of recursive algorithms
+  
+  ### 7.
+
+  [Chunk 2] Quelle: 04-Algorithms and Data Structures.pdf (Index: 1)
+  ------------------------------------------------------------
+  ar search
+  - Binary search
+  - Comparison of searching algorithms
+  
+  ### 5. Sorting Algorithms
+  - Bubble sort
+  - Selection sort
+  - Merge sort
+  - Quick sort
+  - Comparison of sorting algorithms
+  
+  ### 6. Recursion
+  - Definition of recursion
+  - Base case and recursive case
+  - Examples of recursive algorithms
+  
+  ### 7. Conclusion
+  - Summary of key points
+  - Importance of choosing the right algorithm and data structure
+  
+  ----
+  
+  ### Code Examples
+  
+  ```python
+  # Example of a simple linear search algorithm
+  def linear_search(arr, target):
+  for index, value in enumerate(arr):
+  if value == target:
+  return index
+  return -1
+  ```
+  
+  ### Mathematical Formulas
+  
+  - Time Complexity: \( T(n) = O(n) \) for linear search
+  - Space Complexity: \( S(n) = O(1) \) for iterative algorithms
+  
+  ### Tables
+  
+  | Data Structure | Access Time | Insertion Time | Deletion Time |
+  |----------------|-------------|----------------|---------------|
+  | Array          | O(1)        | O(n)           | O(n)          |
+  | Linked List    | O(n)        | O(1)           | O(1)          |
+  | Stack          | O(n)        | O(1)           | O(1)          |
+  | Queue          | O(n)        | O(1)           | O(1)          |
+  
+  ### Diagrams
+  
+  *Figure 1: Example of a binary tree structure*
+  
+  ```
+  A
+  / \
+  B   C
+  / \
+  D   E
+  ```
+  
+  This concludes the overview of algorithms and data structures.
+
+  [Chunk 3] Quelle: 04-Algorithms and Data Structures.pdf (Index: 2)
+  ------------------------------------------------------------
+  |
+  | Stack          | O(n)        | O(1)           | O(1)          |
+  | Queue          | O(n)        | O(1)           | O(1)          |
+  
+  ### Diagrams
+  
+  *Figure 1: Example of a binary tree structure*
+  
+  ```
+  A
+  / \
+  B   C
+  / \
+  D   E
+  ```
+  
+  This concludes the overview of algorithms and data structures. Understanding these concepts is crucial for developing efficient and effective software solutions.
+  
+  
+  
+  # Roadmap
+  
+  ## Foundations
+  
+  ## Imperative Programming
+  
+  ## Object-Oriented Programming
+  
+  ## Algorithms and Data Structures
+  
+  ## Advanced Concepts in Java
+  
+  ## Outlook
+  
+  ----
+  
+  **Page 2  Prog1**
+  
+  
+  
+  # Agenda for this Block
+  
+  ## Algorithms
+  - **Searching**
+  - **Complexity Theory**
+  - **Sorting**
+  
+  ## Data Structures
+  - **Abstract Data Types**
+  - **Array-backed Implementations**
+  - **Linked Implementations**
+  
+  ## Collections and Generics
+  - **Collections**
+  - **Generics**
+  - **Other Useful Classes**
+  
+  
+  
+  # IV-A: Algorithms
+  
+  ## Search Algorithms
+  
+  ### Introduction
+  Search algorithms are fundamental to computer science and are used to retrieve information stored within data structures. They can be broadly categorized into two types: **linear search** and **binary search**.
+  
+  ### Linear Search
+  Linear search is the simplest search algorithm. It checks each element in a list until the desired element is found or the list ends.
+  
+  #### Algorithm
+  ```python
+  def linear_search(arr, target):
+  for index, value in enumerate(arr):
+  if value == target:
+  return index
+  return -1
+  ```
+  
+  #### Complexity
+  - **Time Complexity**: O(n)
+  - **Space Complexity**: O(1)
+  
+  ### Binary Search
+  Binary search is a more efficient algorithm that works on sorted arrays.
+
+  [Chunk 4] Quelle: 02-Skript Imperative Programming.pdf (Index: 23)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 5] Quelle: 02-Skript Imperative Programming.pdf (Index: 24)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 6] Quelle: 02-Skript Imperative Programming.pdf (Index: 36)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 7] Quelle: 02-Skript Imperative Programming.pdf (Index: 37)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 8] Quelle: 02-Skript Imperative Programming.pdf (Index: 38)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 9] Quelle: 02-Skript Imperative Programming.pdf (Index: 39)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 10] Quelle: 02-Skript Imperative Programming.pdf (Index: 40)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+────────────────────────────────────────
+
+STUDENT: Was sind Algorithmen in Java?
+
+ASSISTENT: # Algorithmen in Java 🤔
+
+Das ist eine schöne Einstiegsfrage! Lass uns das gemeinsam erarbeiten.
+
+**Erstmal eine Gegenfrage zum Nachdenken:**
+
+Stell dir vor, du möchtest in einer unsortierten Liste von 100 Zahlen eine bestimmte Zahl finden. Wie würdest du dabei **systematisch** vorgehen?
+
+---
+
+Wenn du darüber nachgedacht hast, hier ein kleiner Denkanstoß:
+
+> Ein **Algorithmus** ist im Kern eine **eindeutige, endliche Folge von Schritten**, die ein Problem löst – egal ob in Java, Python oder auf Papier.
+
+In Java bedeutet das konkret: Du beschreibst diese Schritte in Code. Die Sprache selbst ändert nichts am *Prinzip* des Algorithmus.
+
+---
+
+**Eine Folgefrage für dich:**
+
+Aus den Vorlesungsmaterialien kennst du bereits zwei grundlegende Such-Algorithmen. Kannst du dir vorstellen, **worin sich Linear Search und Binary Search unterscheiden** – also welche unterschiedlichen "Strategien" sie verfolgen?
+
+Beschreib einfach mal in eigenen Worten, was du dir darunter vorstellst! 😊
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 2
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 06-Wrap-up.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## RF E 0 A
+  
+  ### Programmieren I
+  #### Wrap-up + Q&#x26;A
+  **David Bermbach** 3 S
+  
+  ----
+  
+  This document appears to be a summary or conclusion of a programming course, likely including a wrap-up session and a question-and-answer segment led by David Bermbach. If you have specific content or sections from the course that you would like to include or elaborate on, please provide that information!
+  
+  
+  
+  It seems that the text you provided is incomplete and does not contain any specific content related to programming or course material. If you have a specific section of a programming course document, lecture slides, homework, or exercises that you would like me to help with, please provide that content, and I will assist you in preserving the structure and formatting as requested.
+  
+  
+  
+  # WINF – Current Study Program Overview
+  
+  ## 1. Semester
+  | Course Title                                      | LP  |
+  |---------------------------------------------------|-----|
+  | Analysis I and Linear Algebra                      | 30  |
+  | Programming I                                     | 6   |
+  | Introduction to Theoretical Computer Science      | 12  |
+  | Fundamentals of Computer Science                   | 6   |
+  | Fundamentals of Business Informatics               | 6   |
+  
+  ## 2. Semester
+  | Course Title                                      | LP  |
+  |---------------------------------------------------|-----|
+  | Statistics I for Business Sciences                 | 30  |
+  | Architecture of Application Systems                | 6   |
+  | Programming II                                    | 6   |
+  | Accounting and Cost Accounting                     | 6   |
+  | Organization and Innovation Management             | 6   |
+  
+  ## 3.
+
+  [Chunk 2] Quelle: 01-Foundations.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part I: Foundations
+  #### David Bermbach
+  
+  ----
+  
+  ### Table of Contents
+  1. Introduction to Programming
+  2. Basic Concepts
+  3. Control Structures
+  4. Functions
+  5. Data Structures
+  6. Object-Oriented Programming
+  7. Conclusion
+  
+  ----
+  
+  ### 1. Introduction to Programming
+  Programming is the process of creating a set of instructions that tell a computer how to perform a task. It involves writing code in a programming language.
+  
+  ### 2. Basic Concepts
+  - **Variables**: Used to store data values.
+  - **Data Types**: Different types of data (e.g., integers, floats, strings).
+  - **Operators**: Symbols that perform operations on variables and values.
+  
+  #### Example:
+  ```python
+  # This is a comment
+  x = 5           # Integer
+  y = 3.14        # Float
+  name = "Alice"  # String
+  ```
+  
+  ### 3. Control Structures
+  Control structures dictate the flow of control in a program. The most common types are:
+  - **Conditional Statements**: `if`, `else`, `elif`
+  - **Loops**: `for`, `while`
+  
+  #### Example:
+  ```python
+  # Conditional statement
+  if x > 0:
+  print("x is positive")
+  else:
+  print("x is non-positive")
+  
+  # Loop
+  for i in range(5):
+  print(i)
+  ```
+  
+  ### 4. Functions
+  Functions are reusable pieces of code that perform a specific task. They can take inputs and return outputs.
+  
+  #### Example:
+  ```python
+  def add(a, b):
+  return a + b
+  
+  result = add(5, 3)
+  print(result)  # Output: 8
+  ```
+  
+  ### 5. Data Structures
+  Data structures are ways to organize and store data. Common data structures include:
+  - **Lists**
+  - **Tuples**
+  - **Dictionaries**
+  - **Sets**
+  
+  #### Example:
+  ```python
+  # List
+  fruits = ["apple", "banana", "cherry"]
+  
+  # Dictionary
+  person = {"name": "Alice", "age": 25}
+  ```
+  
+  ### 6.
+
+  [Chunk 3] Quelle: 06-Wrap-up.pdf (Index: 2)
+  ------------------------------------------------------------
+  e                                      | LP  |
+  |---------------------------------------------------|-----|
+  | Elective Area                                     | 30-33 |
+  | Elective Area                                     | 12-15 |
+  | Bachelor Thesis                                    | 12   |
+  
+  ## 6. Semester
+  | Course Title                                      | LP  |
+  |---------------------------------------------------|-----|
+  | Bachelor Thesis                                    | 12   |
+  
+  **LP = Leistungspunkte nach dem ECTS-System (1 LP entspricht etwa 30 Zeitstunden)**
+  
+  ### Additional Courses
+  - Fundamentals of Mathematics
+  - Fundamentals of Computer Science
+  - Fundamentals of Business Administration
+  - Fundamentals of Business Informatics
+  - Elective Area
+  - Elective Area
+  - Bachelor Thesis
+  
+  ----
+  
+  This document outlines the current study program for the WINF (Wirtschaftsinformatik) course, detailing the courses and their corresponding credit points (LP) across six semesters.
+  
+  
+  
+  # WINF – StuPO 2025
+  
+  ## Studienverlauf
+  
+  | Semester | Module                                                                                     | LP  |
+  |---------|--------------------------------------------------------------------------------------------|-----|
+  | 1. FS   | Statistik I für Wirtschaftswissenschaften                                                  | 6   |
+  |         | Technische Grundlagen der Informatik                                                       | 6   |
+  |         | Einführung in die Wirtschaftsinformatik                                                   | 6   |
+  |         | Bilanzierung und Kostenrechnung                                                            | 6   |
+  | 2.
+
+  [Chunk 4] Quelle: 06-Wrap-up.pdf (Index: 3)
+  ------------------------------------------------------------
+  Informatik                                                       | 6   |
+  |         | Einführung in die Wirtschaftsinformatik                                                   | 6   |
+  |         | Bilanzierung und Kostenrechnung                                                            | 6   |
+  | 2. FS   | Analysis I und Lineare Algebra für Ingenieurwissenschaften                                 | 12  |
+  |         | Programmieren II                                                                           | 6   |
+  |         | Engineering verteilter Anwendungen                                                          | 6   |
+  |         | Investition und Finanzierung                                                                | 6   |
+  | 3. FS   | WP Gesellschaftliche Verantwortung und Nachhaltigkeit                                      | 6   |
+  |         | Data Management und Systeme                                                                 | 6   |
+  |         | Software &#x26; Business Engineering                                                             | 6   |
+  |         | Platform Economics                                                                          | 6   |
+  |         | WP Wirtschaftswissenschaftliche Grundlagen                                                  | 6   |
+  | 4. FS   | Grundlagen von Data Science und Al                                                          | 6   |
+  |         | WP Programmierpraktikum                                                                     | 6   |
+  |         | Security &#x26; Privacy Engineering                                                               | 6   |
+  |         | Geschäftsprozesse                                                                           | 6   |
+  | 5.
+
+  [Chunk 5] Quelle: 06-Wrap-up.pdf (Index: 4)
+  ------------------------------------------------------------
+  | 6   |
+  |         | Security &#x26; Privacy Engineering                                                               | 6   |
+  |         | Geschäftsprozesse                                                                           | 6   |
+  | 5. FS   | Freie Wahl                                                                                  | 18  |
+  |         | WP Vertiefung Informatik                                                                    | 18-27 |
+  |         | WP Vertiefung Wirtschaftswissenschaften                                                     | 9-18 |
+  | 6. FS   |                                                                                             |     |
+  |         | Bachelorarbeit                                                                              | 12  |
+  
+  ## Farblegende
+  
+  | Grundlagen mathematisch-statistischer Methoden | Grundlagen der Wirtschaftswissenschaften | Grundlagen der Informatik | Grundlagen der Wirtschaftsinformatik | Bachelorarbeit |
+  |------------------------------------------------|------------------------------------------|--------------------------|--------------------------------------|-----------------|
+  |                                                |                                          |                          |                                      |                 |
+  
+  ----
+  
+  This document outlines the curriculum for the WINF program, detailing the modules and their respective credit points (LP) across six semesters.
+
+  [Chunk 6] Quelle: 06-Wrap-up.pdf (Index: 5)
+  ------------------------------------------------------------
+  |                                          |                          |                                      |                 |
+  
+  ----
+  
+  This document outlines the curriculum for the WINF program, detailing the modules and their respective credit points (LP) across six semesters. Each semester includes a combination of core subjects and elective options, providing a comprehensive foundation in both technical and economic disciplines.
+  
+  
+  
+  # WING D
+  
+  ## IuK: Next is Anwendungssysteme + EinfInfo C in Winter Term
+  
+  ### SSE/AIE:
+  
+  | Semester | Courses                                                                                     | LP  |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 1. FS    | Statistik I für Wirtschaftswissenschaften (6 LP)                                          | 6   |
+  |          | Technische Grundlagen der Informatik (6 LP)                                               | 6   |
+  |          | Programmieren I (6 LP)                                                                     | 6   |
+  |          | Einführung in die Wirtschaftsinformatik (6 LP)                                            | 6   |
+  |          | Bilanzierung und Kostenrechnung (6 LP)                                                    | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 2.
+
+  [Chunk 7] Quelle: 06-Wrap-up.pdf (Index: 6)
+  ------------------------------------------------------------
+  tsinformatik (6 LP)                                            | 6   |
+  |          | Bilanzierung und Kostenrechnung (6 LP)                                                    | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 2. FS    | Analysis I und Lineare Algebra für Ingenieurwissenschaften (12 LP)                        | 12  |
+  |          | Programmieren II (6 LP)                                                                    | 6   |
+  |          | Engineering verteilter Anwendungen (6 LP)                                                 | 6   |
+  |          | Investition und Finanzierung (6 LP)                                                       | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 3. FS    | WP Gesellschaftliche Verantwortung und Nachhaltigkeit (6 LP)                              | 6   |
+  |          | Data Management und Systeme (6 LP)                                                        | 6   |
+  |          | Software &#x26; Business Engineering (6 LP)                                                    | 6   |
+  |          | Platform Economics (6 LP)                                                                  | 6   |
+  |          | WP Wirtschaftswissenschaftliche Grundlagen (6 LP)                                         | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 4.
+
+  [Chunk 8] Quelle: 06-Wrap-up.pdf (Index: 7)
+  ------------------------------------------------------------
+  | 6   |
+  |          | WP Wirtschaftswissenschaftliche Grundlagen (6 LP)                                         | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 4. FS    | Grundlagen von Data Science und Al (6 LP)                                                | 6   |
+  |          | WP Programmierpraktikum (6 LP)                                                             | 6   |
+  |          | Security &#x26; Privacy Engineering (6 LP)                                                     | 6   |
+  |          | Geschäftsprozesse (6 LP)                                                                   | 6   |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 5. FS    | Freie Wahl (18 LP)                                                                         | 18  |
+  |          | WP Vertiefung Informatik (18-27 LP)                                                       | 18-27 |
+  |          | WP Vertiefung Wirtschaftswissenschaften (9-18 LP)                                         | 9-18 |
+  |----------|---------------------------------------------------------------------------------------------|-----|
+  | 6. FS    | Bachelorarbeit (12 LP)                                                                     | 12  |
+  
+  ### Legend:
+  - **Prog I**: Grundlagen mathematisch-statistischer Methoden
+  - **Grundlagen der Softwareentwicklung**
+  - **Grundlagen der Wirtschaftswissenschaften**
+  - **Grundlagen der Informatik**
+  - **Grundlagen der Wirtschaftsinformatik**
+  - **Bachelorarbeit**
+  
+  
+  
+  # Further Courses from 3S
+  
+  ## AS/EVA
+  - Programmierpraktikum
+  - Seminar
+  - Scalability Engineering
+  
+  ### Master's Courses
+  
+  ----
+  
+  **Page 6**
+  **Prog I**
+  **3 S**
+  
+  
+  
+  It seems that the text you provided is incomplete and does not contain any specific content related to programming or course material.
+
+  [Chunk 9] Quelle: 06-Wrap-up.pdf (Index: 8)
+  ------------------------------------------------------------
+  t**
+  
+  
+  
+  # Further Courses from 3S
+  
+  ## AS/EVA
+  - Programmierpraktikum
+  - Seminar
+  - Scalability Engineering
+  
+  ### Master's Courses
+  
+  ----
+  
+  **Page 6**
+  **Prog I**
+  **3 S**
+  
+  
+  
+  It seems that the text you provided is incomplete and does not contain any specific content related to programming or course material. If you have a specific section of a programming course document, lecture slides, homework, or exercises that you would like to preserve or convert, please provide that content, and I will assist you accordingly!
+  
+  
+  
+  # Course Topics
+  
+  ## Foundations
+  
+  ## Imperative Programming
+  
+  ## Object-Oriented Programming
+  
+  ## Algorithms and Data Structures
+  
+  ## Advanced Concepts in Java
+  
+  ## Outlook
+  
+  ----
+  
+  **Page 8**
+  **Prog I**
+  **3 S**
+  
+  
+  
+  # Exam Organisation + Hints
+  
+  ## Page 9 - Programming I
+  
+  ### Exam Structure
+  - The exam will consist of multiple-choice questions, coding exercises, and theoretical questions.
+  - Make sure to review all topics covered in the course.
+  
+  ### Hints for Preparation
+  1. **Review Lecture Notes**: Go through your lecture notes and highlight key concepts.
+  2. **Practice Coding**: Solve coding exercises from previous assignments and practice problems.
+  3. **Understand Algorithms**: Be familiar with common algorithms and their complexities.
+  4.
+
+  [Chunk 10] Quelle: 06-Wrap-up.pdf (Index: 9)
+  ------------------------------------------------------------
+  ## Hints for Preparation
+  1. **Review Lecture Notes**: Go through your lecture notes and highlight key concepts.
+  2. **Practice Coding**: Solve coding exercises from previous assignments and practice problems.
+  3. **Understand Algorithms**: Be familiar with common algorithms and their complexities.
+  4. **Work on Sample Questions**: Attempt sample questions provided in the course materials.
+  
+  ### Important Topics to Focus On
+  - Data Types and Variables
+  - Control Structures (if-else, loops)
+  - Functions and Scope
+  - Arrays and Strings
+  - Basic Object-Oriented Programming Concepts
+  
+  ### Study Tips
+  - Form study groups to discuss and clarify difficult topics.
+  - Use online resources and coding platforms for additional practice.
+  - Take breaks during study sessions to maintain focus and retention.
+  
+  ### Final Reminders
+  - Ensure you have all necessary materials ready for the exam day.
+  - Get plenty of rest the night before the exam.
+  - Read each question carefully during the exam.
+  
+  Good luck with your preparation!
+  
+  
+  
+  # Exam Organization
+  
+  ## In-Person &#x26; Written Exam
+  **Planned Duration:** 90 Minutes + reading time
+  
+  ### Registration
+  - **Deadline:** The registration period has ended for both exams. You will be able to register for the second exam if you do not pass the first one or if you are sick.
+  - **Approval:** All candidates with the “Übungsschein” will be approved. Results will be announced early next week.
+
+────────────────────────────────────────
+
+STUDENT: ich habe keine ahnung, habe die vorlesung nicht besucht
+
+ASSISTENT: # Kein Problem – wir starten von vorne! 😊
+
+Es ist gut, dass du dich jetzt damit beschäftigst. Lass uns ganz entspannt einsteigen.
+
+---
+
+## Erstmal ganz ohne Java – eine Alltagsfrage:
+
+Stell dir vor, du erklärst jemandem, wie man **Nudeln kocht**. Du würdest wahrscheinlich sagen:
+
+1. Wasser in den Topf füllen
+2. Wasser zum Kochen bringen
+3. Nudeln hineinwerfen
+4. X Minuten warten
+5. Wasser abgießen
+6. Fertig!
+
+Das ist im Grunde bereits ein **Algorithmus** – eine klare, schrittweise Anleitung, die ein Problem löst.
+
+---
+
+## Jetzt die eigentliche Frage an dich:
+
+> Was denkst du: Was könnte der Unterschied sein zwischen dieser Nudel-Anleitung und einem Algorithmus in Java?
+
+Oder anders gefragt:
+
+> Was muss ein Computer anders "verstehen" als ein Mensch, der eine Kochanleitung liest?
+
+Schreib einfach, was dir spontan einfällt – es gibt keine falsche Antwort! 🙂
+

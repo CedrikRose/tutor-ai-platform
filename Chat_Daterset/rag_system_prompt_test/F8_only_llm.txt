@@ -1,0 +1,113 @@
+================================================================================
+FRAGE: Wie funktioniert Selection Sort in Java?
+Conversation-ID: ed18a70c-e677-45c0-9580-5e60d3012f6a
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Wie funktioniert Selection Sort in Java?
+
+ASSISTENT: # Selection Sort in Java
+
+## Funktionsprinzip
+
+Selection Sort funktioniert, indem es wiederholt das **kleinste Element** aus dem unsortierten Teil des Arrays sucht und es an die richtige Position tauscht.
+
+---
+
+## Schritt-für-Schritt Erklärung
+
+```
+[64, 25, 12, 22, 11]
+ ↑ Suche Minimum im gesamten Array → 11
+[11, 25, 12, 22, 64]  ← Tausch
+     ↑ Suche Minimum ab Index 1 → 12
+[11, 12, 25, 22, 64]  ← Tausch
+         ↑ Suche Minimum ab Index 2 → 22
+[11, 12, 22, 25, 64]  ← Tausch
+             ↑ Suche Minimum ab Index 3 → 25
+[11, 12, 22, 25, 64]  ← fertig
+```
+
+---
+
+## Java Implementierung
+
+```java
+public class SelectionSort {
+
+    public static void selectionSort(int[] array) {
+        int n = array.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            
+            // Index des kleinsten Elements finden
+            int minIndex = i;
+            
+            for (int j = i + 1; j < n; j++) {
+                if (array[j] < array[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            
+            // Kleinstes Element an Position i tauschen
+            if (minIndex != i) {
+                int temp = array[minIndex];
+                array[minIndex] = array[i];
+                array[i] = temp;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] array = {64, 25, 12, 22, 11};
+
+        System.out.print("Vorher: ");
+        printArray(array);
+
+        selectionSort(array);
+
+        System.out.print("Nachher: ");
+        printArray(array);
+    }
+
+    private static void printArray(int[] array) {
+        for (int value : array) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+}
+```
+
+### Ausgabe:
+```
+Vorher:  64 25 12 22 11
+Nachher: 11 12 22 25 64
+```
+
+---
+
+## Komplexität
+
+| | Wert |
+|---|---|
+| **Zeit (Best/Avg/Worst)** | O(n²) |
+| **Speicher** | O(1) |
+| **Stabil** | ❌ Nein |
+
+---
+
+## Vor- und Nachteile
+
+| ✅ Vorteile | ❌ Nachteile |
+|---|---|
+| Einfach zu verstehen | Langsam bei großen Arrays |
+| Wenige Tauschoperationen | Immer O(n²), auch bei sortierten Arrays |
+| In-Place (kein extra Speicher) | Nicht stabil |
+
+> **Tipp:** Für große Datensätze sind **Merge Sort** oder **Quick Sort** deutlich effizienter!
+

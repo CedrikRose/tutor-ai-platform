@@ -1,0 +1,466 @@
+================================================================================
+FRAGE: Was sind Klassen- vs. Instanzvariablen & -methoden in Java?
+Conversation-ID: b2ae0494-61a0-4384-bfb8-919feea34137
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+── RAG-CHUNKS (10 Chunks) ──
+
+  [Chunk 1] Quelle: 03-OOP.pdf (Index: 0)
+  ------------------------------------------------------------
+  # TECHNISCHE UNIVERSITÄT BERLIN
+  
+  ## Programmieren I
+  ### Part III: Object-Oriented Programming
+  #### David Bermbach
+  
+  ----
+  
+  ### Overview of Object-Oriented Programming
+  
+  Object-Oriented Programming (OOP) is a programming paradigm that uses "objects" to represent data and methods to manipulate that data. The key concepts of OOP include:
+  
+  - **Classes and Objects**
+  - **Encapsulation**
+  - **Inheritance**
+  - **Polymorphism**
+  
+  ### 1. Classes and Objects
+  
+  A class is a blueprint for creating objects. An object is an instance of a class.
+  
+  ```python
+  class Dog:
+  def __init__(self, name):
+  self.name = name
+  
+  def bark(self):
+  return f"{self.name} says woof!"
+  
+  # Creating an object of the Dog class
+  my_dog = Dog("Buddy")
+  print(my_dog.bark())  # Output: Buddy says woof!
+  ```
+  
+  ### 2. Encapsulation
+  
+  Encapsulation is the bundling of data and methods that operate on that data within one unit, typically a class. It restricts direct access to some of the object's components.
+  
+  ```python
+  class BankAccount:
+  def __init__(self, balance=0):
+  self.__balance = balance  # Private attribute
+  
+  def deposit(self, amount):
+  self.__balance += amount
+  
+  def get_balance(self):
+  return self.__balance
+  
+  account = BankAccount()
+  account.deposit(100)
+  print(account.get_balance())  # Output: 100
+  ```
+  
+  ### 3. Inheritance
+  
+  Inheritance allows a class to inherit attributes and methods from another class.
+  
+  ```python
+  class Animal:
+  def speak(self):
+  return "Animal speaks"
+  
+  class Cat(Animal):
+  def speak(self):
+  return "Cat meows"
+  
+  my_cat = Cat()
+  print(my_cat.speak())  # Output: Cat meows
+  ```
+  
+  ### 4. Polymorphism
+  
+  Polymorphism allows methods to do different things based on the object it is acting upon.
+  
+  ```python
+  def animal_sound(animal):
+  print(animal.speak())
+  
+  animal_sound(my_cat)  # Output: Cat meows
+  animal_sound(Dog("Rex"))  # Output: Rex says woof!
+  ```
+  
+  ### Summary
+  
+  Object-Oriented Programming is a powerful paradigm that helps in organizing code and making it more reusable and maintainable.
+
+  [Chunk 2] Quelle: 02-Skript Imperative Programming.pdf (Index: 0)
+  ------------------------------------------------------------
+  # Part IIa: Imperative Programming
+  
+  **David Bermbach**
+  
+  *Last update: October 13, 2025*
+  
+  This is the script for the first part of the imperative programming block in the course *Programmieren I*. Use this for reading up on the concepts covered in the lecture which will – for the first part of this block – be using IntelliJ only. For further reading, you can also check the official Java Tutorials.
+  
+  ## 1 Hello, World!
+  
+  All programming courses start with one simple program to greet the world: Let’s have Java print “Hello, World!” to the console.
+  
+  ```java
+  public class HelloWorld {
+  public static void main(String[] args) {
+  System.out.println("Hello, World!");
+  }
+  }
+  ```
+  
+  ### Console output:
+  
+  As you remember, we already talked about the console in Part I. If we launch this program from the console directly by calling `java HelloWorld` and then `java HelloWorld`, it will print the text directly in the line following our command prompt. If we launch this program in IntelliJ, there is a console widget in the lower part of the editor – we will use it for both input (a bit later) and output.
+  
+  Let’s have a closer look at our first program above:
+  
+  - **Line 1**: In Java, executable code is always written inside so-called classes. These will play an important role once we start talking about object-oriented programming. For now, just remember that every `.java` file can contain multiple classes (declared through the keyword `class`), but only one of them can be declared a `public class`. Also, the name of that public class needs to be identical to the file name, i.e., `HelloWorld` needs to be stored in a file with the name `HelloWorld.java`.
+  
+  **Please note**: Java is case-sensitive for everything.
+  
+  1. Your life as a beginner will be significantly easier if you respect the “one file, one class” rule for now.
+  
+  
+  
+  # Java Programming Basics
+  
+  ## Class Definition
+  
+  In Java, every program is defined within a class.
+
+  [Chunk 3] Quelle: 02-Skript Imperative Programming.pdf (Index: 3)
+  ------------------------------------------------------------
+  n be made up of various operators and operands, method or constructor calls, or fixed values.
+  
+  For example, in our earlier program, the expression `"Hello, World!"` is a fixed value expression that evaluates to the string "Hello, World!". This expression is passed as a parameter into a method call. When executing the code, the Java Virtual Machine (JVM) first evaluates the expression to its value and then uses it as input for the method call.
+  
+  Our first program was quite static: it always prints the same text to the console and does not respond to user input or the current state (e.g., time of day). Additionally, it lacks any data processing logic. In the upcoming sections, we will cover:
+  
+  1. Variables and different types (Section 2)
+  2. Getting user input from the console (Section 3)
+  3. Transforming data between different types (Section 4)
+  4. Processing variable content using various operators (Section 5)
+  
+  ## 2. Variables and (Primitive) Data Types
+  
+  In the foundations block, we learned that the basic building blocks of a computer are the CPU, RAM, and disk (we will discuss disk access toward the end of the course). When performing individual steps inside the CPU, we do not have a way to memorize intermediate steps. For this, we need to access the **RAM**, but we need to tell the computer where to access it.
+  
+  For instance, in a computer with 16 GB of RAM, there are approximately 16 billion non-overlapping one-byte memory ranges where we could store a single byte. While low-level programming languages like Assembly expose these memory addresses to programmers, Java abstracts this complexity away. In many lower-level languages, such as C, we also have to remember to explicitly release memory that is no longer needed so that other programs can use it.
+
+  [Chunk 4] Quelle: 02-Skript Imperative Programming.pdf (Index: 4)
+  ------------------------------------------------------------
+  le byte. While low-level programming languages like Assembly expose these memory addresses to programmers, Java abstracts this complexity away. In many lower-level languages, such as C, we also have to remember to explicitly release memory that is no longer needed so that other programs can use it. In Java, we only need to request memory from the JVM, which, through the Garbage Collector, will take care of releasing memory ranges that are no longer needed.
+  
+  What we do need to tell the JVM is how much memory we are requesting, which is defined by different data types—similar to ordering a small or large drink at a bar.
+  
+  The abstraction that higher-level programming languages use for memory addresses is the concept of a **variable**. Variables have a name and a type. There are programming languages known as weakly-typed languages where the type is usually hidden from programmers, but in Java, it is explicitly declared.
+  
+  On a technical level, a variable is essentially an alias, a name for a memory address, indicating where the data stored in this variable is physically located in RAM. The question of "where does it end" is implicitly defined through the type.
+
+  [Chunk 5] Quelle: 02-Skript Imperative Programming.pdf (Index: 5)
+  ------------------------------------------------------------
+  om programmers, but in Java, it is explicitly declared.
+  
+  On a technical level, a variable is essentially an alias, a name for a memory address, indicating where the data stored in this variable is physically located in RAM. The question of "where does it end" is implicitly defined through the type. For example, if RAM were addressable on a bit-level and we had a 32-bit variable starting at bit 100, then bit 131 would contain the last bit of the variable.
+  
+  > **Note:** In actual computers, we typically access the CPU caches first, but Java only provides an abstraction of memory access, regardless of the underlying hardware.
+  
+  
+  
+  # Overview of Primitive Data Types in Java
+  
+  | Type | Memory Size | What it Stores | Value Range |
+  |------|-------------|----------------|-------------|
+  | 8    | integer     | number         | [−128; 127] |
+  | 16   | integer     | number         | [−32,768; 32,767] |
+  | 32   | integer     | number         | [−2^31; 2^31 − 1] |
+  | 64   | integer     | number         | [−2^63; 2^63 − 1] |
+  | 32   | floating point | number      | Wikipedia |
+  | 64   | floating point | number      | Wikipedia |
+  | 1    | boolean     | value          | true/false |
+  | 16   | character   | single character| all unicode characters |
+  | it depends | character sequences | zero or more | s |
+  
+  **Table 1:** Overview of primitive data types and String in Java.
+  
+  On a logical level, one can visualize a variable as a cardboard box: We can put something into the box (= write data to the memory address of the variable), and we can peek inside (= read data from the memory address of the variable). And, of course, cardboard boxes can have different sizes – the one for your smartphone was certainly much smaller than the one your fridge was packaged in. Likewise, variables have different types/sizes.
+  
+  In Java, there are eight primitive data types and another type, **String**, which partly behaves like one; see Table 1 for an overview.
+
+  [Chunk 6] Quelle: 02-Skript Imperative Programming.pdf (Index: 6)
+  ------------------------------------------------------------
+  different sizes – the one for your smartphone was certainly much smaller than the one your fridge was packaged in. Likewise, variables have different types/sizes.
+  
+  In Java, there are eight primitive data types and another type, **String**, which partly behaves like one; see Table 1 for an overview. The primitive data types for numbers all have fixed memory sizes. For **boolean**, the information size is 1 bit, but it depends on the implementation of the JVM whether this is actually stored as 1 bit in memory. For **String**, the size depends on the number of characters stored in the respective variable.
+  
+  Let’s look at a simple example:
+  
+  ```java
+  int number = 10; // line 4
+  String text = "Hello"; // line 8
+  ```
+  
+  **Console output:**
+  
+  When we declare a variable (= request memory space/cardboard box, lines 4 and 8), the syntax is always `type variableName`, with `type` being one of the types from the table above and `variableName` being the name of the variable. Identifiers can be arbitrary names containing characters (a...z, A...Z), numbers (0...9), $, and _.
+  
+  
+  
+  # Variable Naming and Literals in Programming
+  
+  ## Variable Naming Conventions
+  - Variable names should start with a letter.
+  - By convention, variable names should be:
+  1. Self-explaining (e.g., `totalAmount`)
+  2. Use camel-case starting with a lower-case character.
+  
+  - Class and method names should follow the same convention, with only classes starting with an upper-case character.
+  
+  ## Assignment Operator
+  Using the `=` operator, we can assign values to a variable (lines 6 and 8). For this, the expression on the right of the operator is evaluated to a single value and then stored in the variable on the left. When we use a variable as part of an expression (here in line 10 as a parameter), evaluating it means to read the variable value from memory.
+  
+  ## Literals
+  The values on the right side of the assignment operator are so-called literals, i.e., the fixed values that appear directly in the code.
+
+  [Chunk 7] Quelle: 02-Skript Imperative Programming.pdf (Index: 10)
+  ------------------------------------------------------------
+  ide an “empty” variable. This is necessary since the memory at the address for which the variable acts as an alias will always store zeros and ones – on a physical level, there is no “empty”. For this, the compiler will assign a reasonable default value for non-local variables, as shown in Table 2. Generally, it is considered bad practice to not assign a value before accessing a variable – don’t do this.
+  
+  ### Block Scope
+  
+  We already talked briefly about blocks, but this will become more important later: Blocks can contain other blocks, and variable names need to be unique per block. This includes its parent and child blocks but not sibling blocks.
+  
+  For example, if block A contains blocks B and C (both at the same level), then variable names used in A cannot be used in B and C. Variable names used in B cannot be used in A but can be used in C. This is the exact opposite of common usage of names in humans: You might have the same first name as your parents or grandparents, but you are very unlikely to have the same first name as your siblings.
+  
+  Likewise, variables are visible (i.e., accessible) within the same block and all its contained child blocks. For example, block A again contains blocks B and C, but block C also contains block D. Then, variables declared in A are visible in A, B, C, and D; variables declared in B are only visible in B; variables declared in C are visible in C and D; and variables declared in D are visible only in D.
+  
+  # Input, Packages, and Import
+  
+  We can now print variables and literals to the console and assign values to variables, e.g., from other variables or literals. The next step is getting user input, the easiest way...
+  
+  
+  
+  # Reading from the Console in Java
+  
+  To read values from the console in Java, there are multiple methods available, but they all require an understanding of object-oriented programming.
+
+  [Chunk 8] Quelle: 02-Skript Imperative Programming.pdf (Index: 22)
+  ------------------------------------------------------------
+  at the assignment operation in brackets yields the assigned value to first assign a value and then compare said value to `-1`.
+  
+  Second, variables should always have useful names that describe what is stored in the corresponding variable. For example, `numberOfExams` is much more intuitive than `a`. If we now want to calculate the number of exams we need to print, we end up with code such as this (assuming the corresponding variables all exist and have reasonable values):
+  
+  ```java
+  // Example code for calculating number of exams
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  To increase readability, Java offers compound operators for the operators `+`, `-`, `*`, `/`, and `%`. For example, `+=` is short for `a = a + b`, likewise `-=` is short for `a = a - b`, etc. Using this, the code example above can be rewritten to:
+  
+  ```java
+  // Using compound operators
+  int numberOfExams = 5;
+  int examsPrinted = 0;
+  
+  while (examsPrinted &#x3C; numberOfExams) {
+  // Print exam
+  examsPrinted++;
+  }
+  ```
+  
+  ## Class Functionality in Java
+  
+  Almost all functionality provided by the Java Class Library is provided in the form of methods, which we can call. We have already seen how calling class methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 9] Quelle: 02-Skript Imperative Programming.pdf (Index: 36)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+  [Chunk 10] Quelle: 02-Skript Imperative Programming.pdf (Index: 37)
+  ------------------------------------------------------------
+  s methods (which we will cover later) works when we talked about the `IOTools`. Namely, we call methods, e.g., `IOTools.read()`.
+  
+  All advanced math functionality in Java is enclosed in the class `Math`. Aside from methods for more complex calculations, this also includes the constants `PI` and `E`.
+
+────────────────────────────────────────
+
+STUDENT: Was sind Klassen- vs. Instanzvariablen & -methoden in Java?
+
+ASSISTENT: # Klassen- vs. Instanzvariablen & -methoden in Java
+
+Das ist ein zentrales Konzept der objektorientierten Programmierung – ich erkläre es dir direkt und vollständig!
+
+---
+
+## 🧱 Das Fundament: Klassen und Objekte
+
+Stell dir eine **Klasse** als einen Bauplan vor und ein **Objekt** als das konkrete Ding, das nach diesem Bauplan gebaut wurde.
+
+```java
+public class Auto {
+    // Hier kommen Variablen und Methoden hin
+}
+
+// Zwei Objekte (Instanzen) nach dem Bauplan "Auto":
+Auto meinAuto = new Auto();
+Auto deinAuto = new Auto();
+```
+
+`meinAuto` und `deinAuto` sind zwei **Instanzen** der Klasse `Auto` – jede ein eigenständiges Objekt im Speicher.
+
+---
+
+## 📦 Instanzvariablen vs. Klassenvariablen
+
+### Instanzvariablen
+- Gehören zu einem **konkreten Objekt** (einer Instanz)
+- **Jedes Objekt hat seine eigene Kopie** dieser Variable
+- Kein `static`-Schlüsselwort
+
+```java
+public class Auto {
+    String farbe;      // Instanzvariable
+    int geschwindigkeit; // Instanzvariable
+}
+```
+
+```java
+Auto meinAuto = new Auto();
+Auto deinAuto = new Auto();
+
+meinAuto.farbe = "Rot";
+deinAuto.farbe = "Blau";
+
+// meinAuto.farbe ist "Rot"  ← eigene Kopie
+// deinAuto.farbe ist "Blau" ← eigene Kopie
+```
+
+➡️ Jedes Auto hat **seine eigene** Farbe. Änderungen an einem Objekt beeinflussen das andere **nicht**.
+
+---
+
+### Klassenvariablen (`static`)
+- Gehören zur **Klasse selbst**, nicht zu einem Objekt
+- Es gibt **genau eine Kopie**, die von **allen Instanzen geteilt** wird
+- Werden mit dem Schlüsselwort `static` deklariert
+
+```java
+public class Auto {
+    String farbe;               // Instanzvariable
+    static int anzahlAutos = 0; // Klassenvariable
+    
+    public Auto() {
+        anzahlAutos++; // Zählt jedes neu erstellte Auto
+    }
+}
+```
+
+```java
+Auto a1 = new Auto(); // anzahlAutos = 1
+Auto a2 = new Auto(); // anzahlAutos = 2
+Auto a3 = new Auto(); // anzahlAutos = 3
+
+// Zugriff über den Klassennamen (empfohlen!):
+System.out.println(Auto.anzahlAutos); // 3
+```
+
+➡️ `anzahlAutos` ist **einmal** vorhanden und für alle Autos gemeinsam. Es zählt, wie viele Autos insgesamt existieren.
+
+---
+
+## ⚙️ Instanzmethoden vs. Klassenmethoden
+
+### Instanzmethoden
+- Arbeiten mit den Daten **eines konkreten Objekts**
+- Haben Zugriff auf Instanzvariablen (über `this`)
+- Kein `static`
+
+```java
+public class Auto {
+    String farbe;
+    int geschwindigkeit;
+
+    // Instanzmethode
+    public void beschleunigen(int wert) {
+        this.geschwindigkeit += wert; // Zugriff auf eigene Variable
+    }
+
+    public void zeigeInfo() {
+        System.out.println("Farbe: " + farbe + ", Speed: " + geschwindigkeit);
+    }
+}
+```
+
+```java
+meinAuto.beschleunigen(50); // Wirkt nur auf meinAuto
+deinAuto.beschleunigen(30); // Wirkt nur auf deinAuto
+```
+
+---
+
+### Klassenmethoden (`static`)
+- Gehören zur **Klasse**, nicht zu einer Instanz
+- Haben **keinen Zugriff** auf Instanzvariablen (kein `this`)
+- Werden über den **Klassennamen** aufgerufen
+- Du kennst das bereits: `Math.sqrt()`, `IOTools.read()` sind Klassenmethoden!
+
+```java
+public class Auto {
+    static int anzahlAutos = 0;
+
+    // Klassenmethode
+    public static int getAnzahlAutos() {
+        return anzahlAutos; // Zugriff nur auf static-Variable möglich
+    }
+}
+```
+
+```java
+// Aufruf über Klassenname, kein Objekt nötig:
+System.out.println(Auto.getAnzahlAutos());
+```
+
+---
+
+## 🗺️ Übersicht auf einen Blick
+
+| | **Instanz** | **Klasse (`static`)** |
+|---|---|---|
+| **Variable** | Jedes Objekt hat eigene Kopie | Eine gemeinsame Kopie für alle |
+| **Methode** | Arbeitet mit Objekt-Daten (`this`) | Kein Zugriff auf Instanzdaten |
+| **Zugriff** | `objekt.variable` / `objekt.methode()` | `Klasse.variable` / `Klasse.methode()` |
+| **Beispiel** | `meinAuto.farbe` | `Math.sqrt()`, `Auto.anzahlAutos` |
+
+---
+
+## 💡 Wann benutze ich was?
+
+- **Instanzvariable/-methode:** Wenn die Daten oder das Verhalten **spezifisch für ein Objekt** sind (z. B. die Farbe eines bestimmten Autos)
+- **Klassenvariable/-methode:** Wenn etwas **global für alle Objekte** gilt oder **kein Objekt nötig** ist (z. B. Hilfsfunktionen wie `Math.sqrt()`, oder ein gemeinsamer Zähler)
+
+---
+
+Hast du dazu noch Fragen, oder möchtest du das Konzept direkt an einer konkreten Aufgabe ausprobieren? Schreib auch gerne, wenn etwas unklar geblieben ist! 🚀
+

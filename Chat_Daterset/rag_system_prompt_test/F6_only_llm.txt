@@ -1,0 +1,99 @@
+================================================================================
+FRAGE: Was sind Algorithmen in Java?
+Conversation-ID: d3467042-ffb4-4e8b-9ca0-e19093534b6b
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Was sind Algorithmen in Java?
+
+ASSISTENT: # Algorithmen in Java
+
+## Definition
+Ein **Algorithmus** ist eine **endliche Folge von Anweisungen**, die ein Problem löst oder eine Aufgabe ausführt.
+
+---
+
+## Eigenschaften eines Algorithmus
+| Eigenschaft | Bedeutung |
+|-------------|-----------|
+| **Endlichkeit** | Muss irgendwann enden |
+| **Eindeutigkeit** | Jeder Schritt ist klar definiert |
+| **Ausführbarkeit** | Jeder Schritt ist durchführbar |
+| **Korrektheit** | Liefert das richtige Ergebnis |
+
+---
+
+## Beispiele in Java
+
+### 1. Suchalgorithmus (Lineare Suche)
+```java
+public static int lineareSuche(int[] array, int ziel) {
+    for (int i = 0; i < array.length; i++) {
+        if (array[i] == ziel) {
+            return i; // Index gefunden
+        }
+    }
+    return -1; // Nicht gefunden
+}
+```
+
+### 2. Sortieralgorithmus (Bubble Sort)
+```java
+public static void bubbleSort(int[] array) {
+    int n = array.length;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                // Tauschen
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
+```
+
+### 3. Rekursiver Algorithmus (Fakultät)
+```java
+public static int fakultaet(int n) {
+    if (n <= 1) return 1;        // Basisfall
+    return n * fakultaet(n - 1); // Rekursion
+}
+```
+
+---
+
+## Häufige Algorithmen-Kategorien
+
+```
+Algorithmen
+├── Suchen        → Lineare Suche, Binäre Suche
+├── Sortieren     → Bubble Sort, Quick Sort, Merge Sort
+├── Rekursion     → Fakultät, Fibonacci, Türme von Hanoi
+├── Graphen       → Dijkstra, BFS, DFS
+└── Mathematisch  → Primzahlen, ggT (Euklidischer Algorithmus)
+```
+
+---
+
+## Effizienz – Big-O-Notation
+```java
+O(1)       // Konstant   → Array-Zugriff
+O(log n)   // Logarithm. → Binäre Suche
+O(n)       // Linear     → Lineare Suche
+O(n log n) // Effizient  → Merge Sort
+O(n²)      // Quadratisch→ Bubble Sort
+```
+
+---
+
+## Fazit
+> Algorithmen sind das **Herzstück der Programmierung** – sie beschreiben **wie** ein Problem gelöst wird, unabhängig von der Programmiersprache.
+
+Möchtest du ein **konkretes Beispiel** genauer erklärt haben? 😊
+

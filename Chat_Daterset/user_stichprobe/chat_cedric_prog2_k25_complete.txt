@@ -1,0 +1,2201 @@
+================================================================================
+VOLLSTÄNDIGER CHAT-VERLAUF: Cedric
+Anzahl Exchanges: 18
+Anzahl RAG-Chunks: 47
+================================================================================
+
+
+================================================================================
+EXCHANGE 1
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+Ich bin Cedric Rosemann und habe den Kurs letztes Jahr belegt und abgeschlossen, jetzt möchte ich mit dir diese Hausaufgabe noch mal lösen um mein Wissen aufzufrischen. bitte gib mir die erste aufgabe
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 21
+   Chunk-ID: 321fb054-f546-4db1-8df4-03e4c5608558
+
+   Inhalt:
+   Kein Inhalt vorhanden – die Eingabe endet mit dem Marker für Folie 21.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 43
+   Chunk-ID: b9c35e67-e0d1-4625-af17-f33186e91e4b
+
+   Inhalt:
+   ## Finden und Abgleichen – Übersicht (Wiederholung)
+   
+   Diese Folie wiederholt den Abschnittsübergang ohne neuen Inhalt.
+   
+   Die bisher besprochenen Matching-Operationen (`anyMatch`, `allMatch`, `noneMatch`) produzieren `boolean`-Ergebnisse.
+   
+   Die nächste Folie führt zu `findAny()` und `findFirst()` über – Operationen, die **einzelne Elemente** zurückgeben (`Optional<T>`).
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 81
+   Chunk-ID: 22304462-3279-45cf-9cae-2f7ce04c930e
+
+   Inhalt:
+   Übergangsfolie ohne inhaltliche Ergänzung – Titelblatt zum Thema `List` vs. `ListBuffer`.
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 118
+   Chunk-ID: 1aa56b07-2cfa-40b0-bbde-c2293de0f00f
+
+   Inhalt:
+   Überschriftenfolie ohne inhaltliche Ergänzung – Einführung in das Thema Monaden.
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 128
+   Chunk-ID: 77d9a62c-1aab-46cb-a784-d1d6abc3be61
+
+   Inhalt:
+   Überschriftenfolie ohne inhaltliche Ergänzung – Einführung der formalen Monad-Definition.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Hallo Cedric! Schön, dass du dein Wissen auffrischen möchtest. Lass uns mit **Aufgabe 1.1 (Java: Funktionale Interfaces)** starten.
+
+## Die Ausgangssituation
+
+Du hast eine Java-Klasse `FunctionalInterfaces` mit vier statischen Methoden, die aktuell alle `Object` als Parameter für ein Lambda erwarten. Das Problem: **Lambda-Ausdrücke können nicht direkt als `Object` übergeben werden** – sie brauchen ein funktionales Interface als Typ.
+
+Deine Aufgabe ist es, für jede Methode das passende funktionale Interface aus `java.util.function` zu finden und die Methode dann so zu implementieren, dass das Interface angewendet wird.
+
+---
+
+## Die vier Methoden im Überblick
+
+| Methode | Was passiert im Lambda? | Hinweis |
+|---------|------------------------|---------|
+| `applyMathToOneInt(int i, Object o)` | Ein `int` → ein `int` | Ein Argument, gleicher Rückgabetyp |
+| `applyMathToTwoInts(int a, int b, Object o)` | Zwei `int` → ein `int` | Zwei Argumente, primitiv |
+| `concatenateInts(int a, int b, Object o)` | Zwei `int` → `String` | Zwei Argumente, anderer Rückgabetyp |
+| `filterIntegers(List<Integer> nums, Object o)` | `Integer` → `boolean` | Test/Prädikat |
+
+---
+
+## Die wichtigsten funktionalen Interfaces (Kurzübersicht)
+
+Aus der Java-Standardbibliothek `java.util.function`:
+
+| Interface | Signatur | Verwendung |
+|-----------|----------|------------|
+| `UnaryOperator<T>` | `T apply(T t)` | Ein Argument, gleicher Ein- und Rückgabetyp |
+| `IntBinaryOperator` | `int applyAsInt(int a, int b)` | Zwei `int`, Rückgabe `int` (primitiv, effizient) |
+| `BiFunction<T, U, R>` | `R apply(T t, U u)` | Zwei Argumente, beliebiger Rückgabetyp |
+| `Predicate<T>` | `boolean test(T t)` | Ein Argument, Rückgabe `boolean` (Test) |
+
+---
+
+## Dein erster Schritt
+
+**Fange mit `applyMathToOneInt` an.** Schau dir den Lambda-Aufruf in der `main`-Methode an (auskommentiert):
+
+```java
+int modifiedNumber = applyMathToOneInt(10, i -> i + 3);
+```
+
+- **Eingabe:** ein `int` (10)
+- **Lambda:** nimmt `i` (ein `int`) und gibt `i + 3` (auch `int`) zurück
+
+**Welches Interface passt hier?** Überleg kurz – es nimmt **ein** Argument und gibt **denselben Typ** zurück. Schreib mir deine Überlegung, dann schauen wir gemeinsam, ob du auf dem richtigen Weg bist, und ich gebe dir den nächsten Hinweis!
+
+
+================================================================================
+EXCHANGE 2
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+UnaryOperator<T>
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Programmieren II _ 2026 _ Kapitel 1.pdf
+   Chunk-Index: 1
+   Chunk-ID: c9730895-0058-400c-980d-4401238c260a
+
+   Inhalt:
+   ---|--------------------------------|
+   | Compiler         | Java-Compiler                 | Scala-Compiler                 |
+   | REPL             | Java-REPL                     | Scala-REPL                     |
+   
+   ### Byte Code
+   
+   |                  | Java Virtual Machine (JVM)    | Java Virtual Machine (JVM)     | Java Virtual Machine (JVM)     | Java Virtual Machine (JVM)     |
+   |------------------|-------------------------------|--------------------------------|--------------------------------|--------------------------------|
+   | Windows          |                               | Mac                            | Linux                          | Hardware                       |
+   
+   ----
+   
+   ## PROGRAMMIEREN II | 2026 | KAPITEL 1
+   
+   ### 3
+   
+   
+   
+   # BRÜCKE
+   
+   ## SCALA – DIE ZWISCHEN OBJEKT UND FUNKTION
+   
+   ### SCALA UND JAVA REPL – READ EVALUATE PRINT LOOP
+   
+   #### JAVA REPL – JSHELL
+   
+   ```java
+   jshell> 5 * 7
+   $39 ==> 35
+   ```
+   Eingabe in Form eines Ausdrucks oder einer Anweisung
+   
+   ```java
+   jshell> System.out.println("Hello World")
+   Hello World
+   ```
+   
+   ```java
+   jshell> 2 * $39
+   $41 ==> 70
+   ```
+   Automatisches Anlegen von Variablen (wenn keine Zuweisung in der Eingabe)
+   
+   ```java
+   jshell> int age = 10
+   age ==> 10
+   ```
+   Ausgabe oder Bestätigung
+   
+   ```java
+   jshell> int weight =
+   weight ==> 10
+   ```
+   Eingabe über mehrere Zeilen
+   
+   #### SCALA REPL – SCALA
+   
+   ```scala
+   scala> 5 * 7
+   val res2: Int = 35
+   ```
+   
+   ```scala
+   scala> println("Hello World")
+   Hello World
+   ```
+   
+   ```scala
+   scala> 2 * res0
+   val res3: Int = 70
+   ```
+   
+   ```scala
+   scala> val age: Int = 10
+   val age: Int = 10
+   ```
+   
+   ```scala
+   scala> val weight: Int =
+   val weight: Int = 10
+   ```
+   
+   Eingabeprompt
+   
+   ----
+   
+   ## PROGRAMMIEREN II | 2026 | KAPITEL 1
+   
+   
+   
+   # BRÜCKE
+   
+   ## SCALA – DIE ZWISCHEN OBJEKT UND FUNKTION
+   
+   ### SCALA UND JAVA REPL – READ EVALUATE PRINT LOOP
+   
+   #### JAVA REPL – JSHELL
+   
+   ```java
+   jshell> 5*7
+   $39 ==> 35
+   jshell> System.out.println("Hello World")
+   Hello World
+   jshell> 2*$39
+   $41 ==> 70
+   jshell> int age=10
+   age ==> 10
+   jshell> int weight=
+   weight ==> 10
+   ```
+   
+   #### SCALA REPL – SCALA
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Sehr gut, Cedric! **UnaryOperator\<Integer\>** ist absolut korrekt für `applyMathToOneInt`!
+
+Lass mich kurz erklären, warum das passt:
+
+- **Ein Argument:** Das Lambda nimmt genau einen Parameter `i`
+- **Gleicher Ein- und Rückgabetyp:** `int` → `int` (bzw. `Integer` → `Integer` durch Autoboxing)
+
+`UnaryOperator<T>` ist speziell für diesen Fall gedacht: **ein Argument, gleicher Typ raus**. Es erweitert `Function<T, T>` und hat die Methode `T apply(T t)`.
+
+---
+
+## Deine nächste Aufgabe: Implementierung
+
+Jetzt musst du die Methode noch implementieren. Aktuell steht da nur:
+
+```java
+return -1;
+```
+
+**Was muss passieren?** Du hast das Interface `o` als Parameter – wie rufst du die darin enthaltene Funktion auf `i` auf?
+
+Schreib mir deinen Lösungsansatz für die vollständige Methode, dann schauen wir weiter!
+
+
+================================================================================
+EXCHANGE 3
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+und da weiß ich nicht mehr wie es weiter geht. ich weiß nicht mehr wie ich das schreiben muss
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Vorlesung 4
+   Chunk-Index: 10
+   Chunk-ID: 47d249c2-1875-47a9-a149-1fd4131ac25f
+
+   Inhalt:
+   **Match-Ausdrücke: Struktur und Semantik**
+   
+   Ein `match`-Ausdruck ist eine **Fallunterscheidung mit Rückgabewert**:
+   
+   **Bestandteile:**
+   1. **Ausdrucksquelle** – der zu prüfende Wert
+   2. Schlüsselwort `match`
+   3. **case-Zweige** – `muster => rumpf`
+   4. **Rückgabewert** – Ergebnis des ersten passenden Rumpfs
+   
+   **Wichtige Regeln:**
+   - `_` = Standardfall (Default)
+   - **Nur ein Treffer:** Nach dem ersten match wird abgebrochen (kein Fall-through wie in `switch`)
+   - Reihenfolge der cases ist relevant
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Kein Problem, Cedric! Das ist ein kleiner, aber wichtiger Schritt – lass mich dir das direkt zeigen.
+
+## Die Implementierung von `applyMathToOneInt`
+
+Du hast bereits korrekt erkannt: **Der Parameter muss `UnaryOperator<Integer>` sein**.
+
+Die vollständige Methode sieht so aus:
+
+```java
+public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    return o.apply(i);
+}
+```
+
+**Was passiert hier?**
+- `o` ist dein funktionales Interface (das Lambda `i -> i + 3`)
+- `o.apply(i)` ruft die darin enthaltene Funktion auf `i` auf
+- Da `UnaryOperator<Integer>` mit `Integer` arbeitet, findet Autoboxing (`int` ↔ `Integer`) automatisch statt
+
+---
+
+## Direkter Vergleich: Vorher → Nachher
+
+| | Vorher (fehlerhaft) | Nachher (korrekt) |
+|---|---|---|
+| **Parameter** | `Object o` | `UnaryOperator<Integer> o` |
+| **Rückgabe** | `return -1;` | `return o.apply(i);` |
+
+---
+
+## Die nächste Methode: `applyMathToTwoInts`
+
+Schauen wir auf den Methodenaufruf:
+
+```java
+int resultOfMath = applyMathToTwoInts(10, 23, (int a, int b) -> (a % 3) + (b * 5));
+```
+
+- **Zwei Argumente:** `a` und `b` (beide `int`)
+- **Rückgabe:** ein `int` (das Ergebnis der Berechnung)
+
+**Hinweis:** Hier arbeiten wir mit primitiven `int`-Werten, nicht mit `Integer`-Objekten. In `java.util.function` gibt es dafür spezialisierte Interfaces, die Autoboxing vermeiden.
+
+**Welches Interface passt hier?** Überleg kurz – es nimmt **zwei primitive `int`** und gibt **ein primitives `int`** zurück. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 4
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator<Integer> o {return o.apply(a, b)} so richtig?
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (3 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/3
+   Quelle: Vorlesung 4
+   Chunk-Index: 51
+   Chunk-ID: 01897e89-5e97-4bc4-a9fa-a0ab5ec366a3
+
+   Inhalt:
+   Wiederholung: `andThen` erzeugt eine neue Funktion durch **Hintereinanderausführung**: zuerst `f(x)`, dann `g(f(x))`. Die Methode wird auf dem ersten Funktionsobjekt aufgerufen, das zweite wird als Argument übergeben. Das Ergebnis ist eine Funktion vom Eingabetyp des ersten zum Ausgabetyp des zweiten Arguments.
+
+📄 CHUNK 2/3
+   Quelle: Vorlesung 4
+   Chunk-Index: 54
+   Chunk-ID: f7db83f7-455a-46d5-a1be-44b56e7c636f
+
+   Inhalt:
+   Die `andThen`-Methode erzeugt ein **neues Funktionsobjekt** mit einer eigenen `apply`-Methode. Intern wird diese als `g(f(x))` implementiert – beim Aufruf von `combined1(5)` wird also zuerst `f.apply(5)` → `6` ausgeführt, dann `g.apply(6)` → `"Result: 6"`. Das resultierende Objekt `combined1` ist selbst ein `Function1[Int, String]` mit allen Methoden des Traits (inklusive neuem `andThen` für weitere Verkettung).
+
+📄 CHUNK 3/3
+   Quelle: Vorlesung 5
+   Chunk-Index: 152
+   Chunk-ID: 9dce3916-6c47-4da7-a2ec-814a56b5ba3a
+
+   Inhalt:
+   Zusammenfassung des Desugarings: Die `for`-Comprehension iteriert über Collections mit dem Generator `<-`, der Elemente bindet. `yield` transformiert und sammelt Ergebnisse (zu `map`), ohne `yield` führt sie Seiteneffekte aus (zu `foreach`). Guards (`if`) werden zu `filter`. Diese Syntax ist rein syntaktischer Zucker für Methodenaufrufe, die für jede Monade mit `map`, `flatMap`, `filter` definiert sein müssen.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Fast, Cedric! Du hast das richtige Interface erkannt, aber da ist ein kleiner **Syntaxfehler** in deinem Code – passiert schnell!
+
+## Dein Code (korrigiert)
+
+```java
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator o) {
+    return o.applyAsInt(a, b);
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `IntBinaryOperator<Integer> o` | `IntBinaryOperator o` |
+| `o.apply(a, b)` | `o.applyAsInt(a, b)` |
+
+## Warum?
+
+- **`IntBinaryOperator`** ist ein **primitives Interface** – es arbeitet direkt mit `int`, nicht mit `Integer`. Deshalb braucht es **keinen Typparameter** `<Integer>`.
+
+- Die Methode heißt **`applyAsInt`**, nicht `apply`. Das ist eine Konvention bei den primitiven Spezialisierungen in `java.util.function`, um Namenskonflikte mit anderen Interfaces zu vermeiden.
+
+---
+
+## Die nächste Methode: `concatenateInts`
+
+Schauen wir auf den Aufruf:
+
+```java
+String concatenatedInts = concatenateInts(10, 23, (a, b) -> "First: " + a + ", Second: " + b);
+```
+
+- **Zwei Argumente:** `a` und `b` (beide `int`)
+- **Rückgabe:** ein `String`
+
+Hier passt kein primitives Interface mehr, weil der Rückgabetyp `String` ist. Du brauchst ein generisches Interface mit **zwei Eingabetypen** und **einem anderen Rückgabetyp**.
+
+**Welches Interface passt hier?** Überleg kurz – zwei Argumente, verschiedene Typen möglich, beliebiger Rückgabetyp. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 5
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+BiFunction<int, int, String> und o.apply(int a, int b) so richtig?
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Vorlesung 5
+   Chunk-Index: 160
+   Chunk-ID: 58aba450-136a-49a4-8d45-1adc5aa5a21a
+
+   Inhalt:
+   Verkettung der drei Funktionen **mit `flatMap`** (ohne syntaktischen Zucker):
+   
+   ```scala
+   val result = readPrice()
+     .flatMap(applyDiscount)
+     .flatMap(applyVAT)
+   
+   result match {
+     case Right(finalPrice) => println(s"Final price: $finalPrice")
+     case Left(error)       => println(s"Error: $error")
+   }
+   ```
+   
+   **Warum `flatMap`?** Da jede Funktion `Either[String, Double]` zurückgibt, würde `map` verschachtelte `Either` erzeugen (`Either[String, Either[String, Either[...]]]`). `flatMap` "flacht" diese Struktur ab und verkettet nur bei `Right`, bricht bei `Left` ab.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Fast, Cedric! Du hast das richtige Interface erkannt, aber es gibt zwei kleine **Syntaxfehler** – passiert schnell!
+
+## Dein Code (korrigiert)
+
+```java
+public static String concatenateInts(int a, int b, BiFunction<Integer, Integer, String> o) {
+    return o.apply(a, b);
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `BiFunction<int, int, String>` | `BiFunction<Integer, Integer, String>` |
+| `int` als Typparameter | `Integer` (Wrapper-Klasse) |
+
+## Warum?
+
+- **`BiFunction<T, U, R>`** arbeitet mit **generischen Typen**, nicht mit primitiven `int`. Deshalb brauchst du hier `Integer` (die Wrapper-Klasse). Autoboxing kümmert sich dann um die Konvertierung.
+
+- Die Methode heißt einfach **`apply`**, nicht `applyAsInt` – das haben nur die primitiven Spezialisierungen wie `IntBinaryOperator`.
+
+---
+
+## Die letzte Methode: `filterIntegers`
+
+Schauen wir auf den Aufruf:
+
+```java
+List<Integer> greaterThanFive = filterIntegers(nums, i -> i > 5);
+```
+
+- **Ein Argument:** `i` (ein `Integer` aus der Liste)
+- **Rückgabe:** `boolean` (Test, ob das Element behalten werden soll)
+
+Hier brauchst du ein Interface, das **testet** – also ein **Prädikat**.
+
+**Welches Interface passt hier?** Überleg kurz – ein Argument, Rückgabe `boolean`, Test-Operation. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 6
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+public static boolean filterIntegers(int x, Predicate<Integer> o){
+return o.test(Integer x)}
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 12
+   Chunk-ID: 70cfc451-5c77-4a5b-bf42-c8e7c682291d
+
+   Inhalt:
+   **Vergleich: Scala `Option` vs. Java `Optional`**
+   
+   | Aspekt | Scala | Java |
+   |--------|-------|------|
+   | Typ | `Option[T]` | `Optional<T>` |
+   | Erfolg | `Some(value)` | `Optional.of(value)` |
+   | Misserfolg | `None` | `Optional.empty()` |
+   | Fallback | `getOrElse(default)` | `orElse(default)` |
+   
+   **Scala:**
+   ```scala
+   val findProductNameById: Int => Option[String] = id =>
+     if (id == 1) Some("T-Shirt") else None
+   val name = findProductNameById(1).getOrElse("Unknown")
+   ```
+   
+   **Java:**
+   ```java
+   Optional<String> findProductNameById(int id) {
+       if (id == 1) return Optional.of("T-Shirt");
+       else return Optional.empty();
+   }
+   var name = findProductNameById(1).orElse("Unknown");
+   ```
+   
+   Funktional identisch, syntaktisch unterschiedlich.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 28
+   Chunk-ID: 94607064-3869-4b45-b56b-0e4d9e1785e1
+
+   Inhalt:
+   **Vergleich: Funktionsobjekt vs. benannte Funktion**
+   
+   Scala bietet zwei äquivalente Schreibweisen für dieselbe Funktionalität:
+   
+   | Schreibweise | Syntax | Aufruf |
+   |-------------|--------|--------|
+   | **Benannte Funktion** | `val discount: Double => Double = price => price * 0.9` | `discount(originalPrice)` |
+   | **Funktionsobjekt** | `object Discount { def apply(price: Double): Double = price * 0.9 }` | `Discount(originalPrice)` |
+   
+   Beide Varianten berechnen einen Rabatt von 10%. Die `apply`-Methode im Objekt ermöglicht die funktionsähnliche Aufrufsyntax `Discount(100.0)` – Scala übersetzt dies intern zu `Discount.apply(100.0)`.
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 32
+   Chunk-ID: e3d6b509-b528-4a99-b4e4-8ea4ec7c869d
+
+   Inhalt:
+   **Problem 1: Zuweisung an Funktionsvariable schlägt fehl**
+   
+   ```scala
+   val f: Double => Double = Discount  // Fehler!
+   ```
+   
+   Obwohl `Discount` wie eine Funktion aussieht, ist es **kein** `Double => Double`. Der Compiler erkennt das Objekt nicht als Funktionstyp an – es fehlt die Typinformation.
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 117
+   Chunk-ID: 2d13d699-7dc4-4b4d-8a33-bde15341413c
+
+   Inhalt:
+   Diese Folie zeigt das Problem bei der Verwendung von `map` für Berechnungen, die selbst fehlschlagen können. Die Funktionen `applyDiscount` und `applyVAT` lesen Benutzereingaben, die fehlschlagen können – sie müssten eigentlich `Option[Double]` zurückgeben. Mit `map` entsteht jedoch `Option[Option[Double]]`, da `map` das Ergebnis erneut einpackt. Die gezeigte Verkettung `readPrice().map(applyDiscount).map(applyVAT)` funktioniert daher nicht, weil `applyDiscount` und `applyVAT` nicht den passenden Typ `Double => Double` haben, sondern `Double => Option[Double]` bräuchten. Dies illustriert die Einschränkung aus dem historischen Kontext: `map` funktioniert nur für Funktionen ohne eigenen Kontext.
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 155
+   Chunk-ID: 9e7d09b9-47bd-4aed-a0f6-c833dc6659b8
+
+   Inhalt:
+   Dieselben drei Beispiele **ohne** syntaktischen Zucker – die interne Übersetzung:
+   
+   ```scala
+   // Seiteneffekte → foreach
+   nums.foreach(n => println(n * 2))
+   
+   // Transformation → map
+   nums.map(n => n * 2)
+   
+   // Mit Zuweisung
+   val doubled = nums.map(n => n * 2)
+   ```
+   
+   **Kernkonzepte:**
+   - `foreach`: Führt Seiteneffekte aus (kein Rückgabewert, `Unit`)
+   - `map`: Transformiert jedes Element, sammelt Ergebnisse in neuer Collection
+   - `yield` wird zu `map`, fehlendes `yield` wird zu `foreach`
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Du hast das richtige Interface erkannt: **Predicate<Integer>**! Aber deine Syntax hat zwei kleine Fehler – passiert schnell.
+
+## Dein Code (korrigiert)
+
+```java
+public static List<Integer> filterIntegers(List<Integer> nums, Predicate<Integer> o) {
+    List<Integer> output = new ArrayList<>();
+    for (Integer i : nums) {
+        if (o.test(i)) {
+            output.add(i);
+        }
+    }
+    return output;
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `boolean` als Rückgabetyp | `List<Integer>` (die gefilterte Liste) |
+| `int x` als erster Parameter | `List<Integer> nums` (die Eingabeliste) |
+| `o.test(Integer x)` | `o.test(i)` (kein Typ bei Aufruf) |
+| Fehlende Implementierung | Vollständige Schleife mit `ArrayList` |
+
+## Warum?
+
+- **`Predicate<T>`** testet ein Element und gibt `boolean` zurück – aber die **Methode** muss die gefilterte **Liste** zurückgeben, nicht nur einen einzelnen Test.
+
+- Die Methode muss über **alle Elemente** iterieren und das Prädikat auf jedes anwenden.
+
+---
+
+## 🎉 Glückwunsch! Aufgabe 1.1 vollständig gelöst!
+
+| Methode | Interface | Kern-Operation |
+|---------|-----------|---------------|
+| `applyMathToOneInt` | `UnaryOperator<Integer>` | `o.apply(i)` |
+| `applyMathToTwoInts` | `IntBinaryOperator` | `o.applyAsInt(a, b)` |
+| `concatenateInts` | `BiFunction<Integer, Integer, String>` | `o.apply(a, b)` |
+| `filterIntegers` | `Predicate<Integer>` | `o.test(i)` |
+
+---
+
+## Aufgabe 1.2: Scala Basics
+
+Jetzt kommen wir zu den **Scala-Aufgaben** mit `ExamRegistrations`. Die erste Methode ist `readRegistrationsFromFile`.
+
+**Ausgangssituation:**
+- CSV-Datei `registrations.csv` mit Zeilen wie: `Willi,373583,2`
+- Format: `Name,Matrikelnummer,Versuch`
+- Rückgabe: `List[(String, Int, Int)]` – also Tupel aus Name, Matrikelnummer, Versuch
+
+**Gegebener Code:**
+
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+    
+    //TODO: implement
+    List()
+}
+```
+
+**Hinweis:** Die Aufgabe verlangt die **for-Notation** (auch "for-comprehension" genannt).
+
+**Wie würdest du anfangen?** Schreib mir deine erste Idee – auch wenn sie unvollständig ist!
+
+
+================================================================================
+EXCHANGE 7
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+bitte erkläre for-comprehension habe alles schon vergessen
+
+>>> ASSISTENT:
+Kein Problem, Cedric! Die **for-comprehension** in Scala ist ein mächtiges Werkzeug, besonders für Datenverarbeitung. Lass mich sie dir direkt im Chat erklären.
+
+---
+
+## For-Comprehension: Die Grundidee
+
+Die for-comprehension ist Scalas elegante Syntax, um mit **Collections** (Listen, Arrays, Iterator, etc.) zu arbeiten. Sie ersetzt verschachtelte Schleifen und macht den Code lesbarer.
+
+### Grundstruktur
+
+```scala
+for {
+    element <- collection    // Generator: holt jedes Element aus der Collection
+    if condition             // Filter (optional): nur wenn Bedingung wahr
+} yield transformation       // yield: Ergebnis zurückgeben
+```
+
+---
+
+## Ein einfaches Beispiel
+
+```scala
+val numbers = List(1, 2, 3, 4, 5)
+
+// Alle Zahlen verdoppeln
+val doubled = for {
+    n <- numbers
+} yield n * 2
+
+// Ergebnis: List(2, 4, 6, 8, 10)
+```
+
+Mit **Filter**:
+```scala
+// Nur gerade Zahlen verdoppeln
+val doubledEvens = for {
+    n <- numbers
+    if n % 2 == 0
+} yield n * 2
+
+// Ergebnis: List(4, 8)
+```
+
+---
+
+## Mehrere Generatoren (verschachtelt)
+
+Du kannst mehrere `<-` verwenden – das entspricht verschachtelten Schleifen:
+
+```scala
+val list1 = List(1, 2)
+val list2 = List("a", "b")
+
+val combinations = for {
+    num <- list1      // Äußere Schleife
+    str <- list2      // Innere Schleife
+} yield (num, str)
+
+// Ergebnis: List((1,"a"), (1,"b"), (2,"a"), (2,"b"))
+```
+
+---
+
+## Wichtig: `yield` vs. `do` (Seiteneffekte)
+
+| Mit `yield` | Ohne `yield` (nur Seiteneffekte) |
+|-------------|----------------------------------|
+| Gibt eine **neue Collection** zurück | Führt Aktionen aus, gibt **Unit** zurück |
+| `for { ... } yield result` | `for { ... } do println(...)` |
+
+---
+
+## Zurück zu deiner Aufgabe: `readRegistrationsFromFile`
+
+Du hast:
+- `lines` – ein `Iterator[String]` mit Zeilen wie `"Willi,373583,2"`
+- Ziel: Jede Zeile in ein Tupel `(String, Int, Int)` verwandeln
+
+**Schritt-für-Schritt:**
+
+```scala
+for {
+    line <- lines                    // Jede Zeile einzeln
+    values = line.split(",").map(_.trim)  // Aufteilen und trimmen
+} yield (values(0), values(1).toInt, values(2).toInt)
+```
+
+**Was passiert hier?**
+
+| Schritt | Ergebnis für `"Willi,373583,2"` |
+|---------|--------------------------------|
+| `line <- lines` | `"Willi,373583,2"` |
+| `line.split(",")` | `Array("Willi", "373583", "2")` |
+| `.map(_.trim)` | `Array("Willi", "373583", "2")` (hier bereits sauber) |
+| `yield (...)` | `("Willi", 373583, 2)` |
+
+Das `yield` sammelt alle Tupel in eine neue Collection. Da `lines` ein `Iterator` ist, wird ein `Iterator` zurückgegeben – daher brauchst du am Ende `.toList`.
+
+---
+
+## Vollständige Lösung
+
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val registrations = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0), values(1).toInt, values(2).toInt)
+
+    registrations.toList
+}
+```
+
+---
+
+## Deine nächste Aufgabe
+
+**Versuche `readResultsFromFile` selbst!** Die Struktur ist fast identisch, aber:
+- Datei: `results.csv`
+- Format: `Matrikelnummer,Note` (z.B. `"373583,5.0"`)
+- Rückgabe: `List[(Int, Double)]`
+
+Schreib mir deinen Ansatz – auch wenn er unvollständig ist!
+
+
+================================================================================
+EXCHANGE 8
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+bitte gib mir die lösung für die nächste aufgabe
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 50
+   Chunk-ID: ae234ff1-488e-4f99-9b5b-2dfd47ef9021
+
+   Inhalt:
+   ## Eagerness vs. Laziness – Vergleich
+   
+   Diese Folie demonstriert **konkret**, wie Lazy Evaluation die Anzahl der Operationen drastisch reduziert.
+   
+   ### Szenario: Finde erstes verfügbares Produkt unter 10€
+   
+   | Produkt | Filter 1 (verfügbar?) | Filter 2 (< 1000?) | Map | FindFirst |
+   |---------|:---------------------:|:------------------:|:---:| :-------: |
+   | Laptop | ✓ | ✗ | – | – |
+   | T-Shirt | ✓ | ✗ | – | – |
+   | Kochbuch | ✓ | ✗ | – | – |
+   | Smartphone | ✓ | ✗ | – | – |
+   | **Bio-Honig** | ✓ | ✓ | ✓ | **✓ STOP** |
+   | ... | – | – | – | – |
+   
+   ### Operationenzählung:
+   - **Eager-Ausführung** (hypothetisch): 25 + 25 + 25 + 1 = **76 Operationen**
+   - **Lazy-Ausführung** (tatsächlich): 25 + 21 + 3 + 1 = **50 Operationen**
+   
+   **Kritische Erkenntnis**: Nach `Bio-Honig` (erstes Treffer) bricht `findFirst()` die Verarbeitung ab. Die restlichen 20 Produkte werden **nie** betrachtet – das ist **Short-circuiting** in Aktion.
+   
+   Die Tabelle zeigt auch, dass `Designer-Schal` und `Winterjacke` bereits in Filter 1 scheitern (nicht verfügbar), also Filter 2 nie erreichen.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 57
+   Chunk-ID: 4f59e043-269e-4f42-9185-d9b7a3ceec0b
+
+   Inhalt:
+   Zusammenfassung der Laziness-Visualisierung:
+   
+   ```
+   filter:  Laptop, T-Shirt, Kochbuch, Bio-Honig  (4 Elemente)
+   map:     Laptop, T-Shirt, Kochbuch, Bio-Honig  (noch 4)
+   findFirst: "Bio-Honig - 7.99 €"                (Abbruch!)
+   ```
+   
+   **Operationen: 5 + 4 + 1 + 1 = 11**
+   
+   - Die ersten 4 Elemente durchlaufen beide Filter (8 Operationen)
+   - Alle 4 werden gemappt, aber `findFirst` bricht sofort nach dem ersten Ergebnis ab
+   - Die verbleibenden 21 Produkte werden **gar nicht erst verarbeitet**
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 96
+   Chunk-ID: 52cc966d-e548-4a37-878b-071791d290fa
+
+   Inhalt:
+   Übergangsfolie ohne inhaltliche Ergänzung – Wiederholung der `LazyList`/`View`-Einführung.
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 99
+   Chunk-ID: 472d52da-29c2-4ca2-a304-2257172b80af
+
+   Inhalt:
+   **Laziness im Vergleich: `LazyList` vs. `View`**
+   
+   Zwei Code-Beispiele mit `println`-Statements zeigen das unterschiedliche Verhalten:
+   
+   **`LazyList` (mit Caching):**
+   ```scala
+   val productIds: LazyList[Int] = LazyList.from(1000)
+   
+   val nextThree = productIds
+     .map(s => { println(s"vor filter: $s"); s })
+     .filter(_ % 2 == 0)
+     .map(s => { println(s"vor map: $s"); s })
+     .map(id => s"YAOS-$id")
+     .map(s => { println(s"vor take: $s"); s })
+     .take(3)
+     .map(s => { println(s"vor toList: $s"); s })
+     .toList
+   ```
+   
+   **`View` (ohne Caching, mehrfache Evaluation):**
+   ```scala
+   val productView = catalog
+     .map(s => { println(s"vor view: $s"); s })  // EAGER! (vor .view)
+     .view  // Ab hier lazy
+     .map(s => { println(s"vor filter: $s"); s })
+     .filter(_.available)
+     .map(s => { println(s"vor map: $s"); s })
+     .map(p => { println(s"Mapping: ${p.name}"); p.name.toUpperCase })
+   
+   println("Vor foreach: keine Verarbeitung")
+   productView.foreach(println)  // Jedes Element durchläuft alle Schritte
+   ```
+   
+   **Kritischer Fehler im View-Beispiel:** Das erste `map` (Zeile 2) ist **vor** `.view` und daher **eager**!
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 143
+   Chunk-ID: b5c12a82-2d1b-4226-9df2-af85abc73f90
+
+   Inhalt:
+   Einführung monadischer Operationen auf Listen: Drei Listen (`colors`, `sizes`, `styles`) sollen kombiniert werden. Die Herausforderung ist die Erzeugung aller Kombinationen (kartesisches Produkt), was mit verschachtelten `map`-Aufrufen zu `List[List[List[(String, String, String)]]]` führt – unpraktisch verschachtelt.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Ich sehe, du möchtest zur nächsten Aufgabe übergehen. Lass uns **Aufgabe 1.2.2: `readResultsFromFile`** in Scala angehen.
+
+## Die Aufgabe
+
+- **Datei:** `results.csv`
+- **Format:** `Matrikelnummer,Note` (z.B. `"373583,5.0"`)
+- **Rückgabe:** `List[(Int, Double)]` – Tupel aus Matrikelnummer und Note
+
+## Gegebener Code
+
+```scala
+def readResultsFromFile(fileName: String) : List[(Int, Double)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    //TODO: implement
+    List()
+}
+```
+
+## Dein Ansatz
+
+Die Struktur ist fast identisch zu `readRegistrationsFromFile`, aber:
+- Nur **zwei Werte** pro Zeile (nicht drei)
+- Typen: `Int` für Matrikelnummer, `Double` für Note
+
+**Wie würdest du die for-comprehension aufbauen?** Schreib mir deinen Ansatz – auch unvollständig!
+
+
+================================================================================
+EXCHANGE 9
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+warum hast du mir bei derletzten aufgabe einfach die lösung gegeben und jetzt nicht?
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Vorlesung 4
+   Chunk-Index: 11
+   Chunk-ID: 2d0d9935-d786-42f0-bc05-74e9b1224054
+
+   Inhalt:
+   **Wildcard Pattern & Constant Pattern**
+   
+   ```scala
+   day match {
+     case "Monday"              => ...   // Constant Pattern
+     case "Friday"              => ...   // Constant Pattern
+     case "Saturday" | "Sunday" => ...   // Alternative Constants
+     case _                     => ...   // Wildcard Pattern
+   }
+   ```
+   
+   | Pattern | Beschreibung | Verwendung |
+   |---------|------------|------------|
+   | `_` (Wildcard) | Passt auf **jedes** Objekt | Als letzter Default-Fall |
+   | `"Monday"`, `42` | Literale (String, Int, ...) | Exakter Wertvergleich |
+   
+   **Konstante Patterns** nutzen `equals` für den Vergleich.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Du hast vollkommen recht, Cedric – das war inkonsistent von mir. Lass mich das erklären und dann fair verfahren.
+
+## Warum ich bei der letzten Aufgabe die Lösung gab
+
+Bei `filterIntegers` hast du **das richtige Interface erkannt** (`Predicate<Integer>`), aber bei der **Implementierung** waren mehrere grundlegende Dinge durcheinander:
+- Rückgabetyp `boolean` statt `List<Integer>`
+- Parameter `int x` statt `List<Integer> nums`
+- Syntaxfehler bei `o.test(Integer x)`
+
+Das war keine kleine Blockade mehr, sondern ein grundsätzliches Missverständnis der Aufgabenstellung. Da habe ich die komplette Lösung gegeben, damit wir gemeinsam aufbauen können.
+
+---
+
+## Warum ich jetzt frage
+
+Bei `readResultsFromFile` ist die **Struktur fast identisch** zu `readRegistrationsFromFile`, das wir gerade zusammen durchgemacht haben. Du hast also bereits das nötige Wissen – ich möchte dich aktivieren, es anzuwenden.
+
+Aber du hast recht: Du hast nach der Lösung gefragt, und ich habe stattdessen eine Gegenfrage gestellt. Das war nicht meine beste Entscheidung.
+
+---
+
+## Mein Angebot: Du wählst den Weg
+
+**Option A:** Du versuchst `readResultsFromFile` selbst – ich gebe dir nur minimale Hinweise und wir arbeiten dich Schritt für Schritt durch.
+
+**Option B:** Du möchtest die Lösung direkt sehen – dann bekommst du sie sofort, mit Erklärung, und wir gehen danach zur nächsten Methode.
+
+**Welche Option möchtest du?**
+
+
+================================================================================
+EXCHANGE 10
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+nein ich meine du hast mir die vollständige lösung von def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val registrations = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0), values(1).toInt, values(2).toInt)
+
+    registrations.toList
+}
+gegeben
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 63
+   Chunk-ID: bc2fb2c9-3e43-4c03-89ee-6a21d2cf2332
+
+   Inhalt:
+   Wiederholung der Einleitung zu totalen und partiell definierten Funktionen. Die Unterscheidung betrifft die Vollständigkeit der Definitionsmenge einer Funktion.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 70
+   Chunk-ID: b3d34706-86ea-4a94-92e7-e554b8f19464
+
+   Inhalt:
+   ## Syntaktischer Zucker: Die Kurzschreibweise
+   
+   Scala bietet eine **kompakte Syntax** für `PartialFunction`, die die ausführliche Implementierung mit `new PartialFunction { ... }` überflüssig macht:
+   
+   **Ausführlich (boilerplate-intensiv):**
+   ```scala
+   val weekdayToGerman: PartialFunction[String, String] = 
+     new PartialFunction[String, String] {
+       def isDefinedAt(day: String): Boolean = ...
+       def apply(day: String): String = day match { ... }
+     }
+   ```
+   
+   **Verkürzt (idiomatisch):**
+   ```scala
+   val weekdayToGerman: PartialFunction[String, String] = {
+     case "Mon" => "Montag"
+     case "Tue" => "Dienstag"
+     case "Wed" => "Mittwoch"
+   }
+   ```
+   
+   Der Compiler leitet automatisch `isDefinedAt` (Prüfung auf die Cases) und `apply` (Pattern Matching) ab.
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 75
+   Chunk-ID: a2791be3-0ffc-4c91-82c5-5b8bb54da312
+
+   Inhalt:
+   **Beispiel-Datentypen für Scala-Demonstrationen**
+   
+   ```scala
+   sealed trait Category
+   case object ELECTRONICS extends Category
+   case object FASHION extends Category
+   case object BOOKS extends Category
+   case object FOOD extends Category
+   case object OTHER extends Category
+   
+   case class Product(
+     name: String,
+     available: Boolean,
+     price: Int,        // Preis in Eurocent!
+     category: Category
+   ) {
+     override def toString: String = 
+       s"$name (${price / 100.0} €)"
+   }
+   ```
+   
+   **Scala-Syntax-Highlights:**
+   - `sealed trait` – beschränkte Vererbungshierarchie
+   - `case object` / `case class` – automatisch: `equals`, `hashCode`, `toString`, `apply`, `unapply`
+   - String-Interpolation mit `s"..."`
+   
+   Die `catalog`-Liste enthält 26 Produkte mit verschiedenen Kategorien, Verfügbarkeiten und Preisen (in Cent, z.B. `89900` = 899,00 €).
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 102
+   Chunk-ID: 755d8e87-9bfc-4d41-b991-8b8916616623
+
+   Inhalt:
+   **Voraussetzung: `scala.io.StdIn.readLine`**
+   
+   ```scala
+   import scala.io.StdIn.readLine
+   ```
+   
+   Diese Import-Anweisung macht `readLine` verfügbar – eine blockierende Funktion, die eine Zeile von stdin liest. Wichtig für die folgenden Beispiele mit Benutzereingaben und deren Problematik (Seiteneffekte, potenzielle Exceptions bei `toDouble`).
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 109
+   Chunk-ID: 79eb5381-de56-4cb8-bdbb-d603ffb55f6d
+
+   Inhalt:
+   **Ende der Vorlesungseinheit**
+   
+   Die Vorlesungseinheit "Partiell angewandte Funktionen und Currying" ist hiermit abgeschlossen. Die behandelten Konzepte umfassen:
+   
+   1. **Partielle Anwendung** – Fixierung von Argumenten mit `_`-Platzhaltern
+   2. **Currying** – Transformation in verschachtelte einstellige Funktionen
+   3. **Automatische Konvertierung** – `.curried` und `Function.uncurried`
+   4. **Funktionskomposition** – `andThen` für Datenpipelines
+   
+   Diese Techniken ermöglichen flexible, wiederverwendbare und komponierbare Funktionen – Kernprinzipien funktionaler Programmierung, die in der Scala-Standardbibliothek und funktionalen Frameworks intensiv genutzt werden.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Du hast vollkommen recht, Cedric – das war ein Fehler meinerseits! Bei `readRegistrationsFromFile` habe ich dir die **komplette Lösung** gegeben, ohne dich zuerst zu fragen. Das widerspricht meinem eigenen Prinzip der "Hilfe zur Selbsthilfe".
+
+## Warum ich das gemacht habe (keine Entschuldigung, nur Erklärung)
+
+Du hast gesagt: *"bitte erkläre for-comprehension habe alles schon vergessen"*. Ich habe das als **Wissenslücke bei einem grundlegenden Konzept** interpretiert und deshalb die komplette Erklärung + Lösung gegeben – ähnlich wie bei einer reinen Theoriefrage.
+
+Aber: Das war die **Aufgabenbearbeitung**, keine reine Theoriefrage. Hier hätte ich besser unterscheiden müssen zwischen:
+- **Erklärung des Konzepts** (darf ich direkt geben)
+- **Lösung der konkreten Aufgabe** (solltest du selbst versuchen)
+
+---
+
+## Mein Fehler bei `readResultsFromFile`
+
+Als du dann die Lösung für `readResultsFromFile` wolltest, habe ich plötzlich **gezögert** und eine Gegenfrage gestellt. Das war inkonsistent und unfair – ich habe dich für meinen eigenen Fehler bei der ersten Aufgabe bestraft.
+
+---
+
+## Was jetzt fair wäre
+
+Da ich bei `readRegistrationsFromFile` die Lösung direkt gegeben habe, bekommst du **die Lösung für `readResultsFromFile` auch direkt** – fair ist fair.
+
+---
+
+## Lösung für `readResultsFromFile`
+
+```scala
+def readResultsFromFile(fileName: String): List[(Int, Double)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val results = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0).toInt, values(1).toDouble)
+
+    results.toList
+}
+```
+
+**Der einzige Unterschied:** Nur **zwei Werte** statt drei, und `toDouble` statt zweimal `toInt`.
+
+---
+
+## Nächste Aufgabe: `findBestStudent` (3.2.3)
+
+Hier wird es interessanter – wir müssen **zwei Listen verknüpfen**: Registrierungen (Name → Matrikelnummer) und Ergebnisse (Matrikelnummer → Note).
+
+**Gegebener Code:**
+```scala
+def findBestStudent(registrations: List[(String, Int, Int)], results: List[(Int, Double)]) : String = {
+    //TODO: implement
+    ""
+}
+```
+
+**Hinweis:** Du brauchst **zwei Generatoren** in der for-comprehension, um alle Kombinationen durchzugehen.
+
+**Möchtest du:** 
+- **A)** Selbst versuchen (mit Hinweisen von mir)
+- **B)** Die Lösung direkt sehen
+
+
+================================================================================
+EXCHANGE 11
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+ich möchte es selbst lösen.
+was haben wir und was brauchen wir
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Vorlesung 5
+   Chunk-Index: 162
+   Chunk-ID: 1ad4149c-d3d2-4cfd-abf1-73faf45bfa59
+
+   Inhalt:
+   Überschriftenfolie "VORLESUNG" – inhaltlich keine Ergänzung.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Lass uns `findBestStudent` Schritt für Schritt durchgehen.
+
+## Was wir haben
+
+| Eingabe | Struktur | Beispiel |
+|---------|----------|----------|
+| `registrations` | `List[(String, Int, Int)]` | `("Willi", 373583, 2)` → (Name, Matrikelnummer, Versuch) |
+| `results` | `List[(Int, Double)]` | `(373583, 5.0)` → (Matrikelnummer, Note) |
+
+## Was wir brauchen
+
+- **Verknüpfung:** Für jede Registration die passende Note finden (gleiche Matrikelnummer)
+- **Vergleich:** Die beste Note (kleinster Wert!) finden
+- **Rückgabe:** Nur der Name der Person mit der besten Note
+
+## Der Kernpunkt: Zwei Listen verknüpfen
+
+Du brauchst **beide Generatoren** in der for-comprehension:
+
+```scala
+for {
+    (name, id1, _) <- registrations    // _: wir ignorieren den Versuch
+    (id2, grade) <- results
+    if id1 == id2                      // Nur wenn Matrikelnummern übereinstimmen
+} yield ???
+```
+
+## Deine Aufgabe
+
+1. Was kommt nach `yield`? Du willst Name und Note zusammenhalten, um später die beste zu finden.
+
+2. Wie findest du die **beste** Note? In Deutschland: je **kleiner** die Note, desto besser. `1.0` ist besser als `4.0`.
+
+**Schreib mir deinen Ansatz für die for-comprehension!**
+
+
+================================================================================
+EXCHANGE 12
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+es gibt bestimmt einen befehl mit dem man alle notenwerte fuchgehen kann und sich nur den kleisten merkt. wie heißt der?
+
+>>> ASSISTENT:
+Sehr guter Gedanke, Cedric! Du suchst nach einer Möglichkeit, aus mehreren Werten den **kleinsten** zu finden – in unserem Fall die **beste Note** (da niedriger = besser).
+
+---
+
+## Die Scala-Methoden für Minimum/Maximum
+
+| Methode | Bedeutung | Beispiel |
+|---------|-----------|----------|
+| `min` | Kleinster Wert | `List(5.0, 3.0, 4.0).min` → `3.0` |
+| `max` | Größter Wert | `List(5.0, 3.0, 4.0).max` → `5.0` |
+| `minBy(f)` | Kleinster Wert nach Funktion `f` | `list.minBy(_._2)` → Tupel mit kleinstem 2. Element |
+| `maxBy(f)` | Größter Wert nach Funktion `f` | `list.maxBy(_._2)` → Tupel mit größtem 2. Element |
+
+---
+
+## Das Problem bei `findBestStudent`
+
+`min` oder `minBy` allein reichen **nicht direkt**, weil wir **zwei Listen verknüpfen** müssen. Wir haben:
+- `registrations: List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+- `results: List[(Int, Double)]` → (Matrikelnummer, Note)
+
+Wir müssen erst die **passenden Paare finden** (gleiche Matrikelnummer), dann das Minimum bestimmen.
+
+---
+
+## Dein Ansatz mit for-comprehension
+
+Du hast bereits:
+
+```scala
+for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield ???
+```
+
+**Was kommt nach `yield`?**
+
+Du willst **Name und Note** zusammenhalten, um später die beste zu finden. Ein Tupel `(String, Double)` wäre hier sinnvoll.
+
+**Schreib mir:**
+1. Was kommt nach `yield`?
+2. Wie könntest du dann das Minimum finden? (Tipp: `minBy` auf der resultierenden Liste)
+
+
+================================================================================
+EXCHANGE 13
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+was habe ich denn jetzt überhaupt nach dem yield? habe ich ein tupel mit name,id1, versuch, id2, note oder was habe ich dann
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (4 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/4
+   Quelle: Vorlesung 5
+   Chunk-Index: 13
+   Chunk-ID: 594b04df-739c-46c6-b7c8-adf3cb9de569
+
+   Inhalt:
+   **Sprachspezifische Unterschiede**
+   
+   - **Zweck identisch**: Beide vermeiden `null` und bieten typsichere Abwesenheitsbehandlung
+   - **Scala-Vorteile**: Kompakter, ausdrucksstärker, besser in den Sprachkern integriert
+   - **Java-Eigenschaften**: Seit Java 8 verfügbar, mehr Boilerplate erforderlich, ebenfalls typsicher
+   
+   Die Designphilosophie von Scala favorisiert funktionale Patterns direkt in der Sprache, während Java diese über die Standardbibliothek nachrüstet.
+
+📄 CHUNK 2/4
+   Quelle: Vorlesung 4
+   Chunk-Index: 83
+   Chunk-ID: 46a03e27-30d0-4f00-ac4e-a896619eec91
+
+   Inhalt:
+   ## ADTs vs. Klassischer Stil: Ein Vergleich
+   
+   | Aspekt | ADT-Stil | Klassischer Stil |
+   |--------|----------|------------------|
+   | **Typdefinition** | `sealed trait` + `case class` | Eine Klasse mit allen Feldern |
+   | **Varianten** | Separate, typisierte Klassen | String-Flag + optionale Felder |
+   | **Pattern Matching** | Exhaustiveness-Checking | Keine Garantie, `case _` nötig |
+   | **Typsicherheit** | Ungültige Zustände unmöglich | Laufzeitfehler möglich |
+   
+   **Klassischer Stil (problematisch):**
+   ```scala
+   class PaymentMethod(
+     val methodType: String,  // "credit", "paypal", "cod"
+     val number: String = "",  // nur für credit
+     val email: String = ""    // nur für paypal
+   )
+   ```
+   
+   Probleme: Felder haben je nach `methodType` unterschiedliche Bedeutung, können inkonsistent sein, und der Compiler erkennt Fehler nicht.
+
+📄 CHUNK 3/4
+   Quelle: Vorlesung 4
+   Chunk-Index: 84
+   Chunk-ID: 90f3f517-b660-4197-95db-644b7e77a549
+
+   Inhalt:
+   ## Direkter Vergleich: Code-Beispiele
+   
+   **ADT-Stil (links):**
+   - Jede Variante hat **nur ihre relevanten Felder**
+   - `processPayment` nutzt **Pattern Matching** mit garantiert abgedeckten Fällen
+   - Kein `case _` nötig, da `sealed` alle Fälle sichert
+   
+   **Klassischer Stil (rechts):**
+   - **Eine Klasse** für alles, Felder je nach Kontext bedeutungslos
+   - String-Vergleiche für Typunterscheidung (`"credit"`, `"paypal"`)
+   - `case _` für unbekannte Werte nötig
+   - **Laufzeitfehler** bei falscher Verwendung von Feldern
+   
+   **Das ADT-Prinzip "Make illegal states unrepresentable"** eliminiert eine ganze Klasse von Fehlern zur Compile-Zeit.
+
+📄 CHUNK 4/4
+   Quelle: Vorlesung 5
+   Chunk-Index: 95
+   Chunk-ID: 274d4502-d05d-4b39-8e70-304531ffd19e
+
+   Inhalt:
+   **Einführung: `LazyList` und `View`**
+   
+   Zwei Mechanismen für **Lazy Evaluation** in Scala, im Kontrast zu den bisherigen **eager** Collections:
+   
+   **`LazyList` – potentiell unendliche Sequenzen:**
+   ```scala
+   val productIds: LazyList[Int] = LazyList.from(1000)  // Start bei 1000, unendlich!
+   
+   val nextThree = productIds
+     .filter(_ % 2 == 0)           // Nur gerade
+     .map(id => s"YAOS-$id")       // IDs formatieren
+     .take(3)                       // Nur 3 nehmen
+     .toList                        // Erst hier: Evaluation!
+   
+   println(nextThree)  // List(YAOS-1000, YAOS-1002, YAOS-1004)
+   ```
+   
+   **`View` – lazy Sicht auf bestehende Collection:**
+   ```scala
+   val productView = catalog.view
+     .filter(_.available)
+     .map(p => { println(s"Mapping: ${p.name}"); p.name.toUpperCase })
+   
+   println("Vor foreach: keine Verarbeitung")  // Keine Ausgabe!
+   productView.foreach(println)  // Erst hier: Evaluation mit Seiteneffekten
+   ```
+   
+   **Kernunterschied:** `LazyList` ist eine eigene Collection, `View` ist eine **lazy Schicht** über einer eager Collection.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Gute Frage, Cedric! Lass mich das Schritt für Schritt aufklären.
+
+## Was passiert in der for-comprehension?
+
+```scala
+for {
+    (name, id1, _) <- registrations      // registrations: List[(String, Int, Int)]
+    (id2, grade) <- results               // results: List[(Int, Double)]
+    if id1 == id2                         // Filter: nur wenn Matrikelnummern gleich
+} yield ???
+```
+
+### Schritt 1: Die Generatoren
+
+| Variable | Wert aus Beispieldaten |
+|----------|------------------------|
+| `name` | `"Willi"` |
+| `id1` | `373583` |
+| `_` | `2` (ignoriert) |
+| `id2` | `373583` (aus results) |
+| `grade` | `5.0` |
+
+### Schritt 2: Der Filter
+
+`if id1 == id2` → `373583 == 373583` → **true** ✓
+
+Diese Kombination wird behalten.
+
+### Schritt 3: Was kommt nach `yield`?
+
+**Du entscheidest**, was zurückgegeben wird. Du hast gefragt: Was brauchst du?
+
+| Option | `yield` | Ergebnis-Typ |
+|--------|---------|--------------|
+| A | `(name, id1, _, id2, grade)` | `(String, Int, Int, Int, Double)` – zu viel, redundant |
+| B | `(name, id1, grade)` | `(String, Int, Double)` – immer noch redundant (id1 doppelt) |
+| C | `(name, grade)` | `(String, Double)` | **Minimal, optimal** |
+
+## Die richtige Antwort: **C**
+
+```scala
+yield (name, grade)
+```
+
+**Warum?**
+- `id1` und `id2` sind **gleich** (dank Filter), also redundant
+- Der Versuch `_` brauchen wir für "beste Note" nicht
+- Wir brauchen nur **Name** und **Note**, um später das Minimum zu finden
+
+## Das Ergebnis der for-comprehension
+
+```scala
+val nameGradePairs = for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)
+
+// Typ: Iterator[(String, Double)]
+// Beispielinhalt: Iterator(("Willi", 5.0), ("Anselma", 5.0), ("Noll", 4.0), ...)
+```
+
+## Dein nächster Schritt
+
+Du hast jetzt eine Collection mit Tupeln `(Name, Note)`. Wie findest du das **Minimum nach Note**?
+
+**Tipp:** `minBy` mit einer Funktion, die das zweite Element des Tupels extrahiert.
+
+**Schreib mir deinen Ansatz!**
+
+
+================================================================================
+EXCHANGE 14
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+ach so ich einfach als tupel schreiben was ich möchte. kann ich dann auch einfach } yield (name, grade).toList.min(grade) machen?
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (4 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/4
+   Quelle: Vorlesung 4
+   Chunk-Index: 3
+   Chunk-ID: 5e27b4fc-333b-4d51-b8c0-b9c51e1218da
+
+   Inhalt:
+   **Generierte Methoden im Detail**
+   
+   | Methode | Funktion | Beispiel |
+   |---------|----------|----------|
+   | `toString` | Lesbare String-Repräsentation | `Product(123,Mouse,...)` |
+   | `copy` | Erzeugt modifizierte Kopie | `pl.copy(price = pl.price * 0.9)` |
+   | `==` / `hashCode` | Wertbasierte Gleichheit | Für Collections und Maps essenziell |
+   | `apply` | Factory-Methode zum Erzeugen | `Product.apply(...)` oder direkt `Product(...)` |
+   
+   **Zusammenhang:** Diese Methoden ermöglichen funktionale Programmierparadigmen – unveränderliche Daten mit einfacher Kopie-und-Modifizieren-Semantik statt mutabler Zustandsänderungen.
+
+📄 CHUNK 2/4
+   Quelle: Vorlesung 5
+   Chunk-Index: 20
+   Chunk-ID: 9066afa8-fb01-4bdd-a30c-9139db8aaf3b
+
+   Inhalt:
+   ## Deklarativer Programmierstil mit Streams
+   
+   Der deklarative Ansatz löst das gleiche Problem wie der imperative Stil, aber auf drastisch kompaktere Weise:
+   
+   ```java
+   List<String> productNames = catalog.stream()
+       .filter(p -> p.isAvailable() && p.getPrice() < 5000)
+       .sorted(Comparator.comparing(Product::getPrice))
+       .map(Product::getName)
+       .collect(Collectors.toList());
+   ```
+   
+   **Was passiert hier?**
+   - `stream()` – Erzeugt einen Stream aus der Collection (Quelle)
+   - `filter(...)` – **Intermediate Operation**: Behält nur verfügbare Produkte unter 50€
+   - `sorted(...)` – **Intermediate Operation**: Sortiert nach Preis aufsteigend
+   - `map(...)` – **Intermediate Operation**: Transformiert Produkt → Name
+   - `collect(...)` – **Terminal Operation**: Sammelt Ergebnis in eine `List`
+   
+   **Vorteile gegenüber dem imperativen Stil:**
+   - Keine manuelle Container-Verwaltung
+   - Keine expliziten Schleifen
+   - Lesbare Methodenverkettung (Fluent API)
+   - Der Code beschreibt **das WAS**, nicht das **WIE**
+
+📄 CHUNK 3/4
+   Quelle: Vorlesung 4
+   Chunk-Index: 71
+   Chunk-ID: 61e033ba-7062-4f8f-84d4-e79df17beda0
+
+   Inhalt:
+   ## Details zur Kurzschreibweise
+   
+   **Wie funktioniert der syntaktische Zucker?**
+   
+   1. Ein Block `{ case ... => ... }` wird vom Compiler als `PartialFunction` interpretiert
+   2. `isDefinedAt` wird implizit aus den Case-Mustern generiert
+   3. `apply` führt das Pattern Matching durch
+   
+   **Wichtige Einschränkung:**
+   > Die Kurzform funktioniert **nur** für `PartialFunction[A, B]`, **nicht** für normale Funktionen `A => B`!
+   
+   ```scala
+   // ✅ Korrekt: PartialFunction explizit im Typ
+   val f: PartialFunction[String, String] = { case "x" => "y" }
+   
+   // ❌ Fehler: Normaler Funktionstyp erwartet vollständigen Match
+   val g: String => String = { case "x" => "y" }  // Compiler-Fehler: unvollständig
+   ```
+   
+   Diese Unterscheidung ist entscheidend für das Verständnis, wann Partial Functions zum Einsatz kommen.
+
+📄 CHUNK 4/4
+   Quelle: Vorlesung 5
+   Chunk-Index: 91
+   Chunk-ID: d54e629f-0ac4-47b9-9ed9-35476eb08dc9
+
+   Inhalt:
+   Übergangsfolie ohne inhaltliche Ergänzung – Vorbereitung auf visuelle Erklärung von `foldLeft`.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Fast, Cedric! Die Idee ist gut, aber die Reihenfolge ist wichtig.
+
+## Was du meinst
+
+```scala
+yield (name, grade).toList.min(grade)   // ❌ So nicht!
+```
+
+## Das Problem
+
+- `.toList` ist eine Methode auf `Iterator` – du brauchst sie **nach der gesamten for-comprehension**
+- `.minBy(...)` gehört auf die **resultierende Liste**, nicht auf ein einzelnes Tupel
+
+## Die korrekte Reihenfolge
+
+```scala
+val nameGradePairs = for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)          // Iterator[(String, Double)]
+
+val best = nameGradePairs.toList.minBy(_._2)   // (String, Double) mit kleinster Note
+best._1                                        // Nur der Name
+```
+
+Oder kompakt in einer Zeile:
+
+```scala
+(for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)).toList.minBy(_._2)._1
+```
+
+## Erklärung von `_._2`
+
+| Teil | Bedeutung |
+|------|-----------|
+| `_` | Jedes Tupel `(name, grade)` |
+| `._2` | Das **zweite Element** des Tupels → die `grade` |
+
+`minBy(_._2)` sucht das Tupel mit dem **kleinsten zweiten Element** (beste Note).
+
+---
+
+## Deine nächste Aufgabe: `findAdequateStudents`
+
+**Gegeben:**
+- `registrations`: `List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+- `results`: `List[(Int, Double)]` → (Matrikelnummer, Note)
+
+**Gesucht:**
+- Alle Matrikelnummern von Studenten, die:
+  - **im 2. Versuch** sind (`attempt == 2`)
+  - **Note ≤ 3.0** haben
+
+**Hinweis:** Du kannst **beide Filter direkt in die for-comprehension** schreiben!
+
+```scala
+for {
+    (name, id1, attempt) <- registrations if attempt == 2   // Filter 1
+    (id2, grade) <- results if id1 == id2 && ???            // Filter 2
+} yield ???
+```
+
+**Was kommt bei Filter 2 rein, und was wird zurückgegeben?**
+
+
+================================================================================
+EXCHANGE 15
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+grade <= 3.0
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (1 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/1
+   Quelle: Vorlesung 5
+   Chunk-Index: 36
+   Chunk-ID: 183b6733-eebb-4e13-84e4-c8e4e34e43a8
+
+   Inhalt:
+   ## Begrenzung mit `limit(n)`
+   
+   Die `limit()`-Operation schränkt die Stream-Größe auf maximal `n` Elemente ein:
+   
+   ```java
+   List<Product> limitedList = catalog.stream()
+       .filter(p -> p.getPrice() > 2000)   // Teure Produkte
+       .limit(3)                           // Maximal 3 Stück
+       .collect(Collectors.toList());
+   ```
+   
+   **Eigenschaften:**
+   
+   | Aspekt | Beschreibung |
+   |--------|--------------|
+   | **Typ** | Stateful Intermediate Operation |
+   | **Zustand** | Zähler der bereits durchgelassenen Elemente |
+   | **Short-circuiting** | Ja – kann Stream vorzeitig beenden |
+   | **Ordnung** | Erste `n` Elemente in Stream-Reihenfolge |
+   
+   **Anwendungsfall**: "Top-N"-Ergebnisse, Paginierung, Sampling.
+   
+   **Kombination mit `sorted()`**: Für "Top 3 nach Preis" zuerst sortieren, dann limitieren:
+   ```java
+   .sorted(Comparator.comparing(Product::getPrice).reversed())
+   .limit(3)
+   ```
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Du hast den zweiten Filter erkannt: **`grade <= 3.0`** (oder `grade <= 3.0d` für Double).
+
+## Deine for-comprehension für `findAdequateStudents`
+
+```scala
+def findAdequateStudents(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): List[Int] = {
+    (for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2 && grade <= 3.0
+    } yield id1).toList
+}
+```
+
+**Erklärung:**
+
+| Teil | Bedeutung |
+|------|-----------|
+| `(_, id1, attempt) <- registrations` | Name ignorieren, Matrikelnummer und Versuch extrahieren |
+| `if attempt == 2` | Nur Zweitversuch |
+| `(id2, grade) <- results` | Matrikelnummer und Note aus Ergebnissen |
+| `if id1 == id2 && grade <= 3.0` | Gleiche Matrikelnummer UND Note ≤ 3.0 |
+| `yield id1` | Matrikelnummer zurückgeben |
+| `.toList` | Iterator in Liste umwandeln |
+
+---
+
+## Nächste Aufgabe: `findDuplicateRegistrations`
+
+**Gegeben:**
+- `registrations: List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+
+**Gesucht:**
+- Matrikelnummern von Studenten, die **mehrfach** in der Liste vorkommen (gleiche Matrikelnummer, aber verschiedene Namen oder Versuche)
+
+**Hinweis:** Du musst die **Liste mit sich selbst** vergleichen! Zwei Generatoren über dieselbe `registrations`-Liste.
+
+**Wie würdest du die Bedingung formulieren?**
+- Gleiche Matrikelnummer: `x._2 == y._2`
+- Aber **nicht** dasselbe Element: `x._1 != y._1` (verschiedene Namen) oder `x != y`
+
+**Schreib mir deinen Ansatz!**
+
+
+================================================================================
+EXCHANGE 16
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+for{
+(name1, id1, attempt1) <- registrations 
+(name2, id2, attempt2) <- registrations 
+if id2==id2
+if name2 != name1 or attempt1 != attempt2
+} yield id1
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 64
+   Chunk-ID: d7a7b9a4-b78d-499e-bdb0-9524aeec52bb
+
+   Inhalt:
+   Einführung in die **Hierarchie der Scala Collections** im Paket `scala.collection`.
+   
+   **Kernstruktur (als UML-Diagramm):**
+   - `Iterable` ist die Wurzel aller Collections
+   - Drei Hauptzweige: `Set`, `Map`, `Seq`
+   - Spezialisierungen:
+     - `Set` → `SortedSet` → `BitSet`
+     - `Seq` → `IndexedSeq` und `LinearSeq`
+     - `Map` → `SortedMap`
+   
+   **Wichtig:** Alle sind **Traits** (vergleichbar mit Java-Interfaces), keine konkreten Klassen. Das ermöglicht flexible Implementierungen und eine einheitliche API über alle Collection-Typen hinweg.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 65
+   Chunk-ID: 34aa85dd-3530-4dd7-8385-53956289c5a5
+
+   Inhalt:
+   Zweiteilige Hierarchie in Scala: **`scala.collection.immutable`** und **`scala.collection.mutable`**.
+   
+   Diese beiden Pakete enthalten die konkreten Implementierungen. Der Basis-Trait in `scala.collection` dient als gemeinsamer Supertyp für beide Varianten – ähnlich wie `Collection` in Java, aber mit deutlich stärkerer funktionaler Ausrichtung.
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 66
+   Chunk-ID: 9836270d-02d0-4d98-96fe-72e9c7729056
+
+   Inhalt:
+   Wiederholung der Übersichtsfolie für Scala Collections.
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 68
+   Chunk-ID: bc5f88ba-fa51-42f8-8319-7f3173b80ce6
+
+   Inhalt:
+   Wiederholung der Übersichtsfolie für Scala Collections.
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 70
+   Chunk-ID: 6734b184-eed8-443b-8dad-c30b503099ee
+
+   Inhalt:
+   Wiederholung der Übersichtsfolie für Scala Collections.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Sehr guter Ansatz, Cedric! Du hast die Idee richtig erkannt: **zweimal dieselbe Liste durchlaufen** und **Vergleichen**.
+
+Aber es gibt ein paar **kleine Fehler** in deinem Code:
+
+## Dein Code (korrigiert)
+
+```scala
+for {
+    (name1, id1, _) <- registrations      // _ statt attempt1 (brauchen wir nicht)
+    (name2, id2, _) <- registrations      // _ statt attempt2 (brauchen wir nicht)
+    if id1 == id2                         // ❌ Du hattest id2 == id2 (immer true!)
+    if name1 != name2                     // Verschiedene Namen (oder andere Unterscheidung)
+} yield id1
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt | Erklärung |
+|-------------|---------|-----------|
+| `id2 == id2` | `id1 == id2` | `id2 == id2` ist immer `true` – du willst die **beiden verschiedenen Einträge** vergleichen |
+| `name2 != name1 or attempt1 != attempt2` | `name1 != name2` | `or` ist kein gültiger Scala-Operator (nur `||`), aber wir brauchen nur `name1 != name2` |
+
+## Warum reicht `name1 != name2`?
+
+Wenn **zwei verschiedene Einträge** dieselbe **Matrikelnummer** haben, aber **verschiedene Namen**, dann ist das ein Duplikat (dasselbe kann nicht zweimal vorkommen).
+
+**Achtung:** Dein Code gibt **jedes Duplikat zweimal aus** (für `(x, y)` und `(y, x)`). Du brauchst noch eine Möglichkeit, Duplikate in der **Ergebnisliste** zu vermeiden – oder akzeptierst, dass die Testklasse das mit `.sorted` handhabt.
+
+## Die vollständige Lösung (mit Vermeidung von doppelten Einträgen)
+
+```scala
+def findDuplicateRegistrations(registrations: List[(String, Int, Int)]) : Array[Int] = {
+    var duplicates = Array[Int]()
+    for (x <- registrations; y <- registrations if x._2 == y._2 && x._1 != y._1) {
+        if (!duplicates.contains(x._2)) {
+            duplicates = x._2 +: duplicates
+        }
+    }
+    duplicates
+}
+```
+
+**Alternative mit for-yield und `distinct`:**
+
+```scala
+(for {
+    (name1, id1, _) <- registrations
+    (name2, id2, _) <- registrations
+    if id1 == id2 && name1 != name2
+} yield id1).distinct.toArray
+```
+
+---
+
+## Letzte Aufgabe: `findAvgGradeOfRepeatExams`
+
+**Gegeben:**
+- `registrations` und `results` wie zuvor
+
+**Gesucht:**
+- **Durchschnittsnote** aller Studenten, die **im 2. Versuch** die Prüfung schreiben
+
+**Hinweis:** Du brauchst **keine for-comprehension mit yield** – hier geht es um **Zählen und Summieren**.
+
+**Wie würdest du anfangen?**
+
+
+================================================================================
+EXCHANGE 17
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+verknüpfung zwischen registrations und results mit attempt==2, dann mit einer forschleife die noten zusammenrechnen und de anzer der noten teilen aber wie genau keine ahnung
+
+>>> ASSISTENT:
+Sehr guter Ansatz, Cedric! Du hast die Logik schon richtig erkannt:
+
+1. **Verknüpfung** der beiden Listen
+2. **Filter** auf `attempt == 2`
+3. **Summe** der Noten berechnen
+4. **Anzahl** zählen
+5. **Durchschnitt** = Summe / Anzahl
+
+Lass mich dir die **zwei möglichen Ansätze** zeigen:
+
+---
+
+## Ansatz 1: Mit `for`-Schleife und Variablen (imperativ)
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    var sum = 0.0      // Summe der Noten
+    var count = 0      // Anzahl der Studenten
+
+    for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } {
+        sum += grade   // Note addieren
+        count += 1     // Zähler erhöhen
+    }
+
+    sum / count        // Durchschnitt berechnen
+}
+```
+
+---
+
+## Ansatz 2: Mit `for-yield` und `sum`/`size` (funktional)
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    val grades = for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } yield grade
+
+    grades.sum / grades.size
+}
+```
+
+---
+
+## Vergleich
+
+| | Ansatz 1 (imperativ) | Ansatz 2 (funktional) |
+|---|---|---|
+| **Stil** | Variablen, Schleife | `for-yield`, Collection-Methoden |
+| **Vorteil** | Explizit, leicht nachvollziehbar | Kompakt, idiomatisch für Scala |
+| **Aufgabenstellung** | Passt | Passt auch (Hinweis: "Nutze for-Notation") |
+
+Die Aufgabenstellung sagt **"Nutze die for-Notation"** – beide Ansätze tun das, aber **Ansatz 2** ist reiner funktionaler Scala-Stil.
+
+---
+
+## Deine Entscheidung
+
+**Welchen Ansatz möchtest du nehmen?**
+
+- **A)** Ansatz 1 (mit `var sum` und `var count`) – klassisch, explizit
+- **B)** Ansatz 2 (mit `yield` und `.sum`) – kompakt, funktional
+
+Sag mir Bescheid, dann schreibe ich dir die vollständige Methode!
+
+
+================================================================================
+EXCHANGE 18
+================================================================================
+
+📚 AUSGEWÄHLTES MATERIAL: Hausaufgabe 1
+
+>>> STUDENT (Cedric):
+b
+
+────────────────────────────────────────────────────────────────────────────────
+RAG KONTEXT (5 Chunks)
+────────────────────────────────────────────────────────────────────────────────
+
+📄 CHUNK 1/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 17
+   Chunk-ID: c989a1da-8407-4f12-85ec-0e0cce81e094
+
+   Inhalt:
+   **Imperativer Programmierstil (Pre-Java 8)**
+   
+   Dreistufige Verarbeitung mit externer Iteration:
+   
+   ```java
+   // Schritt 1: Filtern (verfügbar UND < 50€)
+   List<Product> affordableProducts = new ArrayList<>();
+   for (Product p : catalog) {
+       if (p.isAvailable() && p.getPrice() < 5000) {
+           affordableProducts.add(p);
+       }
+   }
+   
+   // Schritt 2: Sortieren nach Preis
+   Collections.sort(affordableProducts, new Comparator<Product>() {
+       public int compare(Product p1, Product p2) {
+           return Integer.compare(p1.getPrice(), p2.getPrice());
+       }
+   });
+   
+   // Schritt 3: Namen extrahieren
+   List<String> productNames = new ArrayList<>();
+   for (Product p : affordableProducts) {
+       productNames.add(p.getName());
+   }
+   ```
+   
+   **Probleme**: Viel Boilerplate, manuelle Zustandsverwaltung, schwer zu parallelisieren.
+
+📄 CHUNK 2/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 26
+   Chunk-ID: bef6766c-dd40-4147-a3a3-fae041796006
+
+   Inhalt:
+   Kein Inhalt vorhanden – die Eingabe enthält nur 21 Folien (Indizes 0-20).
+
+📄 CHUNK 3/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 39
+   Chunk-ID: 2ef3f4b0-82d7-49e7-bcf1-7b84d92a0e4f
+
+   Inhalt:
+   ## Finden und Abgleichen – Übersicht
+   
+   Diese Folie leitet über zu **Terminal Operations für boolesche Prüfungen** und **Suche**.
+   
+   Die folgenden Operationen ermöglichen:
+   - **Existenzprüfungen**: Gibt es Elemente mit Eigenschaft X?
+   - **Universalprüfungen**: Haben alle Elemente Eigenschaft X?
+   - **Negativprüfungen**: Hat kein Element Eigenschaft X?
+   - **Selektive Extraktion**: Finde ein passendes Element
+   
+   Alle diese Operationen sind **short-circuiting**: Sie können vorzeitig abbrechen, sobald das Ergebnis feststeht (z.B. `anyMatch` bei erstem Treffer).
+
+📄 CHUNK 4/5
+   Quelle: Vorlesung 5
+   Chunk-Index: 52
+   Chunk-ID: c8e18bc9-92f8-4a7f-92c4-dd4db1c4bbec
+
+   Inhalt:
+   Diese Folie enthält keinen inhaltlichen Text – sie dient als visuelle Trennung oder Platzhalter am Ende des Kapitels.
+
+📄 CHUNK 5/5
+   Quelle: Vorlesung 4
+   Chunk-Index: 75
+   Chunk-ID: c5167cc1-d9a9-49c6-842b-bde1a9e8bbc8
+
+   Inhalt:
+   ## Wiederholung: `collect` mit `PartialFunction`
+   
+   Diese Folie wiederholt das Beispiel aus Folie 73 mit tabellarischer Darstellung, um die Struktur hervorzuheben.
+   
+   **Kernpunkt:** Die Kombination `List.collect(pf)` ist ein mächtiges Idiom in der funktionalen Programmierung – sie transformiert selektiv ohne explizite Filterlogik.
+
+────────────────────────────────────────────────────────────────────────────────
+ENDE RAG KONTEXT
+────────────────────────────────────────────────────────────────────────────────
+
+>>> ASSISTENT:
+Ich sehe, du hast den Buchstaben "b" geschrieben – möchtest du **Ansatz B** (den funktionalen mit `yield` und `.sum`)?
+
+Hier ist die vollständige Lösung für `findAvgGradeOfRepeatExams`:
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    val grades = for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } yield grade
+
+    grades.sum / grades.size
+}
+```
+
+**Erklärung:**
+
+| Teil | Bedeutung |
+|------|-----------|
+| `(_, id1, attempt) <- registrations` | Name ignorieren, Matrikelnummer und Versuch extrahieren |
+| `if attempt == 2` | Nur Zweitversuch |
+| `(id2, grade) <- results` | Matrikelnummer und Note aus Ergebnissen |
+| `if id1 == id2` | Gleiche Matrikelnummer |
+| `yield grade` | Nur die Note zurückgeben (kein Tupel nötig!) |
+| `grades.sum` | Summe aller Noten |
+| `grades.size` | Anzahl der Noten |
+| `sum / size` | Durchschnitt |
+
+**Wichtig:** Hier ist `yield grade` statt `yield (name, grade)` – wir brauchen nur die Note für die Berechnung, nicht den Namen.
+
+---
+
+Damit sind **alle 6 Scala-Methoden** implementiert:
+
+| Methode | Status |
+|---------|--------|
+| `readRegistrationsFromFile` | ✅ |
+| `readResultsFromFile` | ✅ |
+| `findBestStudent` | ✅ |
+| `findAdequateStudents` | ✅ |
+| `findDuplicateRegistrations` | ✅ |
+| `findAvgGradeOfRepeatExams` | ✅ |
+
+Möchtest du noch eine Zusammenfassung aller Lösungen, oder hast du Fragen zu einzelnen Methoden?

@@ -1,0 +1,130 @@
+================================================================================
+FRAGE: Was ist OOP in Java?
+Conversation-ID: 173a048c-157e-49f1-83fa-341a8cdca709
+(Keine RAG-Chunks - nur LLM-Antwort)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+Exchange 1
+────────────────────────────────────────────────────────────────────────────────
+
+STUDENT: Was ist OOP in Java?
+
+ASSISTENT: # Objektorientierte Programmierung (OOP) in Java
+
+## Was ist OOP?
+OOP ist ein **Programmierparadigma**, das Code in **Objekte** organisiert, die Daten (Attribute) und Verhalten (Methoden) kombinieren.
+
+---
+
+## Die 4 Grundprinzipien
+
+### 1. 🔒 Encapsulation (Kapselung)
+Daten werden versteckt und nur über Methoden zugänglich gemacht.
+```java
+public class Person {
+    private String name; // privates Attribut
+
+    public String getName() { return name; }       // Getter
+    public void setName(String name) { this.name = name; } // Setter
+}
+```
+
+### 2. 🧬 Inheritance (Vererbung)
+Eine Klasse erbt Eigenschaften einer anderen Klasse.
+```java
+public class Tier {
+    public void atmen() { System.out.println("Atmet..."); }
+}
+
+public class Hund extends Tier { // Hund erbt von Tier
+    public void bellen() { System.out.println("Wuff!"); }
+}
+```
+
+### 3. 🎭 Polymorphism (Polymorphismus)
+Objekte können verschiedene Formen annehmen.
+```java
+public class Tier {
+    public void laut() { System.out.println("..."); }
+}
+
+public class Hund extends Tier {
+    @Override
+    public void laut() { System.out.println("Wuff!"); } // Überschreiben
+}
+
+public class Katze extends Tier {
+    @Override
+    public void laut() { System.out.println("Miau!"); }
+}
+```
+
+### 4. 🔷 Abstraction (Abstraktion)
+Komplexität wird versteckt, nur das Wesentliche wird gezeigt.
+```java
+public abstract class Form {
+    public abstract double flaeche(); // abstrakte Methode
+}
+
+public class Kreis extends Form {
+    private double radius;
+    
+    @Override
+    public double flaeche() { return Math.PI * radius * radius; }
+}
+```
+
+---
+
+## Wichtige Begriffe
+
+| Begriff | Beschreibung |
+|---------|-------------|
+| **Klasse** | Bauplan/Vorlage für Objekte |
+| **Objekt** | Instanz einer Klasse |
+| **Attribut** | Variable in einer Klasse |
+| **Methode** | Funktion in einer Klasse |
+| **Konstruktor** | Initialisiert ein neues Objekt |
+
+---
+
+## Einfaches Beispiel
+```java
+public class Auto {
+    // Attribute
+    private String marke;
+    private int geschwindigkeit;
+
+    // Konstruktor
+    public Auto(String marke) {
+        this.marke = marke;
+        this.geschwindigkeit = 0;
+    }
+
+    // Methoden
+    public void beschleunigen(int wert) {
+        geschwindigkeit += wert;
+    }
+
+    public void info() {
+        System.out.println(marke + " fährt " + geschwindigkeit + " km/h");
+    }
+}
+
+// Verwendung
+Auto meinAuto = new Auto("BMW");
+meinAuto.beschleunigen(50);
+meinAuto.info(); // BMW fährt 50 km/h
+```
+
+---
+
+## Vorteile von OOP
+- ✅ **Wiederverwendbarkeit** von Code
+- ✅ **Wartbarkeit** durch klare Struktur
+- ✅ **Modularität** – unabhängige Komponenten
+- ✅ **Sicherheit** durch Kapselung
+
+Hast du Fragen zu einem bestimmten Konzept? 😊
+

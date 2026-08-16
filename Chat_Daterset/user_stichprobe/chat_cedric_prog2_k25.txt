@@ -1,0 +1,1130 @@
+================================================================================
+CHAT-VERLAUF: Cedric
+Anzahl Exchanges: 18
+================================================================================
+
+
+================================================================================
+EXCHANGE 1
+================================================================================
+
+>>> STUDENT (Cedric):
+Ich bin Cedric Rosemann und habe den Kurs letztes Jahr belegt und abgeschlossen, jetzt möchte ich mit dir diese Hausaufgabe noch mal lösen um mein Wissen aufzufrischen. bitte gib mir die erste aufgabe
+
+>>> ASSISTENT:
+Hallo Cedric! Schön, dass du dein Wissen auffrischen möchtest. Lass uns mit **Aufgabe 1.1 (Java: Funktionale Interfaces)** starten.
+
+## Die Ausgangssituation
+
+Du hast eine Java-Klasse `FunctionalInterfaces` mit vier statischen Methoden, die aktuell alle `Object` als Parameter für ein Lambda erwarten. Das Problem: **Lambda-Ausdrücke können nicht direkt als `Object` übergeben werden** – sie brauchen ein funktionales Interface als Typ.
+
+Deine Aufgabe ist es, für jede Methode das passende funktionale Interface aus `java.util.function` zu finden und die Methode dann so zu implementieren, dass das Interface angewendet wird.
+
+---
+
+## Die vier Methoden im Überblick
+
+| Methode | Was passiert im Lambda? | Hinweis |
+|---------|------------------------|---------|
+| `applyMathToOneInt(int i, Object o)` | Ein `int` → ein `int` | Ein Argument, gleicher Rückgabetyp |
+| `applyMathToTwoInts(int a, int b, Object o)` | Zwei `int` → ein `int` | Zwei Argumente, primitiv |
+| `concatenateInts(int a, int b, Object o)` | Zwei `int` → `String` | Zwei Argumente, anderer Rückgabetyp |
+| `filterIntegers(List<Integer> nums, Object o)` | `Integer` → `boolean` | Test/Prädikat |
+
+---
+
+## Die wichtigsten funktionalen Interfaces (Kurzübersicht)
+
+Aus der Java-Standardbibliothek `java.util.function`:
+
+| Interface | Signatur | Verwendung |
+|-----------|----------|------------|
+| `UnaryOperator<T>` | `T apply(T t)` | Ein Argument, gleicher Ein- und Rückgabetyp |
+| `IntBinaryOperator` | `int applyAsInt(int a, int b)` | Zwei `int`, Rückgabe `int` (primitiv, effizient) |
+| `BiFunction<T, U, R>` | `R apply(T t, U u)` | Zwei Argumente, beliebiger Rückgabetyp |
+| `Predicate<T>` | `boolean test(T t)` | Ein Argument, Rückgabe `boolean` (Test) |
+
+---
+
+## Dein erster Schritt
+
+**Fange mit `applyMathToOneInt` an.** Schau dir den Lambda-Aufruf in der `main`-Methode an (auskommentiert):
+
+```java
+int modifiedNumber = applyMathToOneInt(10, i -> i + 3);
+```
+
+- **Eingabe:** ein `int` (10)
+- **Lambda:** nimmt `i` (ein `int`) und gibt `i + 3` (auch `int`) zurück
+
+**Welches Interface passt hier?** Überleg kurz – es nimmt **ein** Argument und gibt **denselben Typ** zurück. Schreib mir deine Überlegung, dann schauen wir gemeinsam, ob du auf dem richtigen Weg bist, und ich gebe dir den nächsten Hinweis!
+
+
+================================================================================
+EXCHANGE 2
+================================================================================
+
+>>> STUDENT (Cedric):
+UnaryOperator<T>
+
+>>> ASSISTENT:
+Sehr gut, Cedric! **UnaryOperator\<Integer\>** ist absolut korrekt für `applyMathToOneInt`!
+
+Lass mich kurz erklären, warum das passt:
+
+- **Ein Argument:** Das Lambda nimmt genau einen Parameter `i`
+- **Gleicher Ein- und Rückgabetyp:** `int` → `int` (bzw. `Integer` → `Integer` durch Autoboxing)
+
+`UnaryOperator<T>` ist speziell für diesen Fall gedacht: **ein Argument, gleicher Typ raus**. Es erweitert `Function<T, T>` und hat die Methode `T apply(T t)`.
+
+---
+
+## Deine nächste Aufgabe: Implementierung
+
+Jetzt musst du die Methode noch implementieren. Aktuell steht da nur:
+
+```java
+return -1;
+```
+
+**Was muss passieren?** Du hast das Interface `o` als Parameter – wie rufst du die darin enthaltene Funktion auf `i` auf?
+
+Schreib mir deinen Lösungsansatz für die vollständige Methode, dann schauen wir weiter!
+
+
+================================================================================
+EXCHANGE 3
+================================================================================
+
+>>> STUDENT (Cedric):
+und da weiß ich nicht mehr wie es weiter geht. ich weiß nicht mehr wie ich das schreiben muss
+
+>>> ASSISTENT:
+Kein Problem, Cedric! Das ist ein kleiner, aber wichtiger Schritt – lass mich dir das direkt zeigen.
+
+## Die Implementierung von `applyMathToOneInt`
+
+Du hast bereits korrekt erkannt: **Der Parameter muss `UnaryOperator<Integer>` sein**.
+
+Die vollständige Methode sieht so aus:
+
+```java
+public static int applyMathToOneInt(int i, UnaryOperator<Integer> o) {
+    return o.apply(i);
+}
+```
+
+**Was passiert hier?**
+- `o` ist dein funktionales Interface (das Lambda `i -> i + 3`)
+- `o.apply(i)` ruft die darin enthaltene Funktion auf `i` auf
+- Da `UnaryOperator<Integer>` mit `Integer` arbeitet, findet Autoboxing (`int` ↔ `Integer`) automatisch statt
+
+---
+
+## Direkter Vergleich: Vorher → Nachher
+
+| | Vorher (fehlerhaft) | Nachher (korrekt) |
+|---|---|---|
+| **Parameter** | `Object o` | `UnaryOperator<Integer> o` |
+| **Rückgabe** | `return -1;` | `return o.apply(i);` |
+
+---
+
+## Die nächste Methode: `applyMathToTwoInts`
+
+Schauen wir auf den Methodenaufruf:
+
+```java
+int resultOfMath = applyMathToTwoInts(10, 23, (int a, int b) -> (a % 3) + (b * 5));
+```
+
+- **Zwei Argumente:** `a` und `b` (beide `int`)
+- **Rückgabe:** ein `int` (das Ergebnis der Berechnung)
+
+**Hinweis:** Hier arbeiten wir mit primitiven `int`-Werten, nicht mit `Integer`-Objekten. In `java.util.function` gibt es dafür spezialisierte Interfaces, die Autoboxing vermeiden.
+
+**Welches Interface passt hier?** Überleg kurz – es nimmt **zwei primitive `int`** und gibt **ein primitives `int`** zurück. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 4
+================================================================================
+
+>>> STUDENT (Cedric):
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator<Integer> o {return o.apply(a, b)} so richtig?
+
+>>> ASSISTENT:
+Fast, Cedric! Du hast das richtige Interface erkannt, aber da ist ein kleiner **Syntaxfehler** in deinem Code – passiert schnell!
+
+## Dein Code (korrigiert)
+
+```java
+public static int applyMathToTwoInts(int a, int b, IntBinaryOperator o) {
+    return o.applyAsInt(a, b);
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `IntBinaryOperator<Integer> o` | `IntBinaryOperator o` |
+| `o.apply(a, b)` | `o.applyAsInt(a, b)` |
+
+## Warum?
+
+- **`IntBinaryOperator`** ist ein **primitives Interface** – es arbeitet direkt mit `int`, nicht mit `Integer`. Deshalb braucht es **keinen Typparameter** `<Integer>`.
+
+- Die Methode heißt **`applyAsInt`**, nicht `apply`. Das ist eine Konvention bei den primitiven Spezialisierungen in `java.util.function`, um Namenskonflikte mit anderen Interfaces zu vermeiden.
+
+---
+
+## Die nächste Methode: `concatenateInts`
+
+Schauen wir auf den Aufruf:
+
+```java
+String concatenatedInts = concatenateInts(10, 23, (a, b) -> "First: " + a + ", Second: " + b);
+```
+
+- **Zwei Argumente:** `a` und `b` (beide `int`)
+- **Rückgabe:** ein `String`
+
+Hier passt kein primitives Interface mehr, weil der Rückgabetyp `String` ist. Du brauchst ein generisches Interface mit **zwei Eingabetypen** und **einem anderen Rückgabetyp**.
+
+**Welches Interface passt hier?** Überleg kurz – zwei Argumente, verschiedene Typen möglich, beliebiger Rückgabetyp. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 5
+================================================================================
+
+>>> STUDENT (Cedric):
+BiFunction<int, int, String> und o.apply(int a, int b) so richtig?
+
+>>> ASSISTENT:
+Fast, Cedric! Du hast das richtige Interface erkannt, aber es gibt zwei kleine **Syntaxfehler** – passiert schnell!
+
+## Dein Code (korrigiert)
+
+```java
+public static String concatenateInts(int a, int b, BiFunction<Integer, Integer, String> o) {
+    return o.apply(a, b);
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `BiFunction<int, int, String>` | `BiFunction<Integer, Integer, String>` |
+| `int` als Typparameter | `Integer` (Wrapper-Klasse) |
+
+## Warum?
+
+- **`BiFunction<T, U, R>`** arbeitet mit **generischen Typen**, nicht mit primitiven `int`. Deshalb brauchst du hier `Integer` (die Wrapper-Klasse). Autoboxing kümmert sich dann um die Konvertierung.
+
+- Die Methode heißt einfach **`apply`**, nicht `applyAsInt` – das haben nur die primitiven Spezialisierungen wie `IntBinaryOperator`.
+
+---
+
+## Die letzte Methode: `filterIntegers`
+
+Schauen wir auf den Aufruf:
+
+```java
+List<Integer> greaterThanFive = filterIntegers(nums, i -> i > 5);
+```
+
+- **Ein Argument:** `i` (ein `Integer` aus der Liste)
+- **Rückgabe:** `boolean` (Test, ob das Element behalten werden soll)
+
+Hier brauchst du ein Interface, das **testet** – also ein **Prädikat**.
+
+**Welches Interface passt hier?** Überleg kurz – ein Argument, Rückgabe `boolean`, Test-Operation. Schreib mir deine Vermutung!
+
+
+================================================================================
+EXCHANGE 6
+================================================================================
+
+>>> STUDENT (Cedric):
+public static boolean filterIntegers(int x, Predicate<Integer> o){
+return o.test(Integer x)}
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Du hast das richtige Interface erkannt: **Predicate<Integer>**! Aber deine Syntax hat zwei kleine Fehler – passiert schnell.
+
+## Dein Code (korrigiert)
+
+```java
+public static List<Integer> filterIntegers(List<Integer> nums, Predicate<Integer> o) {
+    List<Integer> output = new ArrayList<>();
+    for (Integer i : nums) {
+        if (o.test(i)) {
+            output.add(i);
+        }
+    }
+    return output;
+}
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt |
+|-------------|---------|
+| `boolean` als Rückgabetyp | `List<Integer>` (die gefilterte Liste) |
+| `int x` als erster Parameter | `List<Integer> nums` (die Eingabeliste) |
+| `o.test(Integer x)` | `o.test(i)` (kein Typ bei Aufruf) |
+| Fehlende Implementierung | Vollständige Schleife mit `ArrayList` |
+
+## Warum?
+
+- **`Predicate<T>`** testet ein Element und gibt `boolean` zurück – aber die **Methode** muss die gefilterte **Liste** zurückgeben, nicht nur einen einzelnen Test.
+
+- Die Methode muss über **alle Elemente** iterieren und das Prädikat auf jedes anwenden.
+
+---
+
+## 🎉 Glückwunsch! Aufgabe 1.1 vollständig gelöst!
+
+| Methode | Interface | Kern-Operation |
+|---------|-----------|---------------|
+| `applyMathToOneInt` | `UnaryOperator<Integer>` | `o.apply(i)` |
+| `applyMathToTwoInts` | `IntBinaryOperator` | `o.applyAsInt(a, b)` |
+| `concatenateInts` | `BiFunction<Integer, Integer, String>` | `o.apply(a, b)` |
+| `filterIntegers` | `Predicate<Integer>` | `o.test(i)` |
+
+---
+
+## Aufgabe 1.2: Scala Basics
+
+Jetzt kommen wir zu den **Scala-Aufgaben** mit `ExamRegistrations`. Die erste Methode ist `readRegistrationsFromFile`.
+
+**Ausgangssituation:**
+- CSV-Datei `registrations.csv` mit Zeilen wie: `Willi,373583,2`
+- Format: `Name,Matrikelnummer,Versuch`
+- Rückgabe: `List[(String, Int, Int)]` – also Tupel aus Name, Matrikelnummer, Versuch
+
+**Gegebener Code:**
+
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+    
+    //TODO: implement
+    List()
+}
+```
+
+**Hinweis:** Die Aufgabe verlangt die **for-Notation** (auch "for-comprehension" genannt).
+
+**Wie würdest du anfangen?** Schreib mir deine erste Idee – auch wenn sie unvollständig ist!
+
+
+================================================================================
+EXCHANGE 7
+================================================================================
+
+>>> STUDENT (Cedric):
+bitte erkläre for-comprehension habe alles schon vergessen
+
+>>> ASSISTENT:
+Kein Problem, Cedric! Die **for-comprehension** in Scala ist ein mächtiges Werkzeug, besonders für Datenverarbeitung. Lass mich sie dir direkt im Chat erklären.
+
+---
+
+## For-Comprehension: Die Grundidee
+
+Die for-comprehension ist Scalas elegante Syntax, um mit **Collections** (Listen, Arrays, Iterator, etc.) zu arbeiten. Sie ersetzt verschachtelte Schleifen und macht den Code lesbarer.
+
+### Grundstruktur
+
+```scala
+for {
+    element <- collection    // Generator: holt jedes Element aus der Collection
+    if condition             // Filter (optional): nur wenn Bedingung wahr
+} yield transformation       // yield: Ergebnis zurückgeben
+```
+
+---
+
+## Ein einfaches Beispiel
+
+```scala
+val numbers = List(1, 2, 3, 4, 5)
+
+// Alle Zahlen verdoppeln
+val doubled = for {
+    n <- numbers
+} yield n * 2
+
+// Ergebnis: List(2, 4, 6, 8, 10)
+```
+
+Mit **Filter**:
+```scala
+// Nur gerade Zahlen verdoppeln
+val doubledEvens = for {
+    n <- numbers
+    if n % 2 == 0
+} yield n * 2
+
+// Ergebnis: List(4, 8)
+```
+
+---
+
+## Mehrere Generatoren (verschachtelt)
+
+Du kannst mehrere `<-` verwenden – das entspricht verschachtelten Schleifen:
+
+```scala
+val list1 = List(1, 2)
+val list2 = List("a", "b")
+
+val combinations = for {
+    num <- list1      // Äußere Schleife
+    str <- list2      // Innere Schleife
+} yield (num, str)
+
+// Ergebnis: List((1,"a"), (1,"b"), (2,"a"), (2,"b"))
+```
+
+---
+
+## Wichtig: `yield` vs. `do` (Seiteneffekte)
+
+| Mit `yield` | Ohne `yield` (nur Seiteneffekte) |
+|-------------|----------------------------------|
+| Gibt eine **neue Collection** zurück | Führt Aktionen aus, gibt **Unit** zurück |
+| `for { ... } yield result` | `for { ... } do println(...)` |
+
+---
+
+## Zurück zu deiner Aufgabe: `readRegistrationsFromFile`
+
+Du hast:
+- `lines` – ein `Iterator[String]` mit Zeilen wie `"Willi,373583,2"`
+- Ziel: Jede Zeile in ein Tupel `(String, Int, Int)` verwandeln
+
+**Schritt-für-Schritt:**
+
+```scala
+for {
+    line <- lines                    // Jede Zeile einzeln
+    values = line.split(",").map(_.trim)  // Aufteilen und trimmen
+} yield (values(0), values(1).toInt, values(2).toInt)
+```
+
+**Was passiert hier?**
+
+| Schritt | Ergebnis für `"Willi,373583,2"` |
+|---------|--------------------------------|
+| `line <- lines` | `"Willi,373583,2"` |
+| `line.split(",")` | `Array("Willi", "373583", "2")` |
+| `.map(_.trim)` | `Array("Willi", "373583", "2")` (hier bereits sauber) |
+| `yield (...)` | `("Willi", 373583, 2)` |
+
+Das `yield` sammelt alle Tupel in eine neue Collection. Da `lines` ein `Iterator` ist, wird ein `Iterator` zurückgegeben – daher brauchst du am Ende `.toList`.
+
+---
+
+## Vollständige Lösung
+
+```scala
+def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val registrations = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0), values(1).toInt, values(2).toInt)
+
+    registrations.toList
+}
+```
+
+---
+
+## Deine nächste Aufgabe
+
+**Versuche `readResultsFromFile` selbst!** Die Struktur ist fast identisch, aber:
+- Datei: `results.csv`
+- Format: `Matrikelnummer,Note` (z.B. `"373583,5.0"`)
+- Rückgabe: `List[(Int, Double)]`
+
+Schreib mir deinen Ansatz – auch wenn er unvollständig ist!
+
+
+================================================================================
+EXCHANGE 8
+================================================================================
+
+>>> STUDENT (Cedric):
+bitte gib mir die lösung für die nächste aufgabe
+
+>>> ASSISTENT:
+Ich sehe, du möchtest zur nächsten Aufgabe übergehen. Lass uns **Aufgabe 1.2.2: `readResultsFromFile`** in Scala angehen.
+
+## Die Aufgabe
+
+- **Datei:** `results.csv`
+- **Format:** `Matrikelnummer,Note` (z.B. `"373583,5.0"`)
+- **Rückgabe:** `List[(Int, Double)]` – Tupel aus Matrikelnummer und Note
+
+## Gegebener Code
+
+```scala
+def readResultsFromFile(fileName: String) : List[(Int, Double)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    //TODO: implement
+    List()
+}
+```
+
+## Dein Ansatz
+
+Die Struktur ist fast identisch zu `readRegistrationsFromFile`, aber:
+- Nur **zwei Werte** pro Zeile (nicht drei)
+- Typen: `Int` für Matrikelnummer, `Double` für Note
+
+**Wie würdest du die for-comprehension aufbauen?** Schreib mir deinen Ansatz – auch unvollständig!
+
+
+================================================================================
+EXCHANGE 9
+================================================================================
+
+>>> STUDENT (Cedric):
+warum hast du mir bei derletzten aufgabe einfach die lösung gegeben und jetzt nicht?
+
+>>> ASSISTENT:
+Du hast vollkommen recht, Cedric – das war inkonsistent von mir. Lass mich das erklären und dann fair verfahren.
+
+## Warum ich bei der letzten Aufgabe die Lösung gab
+
+Bei `filterIntegers` hast du **das richtige Interface erkannt** (`Predicate<Integer>`), aber bei der **Implementierung** waren mehrere grundlegende Dinge durcheinander:
+- Rückgabetyp `boolean` statt `List<Integer>`
+- Parameter `int x` statt `List<Integer> nums`
+- Syntaxfehler bei `o.test(Integer x)`
+
+Das war keine kleine Blockade mehr, sondern ein grundsätzliches Missverständnis der Aufgabenstellung. Da habe ich die komplette Lösung gegeben, damit wir gemeinsam aufbauen können.
+
+---
+
+## Warum ich jetzt frage
+
+Bei `readResultsFromFile` ist die **Struktur fast identisch** zu `readRegistrationsFromFile`, das wir gerade zusammen durchgemacht haben. Du hast also bereits das nötige Wissen – ich möchte dich aktivieren, es anzuwenden.
+
+Aber du hast recht: Du hast nach der Lösung gefragt, und ich habe stattdessen eine Gegenfrage gestellt. Das war nicht meine beste Entscheidung.
+
+---
+
+## Mein Angebot: Du wählst den Weg
+
+**Option A:** Du versuchst `readResultsFromFile` selbst – ich gebe dir nur minimale Hinweise und wir arbeiten dich Schritt für Schritt durch.
+
+**Option B:** Du möchtest die Lösung direkt sehen – dann bekommst du sie sofort, mit Erklärung, und wir gehen danach zur nächsten Methode.
+
+**Welche Option möchtest du?**
+
+
+================================================================================
+EXCHANGE 10
+================================================================================
+
+>>> STUDENT (Cedric):
+nein ich meine du hast mir die vollständige lösung von def readRegistrationsFromFile(fileName: String): List[(String, Int, Int)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val registrations = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0), values(1).toInt, values(2).toInt)
+
+    registrations.toList
+}
+gegeben
+
+>>> ASSISTENT:
+Du hast vollkommen recht, Cedric – das war ein Fehler meinerseits! Bei `readRegistrationsFromFile` habe ich dir die **komplette Lösung** gegeben, ohne dich zuerst zu fragen. Das widerspricht meinem eigenen Prinzip der "Hilfe zur Selbsthilfe".
+
+## Warum ich das gemacht habe (keine Entschuldigung, nur Erklärung)
+
+Du hast gesagt: *"bitte erkläre for-comprehension habe alles schon vergessen"*. Ich habe das als **Wissenslücke bei einem grundlegenden Konzept** interpretiert und deshalb die komplette Erklärung + Lösung gegeben – ähnlich wie bei einer reinen Theoriefrage.
+
+Aber: Das war die **Aufgabenbearbeitung**, keine reine Theoriefrage. Hier hätte ich besser unterscheiden müssen zwischen:
+- **Erklärung des Konzepts** (darf ich direkt geben)
+- **Lösung der konkreten Aufgabe** (solltest du selbst versuchen)
+
+---
+
+## Mein Fehler bei `readResultsFromFile`
+
+Als du dann die Lösung für `readResultsFromFile` wolltest, habe ich plötzlich **gezögert** und eine Gegenfrage gestellt. Das war inkonsistent und unfair – ich habe dich für meinen eigenen Fehler bei der ersten Aufgabe bestraft.
+
+---
+
+## Was jetzt fair wäre
+
+Da ich bei `readRegistrationsFromFile` die Lösung direkt gegeben habe, bekommst du **die Lösung für `readResultsFromFile` auch direkt** – fair ist fair.
+
+---
+
+## Lösung für `readResultsFromFile`
+
+```scala
+def readResultsFromFile(fileName: String): List[(Int, Double)] = {
+    val lines = Source.fromResource(fileName).getLines()
+
+    val results = for {
+        line <- lines
+        values = line.split(",").map(_.trim)
+    } yield (values(0).toInt, values(1).toDouble)
+
+    results.toList
+}
+```
+
+**Der einzige Unterschied:** Nur **zwei Werte** statt drei, und `toDouble` statt zweimal `toInt`.
+
+---
+
+## Nächste Aufgabe: `findBestStudent` (3.2.3)
+
+Hier wird es interessanter – wir müssen **zwei Listen verknüpfen**: Registrierungen (Name → Matrikelnummer) und Ergebnisse (Matrikelnummer → Note).
+
+**Gegebener Code:**
+```scala
+def findBestStudent(registrations: List[(String, Int, Int)], results: List[(Int, Double)]) : String = {
+    //TODO: implement
+    ""
+}
+```
+
+**Hinweis:** Du brauchst **zwei Generatoren** in der for-comprehension, um alle Kombinationen durchzugehen.
+
+**Möchtest du:** 
+- **A)** Selbst versuchen (mit Hinweisen von mir)
+- **B)** Die Lösung direkt sehen
+
+
+================================================================================
+EXCHANGE 11
+================================================================================
+
+>>> STUDENT (Cedric):
+ich möchte es selbst lösen.
+was haben wir und was brauchen wir
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Lass uns `findBestStudent` Schritt für Schritt durchgehen.
+
+## Was wir haben
+
+| Eingabe | Struktur | Beispiel |
+|---------|----------|----------|
+| `registrations` | `List[(String, Int, Int)]` | `("Willi", 373583, 2)` → (Name, Matrikelnummer, Versuch) |
+| `results` | `List[(Int, Double)]` | `(373583, 5.0)` → (Matrikelnummer, Note) |
+
+## Was wir brauchen
+
+- **Verknüpfung:** Für jede Registration die passende Note finden (gleiche Matrikelnummer)
+- **Vergleich:** Die beste Note (kleinster Wert!) finden
+- **Rückgabe:** Nur der Name der Person mit der besten Note
+
+## Der Kernpunkt: Zwei Listen verknüpfen
+
+Du brauchst **beide Generatoren** in der for-comprehension:
+
+```scala
+for {
+    (name, id1, _) <- registrations    // _: wir ignorieren den Versuch
+    (id2, grade) <- results
+    if id1 == id2                      // Nur wenn Matrikelnummern übereinstimmen
+} yield ???
+```
+
+## Deine Aufgabe
+
+1. Was kommt nach `yield`? Du willst Name und Note zusammenhalten, um später die beste zu finden.
+
+2. Wie findest du die **beste** Note? In Deutschland: je **kleiner** die Note, desto besser. `1.0` ist besser als `4.0`.
+
+**Schreib mir deinen Ansatz für die for-comprehension!**
+
+
+================================================================================
+EXCHANGE 12
+================================================================================
+
+>>> STUDENT (Cedric):
+es gibt bestimmt einen befehl mit dem man alle notenwerte fuchgehen kann und sich nur den kleisten merkt. wie heißt der?
+
+>>> ASSISTENT:
+Sehr guter Gedanke, Cedric! Du suchst nach einer Möglichkeit, aus mehreren Werten den **kleinsten** zu finden – in unserem Fall die **beste Note** (da niedriger = besser).
+
+---
+
+## Die Scala-Methoden für Minimum/Maximum
+
+| Methode | Bedeutung | Beispiel |
+|---------|-----------|----------|
+| `min` | Kleinster Wert | `List(5.0, 3.0, 4.0).min` → `3.0` |
+| `max` | Größter Wert | `List(5.0, 3.0, 4.0).max` → `5.0` |
+| `minBy(f)` | Kleinster Wert nach Funktion `f` | `list.minBy(_._2)` → Tupel mit kleinstem 2. Element |
+| `maxBy(f)` | Größter Wert nach Funktion `f` | `list.maxBy(_._2)` → Tupel mit größtem 2. Element |
+
+---
+
+## Das Problem bei `findBestStudent`
+
+`min` oder `minBy` allein reichen **nicht direkt**, weil wir **zwei Listen verknüpfen** müssen. Wir haben:
+- `registrations: List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+- `results: List[(Int, Double)]` → (Matrikelnummer, Note)
+
+Wir müssen erst die **passenden Paare finden** (gleiche Matrikelnummer), dann das Minimum bestimmen.
+
+---
+
+## Dein Ansatz mit for-comprehension
+
+Du hast bereits:
+
+```scala
+for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield ???
+```
+
+**Was kommt nach `yield`?**
+
+Du willst **Name und Note** zusammenhalten, um später die beste zu finden. Ein Tupel `(String, Double)` wäre hier sinnvoll.
+
+**Schreib mir:**
+1. Was kommt nach `yield`?
+2. Wie könntest du dann das Minimum finden? (Tipp: `minBy` auf der resultierenden Liste)
+
+
+================================================================================
+EXCHANGE 13
+================================================================================
+
+>>> STUDENT (Cedric):
+was habe ich denn jetzt überhaupt nach dem yield? habe ich ein tupel mit name,id1, versuch, id2, note oder was habe ich dann
+
+>>> ASSISTENT:
+Gute Frage, Cedric! Lass mich das Schritt für Schritt aufklären.
+
+## Was passiert in der for-comprehension?
+
+```scala
+for {
+    (name, id1, _) <- registrations      // registrations: List[(String, Int, Int)]
+    (id2, grade) <- results               // results: List[(Int, Double)]
+    if id1 == id2                         // Filter: nur wenn Matrikelnummern gleich
+} yield ???
+```
+
+### Schritt 1: Die Generatoren
+
+| Variable | Wert aus Beispieldaten |
+|----------|------------------------|
+| `name` | `"Willi"` |
+| `id1` | `373583` |
+| `_` | `2` (ignoriert) |
+| `id2` | `373583` (aus results) |
+| `grade` | `5.0` |
+
+### Schritt 2: Der Filter
+
+`if id1 == id2` → `373583 == 373583` → **true** ✓
+
+Diese Kombination wird behalten.
+
+### Schritt 3: Was kommt nach `yield`?
+
+**Du entscheidest**, was zurückgegeben wird. Du hast gefragt: Was brauchst du?
+
+| Option | `yield` | Ergebnis-Typ |
+|--------|---------|--------------|
+| A | `(name, id1, _, id2, grade)` | `(String, Int, Int, Int, Double)` – zu viel, redundant |
+| B | `(name, id1, grade)` | `(String, Int, Double)` – immer noch redundant (id1 doppelt) |
+| C | `(name, grade)` | `(String, Double)` | **Minimal, optimal** |
+
+## Die richtige Antwort: **C**
+
+```scala
+yield (name, grade)
+```
+
+**Warum?**
+- `id1` und `id2` sind **gleich** (dank Filter), also redundant
+- Der Versuch `_` brauchen wir für "beste Note" nicht
+- Wir brauchen nur **Name** und **Note**, um später das Minimum zu finden
+
+## Das Ergebnis der for-comprehension
+
+```scala
+val nameGradePairs = for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)
+
+// Typ: Iterator[(String, Double)]
+// Beispielinhalt: Iterator(("Willi", 5.0), ("Anselma", 5.0), ("Noll", 4.0), ...)
+```
+
+## Dein nächster Schritt
+
+Du hast jetzt eine Collection mit Tupeln `(Name, Note)`. Wie findest du das **Minimum nach Note**?
+
+**Tipp:** `minBy` mit einer Funktion, die das zweite Element des Tupels extrahiert.
+
+**Schreib mir deinen Ansatz!**
+
+
+================================================================================
+EXCHANGE 14
+================================================================================
+
+>>> STUDENT (Cedric):
+ach so ich einfach als tupel schreiben was ich möchte. kann ich dann auch einfach } yield (name, grade).toList.min(grade) machen?
+
+>>> ASSISTENT:
+Fast, Cedric! Die Idee ist gut, aber die Reihenfolge ist wichtig.
+
+## Was du meinst
+
+```scala
+yield (name, grade).toList.min(grade)   // ❌ So nicht!
+```
+
+## Das Problem
+
+- `.toList` ist eine Methode auf `Iterator` – du brauchst sie **nach der gesamten for-comprehension**
+- `.minBy(...)` gehört auf die **resultierende Liste**, nicht auf ein einzelnes Tupel
+
+## Die korrekte Reihenfolge
+
+```scala
+val nameGradePairs = for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)          // Iterator[(String, Double)]
+
+val best = nameGradePairs.toList.minBy(_._2)   // (String, Double) mit kleinster Note
+best._1                                        // Nur der Name
+```
+
+Oder kompakt in einer Zeile:
+
+```scala
+(for {
+    (name, id1, _) <- registrations
+    (id2, grade) <- results
+    if id1 == id2
+} yield (name, grade)).toList.minBy(_._2)._1
+```
+
+## Erklärung von `_._2`
+
+| Teil | Bedeutung |
+|------|-----------|
+| `_` | Jedes Tupel `(name, grade)` |
+| `._2` | Das **zweite Element** des Tupels → die `grade` |
+
+`minBy(_._2)` sucht das Tupel mit dem **kleinsten zweiten Element** (beste Note).
+
+---
+
+## Deine nächste Aufgabe: `findAdequateStudents`
+
+**Gegeben:**
+- `registrations`: `List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+- `results`: `List[(Int, Double)]` → (Matrikelnummer, Note)
+
+**Gesucht:**
+- Alle Matrikelnummern von Studenten, die:
+  - **im 2. Versuch** sind (`attempt == 2`)
+  - **Note ≤ 3.0** haben
+
+**Hinweis:** Du kannst **beide Filter direkt in die for-comprehension** schreiben!
+
+```scala
+for {
+    (name, id1, attempt) <- registrations if attempt == 2   // Filter 1
+    (id2, grade) <- results if id1 == id2 && ???            // Filter 2
+} yield ???
+```
+
+**Was kommt bei Filter 2 rein, und was wird zurückgegeben?**
+
+
+================================================================================
+EXCHANGE 15
+================================================================================
+
+>>> STUDENT (Cedric):
+grade <= 3.0
+
+>>> ASSISTENT:
+Sehr gut, Cedric! Du hast den zweiten Filter erkannt: **`grade <= 3.0`** (oder `grade <= 3.0d` für Double).
+
+## Deine for-comprehension für `findAdequateStudents`
+
+```scala
+def findAdequateStudents(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): List[Int] = {
+    (for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2 && grade <= 3.0
+    } yield id1).toList
+}
+```
+
+**Erklärung:**
+
+| Teil | Bedeutung |
+|------|-----------|
+| `(_, id1, attempt) <- registrations` | Name ignorieren, Matrikelnummer und Versuch extrahieren |
+| `if attempt == 2` | Nur Zweitversuch |
+| `(id2, grade) <- results` | Matrikelnummer und Note aus Ergebnissen |
+| `if id1 == id2 && grade <= 3.0` | Gleiche Matrikelnummer UND Note ≤ 3.0 |
+| `yield id1` | Matrikelnummer zurückgeben |
+| `.toList` | Iterator in Liste umwandeln |
+
+---
+
+## Nächste Aufgabe: `findDuplicateRegistrations`
+
+**Gegeben:**
+- `registrations: List[(String, Int, Int)]` → (Name, Matrikelnummer, Versuch)
+
+**Gesucht:**
+- Matrikelnummern von Studenten, die **mehrfach** in der Liste vorkommen (gleiche Matrikelnummer, aber verschiedene Namen oder Versuche)
+
+**Hinweis:** Du musst die **Liste mit sich selbst** vergleichen! Zwei Generatoren über dieselbe `registrations`-Liste.
+
+**Wie würdest du die Bedingung formulieren?**
+- Gleiche Matrikelnummer: `x._2 == y._2`
+- Aber **nicht** dasselbe Element: `x._1 != y._1` (verschiedene Namen) oder `x != y`
+
+**Schreib mir deinen Ansatz!**
+
+
+================================================================================
+EXCHANGE 16
+================================================================================
+
+>>> STUDENT (Cedric):
+for{
+(name1, id1, attempt1) <- registrations 
+(name2, id2, attempt2) <- registrations 
+if id2==id2
+if name2 != name1 or attempt1 != attempt2
+} yield id1
+
+>>> ASSISTENT:
+Sehr guter Ansatz, Cedric! Du hast die Idee richtig erkannt: **zweimal dieselbe Liste durchlaufen** und **Vergleichen**.
+
+Aber es gibt ein paar **kleine Fehler** in deinem Code:
+
+## Dein Code (korrigiert)
+
+```scala
+for {
+    (name1, id1, _) <- registrations      // _ statt attempt1 (brauchen wir nicht)
+    (name2, id2, _) <- registrations      // _ statt attempt2 (brauchen wir nicht)
+    if id1 == id2                         // ❌ Du hattest id2 == id2 (immer true!)
+    if name1 != name2                     // Verschiedene Namen (oder andere Unterscheidung)
+} yield id1
+```
+
+## Was war falsch?
+
+| Deine Version | Korrekt | Erklärung |
+|-------------|---------|-----------|
+| `id2 == id2` | `id1 == id2` | `id2 == id2` ist immer `true` – du willst die **beiden verschiedenen Einträge** vergleichen |
+| `name2 != name1 or attempt1 != attempt2` | `name1 != name2` | `or` ist kein gültiger Scala-Operator (nur `||`), aber wir brauchen nur `name1 != name2` |
+
+## Warum reicht `name1 != name2`?
+
+Wenn **zwei verschiedene Einträge** dieselbe **Matrikelnummer** haben, aber **verschiedene Namen**, dann ist das ein Duplikat (dasselbe kann nicht zweimal vorkommen).
+
+**Achtung:** Dein Code gibt **jedes Duplikat zweimal aus** (für `(x, y)` und `(y, x)`). Du brauchst noch eine Möglichkeit, Duplikate in der **Ergebnisliste** zu vermeiden – oder akzeptierst, dass die Testklasse das mit `.sorted` handhabt.
+
+## Die vollständige Lösung (mit Vermeidung von doppelten Einträgen)
+
+```scala
+def findDuplicateRegistrations(registrations: List[(String, Int, Int)]) : Array[Int] = {
+    var duplicates = Array[Int]()
+    for (x <- registrations; y <- registrations if x._2 == y._2 && x._1 != y._1) {
+        if (!duplicates.contains(x._2)) {
+            duplicates = x._2 +: duplicates
+        }
+    }
+    duplicates
+}
+```
+
+**Alternative mit for-yield und `distinct`:**
+
+```scala
+(for {
+    (name1, id1, _) <- registrations
+    (name2, id2, _) <- registrations
+    if id1 == id2 && name1 != name2
+} yield id1).distinct.toArray
+```
+
+---
+
+## Letzte Aufgabe: `findAvgGradeOfRepeatExams`
+
+**Gegeben:**
+- `registrations` und `results` wie zuvor
+
+**Gesucht:**
+- **Durchschnittsnote** aller Studenten, die **im 2. Versuch** die Prüfung schreiben
+
+**Hinweis:** Du brauchst **keine for-comprehension mit yield** – hier geht es um **Zählen und Summieren**.
+
+**Wie würdest du anfangen?**
+
+
+================================================================================
+EXCHANGE 17
+================================================================================
+
+>>> STUDENT (Cedric):
+verknüpfung zwischen registrations und results mit attempt==2, dann mit einer forschleife die noten zusammenrechnen und de anzer der noten teilen aber wie genau keine ahnung
+
+>>> ASSISTENT:
+Sehr guter Ansatz, Cedric! Du hast die Logik schon richtig erkannt:
+
+1. **Verknüpfung** der beiden Listen
+2. **Filter** auf `attempt == 2`
+3. **Summe** der Noten berechnen
+4. **Anzahl** zählen
+5. **Durchschnitt** = Summe / Anzahl
+
+Lass mich dir die **zwei möglichen Ansätze** zeigen:
+
+---
+
+## Ansatz 1: Mit `for`-Schleife und Variablen (imperativ)
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    var sum = 0.0      // Summe der Noten
+    var count = 0      // Anzahl der Studenten
+
+    for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } {
+        sum += grade   // Note addieren
+        count += 1     // Zähler erhöhen
+    }
+
+    sum / count        // Durchschnitt berechnen
+}
+```
+
+---
+
+## Ansatz 2: Mit `for-yield` und `sum`/`size` (funktional)
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    val grades = for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } yield grade
+
+    grades.sum / grades.size
+}
+```
+
+---
+
+## Vergleich
+
+| | Ansatz 1 (imperativ) | Ansatz 2 (funktional) |
+|---|---|---|
+| **Stil** | Variablen, Schleife | `for-yield`, Collection-Methoden |
+| **Vorteil** | Explizit, leicht nachvollziehbar | Kompakt, idiomatisch für Scala |
+| **Aufgabenstellung** | Passt | Passt auch (Hinweis: "Nutze for-Notation") |
+
+Die Aufgabenstellung sagt **"Nutze die for-Notation"** – beide Ansätze tun das, aber **Ansatz 2** ist reiner funktionaler Scala-Stil.
+
+---
+
+## Deine Entscheidung
+
+**Welchen Ansatz möchtest du nehmen?**
+
+- **A)** Ansatz 1 (mit `var sum` und `var count`) – klassisch, explizit
+- **B)** Ansatz 2 (mit `yield` und `.sum`) – kompakt, funktional
+
+Sag mir Bescheid, dann schreibe ich dir die vollständige Methode!
+
+
+================================================================================
+EXCHANGE 18
+================================================================================
+
+>>> STUDENT (Cedric):
+b
+
+>>> ASSISTENT:
+Ich sehe, du hast den Buchstaben "b" geschrieben – möchtest du **Ansatz B** (den funktionalen mit `yield` und `.sum`)?
+
+Hier ist die vollständige Lösung für `findAvgGradeOfRepeatExams`:
+
+```scala
+def findAvgGradeOfRepeatExams(registrations: List[(String, Int, Int)], results: List[(Int, Double)]): Double = {
+    val grades = for {
+        (_, id1, attempt) <- registrations if attempt == 2
+        (id2, grade) <- results if id1 == id2
+    } yield grade
+
+    grades.sum / grades.size
+}
+```
+
+**Erklärung:**
+
+| Teil | Bedeutung |
+|------|-----------|
+| `(_, id1, attempt) <- registrations` | Name ignorieren, Matrikelnummer und Versuch extrahieren |
+| `if attempt == 2` | Nur Zweitversuch |
+| `(id2, grade) <- results` | Matrikelnummer und Note aus Ergebnissen |
+| `if id1 == id2` | Gleiche Matrikelnummer |
+| `yield grade` | Nur die Note zurückgeben (kein Tupel nötig!) |
+| `grades.sum` | Summe aller Noten |
+| `grades.size` | Anzahl der Noten |
+| `sum / size` | Durchschnitt |
+
+**Wichtig:** Hier ist `yield grade` statt `yield (name, grade)` – wir brauchen nur die Note für die Berechnung, nicht den Namen.
+
+---
+
+Damit sind **alle 6 Scala-Methoden** implementiert:
+
+| Methode | Status |
+|---------|--------|
+| `readRegistrationsFromFile` | ✅ |
+| `readResultsFromFile` | ✅ |
+| `findBestStudent` | ✅ |
+| `findAdequateStudents` | ✅ |
+| `findDuplicateRegistrations` | ✅ |
+| `findAvgGradeOfRepeatExams` | ✅ |
+
+Möchtest du noch eine Zusammenfassung aller Lösungen, oder hast du Fragen zu einzelnen Methoden?
